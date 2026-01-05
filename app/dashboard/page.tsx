@@ -20,6 +20,7 @@ import {
   Edit,
   Trash2,
   User,
+  AlertCircle,
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -404,498 +405,530 @@ export default function DashboardPage() {
         </header>
       )}
 
-      {/* Hero Section */}
-      {userType === "graduate" && (
-        <section className="bg-gradient-to-b from-muted/50 to-background py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground text-balance">Find Your Dream Job Today</h1>
-              <p className="text-lg md:text-xl text-muted-foreground text-pretty">
-                Discover thousands of opportunities from top companies around the world
-              </p>
-
-              {/* Search Bar */}
-              <Card className="p-2 shadow-lg">
-                <div className="flex flex-col md:flex-row gap-2">
-                  <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-background rounded-md">
-                    <Search className="size-5 text-muted-foreground" />
-                    <input
-                      type="text"
-                      placeholder="Job title or keyword"
-                      className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
-                    />
+      {/* Main Content */}
+      <main className="min-h-screen bg-background">
+        {/* Profile Completion Banner for Graduates */}
+        {userType === "graduate" && (
+          <div className="bg-primary/10 border-b border-primary/20">
+            <div className="container mx-auto px-4 py-4">
+              <div className="flex items-start gap-4 max-w-4xl">
+                <AlertCircle className="size-5 text-primary flex-shrink-0 mt-0.5" />
+                <div className="flex-1 space-y-2">
+                  <h3 className="font-semibold text-foreground">Complete Your Profile</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Your profile is 65% complete. Add your work experience, projects, and certifications to stand out to
+                    employers.
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 max-w-md h-2 bg-muted rounded-full overflow-hidden">
+                      <div className="h-full bg-primary w-[65%] rounded-full" />
+                    </div>
+                    <span className="text-sm font-medium text-foreground">65%</span>
                   </div>
-                  <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-background rounded-md">
-                    <MapPin className="size-5 text-muted-foreground" />
-                    <input
-                      type="text"
-                      placeholder="Location"
-                      className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
-                    />
-                  </div>
-                  <Button size="lg" className="md:w-auto">
-                    Search Jobs
-                  </Button>
                 </div>
-              </Card>
-
-              <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span>Popular:</span>
-                {["Designer", "Developer", "Manager", "Marketing"].map((term) => (
-                  <button
-                    key={term}
-                    className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                  >
-                    {term}
-                  </button>
-                ))}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                    window.location.href = "/profile/edit"
+                  }}
+                >
+                  Complete Profile
+                </Button>
               </div>
             </div>
           </div>
-        </section>
-      )}
+        )}
 
-      {userType === "employer" && (
-        <section className="py-16 border-b border-border">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-semibold text-foreground mb-1">Your Job Postings</h2>
-                <p className="text-sm text-muted-foreground">Manage and track your active job listings</p>
-              </div>
-              <Button asChild>
-                <Link href="/post-job" onClick={scrollToTop}>
-                  Post New Job
-                </Link>
-              </Button>
-            </div>
-
-            <Card className="overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-muted/50">
-                    <tr>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Job Title</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Location</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Type</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Salary</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Applicants</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Status</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Posted</th>
-                      <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border">
-                    {employerJobs.map((job) => (
-                      <tr key={job.id} className="hover:bg-muted/30 transition-colors">
-                        <td className="py-4 px-6">
-                          <div className="font-medium text-foreground">{job.title}</div>
-                        </td>
-                        <td className="py-4 px-6">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <MapPin className="size-4" />
-                            {job.location}
-                          </div>
-                        </td>
-                        <td className="py-4 px-6">
-                          <Badge variant="secondary">{job.type}</Badge>
-                        </td>
-                        <td className="py-4 px-6">
-                          <span className="text-sm text-foreground">{job.salary}</span>
-                        </td>
-                        <td className="py-4 px-6">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium text-foreground">{job.applicants}</span>
-                            <span className="text-xs text-muted-foreground">candidates</span>
-                          </div>
-                        </td>
-                        <td className="py-4 px-6">
-                          <Badge variant={job.status === "Active" ? "default" : "secondary"}>{job.status}</Badge>
-                        </td>
-                        <td className="py-4 px-6">
-                          <span className="text-sm text-muted-foreground">
-                            {new Date(job.postedDate).toLocaleDateString("en-US", {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            })}
-                          </span>
-                        </td>
-                        <td className="py-4 px-6">
-                          <div className="flex items-center gap-2">
-                            <Button variant="ghost" size="sm" asChild>
-                              <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                                <Eye className="size-4" />
-                              </Link>
-                            </Button>
-                            <Button variant="ghost" size="sm" disabled>
-                              <Edit className="size-4" />
-                            </Button>
-                            <Button variant="ghost" size="sm" disabled>
-                              <Trash2 className="size-4" />
-                            </Button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-          </div>
-        </section>
-      )}
-
-      {userType === "employer" && (
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
-              <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
-            </div>
-
-            <div className="space-y-6">
-              {/* Search and Filters */}
-              <Card className="p-6">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Search</label>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                      <input placeholder="Name, skills, degree..." className="pl-10" />
+        {/* Hero Section */}
+        {userType === "graduate" && (
+          <section className="bg-gradient-to-b from-muted/50 to-background py-12">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto space-y-6">
+                {/* Search Bar */}
+                <Card className="p-2 shadow-lg">
+                  <div className="flex flex-col md:flex-row gap-2">
+                    <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-background rounded-md">
+                      <Search className="size-5 text-muted-foreground" />
+                      <input
+                        type="text"
+                        placeholder="Job title or keyword"
+                        className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+                      />
                     </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Location</label>
-                    <div className="relative">
-                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                      <select className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm">
-                        <option>All Locations</option>
-                        <option>Remote</option>
-                        <option>San Francisco, CA</option>
-                        <option>New York, NY</option>
-                        <option>Boston, MA</option>
-                        <option>Seattle, WA</option>
-                      </select>
+                    <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-background rounded-md">
+                      <MapPin className="size-5 text-muted-foreground" />
+                      <input
+                        type="text"
+                        placeholder="Location"
+                        className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+                      />
                     </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Graduation Year</label>
-                    <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
-                      <option>Any Year</option>
-                      <option>2024</option>
-                      <option>2023</option>
-                      <option>2022</option>
-                      <option>2021</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Availability</label>
-                    <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
-                      <option>Any</option>
-                      <option>Immediate</option>
-                      <option>Within 2 weeks</option>
-                      <option>Within 1 month</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Popular skills:</span>
-                  <div className="flex flex-wrap gap-2">
-                    <Button variant="outline" size="sm">
-                      React
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Python
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      TypeScript
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      AWS
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Design
+                    <Button size="lg" className="md:w-auto">
+                      Search Jobs
                     </Button>
                   </div>
-                </div>
-              </Card>
+                </Card>
 
-              {/* Results */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">{mockGraduates.length} active graduates found</p>
-                  <select className="h-9 px-3 rounded-md border border-input bg-background text-sm">
-                    <option>Most Recent</option>
-                    <option>Best Match</option>
-                    <option>Graduation Year</option>
-                  </select>
-                </div>
-
-                <div className="grid gap-4">
-                  {mockGraduates.map((graduate) => (
-                    <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
-                      <div className="flex flex-col md:flex-row gap-6">
-                        <div className="flex items-start gap-4 flex-1">
-                          <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                            {graduate.avatar}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
-                            <p className="text-sm text-muted-foreground mb-2">
-                              {graduate.degree} • {graduate.university}
-                            </p>
-                            <div className="flex flex-wrap gap-2 mb-3">
-                              {graduate.skills.map((skill) => (
-                                <Badge key={skill} variant="secondary">
-                                  {skill}
-                                </Badge>
-                              ))}
-                            </div>
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                              <div className="flex items-center gap-2 text-muted-foreground">
-                                <MapPin className="size-4" />
-                                <span>{graduate.location}</span>
-                              </div>
-                              <div className="flex items-center gap-2 text-muted-foreground">
-                                <Briefcase className="size-4" />
-                                <span>{graduate.experience} experience</span>
-                              </div>
-                              <div className="flex items-center gap-2 text-muted-foreground">
-                                <Clock className="size-4" />
-                                <span>{graduate.availability} availability</span>
-                              </div>
-                              <div className="flex items-center gap-2 text-muted-foreground">
-                                <TrendingUp className="size-4" />
-                                <span>Graduated {graduate.graduationYear}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex md:flex-col gap-2 shrink-0">
-                          <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
-                            <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                              View Profile
-                            </Link>
-                          </Button>
-                          <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                            Contact
-                          </Button>
-                        </div>
-                      </div>
-                    </Card>
+                <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <span>Popular:</span>
+                  {["Designer", "Developer", "Manager", "Marketing"].map((term) => (
+                    <button
+                      key={term}
+                      className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
+                    >
+                      {term}
+                    </button>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
-      {/* Companies Section */}
-      {userType === "graduate" && (
-        <section className="py-12 border-b border-border">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-semibold text-foreground mb-1">Explore Top Companies</h2>
-                <p className="text-sm text-muted-foreground">Discover companies hiring talented graduates</p>
-              </div>
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </div>
-
-            <div className="space-y-4 mb-6">
-              <div className="flex flex-col md:flex-row gap-3">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                  <input placeholder="Search companies..." className="pl-10" />
+        {userType === "employer" && (
+          <section className="py-16 border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Your Job Postings</h2>
+                  <p className="text-sm text-muted-foreground">Manage and track your active job listings</p>
                 </div>
-                <div className="flex gap-2">
-                  <select className="h-10 px-4 rounded-md border border-input bg-background text-sm min-w-[140px]">
-                    <option>All Industries</option>
-                    <option>Software Development</option>
-                    <option>Data Science</option>
-                    <option>Cloud Computing</option>
-                    <option>Financial Technology</option>
-                    <option>Design & UX</option>
-                  </select>
-                  <select className="h-10 px-4 rounded-md border border-input bg-background text-sm min-w-[140px]">
-                    <option>All Locations</option>
-                    <option>San Francisco, CA</option>
-                    <option>New York, NY</option>
-                    <option>Seattle, WA</option>
-                    <option>Boston, MA</option>
-                    <option>Austin, TX</option>
-                  </select>
-                </div>
+                <Button asChild>
+                  <Link href="/post-job" onClick={scrollToTop}>
+                    Post New Job
+                  </Link>
+                </Button>
               </div>
-            </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {mockCompanies.map((company) => (
-                <Card key={company.id} className="p-6 hover:shadow-lg transition-shadow">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <div className="size-16 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shrink-0">
-                        {company.logo}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-lg text-foreground mb-1 text-balance">{company.name}</h3>
-                        <p className="text-sm text-muted-foreground">{company.industry}</p>
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground line-clamp-2">{company.description}</p>
-
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <MapPin className="size-4 shrink-0" />
-                        <span>{company.location}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Building2 className="size-4 shrink-0" />
-                        <span>{company.size}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Briefcase className="size-4 shrink-0" />
-                        <span className="font-medium text-foreground">{company.openPositions} open positions</span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {company.benefits.slice(0, 3).map((benefit) => (
-                        <Badge key={benefit} variant="secondary" className="text-xs">
-                          {benefit}
-                        </Badge>
+              <Card className="overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-muted/50">
+                      <tr>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Job Title</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Location</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Type</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Salary</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Applicants</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Status</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Posted</th>
+                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {employerJobs.map((job) => (
+                        <tr key={job.id} className="hover:bg-muted/30 transition-colors">
+                          <td className="py-4 px-6">
+                            <div className="font-medium text-foreground">{job.title}</div>
+                          </td>
+                          <td className="py-4 px-6">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <MapPin className="size-4" />
+                              {job.location}
+                            </div>
+                          </td>
+                          <td className="py-4 px-6">
+                            <Badge variant="secondary">{job.type}</Badge>
+                          </td>
+                          <td className="py-4 px-6">
+                            <span className="text-sm text-foreground">{job.salary}</span>
+                          </td>
+                          <td className="py-4 px-6">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium text-foreground">{job.applicants}</span>
+                              <span className="text-xs text-muted-foreground">candidates</span>
+                            </div>
+                          </td>
+                          <td className="py-4 px-6">
+                            <Badge variant={job.status === "Active" ? "default" : "secondary"}>{job.status}</Badge>
+                          </td>
+                          <td className="py-4 px-6">
+                            <span className="text-sm text-muted-foreground">
+                              {new Date(job.postedDate).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              })}
+                            </span>
+                          </td>
+                          <td className="py-4 px-6">
+                            <div className="flex items-center gap-2">
+                              <Button variant="ghost" size="sm" asChild>
+                                <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
+                                  <Eye className="size-4" />
+                                </Link>
+                              </Button>
+                              <Button variant="ghost" size="sm" disabled>
+                                <Edit className="size-4" />
+                              </Button>
+                              <Button variant="ghost" size="sm" disabled>
+                                <Trash2 className="size-4" />
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
                       ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+            </div>
+          </section>
+        )}
+
+        {userType === "employer" && (
+          <section className="py-16">
+            <div className="container mx-auto px-4">
+              <div className="mb-6">
+                <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
+                <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
+              </div>
+
+              <div className="space-y-6">
+                {/* Search and Filters */}
+                <Card className="p-6">
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Search</label>
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                        <input placeholder="Name, skills, degree..." className="pl-10" />
+                      </div>
                     </div>
 
-                    <div className="flex gap-2 pt-2">
-                      <Button variant="default" size="sm" className="flex-1" disabled>
-                        View Jobs
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Location</label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                        <select className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm">
+                          <option>All Locations</option>
+                          <option>Remote</option>
+                          <option>San Francisco, CA</option>
+                          <option>New York, NY</option>
+                          <option>Boston, MA</option>
+                          <option>Seattle, WA</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Graduation Year</label>
+                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
+                        <option>Any Year</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Availability</label>
+                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
+                        <option>Any</option>
+                        <option>Immediate</option>
+                        <option>Within 2 weeks</option>
+                        <option>Within 1 month</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Popular skills:</span>
+                    <div className="flex flex-wrap gap-2">
+                      <Button variant="outline" size="sm">
+                        React
                       </Button>
-                      <Button variant="outline" size="sm" className="flex-1 bg-transparent" disabled>
-                        Follow
+                      <Button variant="outline" size="sm">
+                        Python
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        TypeScript
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        AWS
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        Design
                       </Button>
                     </div>
                   </div>
                 </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
-      {/* Categories */}
-      {userType === "graduate" && (
-        <section className="py-12 border-b border-border">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-semibold text-foreground mb-6">Browse by Category</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {categories.map((category) => {
-                const Icon = category.icon
-                return (
-                  <Card key={category.name} className="p-6 hover:shadow-md transition-shadow cursor-pointer">
-                    <div className="flex flex-col items-center text-center gap-3">
-                      <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Icon className="size-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-foreground">{category.name}</h3>
-                        <p className="text-sm text-muted-foreground">{category.count} jobs</p>
-                      </div>
-                    </div>
-                  </Card>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-      )}
+                {/* Results */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">{mockGraduates.length} active graduates found</p>
+                    <select className="h-9 px-3 rounded-md border border-input bg-background text-sm">
+                      <option>Most Recent</option>
+                      <option>Best Match</option>
+                      <option>Graduation Year</option>
+                    </select>
+                  </div>
 
-      {/* Featured Jobs */}
-      {userType === "graduate" && (
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-semibold text-foreground">Featured Jobs</h2>
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {featuredJobs.map((job) => (
-                <Link key={job.id} href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                  <Card className="p-6 h-full hover:shadow-lg transition-shadow cursor-pointer">
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-foreground mb-1 text-balance">{job.title}</h3>
-                          <p className="text-sm text-muted-foreground">{job.company}</p>
+                  <div className="grid gap-4">
+                    {mockGraduates.map((graduate) => (
+                      <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
+                        <div className="flex flex-col md:flex-row gap-6">
+                          <div className="flex items-start gap-4 flex-1">
+                            <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                              {graduate.avatar}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
+                              <p className="text-sm text-muted-foreground mb-2">
+                                {graduate.degree} • {graduate.university}
+                              </p>
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                {graduate.skills.map((skill) => (
+                                  <Badge key={skill} variant="secondary">
+                                    {skill}
+                                  </Badge>
+                                ))}
+                              </div>
+                              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <MapPin className="size-4" />
+                                  <span>{graduate.location}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <Briefcase className="size-4" />
+                                  <span>{graduate.experience} experience</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <Clock className="size-4" />
+                                  <span>{graduate.availability} availability</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <TrendingUp className="size-4" />
+                                  <span>Graduated {graduate.graduationYear}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex md:flex-col gap-2 shrink-0">
+                            <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
+                              <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
+                                View Profile
+                              </Link>
+                            </Button>
+                            <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                              Contact
+                            </Button>
+                          </div>
                         </div>
-                        {job.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Companies Section */}
+        {userType === "graduate" && (
+          <section className="py-12 border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Explore Top Companies</h2>
+                  <p className="text-sm text-muted-foreground">Discover companies hiring talented graduates</p>
+                </div>
+                <Button variant="outline" size="sm">
+                  View All
+                </Button>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <div className="flex flex-col md:flex-row gap-3">
+                  <div className="flex-1 relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                    <input placeholder="Search companies..." className="pl-10" />
+                  </div>
+                  <div className="flex gap-2">
+                    <select className="h-10 px-4 rounded-md border border-input bg-background text-sm min-w-[140px]">
+                      <option>All Industries</option>
+                      <option>Software Development</option>
+                      <option>Data Science</option>
+                      <option>Cloud Computing</option>
+                      <option>Financial Technology</option>
+                      <option>Design & UX</option>
+                    </select>
+                    <select className="h-10 px-4 rounded-md border border-input bg-background text-sm min-w-[140px]">
+                      <option>All Locations</option>
+                      <option>San Francisco, CA</option>
+                      <option>New York, NY</option>
+                      <option>Seattle, WA</option>
+                      <option>Boston, MA</option>
+                      <option>Austin, TX</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {mockCompanies.map((company) => (
+                  <Card key={company.id} className="p-6 hover:shadow-lg transition-shadow">
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-4">
+                        <div className="size-16 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shrink-0">
+                          {company.logo}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-lg text-foreground mb-1 text-balance">{company.name}</h3>
+                          <p className="text-sm text-muted-foreground">{company.industry}</p>
+                        </div>
+                      </div>
+
+                      <p className="text-sm text-muted-foreground line-clamp-2">{company.description}</p>
+
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <MapPin className="size-4 shrink-0" />
+                          <span>{company.location}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Building2 className="size-4 shrink-0" />
+                          <span>{company.size}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Briefcase className="size-4 shrink-0" />
+                          <span className="font-medium text-foreground">{company.openPositions} open positions</span>
+                        </div>
                       </div>
 
                       <div className="flex flex-wrap gap-2">
-                        {job.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary">
-                            {tag}
+                        {company.benefits.slice(0, 3).map((benefit) => (
+                          <Badge key={benefit} variant="secondary" className="text-xs">
+                            {benefit}
                           </Badge>
                         ))}
                       </div>
 
-                      <div className="space-y-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                          <MapPin className="size-4" />
-                          <span>{job.location}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Briefcase className="size-4" />
-                          <span>{job.type}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Clock className="size-4" />
-                          <span>Posted {job.postedDays} days ago</span>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-border">
-                        <p className="font-semibold text-foreground">{job.salary}</p>
+                      <div className="flex gap-2 pt-2">
+                        <Button variant="default" size="sm" className="flex-1" disabled>
+                          View Jobs
+                        </Button>
+                        <Button variant="outline" size="sm" className="flex-1 bg-transparent" disabled>
+                          Follow
+                        </Button>
                       </div>
                     </div>
                   </Card>
-                </Link>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
-      {/* CTA Section */}
-      {userType === "employer" && (
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <Card className="p-8 md:p-12 bg-primary text-primary-foreground text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Ready to Hire Top Talent?</h2>
-              <p className="text-lg mb-6 text-primary-foreground/90 text-pretty max-w-2xl mx-auto">
-                Post your job opening and reach thousands of qualified candidates actively looking for their next
-                opportunity
-              </p>
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/post-job" onClick={scrollToTop}>
-                  Post a Job for Free
-                </Link>
-              </Button>
-            </Card>
-          </div>
-        </section>
-      )}
+        {/* Categories */}
+        {userType === "graduate" && (
+          <section className="py-12 border-b border-border">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-6">Browse by Category</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {categories.map((category) => {
+                  const Icon = category.icon
+                  return (
+                    <Card key={category.name} className="p-6 hover:shadow-md transition-shadow cursor-pointer">
+                      <div className="flex flex-col items-center text-center gap-3">
+                        <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <Icon className="size-6 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-foreground">{category.name}</h3>
+                          <p className="text-sm text-muted-foreground">{category.count} jobs</p>
+                        </div>
+                      </div>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Featured Jobs */}
+        {userType === "graduate" && (
+          <section className="py-12">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-semibold text-foreground">Featured Jobs</h2>
+                <Button variant="outline" size="sm">
+                  View All
+                </Button>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {featuredJobs.map((job) => (
+                  <Link key={job.id} href={`/jobs/${job.id}`} onClick={scrollToTop}>
+                    <Card className="p-6 h-full hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex flex-col gap-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-foreground mb-1 text-balance">{job.title}</h3>
+                            <p className="text-sm text-muted-foreground">{job.company}</p>
+                          </div>
+                          {job.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                          {job.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <div className="space-y-2 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="size-4" />
+                            <span>{job.location}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Briefcase className="size-4" />
+                            <span>{job.type}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="size-4" />
+                            <span>Posted {job.postedDays} days ago</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t border-border">
+                          <p className="font-semibold text-foreground">{job.salary}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* CTA Section */}
+        {userType === "employer" && (
+          <section className="py-16 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <Card className="p-8 md:p-12 bg-primary text-primary-foreground text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Ready to Hire Top Talent?</h2>
+                <p className="text-lg mb-6 text-primary-foreground/90 text-pretty max-w-2xl mx-auto">
+                  Post your job opening and reach thousands of qualified candidates actively looking for their next
+                  opportunity
+                </p>
+                <Button size="lg" variant="secondary" asChild>
+                  <Link href="/post-job" onClick={scrollToTop}>
+                    Post a Job for Free
+                  </Link>
+                </Button>
+              </Card>
+            </div>
+          </section>
+        )}
+      </main>
 
       {/* Footer */}
       <footer className="border-t border-border py-12 bg-card">
