@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "The Grad Directory - Find Your Dream Job",
+  title: "Directory - Find Your Dream Job",
   description:
     "Discover thousands of job opportunities from top companies. Post jobs and connect with talented candidates.",
   generator: "v0.app",

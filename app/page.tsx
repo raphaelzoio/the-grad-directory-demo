@@ -28,7 +28,7 @@ export default function HomePage() {
             <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-semibold text-foreground">The Grad Directory</span>
+            <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
           </Link>
         </div>
       </header>
@@ -38,7 +38,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground text-balance">
-              The UK's premier Graduate database
+              The UK's premier graduate database
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground text-pretty max-w-3xl mx-auto leading-relaxed">
               The Graduate Directory is a closed private database, offering employers access to the country's most
@@ -165,7 +165,7 @@ export default function HomePage() {
       <footer className="border-t border-border py-12 bg-card">
         <div className="container mx-auto px-4">
           <div className="text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 The Grad Directory. All rights reserved.</p>
+            <p>&copy; 2025 The Graduate Directory. All rights reserved.</p>
           </div>
         </div>
       </footer>

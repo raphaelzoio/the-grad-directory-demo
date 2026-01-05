@@ -168,7 +168,7 @@ export default function ApplicationsPage() {
             <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-semibold text-foreground">The Grad Directory</span>
+            <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link

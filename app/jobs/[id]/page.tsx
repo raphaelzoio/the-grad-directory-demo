@@ -58,7 +58,7 @@ export default function JobDetailPage() {
             <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-semibold text-foreground">The Grad Directory</span>
+            <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
           </Link>
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" disabled>
