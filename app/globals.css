@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import url("https://fonts.googleapis.com/css2?family=Belleza&display=swap");
+
 @custom-variant dark (&:is(.dark *));
 
 /* Academic theme with paper white and smart typography */
@@ -109,9 +111,10 @@
   --sidebar-ring: oklch(0.7 0.15 20);
 }
 
-/* Smart academic typography with serif for headings */
+/* Smart typography with Inter */
 @theme inline {
-  --font-sans: "Georgia", "Times New Roman", serif;
+  --font-inter: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter);
   --font-serif: "Georgia", "Times New Roman", serif;
   --font-mono: "Courier New", "Courier", monospace;
 
@@ -161,18 +164,23 @@
     @apply bg-background text-foreground;
   }
 
-  /* Enhanced typography for academic readability */
+  /* Enhanced typography for readability */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    @apply font-sans font-semibold;
     letter-spacing: -0.02em;
   }
 
   p {
     @apply leading-relaxed;
+  }
+
+  .font-belleza {
+    font-family: "Belleza", sans-serif;
+    font-weight: 400;
   }
 }

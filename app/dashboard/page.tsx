@@ -21,6 +21,8 @@ import {
   Trash2,
   User,
   AlertCircle,
+  GraduationCap,
+  Calendar,
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -28,10 +30,10 @@ const featuredJobs = [
   {
     id: 1,
     title: "Senior Frontend Developer",
-    company: "TechCorp Inc.",
-    location: "San Francisco, CA",
+    company: "Digital Solutions Ltd",
+    location: "London, UK",
     type: "Full-time",
-    salary: "$120k - $180k",
+    salary: "£60,000 - £85,000 a year",
     tags: ["React", "TypeScript", "Next.js"],
     postedDays: 2,
     featured: true,
@@ -39,10 +41,10 @@ const featuredJobs = [
   {
     id: 2,
     title: "Product Designer",
-    company: "DesignHub",
+    company: "Creative Studios",
     location: "Remote",
     type: "Full-time",
-    salary: "$100k - $150k",
+    salary: "£50,000 - £70,000 a year",
     tags: ["Figma", "UI/UX", "Design Systems"],
     postedDays: 1,
     featured: true,
@@ -50,10 +52,10 @@ const featuredJobs = [
   {
     id: 3,
     title: "Backend Engineer",
-    company: "CloudScale",
-    location: "New York, NY",
+    company: "CloudScale UK",
+    location: "Manchester, UK",
     type: "Full-time",
-    salary: "$130k - $190k",
+    salary: "£65,000 - £90,000 a year",
     tags: ["Node.js", "AWS", "PostgreSQL"],
     postedDays: 3,
     featured: false,
@@ -61,10 +63,10 @@ const featuredJobs = [
   {
     id: 4,
     title: "DevOps Engineer",
-    company: "InfraWorks",
-    location: "Austin, TX",
+    company: "InfraWorks Ltd",
+    location: "Edinburgh, UK",
     type: "Full-time",
-    salary: "$110k - $160k",
+    salary: "£55,000 - £75,000 a year",
     tags: ["Kubernetes", "Docker", "CI/CD"],
     postedDays: 5,
     featured: false,
@@ -72,10 +74,10 @@ const featuredJobs = [
   {
     id: 5,
     title: "Data Scientist",
-    company: "DataVision",
-    location: "Seattle, WA",
+    company: "DataVision plc",
+    location: "Cambridge, UK",
     type: "Full-time",
-    salary: "$140k - $200k",
+    salary: "£70,000 - £95,000 a year",
     tags: ["Python", "ML", "TensorFlow"],
     postedDays: 4,
     featured: false,
@@ -83,10 +85,10 @@ const featuredJobs = [
   {
     id: 6,
     title: "Mobile Developer",
-    company: "AppMakers",
+    company: "AppMakers UK",
     location: "Remote",
     type: "Contract",
-    salary: "$90k - $130k",
+    salary: "£45,000 - £65,000 a year",
     tags: ["React Native", "iOS", "Android"],
     postedDays: 7,
     featured: false,
@@ -104,9 +106,9 @@ const employerJobs = [
   {
     id: 1,
     title: "Senior Frontend Developer",
-    location: "San Francisco, CA",
+    location: "London, UK",
     type: "Full-time",
-    salary: "$120k - $180k",
+    salary: "£60,000 - £85,000 a year",
     applicants: 24,
     status: "Active",
     postedDate: "2025-01-10",
@@ -116,7 +118,7 @@ const employerJobs = [
     title: "Product Designer",
     location: "Remote",
     type: "Full-time",
-    salary: "$100k - $150k",
+    salary: "£50,000 - £70,000 a year",
     applicants: 18,
     status: "Active",
     postedDate: "2025-01-12",
@@ -124,9 +126,9 @@ const employerJobs = [
   {
     id: 3,
     title: "Backend Engineer",
-    location: "New York, NY",
+    location: "Manchester, UK",
     type: "Full-time",
-    salary: "$130k - $190k",
+    salary: "£65,000 - £90,000 a year",
     applicants: 31,
     status: "Active",
     postedDate: "2025-01-08",
@@ -134,9 +136,9 @@ const employerJobs = [
   {
     id: 4,
     title: "DevOps Engineer",
-    location: "Austin, TX",
+    location: "Edinburgh, UK",
     type: "Full-time",
-    salary: "$110k - $160k",
+    salary: "£55,000 - £75,000 a year",
     applicants: 12,
     status: "Closed",
     postedDate: "2024-12-20",
@@ -147,10 +149,10 @@ const mockGraduates = [
   {
     id: 1,
     name: "Sarah Johnson",
-    degree: "Computer Science, BS",
-    university: "Stanford University",
+    degree: "Computer Science, BSc",
+    university: "University of Oxford",
     graduationYear: 2024,
-    location: "San Francisco, CA",
+    location: "London, UK",
     skills: ["React", "TypeScript", "Node.js", "Python"],
     experience: "2 years",
     availability: "Immediate",
@@ -159,10 +161,10 @@ const mockGraduates = [
   {
     id: 2,
     name: "Michael Chen",
-    degree: "Software Engineering, MS",
-    university: "MIT",
+    degree: "Software Engineering, MSc",
+    university: "Imperial College London",
     graduationYear: 2023,
-    location: "Boston, MA",
+    location: "Cambridge, UK",
     skills: ["Java", "Spring Boot", "AWS", "Docker"],
     experience: "3 years",
     availability: "2 weeks",
@@ -171,8 +173,8 @@ const mockGraduates = [
   {
     id: 3,
     name: "Emily Rodriguez",
-    degree: "Data Science, BS",
-    university: "UC Berkeley",
+    degree: "Data Science, BSc",
+    university: "University of Cambridge",
     graduationYear: 2024,
     location: "Remote",
     skills: ["Python", "ML", "TensorFlow", "SQL"],
@@ -183,10 +185,10 @@ const mockGraduates = [
   {
     id: 4,
     name: "David Kim",
-    degree: "Computer Engineering, BS",
-    university: "Carnegie Mellon",
+    degree: "Computer Engineering, BEng",
+    university: "University of Edinburgh",
     graduationYear: 2023,
-    location: "Seattle, WA",
+    location: "Edinburgh, UK",
     skills: ["C++", "Rust", "Kubernetes", "Linux"],
     experience: "2 years",
     availability: "1 month",
@@ -195,10 +197,10 @@ const mockGraduates = [
   {
     id: 5,
     name: "Jessica Martinez",
-    degree: "UX Design, MS",
-    university: "RISD",
+    degree: "UX Design, MA",
+    university: "Royal College of Art",
     graduationYear: 2024,
-    location: "New York, NY",
+    location: "Manchester, UK",
     skills: ["Figma", "UI/UX", "Design Systems", "Research"],
     experience: "2 years",
     availability: "Immediate",
@@ -207,10 +209,10 @@ const mockGraduates = [
   {
     id: 6,
     name: "Alex Thompson",
-    degree: "Information Systems, BS",
-    university: "Georgia Tech",
+    degree: "Information Systems, BSc",
+    university: "University College London",
     graduationYear: 2023,
-    location: "Atlanta, GA",
+    location: "Bristol, UK",
     skills: ["JavaScript", "React", "GraphQL", "MongoDB"],
     experience: "3 years",
     availability: "2 weeks",
@@ -221,69 +223,69 @@ const mockGraduates = [
 const mockCompanies = [
   {
     id: 1,
-    name: "TechCorp Solutions",
+    name: "TechCorp Solutions Ltd",
     industry: "Software Development",
-    location: "San Francisco, CA",
+    location: "London, UK",
     size: "500-1000 employees",
     logo: "TC",
     description: "Leading provider of enterprise software solutions",
     openPositions: 12,
-    benefits: ["Health Insurance", "401k", "Remote Work", "Stock Options"],
+    benefits: ["Private Healthcare", "Pension Scheme", "Remote Work", "Share Options"],
   },
   {
     id: 2,
     name: "DataDrive Analytics",
     industry: "Data Science",
-    location: "New York, NY",
+    location: "Manchester, UK",
     size: "100-500 employees",
     logo: "DD",
     description: "Transforming data into actionable insights",
     openPositions: 8,
-    benefits: ["Health Insurance", "Unlimited PTO", "Learning Budget"],
+    benefits: ["Private Healthcare", "Unlimited Holiday", "Learning Budget"],
   },
   {
     id: 3,
-    name: "CloudScale Inc",
+    name: "CloudScale UK Ltd",
     industry: "Cloud Computing",
-    location: "Seattle, WA",
+    location: "Edinburgh, UK",
     size: "1000+ employees",
     logo: "CS",
     description: "Building the future of cloud infrastructure",
     openPositions: 24,
-    benefits: ["Health Insurance", "401k", "Remote Work", "Gym Membership"],
+    benefits: ["Private Healthcare", "Pension Scheme", "Remote Work", "Gym Membership"],
   },
   {
     id: 4,
     name: "FinTech Innovations",
     industry: "Financial Technology",
-    location: "Boston, MA",
+    location: "Cambridge, UK",
     size: "100-500 employees",
     logo: "FI",
-    description: "Revolutionizing digital banking and payments",
+    description: "Revolutionising digital banking and payments",
     openPositions: 15,
-    benefits: ["Health Insurance", "Stock Options", "Flexible Hours"],
+    benefits: ["Private Healthcare", "Share Options", "Flexible Hours"],
   },
   {
     id: 5,
     name: "DesignHub Studio",
     industry: "Design & UX",
-    location: "Austin, TX",
+    location: "Bristol, UK",
     size: "50-100 employees",
     logo: "DH",
     description: "Creating beautiful digital experiences",
     openPositions: 6,
-    benefits: ["Health Insurance", "Remote Work", "Creative Freedom"],
+    benefits: ["Private Healthcare", "Remote Work", "Creative Freedom"],
   },
   {
     id: 6,
     name: "AI Ventures Lab",
     industry: "Artificial Intelligence",
-    location: "San Francisco, CA",
+    location: "London, UK",
     size: "500-1000 employees",
     logo: "AV",
     description: "Pioneering AI-powered solutions for enterprises",
     openPositions: 18,
-    benefits: ["Health Insurance", "401k", "Stock Options", "Research Time"],
+    benefits: ["Private Healthcare", "Pension Scheme", "Share Options", "Research Time"],
   },
 ]
 
@@ -327,7 +329,7 @@ export default function DashboardPage() {
               <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
                 <Briefcase className="size-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
+              <span className="text-xl font-belleza text-foreground">The Graduate Directory</span>
             </Link>
             <nav className="hidden md:flex items-center gap-6">
               <Link
@@ -380,7 +382,7 @@ export default function DashboardPage() {
               <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
                 <Briefcase className="size-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
+              <span className="text-xl font-belleza text-foreground">The Graduate Directory</span>
             </Link>
             <div className="flex items-center gap-3">
               <Badge variant="secondary" className="hidden sm:inline-flex">
@@ -411,31 +413,55 @@ export default function DashboardPage() {
         {userType === "graduate" && (
           <div className="bg-primary/10 border-b border-primary/20">
             <div className="container mx-auto px-4 py-4">
-              <div className="flex items-start gap-4 max-w-4xl">
-                <AlertCircle className="size-5 text-primary flex-shrink-0 mt-0.5" />
-                <div className="flex-1 space-y-2">
-                  <h3 className="font-semibold text-foreground">Complete Your Profile</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Your profile is 65% complete. Add your work experience, projects, and certifications to stand out to
-                    employers.
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <div className="flex-1 max-w-md h-2 bg-muted rounded-full overflow-hidden">
-                      <div className="h-full bg-primary w-[65%] rounded-full" />
+              <div className="flex items-start gap-4">
+                <div className="size-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg flex-shrink-0">
+                  ST
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-foreground mb-1">Sam Taylor Jr.</h3>
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-2">
+                    <div className="flex items-center gap-1.5">
+                      <GraduationCap className="size-4" />
+                      <span>History, BA - University of Oxford</span>
                     </div>
-                    <span className="text-sm font-medium text-foreground">65%</span>
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="size-4" />
+                      <span>Graduated 2024</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm text-muted-foreground">Complete your profile to stand out to employers.</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          window.scrollTo({ top: 0, behavior: "smooth" })
+                          window.location.href = "/profile/edit"
+                        }}
+                      >
+                        Complete Profile
+                      </Button>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 max-w-md h-2 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-primary w-[85%] rounded-full" />
+                      </div>
+                      <span className="text-sm font-medium text-foreground">85%</span>
+                    </div>
                   </div>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                    window.location.href = "/profile/edit"
-                  }}
-                >
-                  Complete Profile
-                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {userType === "employer" && (
+          <div className="bg-primary/10 border-b border-primary/20">
+            <div className="container mx-auto px-4 py-4">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <AlertCircle className="size-5" />
+                <p className="text-sm">Welcome back! Manage your job postings and discover talented graduates below.</p>
               </div>
             </div>
           </div>
@@ -579,17 +605,24 @@ export default function DashboardPage() {
         )}
 
         {userType === "employer" && (
-          <section className="py-16">
+          <section className="py-16 bg-muted/20">
             <div className="container mx-auto px-4">
-              <div className="mb-6">
-                <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
-                <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
+                  <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
+                </div>
+                <Button asChild>
+                  <Link href="/post-job" onClick={scrollToTop}>
+                    Post New Job
+                  </Link>
+                </Button>
               </div>
 
               <div className="space-y-6">
                 {/* Search and Filters */}
                 <Card className="p-6">
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">Search</label>
                       <div className="relative">
@@ -605,12 +638,49 @@ export default function DashboardPage() {
                         <select className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm">
                           <option>All Locations</option>
                           <option>Remote</option>
-                          <option>San Francisco, CA</option>
-                          <option>New York, NY</option>
-                          <option>Boston, MA</option>
-                          <option>Seattle, WA</option>
+                          <option>London</option>
+                          <option>Manchester</option>
+                          <option>Birmingham</option>
+                          <option>Edinburgh</option>
+                          <option>Bristol</option>
                         </select>
                       </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">University</label>
+                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
+                        <option>All Universities</option>
+                        <option>University of Oxford</option>
+                        <option>University of Cambridge</option>
+                        <option>Imperial College London</option>
+                        <option>University College London</option>
+                        <option>London School of Economics</option>
+                        <option>University of Edinburgh</option>
+                        <option>King's College London</option>
+                        <option>University of Manchester</option>
+                        <option>University of Bristol</option>
+                        <option>University of Warwick</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Subject</label>
+                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
+                        <option>All Subjects</option>
+                        <option>Computer Science</option>
+                        <option>Engineering</option>
+                        <option>Business & Management</option>
+                        <option>Economics</option>
+                        <option>Mathematics</option>
+                        <option>Law</option>
+                        <option>Medicine</option>
+                        <option>Natural Sciences</option>
+                        <option>History</option>
+                        <option>English Literature</option>
+                        <option>Politics & International Relations</option>
+                        <option>Psychology</option>
+                      </select>
                     </div>
 
                     <div className="space-y-2">
@@ -728,42 +798,126 @@ export default function DashboardPage() {
           </section>
         )}
 
-        {/* Companies Section */}
         {userType === "graduate" && (
           <section className="py-12 border-b border-border">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-semibold text-foreground mb-1">Explore Top Companies</h2>
-                  <p className="text-sm text-muted-foreground">Discover companies hiring talented graduates</p>
-                </div>
+                <h2 className="text-2xl font-semibold text-foreground">Featured Jobs</h2>
                 <Button variant="outline" size="sm">
                   View All
                 </Button>
               </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {featuredJobs.map((job) => (
+                  <Link key={job.id} href={`/jobs/${job.id}`} onClick={scrollToTop}>
+                    <Card className="p-6 h-full hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex flex-col gap-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-foreground mb-1 text-balance">{job.title}</h3>
+                            <p className="text-sm text-muted-foreground">{job.company}</p>
+                          </div>
+                          {job.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                          {job.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <div className="space-y-2 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="size-4" />
+                            <span>{job.location}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Briefcase className="size-4" />
+                            <span>{job.type}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="size-4" />
+                            <span>Posted {job.postedDays} days ago</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t border-border">
+                          <p className="font-semibold text-foreground">{job.salary}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Categories */}
+        {userType === "graduate" && (
+          <section className="py-12 border-b border-border">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-6">Browse by Category</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {categories.map((category) => {
+                  const Icon = category.icon
+                  return (
+                    <Card key={category.name} className="p-6 hover:shadow-md transition-shadow cursor-pointer">
+                      <div className="flex flex-col items-center text-center gap-3">
+                        <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <Icon className="size-6 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-foreground">{category.name}</h3>
+                          <p className="text-sm text-muted-foreground">{category.count} jobs</p>
+                        </div>
+                      </div>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Companies Section */}
+        {userType === "graduate" && (
+          <section className="py-12">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-6">Explore Top Companies</h2>
 
               <div className="space-y-4 mb-6">
-                <div className="flex flex-col md:flex-row gap-3">
-                  <div className="flex-1 relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                    <input placeholder="Search companies..." className="pl-10" />
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                    <Search className="size-5 text-muted-foreground" />
+                    <input
+                      type="text"
+                      placeholder="Search companies..."
+                      className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
+                    />
                   </div>
-                  <div className="flex gap-2">
-                    <select className="h-10 px-4 rounded-md border border-input bg-background text-sm min-w-[140px]">
+
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                    <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
                       <option>All Industries</option>
-                      <option>Software Development</option>
-                      <option>Data Science</option>
-                      <option>Cloud Computing</option>
-                      <option>Financial Technology</option>
-                      <option>Design & UX</option>
+                      <option>Technology</option>
+                      <option>Finance</option>
+                      <option>Healthcare</option>
+                      <option>Education</option>
                     </select>
-                    <select className="h-10 px-4 rounded-md border border-input bg-background text-sm min-w-[140px]">
+                  </div>
+
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                    <MapPin className="size-5 text-muted-foreground" />
+                    <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
                       <option>All Locations</option>
-                      <option>San Francisco, CA</option>
-                      <option>New York, NY</option>
-                      <option>Seattle, WA</option>
-                      <option>Boston, MA</option>
-                      <option>Austin, TX</option>
+                      <option>London, UK</option>
+                      <option>Manchester, UK</option>
+                      <option>Edinburgh, UK</option>
+                      <option>Cambridge, UK</option>
+                      <option>Bristol, UK</option>
                     </select>
                   </div>
                 </div>
@@ -818,91 +972,6 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   </Card>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Categories */}
-        {userType === "graduate" && (
-          <section className="py-12 border-b border-border">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-semibold text-foreground mb-6">Browse by Category</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {categories.map((category) => {
-                  const Icon = category.icon
-                  return (
-                    <Card key={category.name} className="p-6 hover:shadow-md transition-shadow cursor-pointer">
-                      <div className="flex flex-col items-center text-center gap-3">
-                        <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Icon className="size-6 text-primary" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-foreground">{category.name}</h3>
-                          <p className="text-sm text-muted-foreground">{category.count} jobs</p>
-                        </div>
-                      </div>
-                    </Card>
-                  )
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Featured Jobs */}
-        {userType === "graduate" && (
-          <section className="py-12">
-            <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-foreground">Featured Jobs</h2>
-                <Button variant="outline" size="sm">
-                  View All
-                </Button>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {featuredJobs.map((job) => (
-                  <Link key={job.id} href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                    <Card className="p-6 h-full hover:shadow-lg transition-shadow cursor-pointer">
-                      <div className="flex flex-col gap-4">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-foreground mb-1 text-balance">{job.title}</h3>
-                            <p className="text-sm text-muted-foreground">{job.company}</p>
-                          </div>
-                          {job.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-                          {job.tags.map((tag) => (
-                            <Badge key={tag} variant="secondary">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-
-                        <div className="space-y-2 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="size-4" />
-                            <span>{job.location}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Briefcase className="size-4" />
-                            <span>{job.type}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="size-4" />
-                            <span>Posted {job.postedDays} days ago</span>
-                          </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-border">
-                          <p className="font-semibold text-foreground">{job.salary}</p>
-                        </div>
-                      </div>
-                    </Card>
-                  </Link>
                 ))}
               </div>
             </div>
