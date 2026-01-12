@@ -844,7 +844,7 @@ export default function DashboardPage() {
                 {/* Results */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">{mockGraduates.length} active graduates found</p>
+                    <p className="text-sm text-muted-foreground">42 active graduates found</p>
                     <select className="h-9 px-3 rounded-md border border-input bg-background text-sm">
                       <option>Most Recent</option>
                       <option>Best Match</option>
