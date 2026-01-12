@@ -8,8 +8,18 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { User, GraduationCap, Briefcase, Globe, Github, Linkedin, X, Plus, Save, ArrowLeft } from "lucide-react"
+import { User, GraduationCap, Briefcase, Globe, Github, Linkedin, X, Plus, Save, ArrowLeft, Trash2 } from "lucide-react"
 import Link from "next/link"
+
+type Education = {
+  id: number
+  degree: string
+  university: string
+  graduationYear: string
+  gpa: string
+  gpaScale: string
+  honors: string
+}
 
 export default function EditProfilePage() {
   const router = useRouter()
@@ -25,6 +35,18 @@ export default function EditProfilePage() {
     "Git",
   ])
   const [newSkill, setNewSkill] = useState("")
+
+  const [educations, setEducations] = useState<Education[]>([
+    {
+      id: 1,
+      degree: "Bachelor of Science in Computer Science",
+      university: "Stanford University",
+      graduationYear: "2024",
+      gpa: "3.9",
+      gpaScale: "4.0",
+      honors: "Summa Cum Laude, Dean's List all semesters",
+    },
+  ])
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -46,6 +68,32 @@ export default function EditProfilePage() {
 
   const removeSkill = (skill: string) => {
     setSkills(skills.filter((s) => s !== skill))
+  }
+
+  const addEducation = () => {
+    const newId = Math.max(...educations.map((e) => e.id), 0) + 1
+    setEducations([
+      ...educations,
+      {
+        id: newId,
+        degree: "",
+        university: "",
+        graduationYear: "",
+        gpa: "",
+        gpaScale: "4.0",
+        honors: "",
+      },
+    ])
+  }
+
+  const removeEducation = (id: number) => {
+    if (educations.length > 1) {
+      setEducations(educations.filter((e) => e.id !== id))
+    }
+  }
+
+  const updateEducation = (id: number, field: keyof Education, value: string) => {
+    setEducations(educations.map((e) => (e.id === id ? { ...e, [field]: value } : e)))
   }
 
   if (userType !== "graduate") {
@@ -139,39 +187,93 @@ export default function EditProfilePage() {
             </div>
           </Card>
 
-          {/* Education */}
           <Card className="p-6">
-            <div className="flex items-center gap-2 mb-6">
-              <GraduationCap className="size-5 text-primary" />
-              <h2 className="text-xl font-bold">Education</h2>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <GraduationCap className="size-5 text-primary" />
+                <h2 className="text-xl font-bold">Education</h2>
+              </div>
+              <Button variant="outline" size="sm" onClick={addEducation}>
+                <Plus className="size-4 mr-2" />
+                Add another
+              </Button>
             </div>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="degree">Degree</Label>
-                <Input id="degree" defaultValue="Bachelor of Science in Computer Science" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="university">University</Label>
-                <Input id="university" defaultValue="Stanford University" />
-              </div>
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="graduationYear">Graduation Year</Label>
-                  <Input id="graduationYear" type="number" defaultValue="2024" />
+            <div className="space-y-6">
+              {educations.map((edu, index) => (
+                <div key={edu.id} className={`space-y-4 ${index > 0 ? "p-4 rounded-lg border bg-muted/30" : ""}`}>
+                  {index > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-muted-foreground">Degree {index + 1}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-destructive hover:text-destructive"
+                        onClick={() => removeEducation(edu.id)}
+                      >
+                        <Trash2 className="size-4 mr-1" />
+                        Remove
+                      </Button>
+                    </div>
+                  )}
+                  <div className="space-y-2">
+                    <Label htmlFor={`degree-${edu.id}`}>Degree</Label>
+                    <Input
+                      id={`degree-${edu.id}`}
+                      value={edu.degree}
+                      onChange={(e) => updateEducation(edu.id, "degree", e.target.value)}
+                      placeholder="e.g. Bachelor of Arts in History"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor={`university-${edu.id}`}>University</Label>
+                    <Input
+                      id={`university-${edu.id}`}
+                      value={edu.university}
+                      onChange={(e) => updateEducation(edu.id, "university", e.target.value)}
+                      placeholder="e.g. University of Oxford"
+                    />
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor={`graduationYear-${edu.id}`}>Graduation Year</Label>
+                      <Input
+                        id={`graduationYear-${edu.id}`}
+                        type="number"
+                        value={edu.graduationYear}
+                        onChange={(e) => updateEducation(edu.id, "graduationYear", e.target.value)}
+                        placeholder="2024"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`gpa-${edu.id}`}>GPA</Label>
+                      <Input
+                        id={`gpa-${edu.id}`}
+                        value={edu.gpa}
+                        onChange={(e) => updateEducation(edu.id, "gpa", e.target.value)}
+                        placeholder="3.9"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`gpaScale-${edu.id}`}>GPA Scale</Label>
+                      <Input
+                        id={`gpaScale-${edu.id}`}
+                        value={edu.gpaScale}
+                        onChange={(e) => updateEducation(edu.id, "gpaScale", e.target.value)}
+                        placeholder="4.0"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor={`honors-${edu.id}`}>Honours & Awards</Label>
+                    <Input
+                      id={`honors-${edu.id}`}
+                      value={edu.honors}
+                      onChange={(e) => updateEducation(edu.id, "honors", e.target.value)}
+                      placeholder="e.g. First Class Honours, Dean's List"
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="gpa">GPA</Label>
-                  <Input id="gpa" defaultValue="3.9" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="gpaScale">GPA Scale</Label>
-                  <Input id="gpaScale" defaultValue="4.0" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="honors">Honors & Awards</Label>
-                <Input id="honors" defaultValue="Summa Cum Laude, Dean's List all semesters" />
-              </div>
+              ))}
             </div>
           </Card>
 
@@ -277,7 +379,7 @@ export default function EditProfilePage() {
                   <Textarea
                     id="description2"
                     rows={3}
-                    defaultValue="Built internal tools and dashboards for research projects, optimized database queries reducing load time by 40%, and mentored junior developers."
+                    defaultValue="Built internal tools and dashboards for research projects, optimised database queries reducing load time by 40%, and mentored junior developers."
                   />
                 </div>
                 <Button variant="ghost" size="sm" className="text-destructive" disabled>

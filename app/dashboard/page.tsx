@@ -10,6 +10,7 @@ import {
   MapPin,
   Briefcase,
   Clock,
+  Guitar,
   Code,
   Palette,
   BarChart,
@@ -24,8 +25,11 @@ import {
   GraduationCap,
   Calendar,
   ChevronDown,
+  Award,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
+
+console.log("[v0] Dashboard module loaded")
 
 const featuredJobs = [
   {
@@ -38,6 +42,7 @@ const featuredJobs = [
     tags: ["React", "TypeScript", "Next.js"],
     postedDays: 2,
     featured: true,
+    startDate: "March 2026",
   },
   {
     id: 2,
@@ -49,6 +54,7 @@ const featuredJobs = [
     tags: ["Figma", "UI/UX", "Design Systems"],
     postedDays: 1,
     featured: true,
+    startDate: "Immediate",
   },
   {
     id: 3,
@@ -60,39 +66,43 @@ const featuredJobs = [
     tags: ["Node.js", "AWS", "PostgreSQL"],
     postedDays: 3,
     featured: false,
+    startDate: "April 2026",
   },
   {
     id: 4,
-    title: "DevOps Engineer",
-    company: "InfraWorks Ltd",
+    title: "Marketing Manager",
+    company: "Growth Partners",
     location: "Edinburgh, UK",
     type: "Full-time",
-    salary: "£55,000 - £75,000 a year",
-    tags: ["Kubernetes", "Docker", "CI/CD"],
+    salary: "£45,000 - £60,000 a year",
+    tags: ["SEO", "Content", "Analytics"],
     postedDays: 5,
     featured: false,
+    startDate: "February 2026",
   },
   {
     id: 5,
     title: "Data Scientist",
-    company: "DataVision plc",
+    company: "FinTech Innovations",
     location: "Cambridge, UK",
     type: "Full-time",
     salary: "£70,000 - £95,000 a year",
     tags: ["Python", "ML", "TensorFlow"],
-    postedDays: 4,
-    featured: false,
+    postedDays: 1,
+    featured: true,
+    startDate: "Flexible",
   },
   {
     id: 6,
-    title: "Mobile Developer",
-    company: "AppMakers UK",
-    location: "Remote",
+    title: "UX Researcher",
+    company: "User First Design",
+    location: "Bristol, UK",
     type: "Contract",
-    salary: "£45,000 - £65,000 a year",
-    tags: ["React Native", "iOS", "Android"],
-    postedDays: 7,
+    salary: "£400 - £500 a day",
+    tags: ["Research", "Interviews", "Usability"],
+    postedDays: 4,
     featured: false,
+    startDate: "May 2026",
   },
 ]
 
@@ -293,24 +303,46 @@ const mockCompanies = [
 export default function DashboardPage() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
-
+  const [locationOpen, setLocationOpen] = useState(false)
+  const [universityOpen, setUniversityOpen] = useState(false)
+  const [subjectOpen, setSubjectOpen] = useState(false)
+  const [experienceOpen, setExperienceOpen] = useState(false)
+  const [availabilityOpen, setAvailabilityOpen] = useState(false)
   const [selectedLocations, setSelectedLocations] = useState<string[]>([])
   const [selectedUniversities, setSelectedUniversities] = useState<string[]>([])
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
   const [selectedExperience, setSelectedExperience] = useState<string[]>([])
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([])
-
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [selectedSectors, setSelectedSectors] = useState<string[]>([])
+  const [selectedDegreeClass, setSelectedDegreeClass] = useState<string[]>([])
+
+  const [jobStartDateOpen, setJobStartDateOpen] = useState(false)
+  const [jobSectorOpen, setJobSectorOpen] = useState(false)
+  const [jobBusinessSizeOpen, setJobBusinessSizeOpen] = useState(false)
+  const [selectedJobStartDates, setSelectedJobStartDates] = useState<string[]>([])
+  const [selectedJobSectors, setSelectedJobSectors] = useState<string[]>([])
+  const [selectedJobBusinessSizes, setSelectedJobBusinessSizes] = useState<string[]>([])
+
+  console.log("[v0] DashboardPage rendering, userType:", userType)
 
   const locationRef = useRef<HTMLDivElement>(null)
   const universityRef = useRef<HTMLDivElement>(null)
   const subjectRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
   const availabilityRef = useRef<HTMLDivElement>(null)
+  const sectorRef = useRef<HTMLDivElement>(null)
+  const degreeClassRef = useRef<HTMLDivElement>(null)
+
+  const jobStartDateRef = useRef<HTMLDivElement>(null)
+  const jobSectorRef = useRef<HTMLDivElement>(null)
+  const jobBusinessSizeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    console.log("[v0] useEffect running, checking sessionStorage")
     if (typeof window !== "undefined") {
       const type = sessionStorage.getItem("userType") as "employer" | "graduate" | null
+      console.log("[v0] userType from sessionStorage:", type)
       if (!type) {
         router.push("/")
       } else {
@@ -329,6 +361,8 @@ export default function DashboardPage() {
         subject: subjectRef,
         experience: experienceRef,
         availability: availabilityRef,
+        sector: sectorRef,
+        degreeClass: degreeClassRef,
       }
 
       if (openDropdown && refs[openDropdown as keyof typeof refs]) {
@@ -337,13 +371,26 @@ export default function DashboardPage() {
           setOpenDropdown(null)
         }
       }
+
+      if (jobStartDateRef.current && !jobStartDateRef.current.contains(event.target as Node)) {
+        setJobStartDateOpen(false)
+      }
+      if (jobSectorRef.current && !jobSectorRef.current.contains(event.target as Node)) {
+        setJobSectorOpen(false)
+      }
+      if (jobBusinessSizeRef.current && !jobBusinessSizeRef.current.contains(event.target as Node)) {
+        setJobBusinessSizeOpen(false)
+      }
     }
 
-    if (openDropdown) {
+    // Only add event listener if there's an open dropdown, to prevent unnecessary calls
+    if (openDropdown || jobStartDateOpen || jobSectorOpen || jobBusinessSizeOpen) {
       document.addEventListener("mousedown", handleClickOutside)
-      return () => document.removeEventListener("mousedown", handleClickOutside)
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [openDropdown])
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [openDropdown, jobStartDateOpen, jobSectorOpen, jobBusinessSizeOpen])
 
   const handleLogout = () => {
     if (typeof window !== "undefined") {
@@ -368,6 +415,43 @@ export default function DashboardPage() {
     if (selections.length === 0) return placeholder
     if (selections.length === 1) return selections[0]
     return `${selections.length} selected`
+  }
+
+  const jobStartDateOptions = ["Immediate", "Within 1 month", "Within 3 months", "Within 6 months", "Flexible"]
+  const jobSectorOptions = [
+    "Finance & Banking",
+    "Technology",
+    "Consulting",
+    "Legal",
+    "Healthcare",
+    "Marketing",
+    "Engineering",
+    "Retail",
+  ]
+  const jobBusinessSizeOptions = [
+    "Startup (1-50)",
+    "SME (51-250)",
+    "Mid-size (251-1000)",
+    "Large (1000+)",
+    "Enterprise (10,000+)",
+  ]
+
+  const toggleJobStartDate = (option: string) => {
+    setSelectedJobStartDates((prev) =>
+      prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option],
+    )
+  }
+
+  const toggleJobSector = (option: string) => {
+    setSelectedJobSectors((prev) =>
+      prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option],
+    )
+  }
+
+  const toggleJobBusinessSize = (option: string) => {
+    setSelectedJobBusinessSizes((prev) =>
+      prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option],
+    )
   }
 
   if (!userType) {
@@ -588,17 +672,6 @@ export default function DashboardPage() {
                 <Card className="p-6">
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Search</label>
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                        <input
-                          placeholder="Name, skills, degree..."
-                          className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">Location</label>
                       <div className="relative" ref={locationRef}>
                         <button
@@ -609,7 +682,7 @@ export default function DashboardPage() {
                           className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
                         >
                           <div className="flex items-center gap-2">
-                            <MapPin className="size-4 text-muted-foreground" />
+                            <MapPin className="size-5 text-muted-foreground" />
                             <span
                               className={selectedLocations.length === 0 ? "text-muted-foreground" : "text-foreground"}
                             >
@@ -827,6 +900,99 @@ export default function DashboardPage() {
                         )}
                       </div>
                     </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Sector</label>
+                      <div className="relative" ref={sectorRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "sector" ? null : "sector")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span className={selectedSectors.length === 0 ? "text-muted-foreground" : "text-foreground"}>
+                            {getDisplayText(selectedSectors, "Select sectors")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "sector" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {[
+                              "Finance & Banking",
+                              "Consulting",
+                              "Technology",
+                              "Legal",
+                              "Healthcare",
+                              "Energy & Utilities",
+                              "Retail & Consumer",
+                              "Media & Entertainment",
+                              "Manufacturing",
+                              "Public Sector",
+                            ].map((sector) => (
+                              <label
+                                key={sector}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedSectors.includes(sector)}
+                                  onChange={() => toggleSelection(sector, selectedSectors, setSelectedSectors)}
+                                />
+                                <span className="text-sm">{sector}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Degree Class</label>
+                      <div className="relative" ref={degreeClassRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "degreeClass" ? null : "degreeClass")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span
+                            className={selectedDegreeClass.length === 0 ? "text-muted-foreground" : "text-foreground"}
+                          >
+                            {getDisplayText(selectedDegreeClass, "Select degree class")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "degreeClass" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {["1st", "2.1", "Any"].map((degClass) => (
+                              <label
+                                key={degClass}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedDegreeClass.includes(degClass)}
+                                  onChange={() =>
+                                    toggleSelection(degClass, selectedDegreeClass, setSelectedDegreeClass)
+                                  }
+                                />
+                                <span className="text-sm">{degClass}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-6">
@@ -889,6 +1055,10 @@ export default function DashboardPage() {
                                   <TrendingUp className="size-4" />
                                   <span>Graduated {graduate.graduationYear}</span>
                                 </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <Guitar className="size-4" />
+                                  <span>Interested in: Cooking, Music</span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -897,9 +1067,6 @@ export default function DashboardPage() {
                               <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
                                 View Profile
                               </Link>
-                            </Button>
-                            <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                              Contact
                             </Button>
                           </div>
                         </div>
@@ -939,7 +1106,7 @@ export default function DashboardPage() {
 
                   <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
                     <div className="flex items-start gap-2">
-                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-foreground">Stevenson Prize for Economics</p>
                         <p className="text-xs text-muted-foreground">Best undergraduate dissertation 2024</p>
@@ -984,7 +1151,7 @@ export default function DashboardPage() {
 
                   <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
                     <div className="flex items-start gap-2">
-                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-foreground">ACM Student Research Award</p>
                         <p className="text-xs text-muted-foreground">Outstanding final year project in AI/ML</p>
@@ -1029,7 +1196,7 @@ export default function DashboardPage() {
 
                   <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
                     <div className="flex items-start gap-2">
-                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-foreground">IET Innovation Award</p>
                         <p className="text-xs text-muted-foreground">Best sustainable engineering project</p>
@@ -1074,7 +1241,7 @@ export default function DashboardPage() {
 
                   <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
                     <div className="flex items-start gap-2">
-                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-foreground">Smith Mathematics Prize</p>
                         <p className="text-xs text-muted-foreground">Outstanding achievement in pure mathematics</p>
@@ -1119,7 +1286,7 @@ export default function DashboardPage() {
 
                   <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
                     <div className="flex items-start gap-2">
-                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-foreground">Ogden Trust Science Prize</p>
                         <p className="text-xs text-muted-foreground">Excellence in experimental physics research</p>
@@ -1164,7 +1331,7 @@ export default function DashboardPage() {
 
                   <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
                     <div className="flex items-start gap-2">
-                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-foreground">Lincoln's Inn Prize</p>
                         <p className="text-xs text-muted-foreground">Top performance in contract law</p>
@@ -1299,6 +1466,123 @@ export default function DashboardPage() {
                   View All
                 </Button>
               </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                {/* Start Date Filter */}
+                <div className="relative" ref={jobStartDateRef}>
+                  <button
+                    type="button"
+                    onClick={() => setJobStartDateOpen(!jobStartDateOpen)}
+                    className="w-full flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    <span className="truncate">
+                      {selectedJobStartDates.length === 0
+                        ? "Start Date"
+                        : selectedJobStartDates.length === 1
+                          ? selectedJobStartDates[0]
+                          : `${selectedJobStartDates.length} selected`}
+                    </span>
+                    <ChevronDown className="size-4 opacity-50" />
+                  </button>
+                  {jobStartDateOpen && (
+                    <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-background shadow-lg">
+                      <div className="p-2 space-y-1">
+                        {jobStartDateOptions.map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedJobStartDates.includes(option)}
+                              onChange={() => toggleJobStartDate(option)}
+                              className="rounded border-input"
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Sector Filter */}
+                <div className="relative" ref={jobSectorRef}>
+                  <button
+                    type="button"
+                    onClick={() => setJobSectorOpen(!jobSectorOpen)}
+                    className="w-full flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    <span className="truncate">
+                      {selectedJobSectors.length === 0
+                        ? "Sector"
+                        : selectedJobSectors.length === 1
+                          ? selectedJobSectors[0]
+                          : `${selectedJobSectors.length} selected`}
+                    </span>
+                    <ChevronDown className="size-4 opacity-50" />
+                  </button>
+                  {jobSectorOpen && (
+                    <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-background shadow-lg">
+                      <div className="p-2 space-y-1">
+                        {jobSectorOptions.map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedJobSectors.includes(option)}
+                              onChange={() => toggleJobSector(option)}
+                              className="rounded border-input"
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Business Size Filter */}
+                <div className="relative" ref={jobBusinessSizeRef}>
+                  <button
+                    type="button"
+                    onClick={() => setJobBusinessSizeOpen(!jobBusinessSizeOpen)}
+                    className="w-full flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    <span className="truncate">
+                      {selectedJobBusinessSizes.length === 0
+                        ? "Business Size"
+                        : selectedJobBusinessSizes.length === 1
+                          ? selectedJobBusinessSizes[0]
+                          : `${selectedJobBusinessSizes.length} selected`}
+                    </span>
+                    <ChevronDown className="size-4 opacity-50" />
+                  </button>
+                  {jobBusinessSizeOpen && (
+                    <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-background shadow-lg">
+                      <div className="p-2 space-y-1">
+                        {jobBusinessSizeOptions.map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedJobBusinessSizes.includes(option)}
+                              onChange={() => toggleJobBusinessSize(option)}
+                              className="rounded border-input"
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {featuredJobs.map((job) => (
                   <Link key={job.id} href={`/jobs/${job.id}`} onClick={scrollToTop}>
@@ -1332,6 +1616,10 @@ export default function DashboardPage() {
                           <div className="flex items-center gap-2">
                             <Clock className="size-4" />
                             <span>Posted {job.postedDays} days ago</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="size-4" />
+                            <span>Starts: {job.startDate}</span>
                           </div>
                         </div>
 
@@ -1383,21 +1671,23 @@ export default function DashboardPage() {
               <div className="space-y-4 mb-6">
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
-                    <Search className="size-5 text-muted-foreground" />
-                    <input
-                      type="text"
-                      placeholder="Search companies..."
-                      className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
-                    />
-                  </div>
-
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
                     <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
                       <option>All Industries</option>
                       <option>Technology</option>
                       <option>Finance</option>
                       <option>Healthcare</option>
                       <option>Education</option>
+                    </select>
+                  </div>
+
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                    <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
+                      <option>All Sizes</option>
+                      <option>Startup (1-50)</option>
+                      <option>SME (51-250)</option>
+                      <option>Mid-size (251-1000)</option>
+                      <option>Large (1000+)</option>
+                      <option>Enterprise (10,000+)</option>
                     </select>
                   </div>
 
