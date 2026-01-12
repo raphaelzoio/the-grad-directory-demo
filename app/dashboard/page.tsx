@@ -23,8 +23,9 @@ import {
   AlertCircle,
   GraduationCap,
   Calendar,
+  ChevronDown,
 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 const featuredJobs = [
   {
@@ -293,6 +294,20 @@ export default function DashboardPage() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
 
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([])
+  const [selectedUniversities, setSelectedUniversities] = useState<string[]>([])
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
+  const [selectedExperience, setSelectedExperience] = useState<string[]>([])
+  const [selectedAvailability, setSelectedAvailability] = useState<string[]>([])
+
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+
+  const locationRef = useRef<HTMLDivElement>(null)
+  const universityRef = useRef<HTMLDivElement>(null)
+  const subjectRef = useRef<HTMLDivElement>(null)
+  const experienceRef = useRef<HTMLDivElement>(null)
+  const availabilityRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const type = sessionStorage.getItem("userType") as "employer" | "graduate" | null
@@ -304,6 +319,32 @@ export default function DashboardPage() {
     }
   }, [router])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node
+
+      const refs = {
+        location: locationRef,
+        university: universityRef,
+        subject: subjectRef,
+        experience: experienceRef,
+        availability: availabilityRef,
+      }
+
+      if (openDropdown && refs[openDropdown as keyof typeof refs]) {
+        const ref = refs[openDropdown as keyof typeof refs]
+        if (ref.current && !ref.current.contains(target)) {
+          setOpenDropdown(null)
+        }
+      }
+    }
+
+    if (openDropdown) {
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [openDropdown])
+
   const handleLogout = () => {
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("userType")
@@ -313,6 +354,20 @@ export default function DashboardPage() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const toggleSelection = (value: string, currentSelections: string[], setSelections: (v: string[]) => void) => {
+    if (currentSelections.includes(value)) {
+      setSelections(currentSelections.filter((item) => item !== value))
+    } else {
+      setSelections([...currentSelections, value])
+    }
+  }
+
+  const getDisplayText = (selections: string[], placeholder: string) => {
+    if (selections.length === 0) return placeholder
+    if (selections.length === 1) return selections[0]
+    return `${selections.length} selected`
   }
 
   if (!userType) {
@@ -513,6 +568,637 @@ export default function DashboardPage() {
           </section>
         )}
 
+        {/* Search Active Graduates section above Your Job Postings */}
+        {userType === "employer" && (
+          <section className="py-16 bg-muted/20 border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
+                  <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
+                </div>
+                <Button asChild>
+                  <Link href="/post-job" onClick={scrollToTop}>
+                    Post New Job
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="space-y-6">
+                <Card className="p-6">
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Search</label>
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                        <input
+                          placeholder="Name, skills, degree..."
+                          className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Location</label>
+                      <div className="relative" ref={locationRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "location" ? null : "location")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <MapPin className="size-4 text-muted-foreground" />
+                            <span
+                              className={selectedLocations.length === 0 ? "text-muted-foreground" : "text-foreground"}
+                            >
+                              {getDisplayText(selectedLocations, "Select locations")}
+                            </span>
+                          </div>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "location" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {["Remote", "London", "Manchester", "Birmingham", "Edinburgh", "Bristol"].map((loc) => (
+                              <label
+                                key={loc}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedLocations.includes(loc)}
+                                  onChange={() => toggleSelection(loc, selectedLocations, setSelectedLocations)}
+                                />
+                                <span className="text-sm">{loc}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">University</label>
+                      <div className="relative" ref={universityRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "university" ? null : "university")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span
+                            className={selectedUniversities.length === 0 ? "text-muted-foreground" : "text-foreground"}
+                          >
+                            {getDisplayText(selectedUniversities, "Select universities")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "university" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {[
+                              "University of Oxford",
+                              "University of Cambridge",
+                              "Imperial College London",
+                              "University College London",
+                              "London School of Economics",
+                              "University of Edinburgh",
+                              "King's College London",
+                              "University of Manchester",
+                              "University of Bristol",
+                              "University of Warwick",
+                            ].map((uni) => (
+                              <label
+                                key={uni}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedUniversities.includes(uni)}
+                                  onChange={() => toggleSelection(uni, selectedUniversities, setSelectedUniversities)}
+                                />
+                                <span className="text-sm">{uni}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Subject</label>
+                      <div className="relative" ref={subjectRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "subject" ? null : "subject")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span className={selectedSubjects.length === 0 ? "text-muted-foreground" : "text-foreground"}>
+                            {getDisplayText(selectedSubjects, "Select subjects")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "subject" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {[
+                              "Computer Science",
+                              "Engineering",
+                              "Business & Management",
+                              "Economics",
+                              "Mathematics",
+                              "Law",
+                              "Medicine",
+                              "Natural Sciences",
+                              "History",
+                              "English Literature",
+                              "Politics & International Relations",
+                              "Psychology",
+                            ].map((subject) => (
+                              <label
+                                key={subject}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedSubjects.includes(subject)}
+                                  onChange={() => toggleSelection(subject, selectedSubjects, setSelectedSubjects)}
+                                />
+                                <span className="text-sm">{subject}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Years of experience</label>
+                      <div className="relative" ref={experienceRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "experience" ? null : "experience")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span
+                            className={selectedExperience.length === 0 ? "text-muted-foreground" : "text-foreground"}
+                          >
+                            {getDisplayText(selectedExperience, "Select experience")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "experience" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {["0-1 years", "1-2 years", "2-3 years", "3-4 years", "4-5 years"].map((exp) => (
+                              <label
+                                key={exp}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedExperience.includes(exp)}
+                                  onChange={() => toggleSelection(exp, selectedExperience, setSelectedExperience)}
+                                />
+                                <span className="text-sm">{exp}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Availability</label>
+                      <div className="relative" ref={availabilityRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "availability" ? null : "availability")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span
+                            className={selectedAvailability.length === 0 ? "text-muted-foreground" : "text-foreground"}
+                          >
+                            {getDisplayText(selectedAvailability, "Select availability")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "availability" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {["Immediate", "2 weeks", "1 month", "3 months"].map((avail) => (
+                              <label
+                                key={avail}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedAvailability.includes(avail)}
+                                  onChange={() => toggleSelection(avail, selectedAvailability, setSelectedAvailability)}
+                                />
+                                <span className="text-sm">{avail}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mt-6">
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <span>Popular skills:</span>
+                    </div>
+                    {["React", "Python", "TypeScript", "AWS", "Figma"].map((skill) => (
+                      <Badge key={skill} variant="secondary" className="cursor-pointer hover:bg-secondary/80">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </Card>
+
+                {/* Results */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">{mockGraduates.length} active graduates found</p>
+                    <select className="h-9 px-3 rounded-md border border-input bg-background text-sm">
+                      <option>Most Recent</option>
+                      <option>Best Match</option>
+                      <option>Graduation Year</option>
+                    </select>
+                  </div>
+
+                  <div className="grid gap-4">
+                    {mockGraduates.map((graduate) => (
+                      <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
+                        <div className="flex flex-col md:flex-row gap-6">
+                          <div className="flex items-start gap-4 flex-1">
+                            <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                              {graduate.avatar}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
+                              <p className="text-sm text-muted-foreground mb-2">
+                                {graduate.degree} • {graduate.university}
+                              </p>
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                {graduate.skills.map((skill) => (
+                                  <Badge key={skill} variant="secondary">
+                                    {skill}
+                                  </Badge>
+                                ))}
+                              </div>
+                              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <MapPin className="size-4" />
+                                  <span>{graduate.location}</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <Briefcase className="size-4" />
+                                  <span>{graduate.experience} experience</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <Clock className="size-4" />
+                                  <span>{graduate.availability} availability</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-muted-foreground">
+                                  <TrendingUp className="size-4" />
+                                  <span>Graduated {graduate.graduationYear}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex md:flex-col gap-2 shrink-0">
+                            <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
+                              <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
+                                View Profile
+                              </Link>
+                            </Button>
+                            <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                              Contact
+                            </Button>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Prize Winners section between Search Active Graduates and Your Job Postings */}
+        {userType === "employer" && (
+          <section className="py-16 bg-gradient-to-b from-muted/30 to-background border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold text-foreground mb-2">Prize Winners</h2>
+                <p className="text-sm text-muted-foreground">
+                  Exceptional graduates recognised for outstanding achievements
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {/* Prize Winner 1 */}
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                      EW
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg text-foreground">Eleanor Watson</h3>
+                      <p className="text-sm text-muted-foreground">Economics, BA</p>
+                      <p className="text-sm text-muted-foreground">London School of Economics</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
+                    <div className="flex items-start gap-2">
+                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">Stevenson Prize for Economics</p>
+                        <p className="text-xs text-muted-foreground">Best undergraduate dissertation 2024</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary">Data Analysis</Badge>
+                    <Badge variant="secondary">Research</Badge>
+                    <Badge variant="secondary">Python</Badge>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="size-4" />
+                      <span>London, UK</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="size-4" />
+                      <span>Immediate availability</span>
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                    View Profile
+                  </Button>
+                </Card>
+
+                {/* Prize Winner 2 */}
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                      JH
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg text-foreground">James Harrison</h3>
+                      <p className="text-sm text-muted-foreground">Computer Science, MEng</p>
+                      <p className="text-sm text-muted-foreground">Imperial College London</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
+                    <div className="flex items-start gap-2">
+                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">ACM Student Research Award</p>
+                        <p className="text-xs text-muted-foreground">Outstanding final year project in AI/ML</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary">Machine Learning</Badge>
+                    <Badge variant="secondary">TensorFlow</Badge>
+                    <Badge variant="secondary">Python</Badge>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="size-4" />
+                      <span>Cambridge, UK</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="size-4" />
+                      <span>Available in 2 weeks</span>
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                    View Profile
+                  </Button>
+                </Card>
+
+                {/* Prize Winner 3 */}
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                      SP
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg text-foreground">Sophie Patel</h3>
+                      <p className="text-sm text-muted-foreground">Engineering, BEng</p>
+                      <p className="text-sm text-muted-foreground">University of Cambridge</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
+                    <div className="flex items-start gap-2">
+                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">IET Innovation Award</p>
+                        <p className="text-xs text-muted-foreground">Best sustainable engineering project</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary">Sustainable Tech</Badge>
+                    <Badge variant="secondary">IoT</Badge>
+                    <Badge variant="secondary">C++</Badge>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="size-4" />
+                      <span>Manchester, UK</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="size-4" />
+                      <span>Immediate availability</span>
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                    View Profile
+                  </Button>
+                </Card>
+
+                {/* Prize Winner 4 */}
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                      OA
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg text-foreground">Oliver Anderson</h3>
+                      <p className="text-sm text-muted-foreground">Mathematics, MMath</p>
+                      <p className="text-sm text-muted-foreground">University of Oxford</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
+                    <div className="flex items-start gap-2">
+                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">Smith Mathematics Prize</p>
+                        <p className="text-xs text-muted-foreground">Outstanding achievement in pure mathematics</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary">Quantitative Analysis</Badge>
+                    <Badge variant="secondary">R</Badge>
+                    <Badge variant="secondary">Statistics</Badge>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="size-4" />
+                      <span>London, UK</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="size-4" />
+                      <span>Available in 1 month</span>
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                    View Profile
+                  </Button>
+                </Card>
+
+                {/* Prize Winner 5 */}
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                      LP
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg text-foreground">Lily Park</h3>
+                      <p className="text-sm text-muted-foreground">Physics, MPhys</p>
+                      <p className="text-sm text-muted-foreground">University of Edinburgh</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
+                    <div className="flex items-start gap-2">
+                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">Ogden Trust Science Prize</p>
+                        <p className="text-xs text-muted-foreground">Excellence in experimental physics research</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary">Data Science</Badge>
+                    <Badge variant="secondary">MATLAB</Badge>
+                    <Badge variant="secondary">Python</Badge>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="size-4" />
+                      <span>Edinburgh, UK</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="size-4" />
+                      <span>Immediate availability</span>
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                    View Profile
+                  </Button>
+                </Card>
+
+                {/* Prize Winner 6 */}
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                      TM
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg text-foreground">Thomas Mitchell</h3>
+                      <p className="text-sm text-muted-foreground">Law, LLB</p>
+                      <p className="text-sm text-muted-foreground">University College London</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
+                    <div className="flex items-start gap-2">
+                      <TrendingUp className="size-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">Lincoln's Inn Prize</p>
+                        <p className="text-xs text-muted-foreground">Top performance in contract law</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary">Legal Research</Badge>
+                    <Badge variant="secondary">Contract Law</Badge>
+                    <Badge variant="secondary">Analysis</Badge>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="size-4" />
+                      <span>Bristol, UK</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="size-4" />
+                      <span>Available in 2 weeks</span>
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
+                    View Profile
+                  </Button>
+                </Card>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Your Job Postings section below Prize Winners */}
         {userType === "employer" && (
           <section className="py-16 border-b border-border">
             <div className="container mx-auto px-4">
@@ -600,200 +1286,6 @@ export default function DashboardPage() {
                   </table>
                 </div>
               </Card>
-            </div>
-          </section>
-        )}
-
-        {userType === "employer" && (
-          <section className="py-16 bg-muted/20">
-            <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
-                  <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
-                </div>
-                <Button asChild>
-                  <Link href="/post-job" onClick={scrollToTop}>
-                    Post New Job
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="space-y-6">
-                {/* Search and Filters */}
-                <Card className="p-6">
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Search</label>
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                        <input placeholder="Name, skills, degree..." className="pl-10" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Location</label>
-                      <div className="relative">
-                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                        <select className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm">
-                          <option>All Locations</option>
-                          <option>Remote</option>
-                          <option>London</option>
-                          <option>Manchester</option>
-                          <option>Birmingham</option>
-                          <option>Edinburgh</option>
-                          <option>Bristol</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">University</label>
-                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
-                        <option>All Universities</option>
-                        <option>University of Oxford</option>
-                        <option>University of Cambridge</option>
-                        <option>Imperial College London</option>
-                        <option>University College London</option>
-                        <option>London School of Economics</option>
-                        <option>University of Edinburgh</option>
-                        <option>King's College London</option>
-                        <option>University of Manchester</option>
-                        <option>University of Bristol</option>
-                        <option>University of Warwick</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Subject</label>
-                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
-                        <option>All Subjects</option>
-                        <option>Computer Science</option>
-                        <option>Engineering</option>
-                        <option>Business & Management</option>
-                        <option>Economics</option>
-                        <option>Mathematics</option>
-                        <option>Law</option>
-                        <option>Medicine</option>
-                        <option>Natural Sciences</option>
-                        <option>History</option>
-                        <option>English Literature</option>
-                        <option>Politics & International Relations</option>
-                        <option>Psychology</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Graduation Year</label>
-                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
-                        <option>Any Year</option>
-                        <option>2024</option>
-                        <option>2023</option>
-                        <option>2022</option>
-                        <option>2021</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Availability</label>
-                      <select className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm">
-                        <option>Any</option>
-                        <option>Immediate</option>
-                        <option>Within 2 weeks</option>
-                        <option>Within 1 month</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Popular skills:</span>
-                    <div className="flex flex-wrap gap-2">
-                      <Button variant="outline" size="sm">
-                        React
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Python
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        TypeScript
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        AWS
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Design
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Results */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">{mockGraduates.length} active graduates found</p>
-                    <select className="h-9 px-3 rounded-md border border-input bg-background text-sm">
-                      <option>Most Recent</option>
-                      <option>Best Match</option>
-                      <option>Graduation Year</option>
-                    </select>
-                  </div>
-
-                  <div className="grid gap-4">
-                    {mockGraduates.map((graduate) => (
-                      <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex flex-col md:flex-row gap-6">
-                          <div className="flex items-start gap-4 flex-1">
-                            <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                              {graduate.avatar}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
-                              <p className="text-sm text-muted-foreground mb-2">
-                                {graduate.degree} • {graduate.university}
-                              </p>
-                              <div className="flex flex-wrap gap-2 mb-3">
-                                {graduate.skills.map((skill) => (
-                                  <Badge key={skill} variant="secondary">
-                                    {skill}
-                                  </Badge>
-                                ))}
-                              </div>
-                              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <MapPin className="size-4" />
-                                  <span>{graduate.location}</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Briefcase className="size-4" />
-                                  <span>{graduate.experience} experience</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Clock className="size-4" />
-                                  <span>{graduate.availability} availability</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <TrendingUp className="size-4" />
-                                  <span>Graduated {graduate.graduationYear}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex md:flex-col gap-2 shrink-0">
-                            <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
-                              <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                                View Profile
-                              </Link>
-                            </Button>
-                            <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                              Contact
-                            </Button>
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </div>
             </div>
           </section>
         )}
