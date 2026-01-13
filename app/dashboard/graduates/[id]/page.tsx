@@ -83,21 +83,7 @@ const graduateProfiles = {
 }
 
 export default function GraduateProfilePage({ params }: { params: { id: string } }) {
-  const graduate = graduateProfiles[params.id as keyof typeof graduateProfiles]
-
-  if (!graduate) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="p-8 text-center">
-          <h1 className="text-2xl font-bold mb-2">Graduate Not Found</h1>
-          <p className="text-muted-foreground mb-4">The profile you're looking for doesn't exist.</p>
-          <Button asChild>
-            <Link href="/dashboard">Back to Dashboard</Link>
-          </Button>
-        </Card>
-      </div>
-    )
-  }
+  const graduate = graduateProfiles[0]
 
   return (
     <div className="min-h-screen bg-muted/30">
