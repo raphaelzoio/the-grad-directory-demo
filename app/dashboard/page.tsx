@@ -10,7 +10,7 @@ import {
   MapPin,
   Briefcase,
   Clock,
-  Guitar,
+  Lightbulb,
   Code,
   Palette,
   BarChart,
@@ -1056,8 +1056,8 @@ export default function DashboardPage() {
                                   <span>Graduated {graduate.graduationYear}</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Guitar className="size-4" />
-                                  <span>Interested in: Cooking, Music</span>
+                                  <Lightbulb className="size-4" /> {/* Changed Guitar to Lightbulb icon */}
+                                  <span>Interested in: AI, Design</span>
                                 </div>
                               </div>
                             </div>
@@ -1670,7 +1670,7 @@ export default function DashboardPage() {
 
               <div className="space-y-4 mb-6">
                 <div className="flex flex-col md:flex-row gap-4">
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-input rounded-md">
                     <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
                       <option>All Industries</option>
                       <option>Technology</option>
@@ -1680,7 +1680,7 @@ export default function DashboardPage() {
                     </select>
                   </div>
 
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-input rounded-md">
                     <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
                       <option>All Sizes</option>
                       <option>Startup (1-50)</option>
@@ -1691,7 +1691,7 @@ export default function DashboardPage() {
                     </select>
                   </div>
 
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-border rounded-md">
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-input rounded-md">
                     <MapPin className="size-5 text-muted-foreground" />
                     <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
                       <option>All Locations</option>
