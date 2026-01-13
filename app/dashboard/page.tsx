@@ -1131,8 +1131,10 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                    View Profile
+                  <Button variant="outline" size="sm" className="w-full bg-transparent">
+                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                      View Profile
+                    </Link>
                   </Button>
                 </Card>
 
@@ -1176,8 +1178,10 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                    View Profile
+                  <Button variant="outline" size="sm" className="w-full bg-transparent">
+                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                      View Profile
+                    </Link>
                   </Button>
                 </Card>
 
@@ -1221,8 +1225,10 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                    View Profile
+                  <Button variant="outline" size="sm" className="w-full bg-transparent">
+                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                      View Profile
+                    </Link>
                   </Button>
                 </Card>
 
@@ -1266,8 +1272,10 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                    View Profile
+                  <Button variant="outline" size="sm" className="w-full bg-transparent">
+                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                      View Profile
+                    </Link>
                   </Button>
                 </Card>
 
@@ -1311,8 +1319,10 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                    View Profile
+                  <Button variant="outline" size="sm" className="w-full bg-transparent">
+                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                      View Profile
+                    </Link>
                   </Button>
                 </Card>
 
@@ -1356,8 +1366,10 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full bg-transparent" disabled>
-                    View Profile
+                  <Button variant="outline" size="sm" className="w-full bg-transparent">
+                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                      View Profile
+                    </Link>
                   </Button>
                 </Card>
               </div>
