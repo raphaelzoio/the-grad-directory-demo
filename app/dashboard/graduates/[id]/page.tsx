@@ -83,7 +83,7 @@ const graduateProfiles = {
 }
 
 export default function GraduateProfilePage({ params }: { params: { id: string } }) {
-  const graduate = graduateProfiles[0]
+  const graduate = graduateProfiles["1"];
 
   return (
     <div className="min-h-screen bg-muted/30">
