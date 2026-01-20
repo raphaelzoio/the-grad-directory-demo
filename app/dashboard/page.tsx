@@ -664,8 +664,8 @@ export default function DashboardPage() {
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Active Graduates</h2>
-                  <p className="text-sm text-muted-foreground">Find and connect with talented graduates</p>
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Talent</h2>
+                  <p className="text-sm text-muted-foreground">Find and connect with talented students and graduates</p>
                 </div>
                 <Button asChild>
                   <Link href="/post-job" onClick={scrollToTop}>
@@ -1026,6 +1026,7 @@ export default function DashboardPage() {
 
                   <div className="grid gap-4">
                     {mockGraduates.map((graduate) => (
+                      <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
                       <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
                         <div className="flex flex-col md:flex-row gap-6">
                           <div className="flex items-start gap-4 flex-1">
@@ -1079,6 +1080,7 @@ export default function DashboardPage() {
                           </div>
                         </div>
                       </Card>
+                    </Link>
                     ))}
                   </div>
                 </div>

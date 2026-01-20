@@ -20,7 +20,7 @@
   --popover-foreground: oklch(0.25 0.01 30);
 
   /* Deep burgundy/maroon for primary academic accent */
-  --primary: oklch(0.35 0.12 15);
+  --primary: #3a67d0;
   --primary-foreground: oklch(0.99 0.005 85);
 
   /* Warm beige for secondary elements */
