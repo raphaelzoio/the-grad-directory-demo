@@ -168,6 +168,7 @@ const mockGraduates = [
     experience: "2 years",
     availability: "Immediate",
     avatar: "SJ",
+    interests: "AI, Machine Learning",
   },
   {
     id: 2,
@@ -180,18 +181,20 @@ const mockGraduates = [
     experience: "3 years",
     availability: "2 weeks",
     avatar: "MC",
+    interests: "Cloud Architecture, DevOps",
   },
   {
     id: 3,
     name: "Emily Rodriguez",
-    degree: "Data Science, BSc",
-    university: "University of Cambridge",
+    degree: "Law (Jurisprudence), BA",
+    university: "University of Oxford",
     graduationYear: 2024,
-    location: "Remote",
-    skills: ["Python", "ML", "TensorFlow", "SQL"],
+    location: "London, UK",
+    skills: ["SQE1", "SQE2", "First Class"],
     experience: "1 year",
     availability: "Immediate",
     avatar: "ER",
+    interests: "Commercial Law, M&A",
   },
   {
     id: 4,
@@ -204,6 +207,7 @@ const mockGraduates = [
     experience: "2 years",
     availability: "1 month",
     avatar: "DK",
+    interests: "Systems Programming, Embedded",
   },
   {
     id: 5,
@@ -216,6 +220,7 @@ const mockGraduates = [
     experience: "2 years",
     availability: "Immediate",
     avatar: "JM",
+    interests: "Product Design, Accessibility",
   },
   {
     id: 6,
@@ -228,6 +233,7 @@ const mockGraduates = [
     experience: "3 years",
     availability: "2 weeks",
     avatar: "AT",
+    interests: "Full-Stack, Startups",
   },
 ]
 
@@ -1027,7 +1033,9 @@ export default function DashboardPage() {
                               {graduate.avatar}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
+                              <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
+                                <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
+                              </Link>
                               <p className="text-sm text-muted-foreground mb-2">
                                 {graduate.degree} • {graduate.university}
                               </p>
@@ -1056,8 +1064,8 @@ export default function DashboardPage() {
                                   <span>Graduated {graduate.graduationYear}</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Lightbulb className="size-4" /> {/* Changed Guitar to Lightbulb icon */}
-                                  <span>Interested in: AI, Design</span>
+                                  <Lightbulb className="size-4" />
+                                  <span>Interested in: {graduate.interests}</span>
                                 </div>
                               </div>
                             </div>
