@@ -56,7 +56,7 @@ export default function AboutEmployersPage() {
             {/* CTA Button */}
             <div className="mt-10 flex justify-center">
               <Button size="lg" onClick={handleProceed} className="min-w-[250px]">
-                Access Employer Dashboard
+                Log in
                 <ArrowRight className="size-5 ml-2" />
               </Button>
             </div>
