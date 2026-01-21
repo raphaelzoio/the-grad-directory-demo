@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Building2, ArrowLeft } from "lucide-react"
+import { Building2, ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -11,6 +11,7 @@ export default function AboutEmployersPage() {
 
   const handleProceed = () => {
     localStorage.setItem("userType", "employer")
+    sessionStorage.setItem("userType", "employer")
     router.push("/dashboard")
   }
 
@@ -55,8 +56,8 @@ export default function AboutEmployersPage() {
             {/* CTA Button */}
             <div className="mt-10 flex justify-center">
               <Button size="lg" onClick={handleProceed} className="min-w-[250px]">
-                <Building2 className="size-5 mr-2" />
-                Log in
+                Access Employer Dashboard
+                <ArrowRight className="size-5 ml-2" />
               </Button>
             </div>
 

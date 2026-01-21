@@ -11,6 +11,7 @@ export default function AboutGraduatesPage() {
 
   const handleContinue = () => {
     if (typeof window !== "undefined") {
+      localStorage.setItem("userType", "graduate")
       sessionStorage.setItem("userType", "graduate")
     }
     router.push("/dashboard")

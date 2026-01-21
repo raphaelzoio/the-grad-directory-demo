@@ -30,7 +30,7 @@ import {
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
-console.log("[v0] Dashboard module loaded")
+
 
 const featuredJobs = [
   {
@@ -339,7 +339,23 @@ export default function DashboardPage() {
   const [selectedJobSectors, setSelectedJobSectors] = useState<string[]>([])
   const [selectedJobBusinessSizes, setSelectedJobBusinessSizes] = useState<string[]>([])
 
-  console.log("[v0] DashboardPage rendering, userType:", userType)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Check sessionStorage first (current session), then localStorage (persisted)
+      const sessionType = sessionStorage.getItem("userType") as "employer" | "graduate" | null
+      const localType = localStorage.getItem("userType") as "employer" | "graduate" | null
+      const type = sessionType || localType
+      
+      if (!type) {
+        router.push("/")
+      } else {
+        setUserType(type)
+        // Sync both storage mechanisms
+        sessionStorage.setItem("userType", type)
+        localStorage.setItem("userType", type)
+      }
+    }
+  }, [router])
 
   const locationRef = useRef<HTMLDivElement>(null)
   const universityRef = useRef<HTMLDivElement>(null)
@@ -352,19 +368,6 @@ export default function DashboardPage() {
   const jobStartDateRef = useRef<HTMLDivElement>(null)
   const jobSectorRef = useRef<HTMLDivElement>(null)
   const jobBusinessSizeRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    console.log("[v0] useEffect running, checking sessionStorage")
-    if (typeof window !== "undefined") {
-      const type = sessionStorage.getItem("userType") as "employer" | "graduate" | null
-      console.log("[v0] userType from sessionStorage:", type)
-      if (!type) {
-        router.push("/")
-      } else {
-        setUserType(type)
-      }
-    }
-  }, [router])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -607,63 +610,6 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-        )}
-
-        {userType === "employer" && (
-          <div className="bg-primary/10 border-b border-primary/20">
-            <div className="container mx-auto px-4 py-4">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <AlertCircle className="size-5" />
-                <p className="text-sm">Welcome back! Manage your job postings and discover talented graduates below.</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Hero Section */}
-        {userType === "graduate" && (
-          <section className="bg-gradient-to-b from-muted/50 to-background py-12">
-            <div className="container mx-auto px-4">
-              <div className="max-w-3xl mx-auto space-y-6">
-                {/* Search Bar */}
-                <Card className="p-2 shadow-lg">
-                  <div className="flex flex-col md:flex-row gap-2">
-                    <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-background rounded-md">
-                      <Search className="size-5 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Job title or keyword"
-                        className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
-                      />
-                    </div>
-                    <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-background rounded-md">
-                      <MapPin className="size-5 text-muted-foreground" />
-                      <input
-                        type="text"
-                        placeholder="Location"
-                        className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder:text-muted-foreground"
-                      />
-                    </div>
-                    <Button size="lg" className="md:w-auto">
-                      Search Jobs
-                    </Button>
-                  </div>
-                </Card>
-
-                <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-                  <span>Popular:</span>
-                  {["Designer", "Developer", "Manager", "Marketing"].map((term) => (
-                    <button
-                      key={term}
-                      className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                    >
-                      {term}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
         )}
 
         {/* Search Active Graduates section above Your Job Postings */}
@@ -1083,8 +1029,7 @@ export default function DashboardPage() {
 
                   <div className="grid gap-4">
                     {mockGraduates.map((graduate) => (
-                      <Link key={graduate.id} href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                      <Card className="p-6 hover:shadow-lg transition-shadow">
+                      <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
                         <div className="flex flex-col md:flex-row gap-6">
                           <div className="flex items-start gap-4 flex-1">
                             <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
@@ -1145,7 +1090,6 @@ export default function DashboardPage() {
                           </div>
                         </div>
                       </Card>
-                    </Link>
                     ))}
                   </div>
                 </div>
