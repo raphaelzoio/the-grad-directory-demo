@@ -46,18 +46,22 @@ export default function HomePage() {
 
             {/* Login Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-              <Button size="lg" className="w-full sm:w-auto min-w-[200px]" onClick={() => handleLogin("graduate")}>
-                <Briefcase className="size-5 mr-2" />
-                Graduate Login
+              <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
+                <Link href="/about-graduates">
+                  <Briefcase className="size-5 mr-2" />
+                  I'm a Graduate
+                </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto min-w-[200px] bg-transparent"
-                onClick={() => handleLogin("employer")}
+                asChild
               >
-                <Building2 className="size-5 mr-2" />
-                Employer Login
+                <Link href="/about-employers">
+                  <Building2 className="size-5 mr-2" />
+                  I'm an Employer
+                </Link>
               </Button>
             </div>
           </div>
