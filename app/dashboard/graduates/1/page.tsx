@@ -16,6 +16,7 @@ import {
   Github,
   Code,
   Cpu,
+  ExternalLink,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -37,6 +38,8 @@ const sarahProfile = {
   bio: "First Class Computer Science graduate from the University of Oxford with a strong foundation in software engineering and artificial intelligence. Passionate about building scalable web applications and exploring the intersection of machine learning and user experience. Experienced in full-stack development through internships at leading tech companies and personal projects. Seeking a graduate role in software engineering or AI/ML engineering.",
   linkedin: "linkedin.com/in/sarahjohnsoncs",
   github: "github.com/sarahjohnson",
+  portfolioUrl: "https://github.com/sarahjohnson",
+  portfolioLabel: "View GitHub",
   workExperience: [
     {
       title: "Software Engineering Intern",
@@ -192,7 +195,14 @@ export default function SarahJohnsonProfile() {
                     <Star className="size-4" />
                   </Button>
                 </div>
-                <Button variant="outline" className="w-full bg-transparent" disabled>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                    <Github className="size-4 mr-2" />
+                    {graduate.portfolioLabel}
+                    <ExternalLink className="size-4 ml-1" />
+                  </a>
+                </Button>
+                <Button variant="outline" className="w-full bg-transparent mt-2" disabled>
                   <Download className="size-4 mr-2" />
                   Download CV
                 </Button>

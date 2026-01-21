@@ -16,6 +16,7 @@ import {
   Scale,
   BookOpen,
   FileText,
+  ExternalLink,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -36,6 +37,8 @@ const emilyProfile = {
   avatar: "ER",
   bio: "First Class Law graduate from the University of Oxford with a passion for commercial law and dispute resolution. Successfully completed both SQE1 and SQE2 examinations. Experienced in legal research, drafting, and client advisory work through vacation schemes at Magic Circle firms. Seeking a training contract to develop expertise in corporate and finance law.",
   linkedin: "linkedin.com/in/emilyrodriguezlaw",
+  portfolioUrl: "https://oxford.ac.uk/dissertation/emily-rodriguez",
+  portfolioLabel: "Read dissertation",
   workExperience: [
     {
       title: "Vacation Scheme",
@@ -197,7 +200,14 @@ export default function EmilyRodriguezProfile() {
                     <Star className="size-4" />
                   </Button>
                 </div>
-                <Button variant="outline" className="w-full bg-transparent" disabled>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                    <FileText className="size-4 mr-2" />
+                    {graduate.portfolioLabel}
+                    <ExternalLink className="size-4 ml-1" />
+                  </a>
+                </Button>
+                <Button variant="outline" className="w-full bg-transparent mt-2" disabled>
                   <Download className="size-4 mr-2" />
                   Download CV
                 </Button>

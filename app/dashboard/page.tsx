@@ -26,6 +26,7 @@ import {
   Calendar,
   ChevronDown,
   Award,
+  ExternalLink,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
@@ -160,7 +161,7 @@ const mockGraduates = [
   {
     id: 1,
     name: "Sarah Johnson",
-    degree: "Computer Science, BSc",
+    degree: "Computer Science, BSc (1st)",
     university: "University of Oxford",
     graduationYear: 2024,
     location: "London, UK",
@@ -169,12 +170,14 @@ const mockGraduates = [
     availability: "Immediate",
     avatar: "SJ",
     interests: "AI, Machine Learning",
+    portfolioUrl: "https://github.com/sarahjohnson",
+    portfolioLabel: "View GitHub",
   },
   {
     id: 2,
     name: "Michael Chen",
-    degree: "Software Engineering, MSc",
-    university: "Imperial College London",
+    degree: "Software Engineering, MSc (1st)",
+    university: "University of Cambridge",
     graduationYear: 2023,
     location: "Cambridge, UK",
     skills: ["Java", "Spring Boot", "AWS", "Docker"],
@@ -182,11 +185,13 @@ const mockGraduates = [
     availability: "2 weeks",
     avatar: "MC",
     interests: "Cloud Architecture, DevOps",
+    portfolioUrl: "https://michaelchen-projects.dev",
+    portfolioLabel: "View Projects",
   },
   {
     id: 3,
     name: "Emily Rodriguez",
-    degree: "Law (Jurisprudence), BA",
+    degree: "Law (Jurisprudence), BA (1st)",
     university: "University of Oxford",
     graduationYear: 2024,
     location: "London, UK",
@@ -195,12 +200,14 @@ const mockGraduates = [
     availability: "Immediate",
     avatar: "ER",
     interests: "Commercial Law, M&A",
+    portfolioUrl: "https://oxford.ac.uk/dissertation/emily-rodriguez",
+    portfolioLabel: "Read dissertation",
   },
   {
     id: 4,
     name: "David Kim",
-    degree: "Computer Engineering, BEng",
-    university: "University of Edinburgh",
+    degree: "Computer Engineering, BEng (1st)",
+    university: "University of Cambridge",
     graduationYear: 2023,
     location: "Edinburgh, UK",
     skills: ["C++", "Rust", "Kubernetes", "Linux"],
@@ -212,8 +219,8 @@ const mockGraduates = [
   {
     id: 5,
     name: "Jessica Martinez",
-    degree: "UX Design, MA",
-    university: "Royal College of Art",
+    degree: "UX Design, MA (1st)",
+    university: "University of Oxford",
     graduationYear: 2024,
     location: "Manchester, UK",
     skills: ["Figma", "UI/UX", "Design Systems", "Research"],
@@ -225,15 +232,15 @@ const mockGraduates = [
   {
     id: 6,
     name: "Alex Thompson",
-    degree: "Information Systems, BSc",
-    university: "University College London",
+    degree: "Data Intensive Science, MPhil (1st)",
+    university: "University of Cambridge",
     graduationYear: 2023,
     location: "Bristol, UK",
-    skills: ["JavaScript", "React", "GraphQL", "MongoDB"],
+    skills: ["Python", "Machine Learning", "TensorFlow", "Data Analysis"],
     experience: "3 years",
     availability: "2 weeks",
     avatar: "AT",
-    interests: "Full-Stack, Startups",
+    interests: "Data Science, AI Research",
   },
 ]
 
@@ -322,6 +329,8 @@ export default function DashboardPage() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [selectedSectors, setSelectedSectors] = useState<string[]>([])
   const [selectedDegreeClass, setSelectedDegreeClass] = useState<string[]>([])
+  const [selectedDiversity, setSelectedDiversity] = useState<string[]>([])
+  const [inCurrentEmployment, setInCurrentEmployment] = useState(false)
 
   const [jobStartDateOpen, setJobStartDateOpen] = useState(false)
   const [jobSectorOpen, setJobSectorOpen] = useState(false)
@@ -498,8 +507,7 @@ export default function DashboardPage() {
               >
                 Messages
               </Link>
-              <span className="text-sm font-medium text-muted-foreground cursor-default">Companies</span>
-              <span className="text-sm font-medium text-muted-foreground cursor-default">About</span>
+              
             </nav>
             <div className="flex items-center gap-3">
               <Button variant="outline" size="sm" asChild>
@@ -662,16 +670,9 @@ export default function DashboardPage() {
         {userType === "employer" && (
           <section className="py-16 bg-muted/20 border-b border-border">
             <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Talent</h2>
-                  <p className="text-sm text-muted-foreground">Find and connect with talented students and graduates</p>
-                </div>
-                <Button asChild>
-                  <Link href="/post-job" onClick={scrollToTop}>
-                    Post New Job
-                  </Link>
-                </Button>
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground mb-1">Search Talent</h2>
+                <p className="text-sm text-muted-foreground">Find and connect with talented students and graduates</p>
               </div>
 
               <div className="space-y-6">
@@ -999,6 +1000,49 @@ export default function DashboardPage() {
                         )}
                       </div>
                     </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Diversity</label>
+                      <div className="relative" ref={sectorRef}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenDropdown(openDropdown === "diversity" ? null : "diversity")
+                          }}
+                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+                        >
+                          <span
+                            className={selectedDiversity.length === 0 ? "text-muted-foreground" : "text-foreground"}
+                          >
+                            {getDisplayText(selectedDiversity, "Select diversity")}
+                          </span>
+                          <ChevronDown className="size-4 text-muted-foreground" />
+                        </button>
+                        {openDropdown === "diversity" && (
+                          <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+                          >
+                            {["Ethnically diverse", "Neurodiverse"].map((diversity) => (
+                              <label
+                                key={diversity}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="size-4"
+                                  checked={selectedDiversity.includes(diversity)}
+                                  onChange={() =>
+                                    toggleSelection(diversity, selectedDiversity, setSelectedDiversity)
+                                  }
+                                />
+                                <span className="text-sm">{diversity}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-6">
@@ -1010,6 +1054,19 @@ export default function DashboardPage() {
                         {skill}
                       </Badge>
                     ))}
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-6 pt-6 border-t">
+                    <input
+                      type="checkbox"
+                      id="employment"
+                      className="size-4"
+                      checked={inCurrentEmployment}
+                      onChange={(e) => setInCurrentEmployment(e.target.checked)}
+                    />
+                    <label htmlFor="employment" className="text-sm font-medium text-foreground cursor-pointer">
+                      Currently in employment
+                    </label>
                   </div>
                 </Card>
 
@@ -1026,8 +1083,8 @@ export default function DashboardPage() {
 
                   <div className="grid gap-4">
                     {mockGraduates.map((graduate) => (
-                      <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                      <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
+                      <Link key={graduate.id} href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
+                      <Card className="p-6 hover:shadow-lg transition-shadow">
                         <div className="flex flex-col md:flex-row gap-6">
                           <div className="flex items-start gap-4 flex-1">
                             <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
@@ -1072,6 +1129,14 @@ export default function DashboardPage() {
                             </div>
                           </div>
                           <div className="flex md:flex-col gap-2 shrink-0">
+                            {graduate.portfolioUrl && (
+                              <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
+                                <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                                  {graduate.portfolioLabel}
+                                  <ExternalLink className="size-4 ml-1" />
+                                </a>
+                              </Button>
+                            )}
                             <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
                               <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
                                 View Profile
@@ -1109,8 +1174,8 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-lg text-foreground">Eleanor Watson</h3>
-                      <p className="text-sm text-muted-foreground">Economics, BA</p>
-                      <p className="text-sm text-muted-foreground">London School of Economics</p>
+                      <p className="text-sm text-muted-foreground">Economics, BA (1st)</p>
+                      <p className="text-sm text-muted-foreground">University of Cambridge</p>
                     </div>
                   </div>
 
@@ -1156,8 +1221,8 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-lg text-foreground">James Harrison</h3>
-                      <p className="text-sm text-muted-foreground">Computer Science, MEng</p>
-                      <p className="text-sm text-muted-foreground">Imperial College London</p>
+                      <p className="text-sm text-muted-foreground">Computer Science, MEng (1st)</p>
+                      <p className="text-sm text-muted-foreground">University of Oxford</p>
                     </div>
                   </div>
 
@@ -1203,7 +1268,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-lg text-foreground">Sophie Patel</h3>
-                      <p className="text-sm text-muted-foreground">Engineering, BEng</p>
+                      <p className="text-sm text-muted-foreground">Engineering, BEng (1st)</p>
                       <p className="text-sm text-muted-foreground">University of Cambridge</p>
                     </div>
                   </div>
@@ -1250,7 +1315,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-lg text-foreground">Oliver Anderson</h3>
-                      <p className="text-sm text-muted-foreground">Mathematics, MMath</p>
+                      <p className="text-sm text-muted-foreground">Mathematics, MMath (1st)</p>
                       <p className="text-sm text-muted-foreground">University of Oxford</p>
                     </div>
                   </div>
@@ -1297,8 +1362,8 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-lg text-foreground">Lily Park</h3>
-                      <p className="text-sm text-muted-foreground">Physics, MPhys</p>
-                      <p className="text-sm text-muted-foreground">University of Edinburgh</p>
+                      <p className="text-sm text-muted-foreground">Physics, MASt (1st)</p>
+                      <p className="text-sm text-muted-foreground">University of Cambridge</p>
                     </div>
                   </div>
 
@@ -1344,8 +1409,8 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-lg text-foreground">Thomas Mitchell</h3>
-                      <p className="text-sm text-muted-foreground">Law, LLB</p>
-                      <p className="text-sm text-muted-foreground">University College London</p>
+                      <p className="text-sm text-muted-foreground">Law, BA (1st)</p>
+                      <p className="text-sm text-muted-foreground">University of Oxford</p>
                     </div>
                   </div>
 
@@ -1786,15 +1851,14 @@ export default function DashboardPage() {
         {userType === "employer" && (
           <section className="py-16 bg-muted/30">
             <div className="container mx-auto px-4">
-              <Card className="p-8 md:p-12 bg-primary text-primary-foreground text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Ready to Hire Top Talent?</h2>
-                <p className="text-lg mb-6 text-primary-foreground/90 text-pretty max-w-2xl mx-auto">
-                  Post your job opening and reach thousands of qualified candidates actively looking for their next
-                  opportunity
+              <Card className="p-6 md:p-8 bg-muted text-foreground text-center">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-balance">Get started</h2>
+                <p className="text-lg mb-6 text-muted-foreground text-pretty max-w-2xl mx-auto">
+                  Post your job opening and reach thousands of highly skilled candidates
                 </p>
                 <Button size="lg" variant="secondary" asChild>
                   <Link href="/post-job" onClick={scrollToTop}>
-                    Post a Job for Free
+                    Post a job
                   </Link>
                 </Button>
               </Card>

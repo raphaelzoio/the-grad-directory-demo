@@ -267,8 +267,6 @@ export default function MessagesPage() {
               <Link href="/messages" className="text-sm font-medium text-primary" onClick={scrollToTop}>
                 Messages
               </Link>
-              <span className="text-sm font-medium text-muted-foreground cursor-default">Companies</span>
-              <span className="text-sm font-medium text-muted-foreground cursor-default">About</span>
             </nav>
             <div className="flex items-center gap-3">
               <Badge variant="secondary" className="hidden sm:inline-flex">

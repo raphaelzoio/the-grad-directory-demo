@@ -13,135 +13,82 @@ import {
   MessageSquare,
   Star,
   Linkedin,
-  Github,
-  Code,
   Database,
+  TrendingUp,
 } from "lucide-react"
 import Link from "next/link"
 
 const alexProfile = {
   id: 6,
   name: "Alex Thompson",
-  email: "alex.thompson@ucl.ac.uk",
+  email: "alex.thompson@cam.ac.uk",
   phone: "+44 7700 678901",
-  degree: "Information Systems, BSc",
-  university: "University College London",
-  department: "Department of Computer Science",
+  degree: "Data Intensive Science, MPhil (1st)",
+  university: "University of Cambridge",
   graduationYear: 2023,
   classification: "First Class Honours",
   location: "Bristol, UK",
-  skills: ["JavaScript", "React", "GraphQL", "MongoDB", "Node.js", "PostgreSQL"],
+  skills: ["Python", "Machine Learning", "TensorFlow", "PyTorch", "Data Analysis", "SQL"],
   experience: "3 years",
   availability: "2 weeks",
   avatar: "AT",
-  bio: "First Class Information Systems graduate from UCL with three years of full-stack development experience. Specialising in modern JavaScript ecosystems and building scalable web applications. Strong interest in startup environments and bringing products from concept to launch. Experienced in working with cross-functional teams and leading technical projects.",
-  linkedin: "linkedin.com/in/alexthompsondev",
-  github: "github.com/athompson-dev",
+  bio: "First Class Data Intensive Science MPhil graduate from Cambridge with three years of experience in machine learning and AI research. Specialising in deep learning architectures and large-scale data processing. Strong background in academic research with publications in peer-reviewed journals. Seeking a senior data scientist role at an innovative organisation working on cutting-edge AI applications.",
+  linkedin: "linkedin.com/in/alexthompsondata",
   workExperience: [
     {
-      title: "Full-Stack Developer",
-      company: "Deliveroo",
+      title: "Machine Learning Engineer",
+      company: "DeepMind London",
+      duration: "2023 - Present",
+      description: "Developed and trained neural network models for natural language processing. Optimised training pipelines for 40% faster convergence. Published research on transformer architecture improvements.",
+    },
+    {
+      title: "Data Scientist",
+      company: "Bloomberg LP",
       duration: "2022 - 2023",
-      description:
-        "Built and maintained features for the restaurant partner portal. Implemented real-time order tracking using WebSockets. Led migration of legacy jQuery code to React, improving performance by 60%.",
+      description: "Built predictive models for financial market analysis using TensorFlow. Processed petabyte-scale datasets using distributed computing. Improved model accuracy from 85% to 92%.",
     },
     {
-      title: "Software Developer",
-      company: "Just Eat Takeaway",
+      title: "Research Associate",
+      company: "Cambridge Computer Lab",
       duration: "2021 - 2022",
-      description:
-        "Developed GraphQL APIs for the mobile application. Implemented search functionality using Elasticsearch. Worked in an agile team delivering fortnightly releases.",
-    },
-    {
-      title: "Junior Developer",
-      company: "TechHub Bristol",
-      duration: "2020 - 2021",
-      description:
-        "Built MVPs for early-stage startups in the accelerator programme. Worked with 5 different startups across fintech, healthtech, and edtech sectors. Developed skills in rapid prototyping and user feedback integration.",
+      description: "Conducted research on neural network optimisation techniques. Co-authored 3 published papers in top-tier conferences. Mentored 2 undergraduate researchers.",
     },
   ],
-  uclModules: [
-    {
-      name: "Web Technologies",
-      grade: "First (80%)",
-      description: "Modern web development including HTML5, CSS3, JavaScript, and frameworks like React and Vue.",
-    },
-    {
-      name: "Database Systems",
-      grade: "First (78%)",
-      description: "Relational and NoSQL databases, query optimisation, and database design principles.",
-    },
-    {
-      name: "Software Engineering",
-      grade: "First (82%)",
-      description: "Agile methodologies, version control, testing, and continuous integration practices.",
-    },
-    {
-      name: "Human-Computer Interaction",
-      grade: "First (75%)",
-      description: "User-centred design, usability evaluation, and interface design principles.",
-    },
-    {
-      name: "Information Security",
-      grade: "First (74%)",
-      description: "Web security, authentication, encryption, and secure coding practices.",
-    },
-    {
-      name: "Data Analytics",
-      grade: "Merit (68%)",
-      description: "Statistical analysis, data visualisation, and business intelligence tools.",
-    },
-    {
-      name: "Systems Analysis and Design",
-      grade: "First (76%)",
-      description: "Requirements gathering, system modelling, and enterprise architecture.",
-    },
-  ],
-  projects: [
-    {
-      name: "Open-Source Booking Platform",
-      description: "Full-stack booking system for small businesses. 50+ GitHub stars and used by 20+ companies. Featured on Product Hunt.",
-      technologies: ["Next.js", "GraphQL", "PostgreSQL", "Stripe"],
-    },
-    {
-      name: "Real-Time Collaboration Tool",
-      description: "Final year project building a collaborative document editor with live cursors and commenting. Achieved First with distinction.",
-      technologies: ["React", "WebSocket", "MongoDB", "Redis"],
-    },
-    {
-      name: "Developer Productivity CLI",
-      description: "Command-line tool for automating common development tasks. Published on npm with 1,000+ weekly downloads.",
-      technologies: ["Node.js", "TypeScript", "CLI"],
-    },
+  courses: [
+    { name: "Advanced Machine Learning", grade: "First (92%)" },
+    { name: "Statistical Data Analysis", grade: "First (90%)" },
+    { name: "Deep Learning Architecture", grade: "First (91%)" },
+    { name: "Research Methodology", grade: "First (88%)" },
+    { name: "Data Engineering at Scale", grade: "First (89%)" },
   ],
   education: [
     {
-      degree: "Bachelor of Science in Information Systems",
-      school: "University College London",
-      year: "2019 - 2023",
-      honors: "First Class Honours, Best Final Year Project",
+      degree: "Master of Philosophy in Data Intensive Science",
+      school: "University of Cambridge",
+      year: "2021 - 2023",
+      honors: "First Class Honours, Hall Prize for Best Research",
     },
     {
-      degree: "A-Levels",
-      school: "Bristol Grammar School",
-      year: "2017 - 2019",
-      honors: "A*A*A in Computer Science, Mathematics, Business Studies",
+      degree: "Bachelor of Arts in Mathematics",
+      school: "University of Cambridge",
+      year: "2018 - 2021",
+      honors: "First Class Honours, Cambridge Mathematics Prize",
     },
   ],
-  certifications: [
-    "AWS Certified Developer Associate",
-    "MongoDB Certified Developer",
-    "Meta Front-End Developer Professional Certificate",
-    "GraphQL Professional Certificate",
+  certifications: ["Google Cloud Professional Data Engineer", "TensorFlow Certified Developer"],
+  awards: ["Cambridge Data Science Award 2023", "Best Paper - International ML Conference 2023"],
+  languages: ["English (Native)", "Python (Advanced)", "SQL (Advanced)"],
+  interests: ["Machine Learning", "AI Research", "Data Engineering", "Open Source ML"],
+  projects: [
+    {
+      title: "Transformer Model Optimization",
+      description: "Developed novel attention mechanism reducing computational complexity by 30% while maintaining performance on BERT benchmarks.",
+    },
+    {
+      title: "Large Language Model Fine-tuning Framework",
+      description: "Created distributed framework for fine-tuning LLMs on custom datasets, now used by 50+ researchers globally. Open-sourced with 2k GitHub stars.",
+    },
   ],
-  awards: [
-    "UCL Best Final Year Project 2023",
-    "Deliveroo Hackathon Winner 2022",
-    "Bristol Tech Festival Young Developer Award",
-    "GitHub Arctic Code Vault Contributor",
-  ],
-  languages: ["English (Native)", "German (Intermediate)"],
-  interests: ["Full-Stack Development", "Startups", "Open Source", "Developer Tools"],
 }
 
 export default function AlexThompsonProfile() {
@@ -176,7 +123,7 @@ export default function AlexThompsonProfile() {
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
-                <p className="text-sm text-muted-foreground mb-4">{graduate.department}, {graduate.university}</p>
+                <p className="text-sm text-muted-foreground mb-4">{graduate.university}</p>
                 <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
                 <div className="flex gap-2 mb-6">
                   <Button size="sm" className="flex-1" disabled>
@@ -215,26 +162,12 @@ export default function AlexThompsonProfile() {
                   <span className="text-muted-foreground">{graduate.experience} Experience</span>
                 </div>
               </div>
-
-              <div className="mt-6 pt-6 border-t">
-                <h3 className="font-semibold mb-3 text-sm">Online Presence</h3>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
-                    <Linkedin className="size-4" />
-                    <span>{graduate.linkedin}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
-                    <Github className="size-4" />
-                    <span>{graduate.github}</span>
-                  </div>
-                </div>
-              </div>
             </Card>
 
             {/* Skills */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <Code className="size-5" />
+                <Database className="size-5" />
                 Technical Skills
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -248,7 +181,7 @@ export default function AlexThompsonProfile() {
 
             {/* Languages */}
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Languages</h3>
+              <h3 className="font-semibold mb-4">Languages & Proficiencies</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.languages.map((lang) => (
                   <li key={lang}>• {lang}</li>
@@ -260,7 +193,7 @@ export default function AlexThompsonProfile() {
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Award className="size-5" />
-                Awards & Recognition
+                Awards
               </h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.awards.map((award) => (
@@ -278,22 +211,17 @@ export default function AlexThompsonProfile() {
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
             </Card>
 
-            {/* UCL Modules */}
+            {/* Projects */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Database className="size-5" />
-                UCL Information Systems Modules
+                <TrendingUp className="size-5" />
+                Research Projects
               </h2>
-              <div className="grid gap-4">
-                {graduate.uclModules.map((module, index) => (
+              <div className="space-y-4">
+                {graduate.projects.map((project, index) => (
                   <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold">{module.name}</h3>
-                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
-                        {module.grade}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{module.description}</p>
+                    <h3 className="font-semibold mb-2">{project.title}</h3>
+                    <p className="text-sm text-muted-foreground">{project.description}</p>
                   </div>
                 ))}
               </div>
@@ -324,24 +252,17 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Projects */}
+            {/* Academic Coursework */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Code className="size-5" />
-                Notable Projects
+                <Database className="size-5" />
+                Academic Coursework
               </h2>
-              <div className="space-y-4">
-                {graduate.projects.map((project, index) => (
-                  <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold mb-2">{project.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
+              <div className="grid gap-3">
+                {graduate.courses.map((course, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
+                    <h3 className="font-semibold text-sm">{course.name}</h3>
+                    <Badge className="bg-amber-50 text-amber-700 border-amber-200">{course.grade}</Badge>
                   </div>
                 ))}
               </div>

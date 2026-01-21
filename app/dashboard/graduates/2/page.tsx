@@ -16,6 +16,7 @@ import {
   Github,
   Cloud,
   Server,
+  ExternalLink,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -37,6 +38,8 @@ const michaelProfile = {
   bio: "MSc Software Engineering graduate from Imperial College London with Distinction. Specialising in cloud architecture and distributed systems. Three years of industry experience building scalable enterprise applications at leading fintech companies. Passionate about DevOps practices and infrastructure automation. Seeking a senior software engineering role focusing on cloud-native development.",
   linkedin: "linkedin.com/in/michaelchenswe",
   github: "github.com/mchen-dev",
+  portfolioUrl: "https://michaelchen-projects.dev",
+  portfolioLabel: "View Projects",
   workExperience: [
     {
       title: "Software Engineer",
@@ -183,7 +186,14 @@ export default function MichaelChenProfile() {
                     <Star className="size-4" />
                   </Button>
                 </div>
-                <Button variant="outline" className="w-full bg-transparent" disabled>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                    <Cloud className="size-4 mr-2" />
+                    {graduate.portfolioLabel}
+                    <ExternalLink className="size-4 ml-1" />
+                  </a>
+                </Button>
+                <Button variant="outline" className="w-full bg-transparent mt-2" disabled>
                   <Download className="size-4 mr-2" />
                   Download CV
                 </Button>
