@@ -37,7 +37,7 @@ export default function HomePage() {
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h1 className="text-3xl md:text-5xl lg:text-3xl text-foreground text-balance font-[Inter]">
+            <h1 className="text-3xl md:text-5xl lg:text-3xl text-foreground text-balance font-['Inter']">
               The UK's premier graduate talent database
             </h1>
             <p className="text-lg md:text-xl lg:text-xl text-pretty max-w-3xl mx-auto leading-relaxed">
