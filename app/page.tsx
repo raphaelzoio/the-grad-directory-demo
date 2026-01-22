@@ -76,54 +76,14 @@ export default function HomePage() {
             <p className="text-center text-sm font-medium text-muted-foreground mb-12 uppercase tracking-wider">
               Trusted by Leading Organisations
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  Jane Street
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  Panmure Liberum
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  Advent International
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  BCG
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  Capgemini
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  AlixPartners
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  Egon Zehnder
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center h-20 w-full px-4">
-                <span className="text-lg font-semibold text-foreground/70 hover:text-foreground transition-colors text-center">
-                  Latham & Watkins
-                </span>
-              </div>
+            <div className="flex items-center justify-center w-full">
+              <Image
+                src="/images/logo-20collage.png"
+                alt="Trusted partner logos including Latham & Watkins, Advent, Farient Advisors, BCG, Beazley, Capgemini, FGS Global, and Panmure Liberum"
+                width={1000}
+                height={600}
+                className="max-w-4xl w-full h-auto mx-auto"
+              />
             </div>
           </div>
         </div>
