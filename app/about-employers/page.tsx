@@ -40,15 +40,19 @@ export default function AboutEmployersPage() {
           <Card className="p-8 md:p-12">
             <div className="space-y-6 text-foreground leading-relaxed">
               <p className="text-base">
-                The Graduate Directory is a member-only platform community for the purposes of graduate recruitment.
-                Employers can access a closed profile database in order to find and connect with top junior talent.
-                They can post jobs, reach out directly to candidates and control the visibility of their profile.
+                The Graduate Directory is a closed searchable database enabling Oxbridge graduates to access high quality jobs and employers to access the highest quality junior talent.
               </p>
 
               <p className="text-base">
-                Membership for SMEs is offered at £950 per month, and for Enterprise clients at £1,950 per month. This
-                represents a competitive offer for those looking to invest in the long term in ambitious, high-potential
-                candidates, or seeking a cost-effective alternative to lengthy, outsourced recruitment.
+                Employers can both post jobs and search the database in a wide variety of ways to identify and connect with employed and not yet employed graduates with up to 10 years’ experience in the workplace. State of the art profiles allow graduates to display skillsets comprehensively via inbuilt video introductions, upload of content such as CVs and dissertations, with ability to specify desired roles and sectors to optimise their employment prospects.
+              </p>
+
+              <p className="text-base">
+                Employers use the database to rapidly and precisely target the high potential talent they seek and circumvent the consuming, high volume applications with little ability to distinguish between them.
+              </p>
+
+              <p className="text-base">
+                We offer a simple charging structure. Employers can pay a one-off database search fee of £995 for a month of access if an SME or £1,995 if a large corporate. Alternatively, they can subscribe at £600 a month for a minimum of six months.
               </p>
             </div>
             </Card>
