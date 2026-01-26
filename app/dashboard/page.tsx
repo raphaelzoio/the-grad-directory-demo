@@ -187,6 +187,7 @@ const mockGraduates = [
     interests: "Cloud Architecture, DevOps",
     portfolioUrl: "https://michaelchen-projects.dev",
     portfolioLabel: "View Projects",
+    openToRelocation: true,
   },
   {
     id: 3,
@@ -215,6 +216,7 @@ const mockGraduates = [
     availability: "1 month",
     avatar: "DK",
     interests: "Systems Programming, Embedded",
+    openToRelocation: true,
   },
   {
     id: 5,
@@ -1066,6 +1068,12 @@ export default function DashboardPage() {
                                   <TrendingUp className="size-4" />
                                   <span>Graduated {graduate.graduationYear}</span>
                                 </div>
+                                {graduate.openToRelocation && (
+                                  <div className="flex items-center gap-2 text-muted-foreground">
+                                    <MapPin className="size-4" />
+                                    <span>Open to relocation</span>
+                                  </div>
+                                )}
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                   <Lightbulb className="size-4" />
                                   <span>Interested in: {graduate.interests}</span>
