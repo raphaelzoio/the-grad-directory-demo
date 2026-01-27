@@ -1479,14 +1479,18 @@ export default function DashboardPage() {
                         </div>
                       )}
                     </div>
-                <Button asChild>
-                  <Link href="/post-job" onClick={scrollToTop}>
-                    Post New Job
-                  </Link>
-                </Button>
-              </div>
+                  </div>
+                </Card>
 
-              <Card className="overflow-hidden">
+                <div className="flex justify-end mb-4">
+                  <Button asChild>
+                    <Link href="/post-job" onClick={scrollToTop}>
+                      Post New Job
+                    </Link>
+                  </Button>
+                </div>
+
+                <Card className="overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead className="bg-muted/50">
