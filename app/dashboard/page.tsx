@@ -619,370 +619,376 @@ export default function DashboardPage() {
 
         {/* Search Active Graduates section above Your Job Postings */}
         {userType === "employer" && (
-          <section className="py-16 bg-muted/20 border-b border-border">
+          <section className="pt-6 pb-8 border-b border-border">
             <div className="container mx-auto px-4">
-              <div>
-                <h2 className="text-2xl font-semibold text-foreground mb-1">Search Talent</h2>
-                <p className="text-sm text-muted-foreground">Find and connect with talented students and graduates</p>
-              </div>
+              <div className="max-w-5xl mx-auto">
+                {/* Header */}
+                <div className="mb-6">
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Search Talent</h2>
+                  <p className="text-sm text-muted-foreground">Find and connect with talented students and graduates</p>
+                </div>
 
-              <div className="space-y-6">
-                <Card className="p-6">
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Location</label>
-                      <div className="relative" ref={locationRef}>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setOpenDropdown(openDropdown === "location" ? null : "location")
-                          }}
-                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                        >
-                          <div className="flex items-center gap-2">
-                            <MapPin className="size-5 text-muted-foreground" />
-                            <span
-                              className={selectedLocations.length === 0 ? "text-muted-foreground" : "text-foreground"}
-                            >
-                              {getDisplayText(selectedLocations, "Select locations")}
-                            </span>
-                          </div>
-                          <ChevronDown className="size-4 text-muted-foreground" />
-                        </button>
-                        {openDropdown === "location" && (
-                          <div
-                            onClick={(e) => e.stopPropagation()}
-                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
-                          >
-                            {["Remote", "London", "Manchester", "Birmingham", "Edinburgh", "Bristol"].map((loc) => (
-                              <label
-                                key={loc}
-                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  className="size-4"
-                                  checked={selectedLocations.includes(loc)}
-                                  onChange={() => toggleSelection(loc, selectedLocations, setSelectedLocations)}
-                                />
-                                <span className="text-sm">{loc}</span>
-                              </label>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">University</label>
-                      <div className="relative" ref={universityRef}>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setOpenDropdown(openDropdown === "university" ? null : "university")
-                          }}
-                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                        >
-                          <span
-                            className={selectedUniversities.length === 0 ? "text-muted-foreground" : "text-foreground"}
-                          >
-                            {getDisplayText(selectedUniversities, "Select universities")}
-                          </span>
-                          <ChevronDown className="size-4 text-muted-foreground" />
-                        </button>
-                        {openDropdown === "university" && (
-                          <div
-                            onClick={(e) => e.stopPropagation()}
-                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
-                          >
-                            {[
-                              "University of Oxford",
-                              "University of Cambridge",
-                              "Imperial College London",
-                              "University College London",
-                              "London School of Economics",
-                              "University of Edinburgh",
-                              "King's College London",
-                              "University of Manchester",
-                              "University of Bristol",
-                              "University of Warwick",
-                            ].map((uni) => (
-                              <label
-                                key={uni}
-                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  className="size-4"
-                                  checked={selectedUniversities.includes(uni)}
-                                  onChange={() => toggleSelection(uni, selectedUniversities, setSelectedUniversities)}
-                                />
-                                <span className="text-sm">{uni}</span>
-                              </label>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="relative" ref={subjectRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "subject" ? null : "subject")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedSubjects.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedSubjects.length === 0 ? "Subject" : `${selectedSubjects.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "subject" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[250px]"
-                        >
-                          {[
-                            "Computer Science",
-                            "Engineering",
-                            "Business & Management",
-                            "Economics",
-                            "Mathematics",
-                            "Law",
-                            "Medicine",
-                            "Natural Sciences",
-                            "History",
-                            "English Literature",
-                            "Politics & International Relations",
-                            "Psychology",
-                          ].map((subject) => (
-                            <label
-                              key={subject}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedSubjects.includes(subject)}
-                                onChange={() => toggleSelection(subject, selectedSubjects, setSelectedSubjects)}
-                              />
-                              <span className="text-sm">{subject}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative" ref={experienceRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "experience" ? null : "experience")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedExperience.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedExperience.length === 0 ? "Experience" : `${selectedExperience.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "experience" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[200px]"
-                        >
-                          {["Select all", "0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"].map((exp) => (
-                            <label
-                              key={exp}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={exp === "All" ? selectedExperience.includes("All") : selectedExperience.includes(exp)}
-                                onChange={() => {
-                                  if (exp === "All") {
-                                    toggleSelection("All", selectedExperience, setSelectedExperience)
-                                  } else {
-                                    const newSelection = selectedExperience.filter(item => item !== "All")
-                                    toggleSelection(exp, newSelection, setSelectedExperience)
-                                  }
-                                }}
-                              />
-                              <span className="text-sm">{exp}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative" ref={availabilityRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "availability" ? null : "availability")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedAvailability.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedAvailability.length === 0 ? "Availability" : `${selectedAvailability.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "availability" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[200px]"
-                        >
-                          {["Immediate", "2 weeks", "1 month", "3 months"].map((avail) => (
-                            <label
-                              key={avail}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedAvailability.includes(avail)}
-                                onChange={() => toggleSelection(avail, selectedAvailability, setSelectedAvailability)}
-                              />
-                              <span className="text-sm">{avail}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative" ref={sectorRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "sector" ? null : "sector")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedSectors.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedSectors.length === 0 ? "Sector" : `${selectedSectors.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "sector" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[200px]"
-                        >
-                          {[
-                            "Finance & Banking",
-                            "Consulting",
-                            "Technology",
-                            "Legal",
-                            "Healthcare",
-                            "Energy & Utilities",
-                            "Retail & Consumer",
-                            "Media & Entertainment",
-                            "Manufacturing",
-                            "Public Sector",
-                          ].map((sector) => (
-                            <label
-                              key={sector}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedSectors.includes(sector)}
-                                onChange={() => toggleSelection(sector, selectedSectors, setSelectedSectors)}
-                              />
-                              <span className="text-sm">{sector}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative" ref={degreeClassRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "degreeClass" ? null : "degreeClass")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedDegreeClass.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedDegreeClass.length === 0 ? "Degree Class" : `${selectedDegreeClass.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "degreeClass" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[150px]"
-                        >
-                          {["1st", "2.1", "Any"].map((degClass) => (
-                            <label
-                              key={degClass}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedDegreeClass.includes(degClass)}
-                                onChange={() =>
-                                  toggleSelection(degClass, selectedDegreeClass, setSelectedDegreeClass)
-                                }
-                              />
-                              <span className="text-sm">{degClass}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative" ref={diversityRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "diversity" ? null : "diversity")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedDiversity.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedDiversity.length === 0 ? "Diversity" : `${selectedDiversity.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "diversity" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[200px]"
-                        >
-                          {["Ethnically diverse", "Neurodiverse"].map((diversity) => (
-                            <label
-                              key={diversity}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedDiversity.includes(diversity)}
-                                onChange={() =>
-                                  toggleSelection(diversity, selectedDiversity, setSelectedDiversity)
-                                }
-                              />
-                              <span className="text-sm">{diversity}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                {/* AI Search Bar */}
+                <div className="mb-6">
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
+                    <input
+                      type="text"
+                      placeholder="Try: 'Oxford CS graduate with Python experience available immediately in London'"
+                      value={searchKeywords}
+                      onChange={(e) => setSearchKeywords(e.target.value)}
+                      className="w-full h-14 pl-12 pr-32 rounded-lg border border-input bg-background text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                    />
+                    <Button 
+                      size="sm" 
+                      className="absolute right-2 top-1/2 -translate-y-1/2"
+                      onClick={() => {
+                        // Demo: simulate autofilling filters
+                        setSelectedLocations(["London"])
+                        setSelectedUniversities(["University of Oxford"])
+                        setSelectedSubjects(["Computer Science"])
+                        setSelectedAvailability(["Immediate"])
+                      }}
+                    >
+                      <Lightbulb className="size-4 mr-2" />
+                      Smart Search
+                    </Button>
                   </div>
-                </Card>
+                  <p className="text-xs text-muted-foreground mt-2">Describe what you are looking for and we will autofill the filters below</p>
+                </div>
+
+                {/* Compact Filters Row */}
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  {/* Location Filter */}
+                  <div className="relative" ref={locationRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "location" ? null : "location")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedLocations.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <MapPin className="size-4" />
+                      <span>{selectedLocations.length === 0 ? "Location" : selectedLocations.length === 1 ? selectedLocations[0] : `${selectedLocations.length} locations`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "location" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[180px]"
+                      >
+                        {["Remote", "London", "Manchester", "Birmingham", "Edinburgh", "Bristol", "Cambridge", "Oxford", "Leeds"].map((loc) => (
+                          <label
+                            key={loc}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedLocations.includes(loc)}
+                              onChange={() => toggleSelection(loc, selectedLocations, setSelectedLocations)}
+                            />
+                            <span className="text-sm">{loc}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* University Filter */}
+                  <div className="relative" ref={universityRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "university" ? null : "university")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedUniversities.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <GraduationCap className="size-4" />
+                      <span>{selectedUniversities.length === 0 ? "University" : `${selectedUniversities.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "university" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[250px]"
+                      >
+                        {[
+                          "University of Oxford",
+                          "University of Cambridge",
+                          "Imperial College London",
+                          "University College London",
+                          "London School of Economics",
+                          "University of Edinburgh",
+                          "King's College London",
+                          "University of Manchester",
+                          "University of Bristol",
+                          "University of Warwick",
+                        ].map((uni) => (
+                          <label
+                            key={uni}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedUniversities.includes(uni)}
+                              onChange={() => toggleSelection(uni, selectedUniversities, setSelectedUniversities)}
+                            />
+                            <span className="text-sm">{uni}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Subject Filter */}
+                  <div className="relative" ref={subjectRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "subject" ? null : "subject")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedSubjects.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <span>{selectedSubjects.length === 0 ? "Subject" : `${selectedSubjects.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "subject" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[220px]"
+                      >
+                        {[
+                          "Computer Science",
+                          "Engineering",
+                          "Business & Management",
+                          "Economics",
+                          "Mathematics",
+                          "Law",
+                          "Medicine",
+                          "Natural Sciences",
+                          "History",
+                          "English Literature",
+                          "Politics & International Relations",
+                          "Psychology",
+                        ].map((subject) => (
+                          <label
+                            key={subject}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedSubjects.includes(subject)}
+                              onChange={() => toggleSelection(subject, selectedSubjects, setSelectedSubjects)}
+                            />
+                            <span className="text-sm">{subject}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Experience Filter */}
+                  <div className="relative" ref={experienceRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "experience" ? null : "experience")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedExperience.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <Briefcase className="size-4" />
+                      <span>{selectedExperience.length === 0 ? "Experience" : `${selectedExperience.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "experience" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[160px]"
+                      >
+                        {["0-1 years", "1-2 years", "2-3 years", "3-5 years", "5+ years"].map((exp) => (
+                          <label
+                            key={exp}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedExperience.includes(exp)}
+                              onChange={() => toggleSelection(exp, selectedExperience, setSelectedExperience)}
+                            />
+                            <span className="text-sm">{exp}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Availability Filter */}
+                  <div className="relative" ref={availabilityRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "availability" ? null : "availability")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedAvailability.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <Clock className="size-4" />
+                      <span>{selectedAvailability.length === 0 ? "Availability" : selectedAvailability.length === 1 ? selectedAvailability[0] : `${selectedAvailability.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "availability" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[160px]"
+                      >
+                        {["Immediate", "2 weeks", "1 month", "3 months"].map((avail) => (
+                          <label
+                            key={avail}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedAvailability.includes(avail)}
+                              onChange={() => toggleSelection(avail, selectedAvailability, setSelectedAvailability)}
+                            />
+                            <span className="text-sm">{avail}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Degree Class Filter */}
+                  <div className="relative" ref={degreeClassRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "degreeClass" ? null : "degreeClass")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedDegreeClass.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <Award className="size-4" />
+                      <span>{selectedDegreeClass.length === 0 ? "Degree Class" : selectedDegreeClass.join(", ")}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "degreeClass" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[120px]"
+                      >
+                        {["1st", "2:1", "2:2", "Any"].map((degClass) => (
+                          <label
+                            key={degClass}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedDegreeClass.includes(degClass)}
+                              onChange={() =>
+                                toggleSelection(degClass, selectedDegreeClass, setSelectedDegreeClass)
+                              }
+                            />
+                            <span className="text-sm">{degClass}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Diversity Filter */}
+                  <div className="relative" ref={diversityRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "diversity" ? null : "diversity")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedDiversity.length > 0 
+                          ? "bg-primary/10 border-primary/30 text-foreground" 
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <span>{selectedDiversity.length === 0 ? "Diversity" : `${selectedDiversity.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "diversity" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[180px]"
+                      >
+                        {["Ethnically diverse", "Neurodiverse"].map((diversity) => (
+                          <label
+                            key={diversity}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedDiversity.includes(diversity)}
+                              onChange={() =>
+                                toggleSelection(diversity, selectedDiversity, setSelectedDiversity)
+                              }
+                            />
+                            <span className="text-sm">{diversity}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Clear Filters */}
+                  {(selectedLocations.length > 0 || selectedUniversities.length > 0 || selectedSubjects.length > 0 || selectedExperience.length > 0 || selectedAvailability.length > 0 || selectedDegreeClass.length > 0 || selectedDiversity.length > 0) && (
+                    <button
+                      onClick={() => {
+                        setSelectedLocations([])
+                        setSelectedUniversities([])
+                        setSelectedSubjects([])
+                        setSelectedExperience([])
+                        setSelectedAvailability([])
+                        setSelectedDegreeClass([])
+                        setSelectedDiversity([])
+                      }}
+                      className="h-9 px-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      Clear all
+                    </button>
+                  )}
+                </div>
 
                 {/* Results */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-muted-foreground">42 active graduates found</p>
-                    <select className="h-9 px-3 rounded-md border border-input bg-background text-sm">
+                    <select className="h-9 px-3 rounded-full border border-input bg-background text-sm">
                       <option>Most Recent</option>
                       <option>Best Match</option>
                       <option>Graduation Year</option>
@@ -991,68 +997,47 @@ export default function DashboardPage() {
 
                   <div className="grid md:grid-cols-2 gap-4">
                     {mockGraduates.map((graduate) => (
-                      <Card key={graduate.id} className="p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex flex-col md:flex-row gap-6">
-                          <div className="flex items-start gap-4 flex-1">
-                            <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                              {graduate.avatar}
+                      <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow">
+                        <div className="flex gap-4">
+                          <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
+                            {graduate.avatar}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
+                              <h3 className="font-semibold text-foreground">{graduate.name}</h3>
+                            </Link>
+                            <p className="text-sm text-muted-foreground mb-2">
+                              {graduate.degree} - {graduate.university}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {graduate.skills.slice(0, 3).map((skill) => (
+                                <Badge key={skill} variant="secondary" className="text-xs">
+                                  {skill}
+                                </Badge>
+                              ))}
+                              {graduate.skills.length > 3 && (
+                                <Badge variant="outline" className="text-xs">+{graduate.skills.length - 3}</Badge>
+                              )}
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
-                                <h3 className="font-semibold text-lg text-foreground mb-1">{graduate.name}</h3>
-                              </Link>
-                              <p className="text-sm text-muted-foreground mb-2">
-                                {graduate.degree} • {graduate.university}
-                              </p>
-                              <div className="flex flex-wrap gap-2 mb-3">
-                                {graduate.skills.map((skill) => (
-                                  <Badge key={skill} variant="secondary">
-                                    {skill}
-                                  </Badge>
-                                ))}
-                              </div>
-                              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <MapPin className="size-4" />
-                                  <span>{graduate.location}</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Briefcase className="size-4" />
-                                  <span>{graduate.experience} experience</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Clock className="size-4" />
-                                  <span>{graduate.availability} availability</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <TrendingUp className="size-4" />
-                                  <span>Graduated {graduate.graduationYear}</span>
-                                </div>
-                                {graduate.openToRelocation && (
-                                  <div className="flex items-center gap-2 text-muted-foreground">
-                                    <MapPin className="size-4" />
-                                    <span>Open to relocation</span>
-                                  </div>
-                                )}
-                                <div className="flex items-center gap-2 text-muted-foreground">
-                                  <Lightbulb className="size-4" />
-                                  <span>Interested in: {graduate.interests}</span>
-                                </div>
-                              </div>
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                              <span className="flex items-center gap-1">
+                                <MapPin className="size-3" />
+                                {graduate.location}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Clock className="size-3" />
+                                {graduate.availability}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Briefcase className="size-3" />
+                                {graduate.experience}
+                              </span>
                             </div>
                           </div>
-                          <div className="flex md:flex-col gap-2 shrink-0">
-                            {graduate.portfolioUrl && (
-                              <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
-                                <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
-                                  {graduate.portfolioLabel}
-                                  <ExternalLink className="size-4 ml-1" />
-                                </a>
-                              </Button>
-                            )}
-                            <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
+                          <div className="shrink-0">
+                            <Button variant="outline" size="sm" className="bg-transparent" asChild>
                               <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                                View Profile
+                                View
                               </Link>
                             </Button>
                           </div>
