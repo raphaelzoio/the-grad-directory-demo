@@ -7,12 +7,14 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { UKCityAutocomplete } from "@/components/uk-city-autocomplete"
 import { Briefcase, LogOut } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function PostJobPage() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
+  const [jobLocation, setJobLocation] = useState("")
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -98,7 +100,12 @@ export default function PostJobPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="location">Location *</Label>
-                    <Input id="location" placeholder="e.g. San Francisco, CA or Remote" className="w-full" />
+                    <UKCityAutocomplete
+                      id="location"
+                      value={jobLocation}
+                      onValueChange={setJobLocation}
+                      placeholder="Select location or Remote"
+                    />
                   </div>
                 </div>
 

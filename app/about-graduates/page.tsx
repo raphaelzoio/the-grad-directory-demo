@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, GraduationCap } from "lucide-react"
+import { ArrowRight, ArrowLeft, GraduationCap } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -18,13 +18,13 @@ export default function AboutGraduatesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-background border-b sticky top-0 z-50">
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-foreground">
-            <GraduationCap className="size-6" />
-            <span>The Grad Directory</span>
+          <Link href="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="size-4" />
+            Back to Home
           </Link>
         </div>
       </header>
@@ -35,10 +35,10 @@ export default function AboutGraduatesPage() {
           {/* Title Section */}
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-3xl font-bold text-foreground mb-4 text-balance">
-              About The Graduate Directory
+              About
             </h1>
             <p className="text-lg text-muted-foreground">
-              For students and graduates
+              For Oxbridge students and graduates
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export default function AboutGraduatesPage() {
                 processes on a deeper level.
               </p>
               <p className="text-foreground leading-relaxed mb-6">
-                If you are a student or a recent graduate with 0-5 years of industry experience, and have completed one
+                If you are a student or a recent graduate with 0-10 years of industry experience, and have completed one
                 or more degrees at Oxford or Cambridge, you are eligible to join the directory free of charge. Your
                 profile will become part of a searchable database where employers can view your academics, skills,
                 interests, industry experience and personal projects. It is advised to make your profile as detailed as
