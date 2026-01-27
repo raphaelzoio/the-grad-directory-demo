@@ -377,14 +377,15 @@ export default function DashboardPage() {
       const target = event.target as Node
 
       const refs = {
-        location: locationRef,
-        university: universityRef,
-        subject: subjectRef,
-        experience: experienceRef,
-        availability: availabilityRef,
-        sector: sectorRef,
-        degreeClass: degreeClassRef,
-      }
+  location: locationRef,
+  university: universityRef,
+  subject: subjectRef,
+  experience: experienceRef,
+  availability: availabilityRef,
+  sector: sectorRef,
+  degreeClass: degreeClassRef,
+  diversity: diversityRef,  // Add this line
+}
 
       if (openDropdown && refs[openDropdown as keyof typeof refs]) {
         const ref = refs[openDropdown as keyof typeof refs]
