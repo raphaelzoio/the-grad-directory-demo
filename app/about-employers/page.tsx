@@ -55,17 +55,17 @@ export default function AboutEmployersPage() {
                 We offer a simple charging structure. Employers can pay a one-off database search fee of £995 for a month of access if an SME or £1,995 if a large corporate. Alternatively, they can subscribe at £600 a month for a minimum of six months.
               </p>
             </div>
-            </Card>
+          </Card>
 
-            {/* CTA Button */}
-            <div className="mt-10 flex justify-center">
-              <Button size="lg" onClick={handleProceed} className="min-w-[250px]">
-                Log in
-                <ArrowRight className="size-5 ml-2" />
-              </Button>
-            </div>
+          {/* CTA Button */}
+          <div className="mt-10 flex justify-center">
+            <Button size="lg" onClick={handleProceed} className="min-w-[250px]">
+              Log in
+              <ArrowRight className="size-5 ml-2" />
+            </Button>
+          </div>
 
-            {/* Back Link */}
+          {/* Back Link */}
           <div className="text-center mt-8">
             <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
               ← Back to Home
