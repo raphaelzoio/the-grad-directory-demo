@@ -61,7 +61,7 @@ export default function HomePage() {
               >
                 <Link href="/about-employers">
                   <Building2 className="size-5 mr-2" />
-                  I'm an employer
+                  For employers
                 </Link>
               </Button>
             </div>
