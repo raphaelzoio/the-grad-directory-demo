@@ -37,7 +37,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl space-y-8">
+          <div className="max-w-4xl mx-auto space-y-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
               The UK's premier graduate talent database
             </h1>
