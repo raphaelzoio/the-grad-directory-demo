@@ -35,7 +35,7 @@ export default function AboutGraduatesPage() {
           {/* Title Section */}
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-3xl font-bold text-foreground mb-4 text-balance">
-              About The Graduate Directory
+              About
             </h1>
             <p className="text-lg text-muted-foreground">
               For students and graduates

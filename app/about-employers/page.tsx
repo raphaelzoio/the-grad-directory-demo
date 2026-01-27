@@ -32,7 +32,7 @@ export default function AboutEmployersPage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Title */}
           <div className="text-center space-y-2">
-            <h1 className="text-3xl md:text-3xl font-bold text-foreground">About The Graduate Directory</h1>
+            <h1 className="text-3xl md:text-3xl font-bold text-foreground">About</h1>
             <p className="text-lg text-muted-foreground">For employers</p>
           </div>
 
