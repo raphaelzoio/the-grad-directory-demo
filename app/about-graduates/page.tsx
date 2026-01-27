@@ -51,7 +51,7 @@ export default function AboutGraduatesPage() {
                 processes on a deeper level.
               </p>
               <p className="text-foreground leading-relaxed mb-6">
-                If you are a student or a recent graduate with 0-5 years of industry experience, and have completed one
+                If you are a student or a recent graduate with 0-10 years of industry experience, and have completed one
                 or more degrees at Oxford or Cambridge, you are eligible to join the directory free of charge. Your
                 profile will become part of a searchable database where employers can view your academics, skills,
                 interests, industry experience and personal projects. It is advised to make your profile as detailed as

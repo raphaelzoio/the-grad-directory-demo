@@ -38,10 +38,10 @@ export default function HomePage() {
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl space-y-8">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground text-balance leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
               The UK's premier graduate talent database
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground text-pretty max-w-2xl leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground text-pretty max-w-2xl leading-relaxed">
               The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
             </p>
 
