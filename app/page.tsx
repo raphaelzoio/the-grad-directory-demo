@@ -29,7 +29,7 @@ export default function HomePage() {
             <div className="size-10 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-6 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">The Graduate Directory</span>
+            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">TGD</span>
           </Link>
         </div>
       </header>
