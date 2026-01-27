@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, GraduationCap } from "lucide-react"
+import { ArrowRight, ArrowLeft, GraduationCap } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
