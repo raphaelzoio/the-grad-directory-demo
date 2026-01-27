@@ -27,6 +27,7 @@ import {
   ChevronDown,
   Award,
   ExternalLink,
+  ArrowUpDown,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
@@ -312,6 +313,85 @@ const mockCompanies = [
     description: "Pioneering AI-powered solutions for enterprises",
     openPositions: 18,
     benefits: ["Private Healthcare", "Pension Scheme", "Share Options", "Research Time"],
+  },
+]
+
+const mockJobs = [
+  {
+    id: 1,
+    title: "Graduate Software Engineer",
+    company: "TechCorp Solutions Ltd",
+    location: "London, UK",
+    description: "Join our engineering team to build scalable web applications using modern technologies.",
+    applications: 24,
+    postedDate: "3 days ago",
+    tags: ["JavaScript", "React", "Node.js"],
+  },
+  {
+    id: 2,
+    title: "Junior Data Analyst",
+    company: "DataDrive Analytics",
+    location: "Manchester, UK",
+    description: "Analyse large datasets and create insights to drive business decisions.",
+    applications: 18,
+    postedDate: "1 week ago",
+    tags: ["Python", "SQL", "Tableau"],
+  },
+  {
+    id: 3,
+    title: "Graduate Product Designer",
+    company: "DesignHub Studio",
+    location: "Bristol, UK",
+    description: "Design intuitive user experiences for our suite of digital products.",
+    applications: 12,
+    postedDate: "2 weeks ago",
+    tags: ["Figma", "UX Research", "Prototyping"],
+  },
+]
+
+const mockApplications = [
+  {
+    id: 1,
+    jobTitle: "Graduate Software Engineer",
+    company: "TechCorp Solutions Ltd",
+    location: "London, UK",
+    status: "Under Review",
+    appliedDate: "2 days ago",
+  },
+  {
+    id: 2,
+    jobTitle: "Junior Data Analyst",
+    company: "DataDrive Analytics",
+    location: "Manchester, UK",
+    status: "Accepted",
+    appliedDate: "1 week ago",
+  },
+  {
+    id: 3,
+    jobTitle: "Product Designer Intern",
+    company: "DesignHub Studio",
+    location: "Bristol, UK",
+    status: "Rejected",
+    appliedDate: "2 weeks ago",
+  },
+]
+
+const mockSavedJobs = [
+  {
+    id: 4,
+    title: "Machine Learning Engineer",
+    company: "AI Ventures Lab",
+    location: "London, UK",
+    description: "Build and deploy ML models for enterprise clients.",
+    tags: ["Python", "TensorFlow", "AWS"],
+  },
+  {
+    id: 5,
+    title: "Cloud Infrastructure Engineer",
+    company: "CloudScale UK Ltd",
+    location: "Edinburgh, UK",
+    description: "Design and maintain cloud infrastructure at scale.",
+    tags: ["AWS", "Kubernetes", "Terraform"],
   },
 ]
 
@@ -619,7 +699,7 @@ export default function DashboardPage() {
 
         {/* Search Active Graduates section above Your Job Postings */}
         {userType === "employer" && (
-          <section className="pt-6 pb-8 border-b border-border">
+          <section className="pt-6 pb-12 border-b border-border">
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">
                 {/* Header */}
@@ -983,75 +1063,87 @@ export default function DashboardPage() {
                     </button>
                   )}
                 </div>
-
-                {/* Results */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">42 active graduates found</p>
-                    <select className="h-9 px-3 rounded-full border border-input bg-background text-sm">
-                      <option>Most Recent</option>
-                      <option>Best Match</option>
-                      <option>Graduation Year</option>
-                    </select>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {mockGraduates.map((graduate) => (
-                      <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow">
-                        <div className="flex gap-4">
-                          <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
-                            {graduate.avatar}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
-                              <h3 className="font-semibold text-foreground">{graduate.name}</h3>
-                            </Link>
-                            <p className="text-sm text-muted-foreground mb-2">
-                              {graduate.degree} - {graduate.university}
-                            </p>
-                            <div className="flex flex-wrap gap-1.5 mb-3">
-                              {graduate.skills.slice(0, 3).map((skill) => (
-                                <Badge key={skill} variant="secondary" className="text-xs">
-                                  {skill}
-                                </Badge>
-                              ))}
-                              {graduate.skills.length > 3 && (
-                                <Badge variant="outline" className="text-xs">+{graduate.skills.length - 3}</Badge>
-                              )}
-                            </div>
-                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                              <span className="flex items-center gap-1">
-                                <MapPin className="size-3" />
-                                {graduate.location}
-                              </span>
-                              <span className="flex items-center gap-1">
-                                <Clock className="size-3" />
-                                {graduate.availability}
-                              </span>
-                              <span className="flex items-center gap-1">
-                                <Briefcase className="size-3" />
-                                {graduate.experience}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="shrink-0">
-                            <Button variant="outline" size="sm" className="bg-transparent" asChild>
-                              <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                                View
-                              </Link>
-                            </Button>
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
           </section>
         )}
 
-        {/* Prize Winners section between Search Active Graduates and Your Job Postings */}
+        {/* Results Section */}
+        {userType === "employer" && (
+          <section className="py-8 border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
+                {/* Results Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <p className="text-sm text-muted-foreground">42 active graduates found</p>
+                  <button className="h-9 px-4 rounded-full border border-input bg-background text-sm flex items-center gap-2 hover:bg-muted/50 transition-colors">
+                    <ArrowUpDown className="size-4" />
+                    <span>Most Recent</span>
+                  </button>
+                </div>
+
+                {/* Results Grid */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  {mockGraduates.map((graduate) => (
+                    <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow">
+                      <div className="flex gap-4">
+                        <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
+                          {graduate.avatar}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
+                            <h3 className="font-semibold text-foreground">{graduate.name}</h3>
+                          </Link>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {graduate.degree} - {graduate.university}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 mb-3">
+                            {graduate.skills.slice(0, 3).map((skill) => (
+                              <Badge key={skill} variant="secondary" className="text-xs">
+                                {skill}
+                              </Badge>
+                            ))}
+                            {graduate.skills.length > 3 && (
+                              <Badge variant="outline" className="text-xs">+{graduate.skills.length - 3}</Badge>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                            <span className="flex items-center gap-1">
+                              <MapPin className="size-3" />
+                              {graduate.location}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="size-3" />
+                              {graduate.availability}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Briefcase className="size-3" />
+                              {graduate.experience}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="shrink-0">
+                          <Button variant="outline" size="sm" className="bg-transparent" asChild>
+                            <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
+                              View
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* View All Button */}
+                <div className="flex justify-center pt-6">
+                  <Button asChild>
+                    <Link href="/search?role=employer">View All Graduates</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
         {userType === "employer" && (
           <section className="py-16 bg-gradient-to-b from-muted/30 to-background border-b border-border">
             <div className="container mx-auto px-4">
@@ -1086,25 +1178,8 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary">Data Analysis</Badge>
-                    <Badge variant="secondary">Research</Badge>
-                    <Badge variant="secondary">Python</Badge>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4" />
-                      <span>London, UK</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4" />
-                      <span>Immediate availability</span>
-                    </div>
-                  </div>
-
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                  <Button size="sm" asChild>
+                    <Link href="/dashboard/graduates/1" onClick={scrollToTop}>
                       View Profile
                     </Link>
                   </Button>
@@ -1114,12 +1189,12 @@ export default function DashboardPage() {
                 <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      JH
+                      AJ
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">James Harrison</h3>
+                      <h3 className="font-semibold text-lg text-foreground">Aisha Johnson</h3>
                       <p className="text-sm text-muted-foreground">Computer Science, MEng (1st)</p>
-                      <p className="text-sm text-muted-foreground">University of Oxford</p>
+                      <p className="text-sm text-muted-foreground">Imperial College London</p>
                     </div>
                   </div>
 
@@ -1127,31 +1202,14 @@ export default function DashboardPage() {
                     <div className="flex items-start gap-2">
                       <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
-                        <p className="text-sm font-semibold text-foreground">ACM Student Research Award</p>
-                        <p className="text-xs text-muted-foreground">Outstanding final year project in AI/ML</p>
+                        <p className="text-sm font-semibold text-foreground">Google Scholar Award</p>
+                        <p className="text-xs text-muted-foreground">Excellence in AI and Machine Learning</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary">Machine Learning</Badge>
-                    <Badge variant="secondary">TensorFlow</Badge>
-                    <Badge variant="secondary">Python</Badge>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4" />
-                      <span>Cambridge, UK</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4" />
-                      <span>Available in 2 weeks</span>
-                    </div>
-                  </div>
-
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                  <Button size="sm" asChild>
+                    <Link href="/dashboard/graduates/2" onClick={scrollToTop}>
                       View Profile
                     </Link>
                   </Button>
@@ -1161,58 +1219,11 @@ export default function DashboardPage() {
                 <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      SP
+                      RC
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Sophie Patel</h3>
-                      <p className="text-sm text-muted-foreground">Engineering, BEng (1st)</p>
-                      <p className="text-sm text-muted-foreground">University of Cambridge</p>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
-                    <div className="flex items-start gap-2">
-                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">IET Innovation Award</p>
-                        <p className="text-xs text-muted-foreground">Best sustainable engineering project</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary">Sustainable Tech</Badge>
-                    <Badge variant="secondary">IoT</Badge>
-                    <Badge variant="secondary">C++</Badge>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4" />
-                      <span>Manchester, UK</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4" />
-                      <span>Immediate availability</span>
-                    </div>
-                  </div>
-
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
-                      View Profile
-                    </Link>
-                  </Button>
-                </Card>
-
-                {/* Prize Winner 4 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      OA
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Oliver Anderson</h3>
-                      <p className="text-sm text-muted-foreground">Mathematics, MMath (1st)</p>
+                      <h3 className="font-semibold text-lg text-foreground">Rohan Chaudhury</h3>
+                      <p className="text-sm text-muted-foreground">Physics, BA (1st)</p>
                       <p className="text-sm text-muted-foreground">University of Oxford</p>
                     </div>
                   </div>
@@ -1221,125 +1232,14 @@ export default function DashboardPage() {
                     <div className="flex items-start gap-2">
                       <Award className="size-4 text-primary mt-0.5 shrink-0" />
                       <div>
-                        <p className="text-sm font-semibold text-foreground">Smith Mathematics Prize</p>
-                        <p className="text-xs text-muted-foreground">Outstanding achievement in pure mathematics</p>
+                        <p className="text-sm font-semibold text-foreground">Hertz Fellowship Award</p>
+                        <p className="text-xs text-muted-foreground">Exceptional STEM talent and innovation</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary">Quantitative Analysis</Badge>
-                    <Badge variant="secondary">R</Badge>
-                    <Badge variant="secondary">Statistics</Badge>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4" />
-                      <span>London, UK</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4" />
-                      <span>Available in 1 month</span>
-                    </div>
-                  </div>
-
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
-                      View Profile
-                    </Link>
-                  </Button>
-                </Card>
-
-                {/* Prize Winner 5 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      LP
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Lily Park</h3>
-                      <p className="text-sm text-muted-foreground">Physics, MASt (1st)</p>
-                      <p className="text-sm text-muted-foreground">University of Cambridge</p>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
-                    <div className="flex items-start gap-2">
-                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">Ogden Trust Science Prize</p>
-                        <p className="text-xs text-muted-foreground">Excellence in experimental physics research</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary">Data Science</Badge>
-                    <Badge variant="secondary">MATLAB</Badge>
-                    <Badge variant="secondary">Python</Badge>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4" />
-                      <span>Edinburgh, UK</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4" />
-                      <span>Immediate availability</span>
-                    </div>
-                  </div>
-
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
-                      View Profile
-                    </Link>
-                  </Button>
-                </Card>
-
-                {/* Prize Winner 6 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      TM
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Thomas Mitchell</h3>
-                      <p className="text-sm text-muted-foreground">Law, BA (1st)</p>
-                      <p className="text-sm text-muted-foreground">University of Oxford</p>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
-                    <div className="flex items-start gap-2">
-                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">Lincoln's Inn Prize</p>
-                        <p className="text-xs text-muted-foreground">Top performance in contract law</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="secondary">Legal Research</Badge>
-                    <Badge variant="secondary">Contract Law</Badge>
-                    <Badge variant="secondary">Analysis</Badge>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-4" />
-                      <span>Bristol, UK</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-4" />
-                      <span>Available in 2 weeks</span>
-                    </div>
-                  </div>
-
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    <Link href={`/dashboard/graduates/1`} onClick={scrollToTop}>
+                  <Button size="sm" asChild>
+                    <Link href="/dashboard/graduates/3" onClick={scrollToTop}>
                       View Profile
                     </Link>
                   </Button>
@@ -1349,347 +1249,33 @@ export default function DashboardPage() {
           </section>
         )}
 
-        {/* Your Job Postings section below Prize Winners */}
+        {/* Your Job Postings section */}
         {userType === "employer" && (
-          <section className="py-12">
+          <section className="py-16 border-b border-border">
             <div className="container mx-auto px-4">
-              <div className="max-w-7xl mx-auto">
-                {/* Filter Header with Search */}
-                <Card className="p-4 mb-6">
-                  <h2 className="text-2xl font-serif font-semibold text-foreground mb-4">Search Active Graduates</h2>
-                  
-                  {/* Search Bar */}
-                  <div className="relative mb-4">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
-                    <input
-                      type="text"
-                      placeholder="Search by keywords, skills, interests..."
-                      value={searchKeywords}
-                      onChange={(e) => setSearchKeywords(e.target.value)}
-                      className="w-full h-12 pl-11 pr-4 rounded-md border border-input bg-background text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    />
-                  </div>
-
-                  {/* Compact Filter Dropdowns */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-                    <div className="relative" ref={locationRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "location" ? null : "location")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedLocations.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedLocations.length === 0 ? "Location" : `${selectedLocations.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "location" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[200px]"
-                        >
-                          {[
-                            "London",
-                            "Manchester",
-                            "Birmingham",
-                            "Edinburgh",
-                            "Cambridge",
-                            "Oxford",
-                            "Bristol",
-                            "Leeds",
-                            "Remote",
-                          ].map((location) => (
-                            <label
-                              key={location}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedLocations.includes(location)}
-                                onChange={() => toggleSelection(location, selectedLocations, setSelectedLocations)}
-                              />
-                              <span className="text-sm">{location}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative" ref={universityRef}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setOpenDropdown(openDropdown === "university" ? null : "university")
-                        }}
-                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                      >
-                        <span className={selectedUniversities.length === 0 ? "text-muted-foreground" : "text-foreground"}>
-                          {selectedUniversities.length === 0 ? "University" : `${selectedUniversities.length} selected`}
-                        </span>
-                        <ChevronDown className="size-4 text-muted-foreground" />
-                      </button>
-                      {openDropdown === "university" && (
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[250px]"
-                        >
-                          {[
-                            "University of Oxford",
-                            "University of Cambridge",
-                            "Imperial College London",
-                            "University College London",
-                            "London School of Economics",
-                            "University of Edinburgh",
-                            "King's College London",
-                            "University of Manchester",
-                            "University of Bristol",
-                            "University of Warwick",
-                          ].map((uni) => (
-                            <label
-                              key={uni}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                className="size-4"
-                                checked={selectedUniversities.includes(uni)}
-                                onChange={() => toggleSelection(uni, selectedUniversities, setSelectedUniversities)}
-                              />
-                              <span className="text-sm">{uni}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </Card>
-
-                <div className="flex justify-end mb-4">
-                  <Button asChild>
-                    <Link href="/post-job" onClick={scrollToTop}>
-                      Post New Job
-                    </Link>
-                  </Button>
+              <div className="mb-8 flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-semibold text-foreground mb-2">Your Job Postings</h2>
+                  <p className="text-sm text-muted-foreground">Manage and track your active job postings</p>
                 </div>
-
-                <Card className="overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead className="bg-muted/50">
-                      <tr>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Job Title</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Location</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Type</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Salary</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Applicants</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Status</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Posted</th>
-                        <th className="text-left py-4 px-6 text-sm font-semibold text-foreground">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {employerJobs.map((job) => (
-                        <tr key={job.id} className="hover:bg-muted/30 transition-colors">
-                          <td className="py-4 px-6">
-                            <div className="font-medium text-foreground">{job.title}</div>
-                          </td>
-                          <td className="py-4 px-6">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <MapPin className="size-4" />
-                              {job.location}
-                            </div>
-                          </td>
-                          <td className="py-4 px-6">
-                            <Badge variant="secondary">{job.type}</Badge>
-                          </td>
-                          <td className="py-4 px-6">
-                            <span className="text-sm text-foreground">{job.salary}</span>
-                          </td>
-                          <td className="py-4 px-6">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium text-foreground">{job.applicants}</span>
-                              <span className="text-xs text-muted-foreground">candidates</span>
-                            </div>
-                          </td>
-                          <td className="py-4 px-6">
-                            <Badge variant={job.status === "Active" ? "default" : "secondary"}>{job.status}</Badge>
-                          </td>
-                          <td className="py-4 px-6">
-                            <span className="text-sm text-muted-foreground">
-                              {new Date(job.postedDate).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </span>
-                          </td>
-                          <td className="py-4 px-6">
-                            <div className="flex items-center gap-2">
-                              <Button variant="ghost" size="sm" asChild>
-                                <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                                  <Eye className="size-4" />
-                                </Link>
-                              </Button>
-                              <Button variant="ghost" size="sm" disabled>
-                                <Edit className="size-4" />
-                              </Button>
-                              <Button variant="ghost" size="sm" disabled>
-                                <Trash2 className="size-4" />
-                              </Button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Card>
-            </div>
-          </section>
-        )}
-
-        {userType === "graduate" && (
-          <section className="py-12 border-b border-border">
-            <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-foreground">Featured Jobs</h2>
-                <Button variant="outline" size="sm">
-                  View All
+                <Button asChild>
+                  <Link href="/post-job" onClick={scrollToTop}>
+                    Post New Job
+                  </Link>
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                {/* Start Date Filter */}
-                <div className="relative" ref={jobStartDateRef}>
-                  <button
-                    type="button"
-                    onClick={() => setJobStartDateOpen(!jobStartDateOpen)}
-                    className="w-full flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
-                  >
-                    <span className="truncate">
-                      {selectedJobStartDates.length === 0
-                        ? "Start Date"
-                        : selectedJobStartDates.length === 1
-                          ? selectedJobStartDates[0]
-                          : `${selectedJobStartDates.length} selected`}
-                    </span>
-                    <ChevronDown className="size-4 opacity-50" />
-                  </button>
-                  {jobStartDateOpen && (
-                    <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-background shadow-lg">
-                      <div className="p-2 space-y-1">
-                        {jobStartDateOptions.map((option) => (
-                          <label
-                            key={option}
-                            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedJobStartDates.includes(option)}
-                              onChange={() => toggleJobStartDate(option)}
-                              className="rounded border-input"
-                            />
-                            <span className="text-sm">{option}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Sector Filter */}
-                <div className="relative" ref={jobSectorRef}>
-                  <button
-                    type="button"
-                    onClick={() => setJobSectorOpen(!jobSectorOpen)}
-                    className="w-full flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
-                  >
-                    <span className="truncate">
-                      {selectedJobSectors.length === 0
-                        ? "Sector"
-                        : selectedJobSectors.length === 1
-                          ? selectedJobSectors[0]
-                          : `${selectedJobSectors.length} selected`}
-                    </span>
-                    <ChevronDown className="size-4 opacity-50" />
-                  </button>
-                  {jobSectorOpen && (
-                    <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-background shadow-lg">
-                      <div className="p-2 space-y-1">
-                        {jobSectorOptions.map((option) => (
-                          <label
-                            key={option}
-                            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedJobSectors.includes(option)}
-                              onChange={() => toggleJobSector(option)}
-                              className="rounded border-input"
-                            />
-                            <span className="text-sm">{option}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Business Size Filter */}
-                <div className="relative" ref={jobBusinessSizeRef}>
-                  <button
-                    type="button"
-                    onClick={() => setJobBusinessSizeOpen(!jobBusinessSizeOpen)}
-                    className="w-full flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
-                  >
-                    <span className="truncate">
-                      {selectedJobBusinessSizes.length === 0
-                        ? "Business Size"
-                        : selectedJobBusinessSizes.length === 1
-                          ? selectedJobBusinessSizes[0]
-                          : `${selectedJobBusinessSizes.length} selected`}
-                    </span>
-                    <ChevronDown className="size-4 opacity-50" />
-                  </button>
-                  {jobBusinessSizeOpen && (
-                    <div className="absolute z-50 mt-1 w-full rounded-md border border-input bg-background shadow-lg">
-                      <div className="p-2 space-y-1">
-                        {jobBusinessSizeOptions.map((option) => (
-                          <label
-                            key={option}
-                            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedJobBusinessSizes.includes(option)}
-                              onChange={() => toggleJobBusinessSize(option)}
-                              className="rounded border-input"
-                            />
-                            <span className="text-sm">{option}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {featuredJobs.map((job) => (
-                  <Link key={job.id} href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                    <Card className="p-6 h-full hover:shadow-lg transition-shadow cursor-pointer">
-                      <div className="flex flex-col gap-4">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-foreground mb-1 text-balance">{job.title}</h3>
-                            <p className="text-sm text-muted-foreground">{job.company}</p>
-                          </div>
-                          {job.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
+              <div className="space-y-4">
+                {mockJobs.map((job) => (
+                  <Card key={job.id} className="p-6 hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-lg font-semibold text-foreground">{job.title}</h3>
+                          <Badge>{job.applications} applications</Badge>
                         </div>
-
+                        <p className="text-sm text-muted-foreground mb-3">{job.company} • {job.location}</p>
+                        <p className="text-sm text-foreground mb-3">{job.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {job.tags.map((tag) => (
                             <Badge key={tag} variant="secondary">
@@ -1697,153 +1283,15 @@ export default function DashboardPage() {
                             </Badge>
                           ))}
                         </div>
-
-                        <div className="space-y-2 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="size-4" />
-                            <span>{job.location}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Briefcase className="size-4" />
-                            <span>{job.type}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="size-4" />
-                            <span>Posted {job.postedDays} days ago</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="size-4" />
-                            <span>Starts: {job.startDate}</span>
-                          </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-border">
-                          <p className="font-semibold text-foreground">{job.salary}</p>
-                        </div>
                       </div>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Categories */}
-        {userType === "graduate" && (
-          <section className="py-12 border-b border-border">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-semibold text-foreground mb-6">Browse by Category</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {categories.map((category) => {
-                  const Icon = category.icon
-                  return (
-                    <Card key={category.name} className="p-6 hover:shadow-md transition-shadow cursor-pointer">
-                      <div className="flex flex-col items-center text-center gap-3">
-                        <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Icon className="size-6 text-primary" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-foreground">{category.name}</h3>
-                          <p className="text-sm text-muted-foreground">{category.count} jobs</p>
-                        </div>
-                      </div>
-                    </Card>
-                  )
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Companies Section */}
-        {userType === "graduate" && (
-          <section className="py-12">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-semibold text-foreground mb-6">Explore Top Companies</h2>
-
-              <div className="space-y-4 mb-6">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-input rounded-md">
-                    <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
-                      <option>All Industries</option>
-                      <option>Technology</option>
-                      <option>Finance</option>
-                      <option>Healthcare</option>
-                      <option>Education</option>
-                    </select>
-                  </div>
-
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-input rounded-md">
-                    <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
-                      <option>All Sizes</option>
-                      <option>Startup (1-50)</option>
-                      <option>SME (51-250)</option>
-                      <option>Mid-size (251-1000)</option>
-                      <option>Large (1000+)</option>
-                      <option>Enterprise (10,000+)</option>
-                    </select>
-                  </div>
-
-                  <div className="flex-1 flex items-center gap-2 px-4 py-3 bg-card border border-input rounded-md">
-                    <MapPin className="size-5 text-muted-foreground" />
-                    <select className="flex-1 bg-transparent border-none outline-none text-sm text-foreground">
-                      <option>All Locations</option>
-                      <option>London, UK</option>
-                      <option>Manchester, UK</option>
-                      <option>Edinburgh, UK</option>
-                      <option>Cambridge, UK</option>
-                      <option>Bristol, UK</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {mockCompanies.map((company) => (
-                  <Card key={company.id} className="p-6 hover:shadow-lg transition-shadow">
-                    <div className="space-y-4">
-                      <div className="flex items-start gap-4">
-                        <div className="size-16 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shrink-0">
-                          {company.logo}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-lg text-foreground mb-1 text-balance">{company.name}</h3>
-                          <p className="text-sm text-muted-foreground">{company.industry}</p>
-                        </div>
-                      </div>
-
-                      <p className="text-sm text-muted-foreground line-clamp-2">{company.description}</p>
-
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <MapPin className="size-4 shrink-0" />
-                          <span>{company.location}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Building2 className="size-4 shrink-0" />
-                          <span>{company.size}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Briefcase className="size-4 shrink-0" />
-                          <span className="font-medium text-foreground">{company.openPositions} open positions</span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {company.benefits.slice(0, 3).map((benefit) => (
-                          <Badge key={benefit} variant="secondary" className="text-xs">
-                            {benefit}
-                          </Badge>
-                        ))}
-                      </div>
-
-                      <div className="flex gap-2 pt-2">
-                        <Button variant="default" size="sm" className="flex-1" disabled>
-                          View Jobs
-                        </Button>
-                        <Button variant="outline" size="sm" className="flex-1 bg-transparent" disabled>
-                          Follow
+                      <div className="text-right shrink-0">
+                        <p className="text-sm font-medium text-foreground mb-2">
+                          Posted {job.postedDate}
+                        </p>
+                        <Button size="sm" variant="outline" asChild>
+                          <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
+                            View Details
+                          </Link>
                         </Button>
                       </div>
                     </div>
@@ -1854,111 +1302,103 @@ export default function DashboardPage() {
           </section>
         )}
 
-        {/* CTA Section */}
-        {userType === "employer" && (
-          <section className="py-16 bg-muted/30">
+        {/* Graduate Profile section */}
+        {userType === "graduate" && (
+          <section className="py-16 border-b border-border">
             <div className="container mx-auto px-4">
-              <Card className="p-6 md:p-8 bg-muted text-foreground text-center">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-balance">Get started</h2>
-                <p className="text-lg mb-6 text-muted-foreground text-pretty max-w-2xl mx-auto">
-                  Post your job opening and reach thousands of highly skilled candidates
-                </p>
-                <Button size="lg" variant="secondary" asChild>
-                  <Link href="/post-job" onClick={scrollToTop}>
-                    Post a job
-                  </Link>
-                </Button>
-              </Card>
+              <h2 className="text-2xl font-semibold text-foreground mb-8">Your Profile</h2>
+              <Button asChild>
+                <Link href="/profile/edit" onClick={scrollToTop}>
+                  Edit Profile
+                </Link>
+              </Button>
             </div>
           </section>
         )}
-      </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-12 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-semibold text-foreground mb-4">For Job Seekers</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Browse Jobs
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Companies
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Career Advice
-                  </Link>
-                </li>
-              </ul>
+        {/* Job Applications section for graduates */}
+        {userType === "graduate" && (
+          <section className="py-16 border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold text-foreground mb-2">Your Applications</h2>
+                <p className="text-sm text-muted-foreground">Track your job applications and their status</p>
+              </div>
+
+              <div className="space-y-4">
+                {mockApplications.map((application) => (
+                  <Card key={application.id} className="p-6 hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-foreground mb-1">
+                          {application.jobTitle}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {application.company} • {application.location}
+                        </p>
+                        <Badge
+                          className={
+                            application.status === "Accepted"
+                              ? "bg-green-100 text-green-800"
+                              : application.status === "Under Review"
+                                ? "bg-blue-100 text-blue-800"
+                                : application.status === "Rejected"
+                                  ? "bg-red-100 text-red-800"
+                                  : "bg-gray-100 text-gray-800"
+                          }
+                        >
+                          {application.status}
+                        </Badge>
+                      </div>
+                      <div className="text-right text-sm text-muted-foreground shrink-0">
+                        Applied {application.appliedDate}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-foreground mb-4">For Employers</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Post a Job
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Resources
-                  </Link>
-                </li>
-              </ul>
+          </section>
+        )}
+
+        {/* Saved Jobs for Graduates */}
+        {userType === "graduate" && (
+          <section className="py-16">
+            <div className="container mx-auto px-4">
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold text-foreground mb-2">Saved Jobs</h2>
+                <p className="text-sm text-muted-foreground">Jobs you've bookmarked for later</p>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {mockSavedJobs.map((job) => (
+                  <Card key={job.id} className="p-5 hover:shadow-md transition-shadow">
+                    <div className="mb-3">
+                      <h3 className="text-base font-semibold text-foreground mb-1">{job.title}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {job.company} • {job.location}
+                      </p>
+                    </div>
+                    <p className="text-sm text-foreground mb-3">{job.description}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {job.tags.slice(0, 2).map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <Button size="sm" asChild>
+                      <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
+                        Apply Now
+                      </Link>
+                    </Button>
+                  </Card>
+                ))}
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-foreground mb-4">Company</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Blog
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-foreground mb-4">Legal</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-foreground transition-colors">
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 JobBoard. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
-}
+          </section>
+        )}
+      </div>
+    )
+  }
+)
