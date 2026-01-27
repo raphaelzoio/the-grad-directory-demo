@@ -721,7 +721,7 @@ export default function DashboardPage() {
                     />
                     <Button 
                       size="sm" 
-                      className="absolute right-2 top-1/2 -translate-y-1/2"
+                      className="absolute right-3 top-1/2 -translate-y-1/2"
                       onClick={() => {
                         // Demo: simulate autofilling filters
                         setSelectedLocations(["London"])
