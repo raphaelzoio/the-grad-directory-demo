@@ -38,7 +38,7 @@ export default function AboutGraduatesPage() {
               About
             </h1>
             <p className="text-lg text-muted-foreground">
-              For students and graduates
+              For Oxbridge students and graduates
             </p>
           </div>
 

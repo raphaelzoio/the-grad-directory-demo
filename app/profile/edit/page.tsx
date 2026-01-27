@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
+import { UKCityAutocomplete } from "@/components/uk-city-autocomplete"
 import { User, GraduationCap, Briefcase, Globe, Github, Linkedin, X, Plus, Save, ArrowLeft, Trash2 } from "lucide-react"
 import Link from "next/link"
 
@@ -24,6 +25,7 @@ type Education = {
 export default function EditProfilePage() {
   const router = useRouter()
   const [userType, setUserType] = useState<string | null>(null)
+  const [location, setLocation] = useState("london")
   const [skills, setSkills] = useState([
     "React",
     "TypeScript",
@@ -150,7 +152,12 @@ export default function EditProfilePage() {
               </div>
               <div className="space-y-2 md:col-span-2">
                 <Label htmlFor="location">Location</Label>
-                <Input id="location" defaultValue="San Francisco, CA" />
+                <UKCityAutocomplete
+                  id="location"
+                  value={location}
+                  onValueChange={setLocation}
+                  placeholder="Select your location"
+                />
               </div>
             </div>
           </Card>
