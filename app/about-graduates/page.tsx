@@ -18,13 +18,13 @@ export default function AboutGraduatesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-background border-b sticky top-0 z-50">
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold text-foreground">
-            <GraduationCap className="size-6" />
-            <span>The Grad Directory</span>
+          <Link href="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="size-4" />
+            Back to Home
           </Link>
         </div>
       </header>
