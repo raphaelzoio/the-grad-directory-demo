@@ -1,10 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Belleza } from "next/font/google"
+import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const belleza = Belleza({ subsets: ["latin"], weight: "400", variable: "--font-belleza" })
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" })
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: "Directory - Find Your Dream Job",
@@ -37,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${belleza.variable} font-sans antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
