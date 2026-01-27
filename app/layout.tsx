@@ -1,10 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Mate, Inter } from "next/font/google"
+import { Merriweather, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const mate = Mate({ subsets: ["latin"], weight: "400", variable: "--font-serif" })
+const merriweather = Merriweather({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-serif" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${mate.variable} ${inter.variable} font-sans antialiased`}>
+      <body className={`${merriweather.variable} ${inter.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
