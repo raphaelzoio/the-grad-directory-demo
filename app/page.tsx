@@ -82,7 +82,7 @@ export default function HomePage() {
           alt="Trusted partner logos including Latham & Watkins, Advent, Farient Advisors, BCG, Beazley, Capgemini, FGS Global, and Panmure Liberum"
           width={1000}
           height={600}
-          className="max-w-4xl w-full h-auto ml-8"
+          className="max-w-4xl w-full h-auto ml-10"
         />
       </div>
     </div>
