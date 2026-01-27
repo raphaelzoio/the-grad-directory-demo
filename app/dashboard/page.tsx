@@ -796,7 +796,7 @@ export default function DashboardPage() {
         onClick={(e) => e.stopPropagation()}
         className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
       >
-        {["All", "0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"].map((exp) => (
+        {["Select all", "0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"].map((exp) => (
           <label
             key={exp}
             className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
