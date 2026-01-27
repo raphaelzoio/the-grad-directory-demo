@@ -50,7 +50,7 @@ export default function HomePage() {
               <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
                 <Link href="/about-graduates">
                   <Briefcase className="size-5 mr-2" />
-                  I'm a graduate
+                  For students and graduates
                 </Link>
               </Button>
               <Button
