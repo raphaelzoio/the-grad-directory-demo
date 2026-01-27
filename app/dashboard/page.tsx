@@ -1302,20 +1302,6 @@ export default function DashboardPage() {
           </section>
         )}
 
-        {/* Graduate Profile section */}
-        {userType === "graduate" && (
-          <section className="py-16 border-b border-border">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-semibold text-foreground mb-8">Your Profile</h2>
-              <Button asChild>
-                <Link href="/profile/edit" onClick={scrollToTop}>
-                  Edit Profile
-                </Link>
-              </Button>
-            </div>
-          </section>
-        )}
-
         {/* Job Applications section for graduates */}
         {userType === "graduate" && (
           <section className="py-16 border-b border-border">
@@ -1401,4 +1387,3 @@ export default function DashboardPage() {
       </div>
     )
   }
-}
