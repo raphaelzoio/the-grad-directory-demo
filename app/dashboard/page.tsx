@@ -775,45 +775,53 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Years of experience</label>
-                      <div className="relative" ref={experienceRef}>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setOpenDropdown(openDropdown === "experience" ? null : "experience")
-                          }}
-                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                        >
-                          <span
-                            className={selectedExperience.length === 0 ? "text-muted-foreground" : "text-foreground"}
-                          >
-                            {getDisplayText(selectedExperience, "Select experience")}
-                          </span>
-                          <ChevronDown className="size-4 text-muted-foreground" />
-                        </button>
-                        {openDropdown === "experience" && (
-                          <div
-                            onClick={(e) => e.stopPropagation()}
-                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
-                          >
-                            {["0-1 years", "1-2 years", "2-3 years", "3-4 years", "4-5 years"].map((exp) => (
-                              <label
-                                key={exp}
-                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  className="size-4"
-                                  checked={selectedExperience.includes(exp)}
-                                  onChange={() => toggleSelection(exp, selectedExperience, setSelectedExperience)}
-                                />
-                                <span className="text-sm">{exp}</span>
-                              </label>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
+  <label className="text-sm font-medium text-foreground">Years of experience</label>
+  <div className="relative" ref={experienceRef}>
+    <button
+      onClick={(e) => {
+        e.stopPropagation()
+        setOpenDropdown(openDropdown === "experience" ? null : "experience")
+      }}
+      className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+    >
+      <span
+        className={selectedExperience.length === 0 ? "text-muted-foreground" : "text-foreground"}
+      >
+        {getDisplayText(selectedExperience, "Select experience")}
+      </span>
+      <ChevronDown className="size-4 text-muted-foreground" />
+    </button>
+    {openDropdown === "experience" && (
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+      >
+        {["All", "0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"].map((exp) => (
+          <label
+            key={exp}
+            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              className="size-4"
+              checked={exp === "All" ? selectedExperience.includes("All") : selectedExperience.includes(exp)}
+              onChange={() => {
+                if (exp === "All") {
+                  toggleSelection("All", selectedExperience, setSelectedExperience)
+                } else {
+                  // Remove "All" if selecting specific options
+                  const newSelection = selectedExperience.filter(item => item !== "All")
+                  toggleSelection(exp, newSelection, setSelectedExperience)
+                }
+              }}
+            />
+            <span className="text-sm">{exp}</span>
+          </label>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
 
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">Availability</label>
