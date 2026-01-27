@@ -69,20 +69,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Partnership Logos */}
+{/* Partnership Logos */}
 <section className="py-16 border-t border-border bg-card">
   <div className="container mx-auto px-4">
     <div className="max-w-6xl mx-auto">
       <p className="text-sm font-medium text-muted-foreground mb-12 uppercase tracking-wider text-center">
         Trusted by Leading Organisations
       </p>
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center">
         <Image
           src="/images/logo-20collage.png"
           alt="Trusted partner logos including Latham & Watkins, Advent, Farient Advisors, BCG, Beazley, Capgemini, FGS Global, and Panmure Liberum"
           width={1000}
           height={600}
-          className="max-w-4xl w-full h-auto ml-10"
+          className="max-w-4xl w-full h-auto"
         />
       </div>
     </div>
