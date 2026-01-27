@@ -370,6 +370,7 @@ export default function DashboardPage() {
   const jobStartDateRef = useRef<HTMLDivElement>(null)
   const jobSectorRef = useRef<HTMLDivElement>(null)
   const jobBusinessSizeRef = useRef<HTMLDivElement>(null)
+  const diversityRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -958,48 +959,47 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Diversity</label>
-                      <div className="relative" ref={sectorRef}>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setOpenDropdown(openDropdown === "diversity" ? null : "diversity")
-                          }}
-                          className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
-                        >
-                          <span
-                            className={selectedDiversity.length === 0 ? "text-muted-foreground" : "text-foreground"}
-                          >
-                            {getDisplayText(selectedDiversity, "Select diversity")}
-                          </span>
-                          <ChevronDown className="size-4 text-muted-foreground" />
-                        </button>
-                        {openDropdown === "diversity" && (
-                          <div
-                            onClick={(e) => e.stopPropagation()}
-                            className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
-                          >
-                            {["Ethnically diverse", "Neurodiverse"].map((diversity) => (
-                              <label
-                                key={diversity}
-                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                              >
-                                <input
-                                  type="checkbox"
-                                  className="size-4"
-                                  checked={selectedDiversity.includes(diversity)}
-                                  onChange={() =>
-                                    toggleSelection(diversity, selectedDiversity, setSelectedDiversity)
-                                  }
-                                />
-                                <span className="text-sm">{diversity}</span>
-                              </label>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+  <label className="text-sm font-medium text-foreground">Diversity</label>
+  <div className="relative" ref={diversityRef}>  {/* Changed from sectorRef */}
+    <button
+      onClick={(e) => {
+        e.stopPropagation()
+        setOpenDropdown(openDropdown === "diversity" ? null : "diversity")
+      }}
+      className="w-full h-10 px-4 rounded-md border border-input bg-background text-sm flex items-center justify-between hover:bg-muted/50 transition-colors"
+    >
+      <span
+        className={selectedDiversity.length === 0 ? "text-muted-foreground" : "text-foreground"}
+      >
+        {getDisplayText(selectedDiversity, "Select diversity")}
+      </span>
+      <ChevronDown className="size-4 text-muted-foreground" />
+    </button>
+    {openDropdown === "diversity" && (
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto"
+      >
+        {["Ethnically diverse", "Neurodiverse"].map((diversity) => (
+          <label
+            key={diversity}
+            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              className="size-4"
+              checked={selectedDiversity.includes(diversity)}
+              onChange={() =>
+                toggleSelection(diversity, selectedDiversity, setSelectedDiversity)
+              }
+            />
+            <span className="text-sm">{diversity}</span>
+          </label>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
 
                   <div className="flex flex-wrap gap-2 mt-6">
                     <div className="flex items-center gap-1 text-sm text-muted-foreground">
