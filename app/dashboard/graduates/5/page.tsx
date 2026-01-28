@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { BookmarkButton } from "@/components/bookmark-button"
 import {
   MapPin,
   Mail,
@@ -11,7 +12,6 @@ import {
   Award,
   Download,
   MessageSquare,
-  Star,
   Linkedin,
   Globe,
   Palette,
@@ -178,9 +178,7 @@ export default function JessicaMartinezProfile() {
                     <MessageSquare className="size-4 mr-2" />
                     Contact
                   </Button>
-                  <Button size="sm" variant="outline" disabled>
-                    <Star className="size-4" />
-                  </Button>
+                  <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
                 </div>
                 <Button variant="outline" className="w-full bg-transparent" disabled>
                   <Download className="size-4 mr-2" />

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { UKCityAutocomplete } from "@/components/uk-city-autocomplete"
-import { Briefcase, LogOut } from "lucide-react"
+import { Navbar } from "@/components/navbar"
 import { useEffect, useState } from "react"
 
 export default function PostJobPage() {
@@ -29,13 +29,6 @@ export default function PostJobPage() {
     }
   }, [router])
 
-  const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.removeItem("userType")
-    }
-    router.push("/")
-  }
-
   if (!userType) {
     return null
   }
@@ -43,25 +36,7 @@ export default function PostJobPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-              <Briefcase className="size-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/dashboard">Cancel</Link>
-            </Button>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="size-4 mr-2" />
-              Logout
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navbar userType="employer" currentPage="your-jobs" />
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">

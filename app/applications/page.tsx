@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,8 +12,6 @@ import {
   DollarSign,
   Clock,
   Building2,
-  LogOut,
-  User,
   Search,
   Calendar,
   Filter,
@@ -22,6 +19,7 @@ import {
   XCircle,
   AlertCircle,
 } from "lucide-react"
+import { Navbar } from "@/components/navbar"
 
 const mockApplications = [
   {
@@ -106,12 +104,12 @@ const mockApplications = [
 
 export default function ApplicationsPage() {
   const router = useRouter()
-  const [userType, setUserType] = useState<string | null>(null)
+  const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
 
   useEffect(() => {
-    const type = sessionStorage.getItem("userType")
+    const type = sessionStorage.getItem("userType") as "employer" | "graduate" | null
     if (!type) {
       router.push("/")
     } else if (type !== "graduate") {
@@ -120,15 +118,6 @@ export default function ApplicationsPage() {
       setUserType(type)
     }
   }, [router])
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("userType")
-    router.push("/")
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
 
   const filteredApplications = mockApplications.filter((app) => {
     const matchesSearch =
@@ -161,57 +150,7 @@ export default function ApplicationsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-            <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-              <Briefcase className="size-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link
-              href="/dashboard"
-              className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-              onClick={scrollToTop}
-            >
-              Find Jobs
-            </Link>
-            <Link
-              href="/applications"
-              className="text-sm font-medium text-primary transition-colors"
-              onClick={scrollToTop}
-            >
-              My Applications
-            </Link>
-            <Link
-              href="/messages"
-              className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-              onClick={scrollToTop}
-            >
-              Messages
-            </Link>
-            <span className="text-sm font-medium text-muted-foreground cursor-default">Companies</span>
-            <span className="text-sm font-medium text-muted-foreground cursor-default">About</span>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/profile/edit" onClick={scrollToTop}>
-                <User className="size-4 mr-2" />
-                Edit Profile
-              </Link>
-            </Button>
-            <Badge variant="secondary" className="hidden sm:inline-flex">
-              Graduate
-            </Badge>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="size-4 mr-2" />
-              Logout
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navbar userType="graduate" currentPage="applications" />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">

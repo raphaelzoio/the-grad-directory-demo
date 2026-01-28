@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Navbar } from "@/components/navbar"
 import {
   Search,
   MapPin,
@@ -14,13 +15,11 @@ import {
   Code,
   Palette,
   BarChart,
-  LogOut,
   TrendingUp,
   Building2,
   Eye,
   Edit,
   Trash2,
-  User,
   AlertCircle,
   GraduationCap,
   Calendar,
@@ -495,13 +494,6 @@ export default function DashboardPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [openDropdown, jobStartDateOpen, jobSectorOpen, jobBusinessSizeOpen])
 
-  const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.removeItem("userType")
-    }
-    router.push("/")
-  }
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -564,88 +556,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      {userType === "graduate" && (
-        <header className="border-b border-border bg-card sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-              <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-                <Briefcase className="size-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-belleza text-foreground">The Graduate Directory</span>
-            </Link>
-            <nav className="hidden md:flex items-center gap-6">
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                onClick={scrollToTop}
-              >
-                Find Jobs
-              </Link>
-              <Link
-                href="/applications"
-                className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                onClick={scrollToTop}
-              >
-                My Applications
-              </Link>
-              <Link
-                href="/messages"
-                className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                onClick={scrollToTop}
-              >
-                Messages
-              </Link>
-              
-            </nav>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/profile/edit" onClick={scrollToTop}>
-                  <User className="size-4 mr-2" />
-                  Edit Profile
-                </Link>
-              </Button>
-              <Badge variant="secondary" className="hidden sm:inline-flex">
-                Graduate
-              </Badge>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="size-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          </div>
-        </header>
-      )}
-
-      {userType === "employer" && (
-        <header className="border-b border-border bg-card sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-              <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-                <Briefcase className="size-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-belleza text-foreground">The Graduate Directory</span>
-            </Link>
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="hidden sm:inline-flex">
-                Employer
-              </Badge>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/messages" onClick={scrollToTop}>
-                  Messages
-                </Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/post-job" onClick={scrollToTop}>
-                  Post a Job
-                </Link>
-              </Button>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="size-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          </div>
-        </header>
+      {userType && (
+        <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
       )}
 
       {/* Main Content */}
@@ -1384,7 +1296,8 @@ export default function DashboardPage() {
             </div>
           </section>
         )}
-      </div>
+      </main>
+    </div>
     )
   }
-}
+

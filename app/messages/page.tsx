@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Briefcase, LogOut, Search, Send, Paperclip, MoreVertical, Phone, Video, Archive, Star } from "lucide-react"
+import { Navbar } from "@/components/navbar"
+import { Search, Send, Paperclip, MoreVertical, Phone, Video, Archive, Star } from "lucide-react"
 
 const employerConversations = [
   {
@@ -185,11 +185,11 @@ const mockMessages = [
 
 export default function MessagesPage() {
   const router = useRouter()
-  const [userType, setUserType] = useState<string | null>(null)
+  const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [selectedConversation, setSelectedConversation] = useState<any>(null)
 
   useEffect(() => {
-    const type = sessionStorage.getItem("userType")
+    const type = sessionStorage.getItem("userType") as "employer" | "graduate" | null
     if (!type) {
       router.push("/")
     } else {
@@ -197,15 +197,6 @@ export default function MessagesPage() {
       setSelectedConversation(type === "employer" ? employerConversations[0] : mockConversations[0])
     }
   }, [router])
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("userType")
-    router.push("/")
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
 
   if (!userType) {
     return null
@@ -217,69 +208,7 @@ export default function MessagesPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      {userType === "employer" ? (
-        <header className="border-b border-border bg-card sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-              <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-                <Briefcase className="size-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
-            </Link>
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="hidden sm:inline-flex">
-                Employer
-              </Badge>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/messages" onClick={scrollToTop}>
-                  Messages
-                </Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/post-job" onClick={scrollToTop}>
-                  Post a Job
-                </Link>
-              </Button>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="size-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          </div>
-        </header>
-      ) : (
-        <header className="border-b border-border bg-card sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-              <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-                <Briefcase className="size-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
-            </Link>
-            <nav className="hidden md:flex items-center gap-6">
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-                onClick={scrollToTop}
-              >
-                Find Jobs
-              </Link>
-              <Link href="/messages" className="text-sm font-medium text-primary" onClick={scrollToTop}>
-                Messages
-              </Link>
-            </nav>
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="hidden sm:inline-flex">
-                Graduate
-              </Badge>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="size-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          </div>
-        </header>
-      )}
+      {userType && <Navbar userType={userType} currentPage="messages" />}
 
       {/* Messages Interface */}
       <div className="container mx-auto px-4 py-6">
