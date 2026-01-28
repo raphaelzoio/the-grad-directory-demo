@@ -82,6 +82,13 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
                   Find Jobs
                 </Link>
                 <Link
+                  href="/saved-jobs"
+                  onClick={scrollToTop}
+                  className={navLinkClass(currentPage === "bookmarks")}
+                >
+                  Saved Jobs
+                </Link>
+                <Link
                   href="/applications"
                   onClick={scrollToTop}
                   className={navLinkClass(currentPage === "applications")}

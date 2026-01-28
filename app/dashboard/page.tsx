@@ -28,6 +28,7 @@ import {
   ExternalLink,
   ArrowUpDown,
   BookOpen,
+  Bookmark,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
@@ -1232,39 +1233,218 @@ export default function DashboardPage() {
           </section>
         )}
         
-        {/* Saved Jobs for Graduates */}
+        {/* Jobs Board for Graduates */}
         {userType === "graduate" && (
-          <section className="py-16">
+          <section className="pt-6 pb-12 border-b border-border">
             <div className="container mx-auto px-4">
-              <div className="mb-8">
-                <h2 className="text-2xl font-semibold text-foreground mb-2">Saved Jobs</h2>
-                <p className="text-sm text-muted-foreground">Jobs you've bookmarked for later</p>
-              </div>
+              <div className="max-w-5xl mx-auto">
+                {/* Header */}
+                <div className="mb-6">
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Find Jobs</h2>
+                  <p className="text-sm text-muted-foreground">Discover opportunities from top employers</p>
+                </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                {mockSavedJobs.map((job) => (
-                  <Card key={job.id} className="p-5 hover:shadow-md transition-shadow">
-                    <div className="mb-3">
-                      <h3 className="text-base font-semibold text-foreground mb-1">{job.title}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {job.company} • {job.location}
-                      </p>
-                    </div>
-                    <p className="text-sm text-foreground mb-3">{job.description}</p>
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {job.tags.slice(0, 2).map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                    <Button size="sm" asChild>
-                      <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                        Apply Now
-                      </Link>
-                    </Button>
-                  </Card>
-                ))}
+                {/* Search Bar */}
+                <div className="mb-6">
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
+                    <input
+                      type="text"
+                      placeholder="Search jobs by title, company, or keywords..."
+                      className="w-full h-14 pl-12 pr-4 rounded-lg border border-input bg-background text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Filters Row */}
+                <div className="flex flex-wrap items-center gap-2 mb-6">
+                  {/* Location Filter */}
+                  <div className="relative" ref={jobStartDateRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setJobStartDateOpen(!jobStartDateOpen)
+                        setJobSectorOpen(false)
+                        setJobBusinessSizeOpen(false)
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedJobStartDates.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <Clock className="size-4" />
+                      <span>{selectedJobStartDates.length === 0 ? "Start Date" : selectedJobStartDates.length === 1 ? selectedJobStartDates[0] : `${selectedJobStartDates.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {jobStartDateOpen && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[180px]"
+                      >
+                        {jobStartDateOptions.map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedJobStartDates.includes(option)}
+                              onChange={() => toggleJobStartDate(option)}
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Sector Filter */}
+                  <div className="relative" ref={jobSectorRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setJobSectorOpen(!jobSectorOpen)
+                        setJobStartDateOpen(false)
+                        setJobBusinessSizeOpen(false)
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedJobSectors.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <Briefcase className="size-4" />
+                      <span>{selectedJobSectors.length === 0 ? "Sector" : selectedJobSectors.length === 1 ? selectedJobSectors[0] : `${selectedJobSectors.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {jobSectorOpen && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[180px]"
+                      >
+                        {jobSectorOptions.map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedJobSectors.includes(option)}
+                              onChange={() => toggleJobSector(option)}
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Business Size Filter */}
+                  <div className="relative" ref={jobBusinessSizeRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setJobBusinessSizeOpen(!jobBusinessSizeOpen)
+                        setJobStartDateOpen(false)
+                        setJobSectorOpen(false)
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedJobBusinessSizes.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <Building2 className="size-4" />
+                      <span>{selectedJobBusinessSizes.length === 0 ? "Company Size" : selectedJobBusinessSizes.length === 1 ? selectedJobBusinessSizes[0] : `${selectedJobBusinessSizes.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {jobBusinessSizeOpen && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[180px]"
+                      >
+                        {jobBusinessSizeOptions.map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedJobBusinessSizes.includes(option)}
+                              onChange={() => toggleJobBusinessSize(option)}
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Clear Filters */}
+                  {(selectedJobStartDates.length > 0 || selectedJobSectors.length > 0 || selectedJobBusinessSizes.length > 0) && (
+                    <button
+                      onClick={() => {
+                        setSelectedJobStartDates([])
+                        setSelectedJobSectors([])
+                        setSelectedJobBusinessSizes([])
+                      }}
+                      className="h-9 px-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      Clear all
+                    </button>
+                  )}
+                </div>
+
+                {/* Results Count */}
+                <div className="mb-4">
+                  <p className="text-sm text-muted-foreground">{featuredJobs.length} jobs found</p>
+                </div>
+
+                {/* Jobs Grid */}
+                <div className="grid gap-4 md:grid-cols-2">
+                  {featuredJobs.map((job) => (
+                    <Card key={job.id} className="p-5 hover:shadow-md transition-shadow">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-base font-semibold text-foreground">{job.title}</h3>
+                            {job.featured && (
+                              <Badge variant="secondary" className="text-xs">Featured</Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            {job.company} • {job.location}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                        <span>{job.type}</span>
+                        <span>{job.salary}</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {job.tags.map((tag) => (
+                          <Badge key={tag} variant="outline" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          Posted {job.postedDays} {job.postedDays === 1 ? "day" : "days"} ago • Start: {job.startDate}
+                        </span>
+                        <Button size="sm" asChild>
+                          <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
+                            View Job
+                          </Link>
+                        </Button>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
