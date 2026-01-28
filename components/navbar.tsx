@@ -100,6 +100,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
           </nav>
         </div>
         <div className="flex items-center gap-2 ml-auto">
+          {userType === "graduate" ? (
           <div className="relative group">
             <Button variant="ghost" size="icon" className="rounded-full relative">
               <Bell className="size-5" />
@@ -113,6 +114,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
               </p>
             </div>
           </div>
+          ) : null}
           <Button variant="ghost" size="icon" className="rounded-full" onClick={handleLogout} title="Logout">
             <User className="size-5" />
           </Button>
