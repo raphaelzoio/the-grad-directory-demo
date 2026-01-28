@@ -63,9 +63,9 @@ export default function BookmarksPage() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-2">Saved Candidates</h1>
-            <p className="text-muted-foreground text-lg">
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-foreground mb-1">Saved Candidates</h1>
+            <p className="text-sm text-muted-foreground">
               Your saved candidates for quick access
             </p>
           </div>

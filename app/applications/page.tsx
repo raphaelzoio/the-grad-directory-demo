@@ -156,9 +156,9 @@ export default function ApplicationsPage() {
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-2 text-balance">My Applications</h1>
-            <p className="text-muted-foreground text-lg">Track the status of your job applications</p>
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-foreground mb-1">My Applications</h1>
+            <p className="text-sm text-muted-foreground">Track the status of your job applications</p>
           </div>
 
           {/* Stats Cards */}

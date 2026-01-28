@@ -8,7 +8,7 @@ const merriweather = Merriweather({ subsets: ["latin"], weight: ["400", "700"], 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
-  title: "Directory - Find Your Dream Job",
+  title: "The Graduate Directory",
   description:
     "Discover thousands of job opportunities from top companies. Post jobs and connect with talented candidates.",
   generator: "v0.app",
