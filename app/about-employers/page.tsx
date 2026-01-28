@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Building2, ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 export default function AboutEmployersPage() {
@@ -31,9 +32,25 @@ export default function AboutEmployersPage() {
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Title */}
-          <div className="text-center space-y-2">
-            <h1 className="text-3xl md:text-3xl font-bold text-foreground">About</h1>
-            <p className="text-lg text-muted-foreground">For employers</p>
+          <div className="flex items-center justify-center gap-6">
+            <Image
+              src="/images/woman.png"
+              alt="Professional woman"
+              width={80}
+              height={80}
+              className="size-40 rounded-full object-contain"
+            />
+            <div className="text-center space-y-2">
+              <h1 className="text-3xl md:text-3xl font-bold text-foreground">About</h1>
+              <p className="text-lg text-muted-foreground">For employers</p>
+            </div>
+            <Image
+              src="/images/man.png"
+              alt="Professional man"
+              width={80}
+              height={80}
+              className="size-40 rounded-full object-contain"
+            />
           </div>
 
           {/* Information Card */}
@@ -63,13 +80,6 @@ export default function AboutEmployersPage() {
               Log in
               <ArrowRight className="size-5 ml-2" />
             </Button>
-          </div>
-
-          {/* Back Link */}
-          <div className="text-center mt-8">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              ← Back to Home
-            </Link>
           </div>
 
           {/* Additional Info */}

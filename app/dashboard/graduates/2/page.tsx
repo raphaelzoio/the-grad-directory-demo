@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { BookmarkButton } from "@/components/bookmark-button"
+import { ContactDialog } from "@/components/contact-dialog"
 import {
   MapPin,
   Mail,
@@ -11,7 +12,6 @@ import {
   GraduationCap,
   Award,
   Download,
-  MessageSquare,
   Linkedin,
   Github,
   Cloud,
@@ -178,10 +178,7 @@ export default function MichaelChenProfile() {
                 <p className="text-sm text-muted-foreground mb-4">{graduate.department}, {graduate.university}</p>
                 <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
                 <div className="flex gap-2 mb-6">
-                  <Button size="sm" className="flex-1" disabled>
-                    <MessageSquare className="size-4 mr-2" />
-                    Contact
-                  </Button>
+                  <ContactDialog graduateName={graduate.name} />
                   <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
                 </div>
                 <Button variant="outline" className="w-full bg-transparent" asChild>

@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Briefcase, User, Bookmark } from "lucide-react"
+import { Briefcase, User, Bookmark, Bell } from "lucide-react"
 
 interface NavbarProps {
   userType: "employer" | "graduate"
@@ -99,9 +99,24 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
             )}
           </nav>
         </div>
-        <Button variant="ghost" size="icon" className="rounded-full" onClick={handleLogout} title="Logout">
-          <User className="size-5" />
-        </Button>
+        <div className="flex items-center gap-2 ml-auto">
+          <div className="relative group">
+            <Button variant="ghost" size="icon" className="rounded-full relative">
+              <Bell className="size-5" />
+              <span className="absolute -top-1 -right-1 size-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                1
+              </span>
+            </Button>
+            <div className="absolute right-0 top-full mt-2 w-64 p-3 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <p className="text-sm text-foreground">
+                An employer at <span className="font-semibold">CloudFlow Solutions</span> has saved your profile
+              </p>
+            </div>
+          </div>
+          <Button variant="ghost" size="icon" className="rounded-full" onClick={handleLogout} title="Logout">
+            <User className="size-5" />
+          </Button>
+        </div>
       </div>
     </header>
   )

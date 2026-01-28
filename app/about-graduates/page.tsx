@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowRight, ArrowLeft, GraduationCap } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 export default function AboutGraduatesPage() {
@@ -33,13 +34,29 @@ export default function AboutGraduatesPage() {
       <main className="container mx-auto px-4 py-12 md:py-20">
         <div className="max-w-4xl mx-auto">
           {/* Title Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-3xl font-bold text-foreground mb-4 text-balance">
-              About
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              For Oxbridge students and graduates
-            </p>
+          <div className="flex items-center justify-center gap-6 mb-12">
+            <Image
+              src="/images/woman.png"
+              alt="Professional woman"
+              width={80}
+              height={80}
+              className="size-40 rounded-full object-contain"
+            />
+            <div className="text-center">
+              <h1 className="text-3xl md:text-3xl font-bold text-foreground mb-4 text-balance">
+                About
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                For Oxbridge students and graduates
+              </p>
+            </div>
+            <Image
+              src="/images/man.png"
+              alt="Professional man"
+              width={80}
+              height={80}
+              className="size-40 rounded-full object-contain"
+            />
           </div>
 
           {/* Content Card */}
@@ -71,13 +88,6 @@ export default function AboutGraduatesPage() {
               Log in
               <ArrowRight className="size-5 ml-2" />
             </Button>
-          </div>
-
-          {/* Back Link */}
-          <div className="text-center mt-8">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              ← Back to Home
-            </Link>
           </div>
         </div>
       </main>

@@ -1231,52 +1231,7 @@ export default function DashboardPage() {
             </div>
           </section>
         )}
-
-        {/* Job Applications section for graduates */}
-        {userType === "graduate" && (
-          <section className="py-16 border-b border-border">
-            <div className="container mx-auto px-4">
-              <div className="mb-8">
-                <h2 className="text-2xl font-semibold text-foreground mb-2">Your Applications</h2>
-                <p className="text-sm text-muted-foreground">Track your job applications and their status</p>
-              </div>
-
-              <div className="space-y-4">
-                {mockApplications.map((application) => (
-                  <Card key={application.id} className="p-6 hover:shadow-md transition-shadow">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-foreground mb-1">
-                          {application.jobTitle}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {application.company} • {application.location}
-                        </p>
-                        <Badge
-                          className={
-                            application.status === "Accepted"
-                              ? "bg-green-100 text-green-800"
-                              : application.status === "Under Review"
-                                ? "bg-blue-100 text-blue-800"
-                                : application.status === "Rejected"
-                                  ? "bg-red-100 text-red-800"
-                                  : "bg-gray-100 text-gray-800"
-                          }
-                        >
-                          {application.status}
-                        </Badge>
-                      </div>
-                      <div className="text-right text-sm text-muted-foreground shrink-0">
-                        Applied {application.appliedDate}
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
+        
         {/* Saved Jobs for Graduates */}
         {userType === "graduate" && (
           <section className="py-16">

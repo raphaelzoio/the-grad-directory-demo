@@ -24,12 +24,12 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
             <div className="size-10 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-6 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight"></span>
+            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">The Graduate Directory</span>
           </Link>
         </div>
       </header>
@@ -80,25 +80,38 @@ export default function HomePage() {
         </div>
       </section>
 
-{/* Partnership Logos */}
-<section className="py-16 border-t border-border bg-background">
-  <div className="container mx-auto px-4">
-    <div className="max-w-6xl mx-auto">
-      <p className="text-sm font-medium text-muted-foreground mb-12 uppercase tracking-wider text-center">
-        Trusted by Leading Organisations
-      </p>
-      <div className="flex justify-center items-center pl-12">
-        <Image
-          src="/images/logo-20collage.png"
-          alt="Trusted partner logos including Latham & Watkins, Advent, Farient Advisors, BCG, Beazley, Capgemini, FGS Global, and Panmure Liberum"
-          width={1000}
-          height={600}
-          className="max-w-4xl w-full h-auto"
-        />
-      </div>
-    </div>
-  </div>
-</section>
+      {/* Partnership Logos */}
+      <section className="py-16 border-t border-border bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <p className="text-xl font-medium text-muted-foreground mb-12 uppercase tracking-wider text-left">
+              Trusted by leading organisations
+            </p>
+            <div className="flex justify-center items-center">
+              <Image
+                src="/images/logo-20collage.png"
+                alt="Trusted partner logos including Latham & Watkins, Advent, Farient Advisors, BCG, Beazley, Capgemini, FGS Global, and Panmure Liberum"
+                width={1789}
+                height={388}
+                className="max-w-6xl w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 border-t border-border bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto text-right">
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
+                Search, refined
+              </h3>
+              <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
+                The directory deploys AI judiciously to help your search process: simply write a sentence about what you're looking for, and we can apply it to a filtering system to find the best people, while maintaining breadth of candidates and depth of quality
+              </p>
+          </div>
+        </div>
+      </section>  
 
       {/* Footer */}
       <footer className="border-t border-border py-12 bg-background">
