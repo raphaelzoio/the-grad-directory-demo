@@ -22,7 +22,6 @@ import {
   Trash2,
   AlertCircle,
   GraduationCap,
-  Calendar,
   ChevronDown,
   Award,
   ExternalLink,
@@ -567,44 +566,28 @@ export default function DashboardPage() {
         {/* Profile Completion Banner for Graduates */}
         {userType === "graduate" && (
           <div className="bg-primary/10 border-b border-primary/20">
-            <div className="container mx-auto px-4 py-4">
-              <div className="flex items-start gap-4">
-                <div className="size-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg flex-shrink-0">
-                  ST
+            <div className="container mx-auto px-4 py-3">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-semibold text-foreground">Sam Taylor Jr.</h3>
+                  <span className="text-sm text-muted-foreground">• History, BA • University of Oxford • 2024</span>
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground mb-1">Sam Taylor Jr.</h3>
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-2">
-                    <div className="flex items-center gap-1.5">
-                      <GraduationCap className="size-4" />
-                      <span>History, BA - University of Oxford</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="size-4" />
-                      <span>Graduated 2024</span>
-                    </div>
+                <div className="flex items-center gap-3 flex-1 px-6">
+                  <div className="flex-1 h-2 bg-white rounded-full overflow-hidden">
+                    <div className="h-full bg-primary/50 w-[85%] rounded-full" />
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm text-muted-foreground">Complete your profile to stand out to employers.</p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          window.scrollTo({ top: 0, behavior: "smooth" })
-                          window.location.href = "/profile/edit"
-                        }}
-                      >
-                        Complete Profile
-                      </Button>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 max-w-md h-2 bg-muted rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[85%] rounded-full" />
-                      </div>
-                      <span className="text-sm font-medium text-foreground">85%</span>
-                    </div>
-                  </div>
+                  <span className="text-sm font-medium text-foreground shrink-0 min-w-[5rem]">85% complete</span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 shrink-0"
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                      window.location.href = "/profile/edit"
+                    }}
+                  >
+                    Complete Profile
+                  </Button>
                 </div>
               </div>
             </div>
@@ -1444,6 +1427,78 @@ export default function DashboardPage() {
                       </div>
                     </Card>
                   ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Discover Companies Section for Graduates */}
+        {userType === "graduate" && (
+          <section className="py-12 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
+                {/* Header */}
+                <div className="mb-6">
+                  <h2 className="text-2xl font-semibold text-foreground mb-1">Discover Companies</h2>
+                  <p className="text-sm text-muted-foreground">Explore top employers actively hiring graduates</p>
+                </div>
+
+                {/* Companies Grid */}
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {mockCompanies.slice(0, 6).map((company) => (
+                    <Card key={company.id} className="p-5 hover:shadow-md transition-shadow">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="size-12 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
+                          {company.logo}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-foreground mb-0.5">{company.name}</h3>
+                          <p className="text-xs text-muted-foreground">{company.industry}</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 mb-3">
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <MapPin className="size-3 shrink-0" />
+                          <span>{company.location}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <Building2 className="size-3 shrink-0" />
+                          <span>{company.size}</span>
+                        </div>
+                      </div>
+
+                      <div className="mb-3">
+                        <p className="text-xs font-medium text-foreground mb-1.5">
+                          {company.openPositions} open positions
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {company.benefits.slice(0, 2).map((benefit) => (
+                            <Badge key={benefit} variant="secondary" className="text-xs">
+                              {benefit}
+                            </Badge>
+                          ))}
+                          {company.benefits.length > 2 && (
+                            <Badge variant="outline" className="text-xs">+{company.benefits.length - 2}</Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      <Button size="sm" variant="outline" className="w-full" asChild>
+                        <Link href={`/companies/${company.id}`} onClick={scrollToTop}>
+                          View Company
+                        </Link>
+                      </Button>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* View All Button */}
+                <div className="flex justify-center pt-6">
+                  <Button variant="outline" asChild>
+                    <Link href="#">Browse All Companies</Link>
+                  </Button>
                 </div>
               </div>
             </div>
