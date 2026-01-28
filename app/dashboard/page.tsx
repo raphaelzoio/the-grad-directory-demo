@@ -27,6 +27,7 @@ import {
   Award,
   ExternalLink,
   ArrowUpDown,
+  BookOpen,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
@@ -1033,6 +1034,23 @@ export default function DashboardPage() {
                               {graduate.experience}
                             </span>
                           </div>
+                          {graduate.portfolioUrl && graduate.portfolioLabel && (
+                            <div className="mt-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 text-xs gap-1.5"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? (
+                                  <BookOpen className="size-3" />
+                                ) : (
+                                  <ExternalLink className="size-3" />
+                                )}
+                                {graduate.portfolioLabel}
+                              </Button>
+                            </div>
+                          )}
                         </div>
                         <div className="shrink-0">
                           <Button variant="outline" size="sm" className="bg-transparent" asChild>
@@ -1049,7 +1067,7 @@ export default function DashboardPage() {
                 {/* View All Button */}
                 <div className="flex justify-center pt-6">
                   <Button asChild>
-                    <Link href="/search?role=employer">View All Graduates</Link>
+                    <Link href="#">View All Graduates</Link>
                   </Button>
                 </div>
               </div>

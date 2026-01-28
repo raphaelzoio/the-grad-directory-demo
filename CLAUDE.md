@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-The Graduate Directory (TGD) - A recruitment platform connecting Oxbridge students/graduates with premium employers. Built with Next.js 16, React 19, and TypeScript. Uses mock data for demonstration purposes (no backend database).
+The Graduate Directory - A recruitment platform connecting Oxbridge students/graduates with premium employers. Built with Next.js 16, React 19, and TypeScript. Uses mock data for demonstration purposes (no backend database).
 
 ## Commands
 

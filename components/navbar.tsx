@@ -38,7 +38,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
             <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-belleza text-foreground">TGD</span>
+            <span className="text-xl font-belleza text-foreground"></span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             {userType === "employer" ? (

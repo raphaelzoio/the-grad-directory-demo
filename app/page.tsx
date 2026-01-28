@@ -29,7 +29,7 @@ export default function HomePage() {
             <div className="size-10 rounded-lg bg-primary flex items-center justify-center">
               <Briefcase className="size-6 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">TGD</span>
+            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight"></span>
           </Link>
         </div>
       </header>
@@ -48,21 +48,21 @@ export default function HomePage() {
 
               {/* Login Buttons */}
               <div className="flex flex-col sm:flex-row items-start gap-4 pt-4">
-                <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
-                  <Link href="/about-graduates">
-                    <Briefcase className="size-5 mr-2" />
-                    For students and graduates
-                  </Link>
-                </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto min-w-[200px] bg-transparent"
+                  className="w-full sm:w-auto min-w-[200px]"
                   asChild
                 >
                   <Link href="/about-employers">
                     <Building2 className="size-5 mr-2" />
                     For employers
+                  </Link>
+                </Button>
+                <Button size="lg"
+                  variant="outline" className="w-full sm:w-auto min-w-[200px]" asChild>
+                  <Link href="/about-graduates">
+                    <Briefcase className="size-5 mr-2" />
+                    For students and graduates
                   </Link>
                 </Button>
               </div>
