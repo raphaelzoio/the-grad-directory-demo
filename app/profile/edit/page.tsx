@@ -9,7 +9,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { UKCityAutocomplete } from "@/components/uk-city-autocomplete"
-import { User, GraduationCap, Briefcase, Globe, Github, Linkedin, X, Plus, Save, ArrowLeft, Trash2 } from "lucide-react"
+import { Navbar } from "@/components/navbar"
+import { User, GraduationCap, Briefcase, Globe, Github, Linkedin, X, Plus, Save, Trash2 } from "lucide-react"
 import Link from "next/link"
 
 type Education = {
@@ -27,26 +28,26 @@ export default function EditProfilePage() {
   const [userType, setUserType] = useState<string | null>(null)
   const [location, setLocation] = useState("london")
   const [skills, setSkills] = useState([
-    "React",
-    "TypeScript",
-    "Node.js",
     "Python",
-    "PostgreSQL",
-    "AWS",
-    "Docker",
-    "Git",
+    "Data Analysis",
+    "Research",
+    "Critical Thinking",
+    "Academic Writing",
+    "Public Speaking",
+    "Microsoft Office",
+    "LaTeX",
   ])
   const [newSkill, setNewSkill] = useState("")
 
   const [educations, setEducations] = useState<Education[]>([
     {
       id: 1,
-      degree: "Bachelor of Science in Computer Science",
-      university: "Stanford University",
+      degree: "BA (Hons) Philosophy, Politics and Economics",
+      university: "University of Oxford",
       graduationYear: "2024",
-      gpa: "3.9",
-      gpaScale: "4.0",
-      honors: "Summa Cum Laude, Dean's List all semesters",
+      gpa: "First Class",
+      gpaScale: "Honours",
+      honors: "Collection Prize, JCR Academic Scholar",
     },
   ])
 
@@ -104,29 +105,21 @@ export default function EditProfilePage() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Header */}
-      <div className="bg-background border-b sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
+      <Navbar userType="graduate" currentPage="profile" />
+
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* Page Header */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/dashboard">
-                  <ArrowLeft className="size-4 mr-2" />
-                  Back to Dashboard
-                </Link>
-              </Button>
-              <h1 className="text-xl font-bold">Edit Profile</h1>
+            <div>
+              <h1 className="text-2xl font-bold">Edit Profile</h1>
+              <p className="text-muted-foreground">Update your profile information to help employers find you</p>
             </div>
             <Button disabled>
               <Save className="size-4 mr-2" />
               Save Changes
             </Button>
           </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto space-y-6">
           {/* Personal Information */}
           <Card className="p-6">
             <div className="flex items-center gap-2 mb-6">
@@ -136,19 +129,19 @@ export default function EditProfilePage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" defaultValue="Sarah" />
+                <Input id="firstName" defaultValue="Eleanor" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="lastName">Last Name</Label>
-                <Input id="lastName" defaultValue="Johnson" />
+                <Input id="lastName" defaultValue="Whitmore" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" defaultValue="sarah.johnson@email.com" />
+                <Input id="email" type="email" defaultValue="eleanor.whitmore@ox.ac.uk" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone</Label>
-                <Input id="phone" defaultValue="+1 (555) 123-4567" />
+                <Input id="phone" defaultValue="+44 7700 900123" />
               </div>
               <div className="space-y-2 md:col-span-2">
                 <Label htmlFor="location">Location</Label>
@@ -171,24 +164,24 @@ export default function EditProfilePage() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="title">Professional Title</Label>
-                <Input id="title" defaultValue="Full-Stack Developer" />
+                <Input id="title" defaultValue="Policy & Strategy Analyst" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="bio">Bio</Label>
                 <Textarea
                   id="bio"
                   rows={5}
-                  defaultValue="Passionate full-stack developer with a strong foundation in computer science and hands-on experience building scalable web applications. Experienced in modern JavaScript frameworks and cloud technologies. Eager to contribute to innovative projects and continue growing in a dynamic team environment."
+                  defaultValue="Oxford PPE graduate with a keen interest in public policy and economic strategy. Experienced in research and analysis through internships at leading think tanks and consultancies. Strong analytical mindset combined with excellent communication skills developed through debating and student journalism. Seeking opportunities in consulting, policy research, or corporate strategy."
                 />
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="experience">Years of Experience</Label>
-                  <Input id="experience" defaultValue="2 years" />
+                  <Input id="experience" defaultValue="1 year (internships)" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="availability">Availability</Label>
-                  <Input id="availability" defaultValue="Immediate" />
+                  <Input id="availability" defaultValue="September 2024" />
                 </div>
               </div>
             </div>
@@ -340,12 +333,12 @@ export default function EditProfilePage() {
               <div className="p-4 rounded-lg border bg-muted/30 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="jobTitle1">Job Title</Label>
-                  <Input id="jobTitle1" defaultValue="Software Engineering Intern" />
+                  <Input id="jobTitle1" defaultValue="Policy Research Intern" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="company1">Company</Label>
-                    <Input id="company1" defaultValue="Tech Startup Inc." />
+                    <Input id="company1" defaultValue="Institute for Government" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="duration1">Duration</Label>
@@ -357,7 +350,7 @@ export default function EditProfilePage() {
                   <Textarea
                     id="description1"
                     rows={3}
-                    defaultValue="Developed and maintained React-based web applications, implemented RESTful APIs using Node.js, and collaborated with cross-functional teams on feature development."
+                    defaultValue="Conducted research on public sector reform initiatives, drafted policy briefings for senior researchers, and contributed to a published report on civil service modernisation."
                   />
                 </div>
                 <Button variant="ghost" size="sm" className="text-destructive" disabled>
@@ -369,16 +362,16 @@ export default function EditProfilePage() {
               <div className="p-4 rounded-lg border bg-muted/30 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="jobTitle2">Job Title</Label>
-                  <Input id="jobTitle2" defaultValue="Full-Stack Developer" />
+                  <Input id="jobTitle2" defaultValue="Strategy Consulting Intern" />
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="company2">Company</Label>
-                    <Input id="company2" defaultValue="University Innovation Lab" />
+                    <Input id="company2" defaultValue="McKinsey & Company" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="duration2">Duration</Label>
-                    <Input id="duration2" defaultValue="2022 - 2024" />
+                    <Input id="duration2" defaultValue="Summer 2022" />
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -386,7 +379,7 @@ export default function EditProfilePage() {
                   <Textarea
                     id="description2"
                     rows={3}
-                    defaultValue="Built internal tools and dashboards for research projects, optimised database queries reducing load time by 40%, and mentored junior developers."
+                    defaultValue="Supported client engagement in the financial services sector, built financial models and market analysis presentations, and participated in client workshops and stakeholder interviews."
                   />
                 </div>
                 <Button variant="ghost" size="sm" className="text-destructive" disabled>
@@ -413,19 +406,19 @@ export default function EditProfilePage() {
               <div className="p-4 rounded-lg border bg-muted/30 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="projectName1">Project Name</Label>
-                  <Input id="projectName1" defaultValue="E-commerce Platform" />
+                  <Input id="projectName1" defaultValue="Undergraduate Dissertation" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="projectDesc1">Description</Label>
                   <Textarea
                     id="projectDesc1"
                     rows={3}
-                    defaultValue="Full-stack e-commerce application with payment integration, inventory management, and real-time order tracking."
+                    defaultValue="Extended essay examining the impact of behavioural economics on UK pension policy reform. Awarded distinction and nominated for the Gibbs Prize."
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="projectTech1">Technologies (comma-separated)</Label>
-                  <Input id="projectTech1" defaultValue="React, Node.js, PostgreSQL, Stripe" />
+                  <Label htmlFor="projectTech1">Skills Demonstrated</Label>
+                  <Input id="projectTech1" defaultValue="Research, Statistical Analysis, Policy Analysis, Academic Writing" />
                 </div>
                 <Button variant="ghost" size="sm" className="text-destructive" disabled>
                   Remove
@@ -436,19 +429,19 @@ export default function EditProfilePage() {
               <div className="p-4 rounded-lg border bg-muted/30 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="projectName2">Project Name</Label>
-                  <Input id="projectName2" defaultValue="Task Management App" />
+                  <Input id="projectName2" defaultValue="Oxford Union Debate Series" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="projectDesc2">Description</Label>
                   <Textarea
                     id="projectDesc2"
                     rows={3}
-                    defaultValue="Collaborative task management tool with real-time updates, team collaboration features, and analytics dashboard."
+                    defaultValue="Organised and chaired a term-long debate series on economic inequality, featuring speakers from government, academia, and industry. Managed a team of 8 volunteers."
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="projectTech2">Technologies (comma-separated)</Label>
-                  <Input id="projectTech2" defaultValue="TypeScript, Next.js, Supabase, Tailwind" />
+                  <Label htmlFor="projectTech2">Skills Demonstrated</Label>
+                  <Input id="projectTech2" defaultValue="Event Management, Leadership, Public Speaking, Stakeholder Engagement" />
                 </div>
                 <Button variant="ghost" size="sm" className="text-destructive" disabled>
                   Remove
@@ -470,9 +463,9 @@ export default function EditProfilePage() {
               </Button>
             </div>
             <div className="space-y-3">
-              <Input defaultValue="AWS Certified Developer - Associate" />
-              <Input defaultValue="MongoDB Certified Developer" />
-              <Input defaultValue="Google Cloud Professional" />
+              <Input defaultValue="Bloomberg Market Concepts Certificate" />
+              <Input defaultValue="CFA Level I Candidate" />
+              <Input defaultValue="Excel Financial Modelling (Oxford Careers Service)" />
             </div>
           </Card>
 
@@ -488,8 +481,12 @@ export default function EditProfilePage() {
                 <Input defaultValue="Native" placeholder="Proficiency" />
               </div>
               <div className="grid md:grid-cols-2 gap-4">
-                <Input defaultValue="Spanish" placeholder="Language" />
-                <Input defaultValue="Conversational" placeholder="Proficiency" />
+                <Input defaultValue="French" placeholder="Language" />
+                <Input defaultValue="Professional Working" placeholder="Proficiency" />
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input defaultValue="German" placeholder="Language" />
+                <Input defaultValue="Intermediate" placeholder="Proficiency" />
               </div>
               <Button variant="outline" size="sm" disabled>
                 <Plus className="size-4 mr-2" />
@@ -508,16 +505,16 @@ export default function EditProfilePage() {
               <div className="space-y-2">
                 <Label htmlFor="website" className="flex items-center gap-2">
                   <Globe className="size-4" />
-                  Website
+                  Website / Portfolio
                 </Label>
-                <Input id="website" defaultValue="sarahjohnson.dev" placeholder="your-website.com" />
+                <Input id="website" defaultValue="eleanorwhitmore.com" placeholder="your-website.com" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="github" className="flex items-center gap-2">
                   <Github className="size-4" />
                   GitHub
                 </Label>
-                <Input id="github" defaultValue="github.com/sarahjohnson" placeholder="github.com/username" />
+                <Input id="github" placeholder="github.com/username" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="linkedin" className="flex items-center gap-2">
@@ -526,7 +523,7 @@ export default function EditProfilePage() {
                 </Label>
                 <Input
                   id="linkedin"
-                  defaultValue="linkedin.com/in/sarahjohnson"
+                  defaultValue="linkedin.com/in/eleanorwhitmore"
                   placeholder="linkedin.com/in/username"
                 />
               </div>
@@ -541,7 +538,7 @@ export default function EditProfilePage() {
             </div>
             <Textarea
               rows={3}
-              defaultValue="Open Source Contribution, UI/UX Design, Tech Blogging, Hackathons"
+              defaultValue="Debating, Economic History, Current Affairs, Rowing, Classical Music, Travel"
               placeholder="List your interests (comma-separated)"
             />
           </Card>
