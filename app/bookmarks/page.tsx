@@ -58,7 +58,7 @@ export default function BookmarksPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar userType="employer" currentPage="directory" />
+      <Navbar userType="employer" currentPage="bookmarks" />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
