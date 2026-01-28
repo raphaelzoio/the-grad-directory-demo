@@ -7,7 +7,7 @@ import { Briefcase, User, Bookmark, Bell } from "lucide-react"
 
 interface NavbarProps {
   userType: "employer" | "graduate"
-  currentPage?: "directory" | "jobs" | "applications" | "messages" | "your-jobs" | "bookmarks" | "profile"
+  currentPage?: "directory" | "jobs" | "applications" | "messages" | "your-jobs" | "bookmarks" | "profile" | "post-job"
 }
 
 export function Navbar({ userType, currentPage }: NavbarProps) {
@@ -55,7 +55,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
                   onClick={scrollToTop}
                   className={navLinkClass(currentPage === "bookmarks")}
                 >
-                  Bookmarks
+                  Saved Candidates
                 </Link>
                 <Link
                   href="/messages"
@@ -65,11 +65,18 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
                   Messages
                 </Link>
                 <Link
-                  href="/post-job"
+                  href="/your-jobs"
                   onClick={scrollToTop}
                   className={navLinkClass(currentPage === "your-jobs")}
                 >
-                  Your jobs
+                  Your Jobs
+                </Link>
+                <Link
+                  href="/post-job"
+                  onClick={scrollToTop}
+                  className={navLinkClass(currentPage === "post-job")}
+                >
+                  Post a Job
                 </Link>
               </>
             ) : (

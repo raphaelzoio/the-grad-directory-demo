@@ -36,7 +36,7 @@ export default function PostJobPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <Navbar userType="employer" currentPage="your-jobs" />
+      <Navbar userType="employer" currentPage="post-job" />
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">

@@ -102,12 +102,12 @@ export default function HomePage() {
 
       <section className="py-16 border-t border-border bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto text-left">
+          <div className="max-w-6xl mx-auto">
               <h3 className="text-3xl md:text-4xl lg:text-4xl font-serif text-foreground text-balance leading-tight pb-6">
                 Search, refined
               </h3>
               <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
-                The directory deploys AI judiciously to help your search process: simply write a sentence about what you're looking for, and we can apply it to a filtering system to find the best people, while maintaining breadth of candidates and depth of quality
+                The directory deploys AI judiciously to help your search process: simply write a sentence about what you're looking for, and we can apply it to a filtering system to find the best people, while maintaining breadth of candidates and depth of quality.
               </p>
           </div>
         </div>
@@ -116,8 +116,10 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t border-border py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-sm text-muted-foreground">
-            <p>&copy; 2026 The Graduate Directory. All rights reserved.</p>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-sm text-muted-foreground">
+              <p>&copy; 2026 The Graduate Directory. All rights reserved.</p>
+            </div>
           </div>
         </div>
       </footer>
