@@ -35,7 +35,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-24 md:py-32">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -102,8 +102,8 @@ export default function HomePage() {
 
       <section className="py-16 border-t border-border bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto text-right">
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
+          <div className="max-w-6xl mx-auto text-left">
+              <h3 className="text-3xl md:text-4xl lg:text-4xl font-serif text-foreground text-balance leading-tight pb-6">
                 Search, refined
               </h3>
               <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
