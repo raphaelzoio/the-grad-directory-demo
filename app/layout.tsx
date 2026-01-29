@@ -4,8 +4,11 @@ import { Nata_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const serif = Nata_Sans({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-serif" })
-const sans = Nata_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-sans" })
+const nataSans = Nata_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-sans"
+})
 
 export const metadata: Metadata = {
   title: "The Graduate Directory",
@@ -38,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${serif.variable} ${sans.variable} font-sans font-medium antialiased`}>
+      <body className={`${nataSans.variable} font-sans font-medium antialiased`} style={{ "--font-serif": "var(--font-sans)" } as React.CSSProperties}>
         {children}
         <Analytics />
       </body>
