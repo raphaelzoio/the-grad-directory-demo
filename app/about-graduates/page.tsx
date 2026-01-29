@@ -1,8 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, ArrowLeft, Briefcase } from "lucide-react"
+import { ArrowRight, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -23,9 +24,13 @@ export default function AboutGraduatesPage() {
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3">
-            <div className="size-10 rounded-lg bg-primary flex items-center justify-center">
-              <Briefcase className="size-6 text-primary-foreground" />
-            </div>
+            <Image
+              src="/images/logo.png"
+              alt="The Graduate Directory"
+              width={40}
+              height={40}
+              className="size-10 rounded-lg"
+            />
             <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">The Graduate Directory</span>
           </Link>
         </div>

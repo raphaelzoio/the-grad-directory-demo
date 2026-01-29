@@ -1,9 +1,10 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Briefcase, User, Bookmark, Bell } from "lucide-react"
+import { User, Bookmark, Bell } from "lucide-react"
 
 interface NavbarProps {
   userType: "employer" | "graduate"
@@ -35,9 +36,13 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-            <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-              <Briefcase className="size-5 text-primary-foreground" />
-            </div>
+            <Image
+              src="/images/logo.png"
+              alt="The Graduate Directory"
+              width={32}
+              height={32}
+              className="size-8 rounded-lg"
+            />
             <span className="text-xl font-belleza text-foreground"></span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
