@@ -59,7 +59,7 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button size="lg"
-                  variant="outline" className="w-full sm:w-auto min-w-[200px]" asChild>
+                  variant="secondary" className="w-full sm:w-auto min-w-[200px]" asChild>
                   <Link href="/about-graduates">
                     <Briefcase className="size-5 mr-2" />
                     For students and graduates

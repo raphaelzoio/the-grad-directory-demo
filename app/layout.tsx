@@ -1,11 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Merriweather, Inter } from "next/font/google"
+import { Nata_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const merriweather = Merriweather({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-serif" })
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
+const serif = Nata_Sans({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-serif" })
+const sans = Nata_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: "The Graduate Directory",
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${merriweather.variable} ${inter.variable} font-sans antialiased`}>
+      <body className={`${serif.variable} ${sans.variable} font-sans font-medium antialiased`}>
         {children}
         <Analytics />
       </body>
