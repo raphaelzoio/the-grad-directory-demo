@@ -73,11 +73,11 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center md:justify-end">
               <Image
-                src="/images/grads.png"
+                src="/images/board_briefcase.png"
                 alt="Graduate students"
                 width={500}
                 height={500}
-                className="w-full max-w-md h-auto"
+                className="w-90 max-w-md h-auto"
               />
             </div>
           </div>
