@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
             <Image
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               alt="The Graduate Directory"
               width={40}
               height={40}
@@ -41,7 +41,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
             <div className="space-y-8">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
                 The UK's premier graduate talent database
@@ -114,7 +114,7 @@ export default function HomePage() {
                 The directory deploys AI judiciously to help your search process: simply write a sentence about what you're looking for, and we can apply it to a filtering system to find the best people, while maintaining breadth of candidates and depth of quality.
               </p><br/>
               <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
-                The database is designed to reduce companies having to sift through thousands of AI-written applications. Our platform allows you to connect directly with the top talent in the country, knowing that experience and credentials have already been validated
+                The database is designed to reduce companies having to sift through thousands of AI-written applications. Our platform allows you to connect directly with the top talent in the country, knowing that experience and credentials have already been validated.
               </p>
           </div>
         </div>

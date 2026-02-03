@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     "Discover thousands of job opportunities from top companies. Post jobs and connect with talented candidates.",
   generator: "v0.app",
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: "/images/logo.jpg",
+    apple: "/images/logo.jpg",
   },
 }
 

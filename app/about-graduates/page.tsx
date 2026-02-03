@@ -25,7 +25,7 @@ export default function AboutGraduatesPage() {
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               alt="The Graduate Directory"
               width={40}
               height={40}

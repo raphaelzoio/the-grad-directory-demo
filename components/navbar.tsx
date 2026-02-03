@@ -37,7 +37,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
             <Image
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               alt="The Graduate Directory"
               width={32}
               height={32}
