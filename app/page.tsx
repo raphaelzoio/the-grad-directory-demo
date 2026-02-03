@@ -41,7 +41,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 items-center">
             <div className="space-y-8">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
                 The UK's premier graduate talent database
@@ -71,7 +71,7 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center md:justify-center">
+            <div className="flex justify-center md:justify-end">
               <Image
                 src="/images/board_briefcase.png"
                 alt="Graduate students"
