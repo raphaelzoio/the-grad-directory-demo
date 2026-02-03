@@ -112,6 +112,9 @@ export default function HomePage() {
               </h3>
               <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
                 The directory deploys AI judiciously to help your search process: simply write a sentence about what you're looking for, and we can apply it to a filtering system to find the best people, while maintaining breadth of candidates and depth of quality.
+              </p><br/>
+              <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
+                The database is designed to reduce companies having to sift through thousands of AI-written applications. Our platform allows you to connect directly with the top talent in the country, knowing that experience and credentials have already been validated
               </p>
           </div>
         </div>
