@@ -107,7 +107,7 @@ export default function BookmarksPage() {
                         <p className="text-sm text-muted-foreground mb-2">
                           {graduate.college}, {graduate.university}
                         </p>
-                        <Badge className="bg-amber-500 text-white w-fit">
+                        <Badge className="bg-green-800 text-white w-fit">
                           {graduate.classification}
                         </Badge>
                       </div>

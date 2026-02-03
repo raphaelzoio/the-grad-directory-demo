@@ -71,13 +71,13 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center md:justify-end">
+            <div className="flex justify-center md:justify-center">
               <Image
                 src="/images/board_briefcase.png"
                 alt="Graduate students"
                 width={500}
                 height={500}
-                className="w-90 max-w-md h-auto"
+                className="w-50 max-w-md h-auto"
               />
             </div>
           </div>
@@ -88,16 +88,16 @@ export default function HomePage() {
       <section className="py-16 border-t border-border bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xl font-medium text-muted-foreground mb-12 uppercase tracking-wider text-left">
-              Trusted by leading organisations
+            <p className="text-xl font-medium text-muted-foreground mb-12 uppercase tracking-wider text-center">
+          Trusted by leading organisations
             </p>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center pl-8">
               <Image
                 src="/images/logo-20collage.png"
                 alt="Trusted partner logos including Latham & Watkins, Advent, Farient Advisors, BCG, Beazley, Capgemini, FGS Global, and Panmure Liberum"
                 width={1789}
                 height={388}
-                className="max-w-6xl w-full h-auto"
+                className="max-w-3xl w-full h-auto"
               />
             </div>
           </div>
