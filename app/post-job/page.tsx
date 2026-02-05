@@ -63,7 +63,7 @@ export default function PostJobPage() {
                     <Label htmlFor="type">Employment Type *</Label>
                     <select
                       id="type"
-                      className="w-full h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
+                      className="w-full h-10 px-3 rounded-md border border-input bg-card text-foreground text-sm"
                     >
                       <option value="">Select type</option>
                       <option value="full-time">Full-time</option>
@@ -80,6 +80,7 @@ export default function PostJobPage() {
                       value={jobLocation}
                       onValueChange={setJobLocation}
                       placeholder="Select location or Remote"
+                      className="bg-card"
                     />
                   </div>
                 </div>
@@ -168,7 +169,7 @@ export default function PostJobPage() {
                     <Label htmlFor="company-size">Company Size *</Label>
                     <select
                       id="company-size"
-                      className="w-full h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
+                      className="w-full h-10 px-3 rounded-md border border-input bg-card text-foreground text-sm"
                     >
                       <option value="">Select size</option>
                       <option value="1-10">1-10 employees</option>

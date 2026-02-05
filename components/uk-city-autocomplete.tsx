@@ -101,6 +101,7 @@ interface UKCityAutocompleteProps {
   placeholder?: string
   defaultValue?: string
   id?: string
+  className?: string
 }
 
 export function UKCityAutocomplete({
@@ -109,6 +110,7 @@ export function UKCityAutocomplete({
   placeholder = "Select location...",
   defaultValue,
   id,
+  className,
 }: UKCityAutocompleteProps) {
   const [open, setOpen] = React.useState(false)
   const [internalValue, setInternalValue] = React.useState(defaultValue || "")
@@ -138,7 +140,7 @@ export function UKCityAutocomplete({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between font-normal"
+          className={cn("w-full justify-between font-normal", className)}
         >
           {selectedCity ? (
             <span className="text-foreground">{selectedCity.label}</span>
