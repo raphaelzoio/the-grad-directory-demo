@@ -286,7 +286,7 @@ export default function EditProfilePage() {
             <div className="space-y-4">
               <div className="flex flex-wrap gap-2">
                 {skills.map((skill) => (
-                  <Badge key={skill} variant="secondary" className="pl-3 pr-1 py-1.5">
+                  <Badge key={skill} variant="secondary" className="pl-3 pr-1 py-1.5 text-white">
                     {skill}
                     <button
                       onClick={() => removeSkill(skill)}

@@ -996,7 +996,7 @@ export default function DashboardPage() {
                           </p>
                           <div className="flex flex-wrap gap-1.5 mb-3">
                             {graduate.skills.slice(0, 3).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-xs">
+                              <Badge key={skill} variant="secondary" className="text-white text-xs">
                                 {skill}
                               </Badge>
                             ))}
@@ -1192,7 +1192,7 @@ export default function DashboardPage() {
                         <p className="text-sm text-foreground mb-3">{job.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {job.tags.map((tag) => (
-                            <Badge key={tag} variant="secondary">
+                            <Badge key={tag} variant="secondary text-white">
                               {tag}
                             </Badge>
                           ))}
@@ -1396,7 +1396,7 @@ export default function DashboardPage() {
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="text-base font-semibold text-foreground">{job.title}</h3>
                             {job.featured && (
-                              <Badge variant="secondary" className="text-xs">Featured</Badge>
+                              <Badge variant="secondary" className="text-white text-xs">Featured</Badge>
                             )}
                           </div>
                           <p className="text-sm text-muted-foreground">
@@ -1475,7 +1475,7 @@ export default function DashboardPage() {
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {company.benefits.slice(0, 2).map((benefit) => (
-                            <Badge key={benefit} variant="secondary" className="text-xs">
+                            <Badge key={benefit} variant="secondary" className="text-xs text-white">
                               {benefit}
                             </Badge>
                           ))}

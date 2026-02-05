@@ -250,7 +250,7 @@ export default function EmilyRodriguezProfile() {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {graduate.skills.map((skill) => (
-                  <Badge key={skill} variant="secondary">
+                  <Badge key={skill} variant="secondary" className="text-white">
                     {skill}
                   </Badge>
                 ))}

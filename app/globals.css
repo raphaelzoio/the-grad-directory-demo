@@ -10,7 +10,7 @@
   --foreground: oklch(0.2 0.02 140);
 
   /* Card elements with slight cream tint */
-  --card: #D7F5DD;
+  --card: #cffcda;
   --card-foreground: oklch(0.2 0.02 140);
 
   /* Popovers */
@@ -18,11 +18,11 @@
   --popover-foreground: oklch(0.2 0.02 140);
 
   /* Dark green for primary accent */
-  --primary: #58A367;
+  --primary: #84c791;
   --primary-foreground: oklch(0.98 0.008 85);
 
   /* Muted green for secondary elements */
-  --secondary: oklch(0.88 0.02 150);
+  --secondary: oklch(56.124% 0.1834 143.76);
   --secondary-foreground: oklch(0.25 0.02 140);
 
   /* Muted cream tones */

@@ -71,7 +71,7 @@ export default function BookmarksPage() {
           </div>
 
           <div className="mb-6">
-            <Badge variant="secondary" className="text-sm">
+            <Badge variant="secondary" className="text-sm text-white">
               {bookmarkedGraduates.length} saved candidate{bookmarkedGraduates.length !== 1 ? "s" : ""}
             </Badge>
           </div>
@@ -129,7 +129,7 @@ export default function BookmarksPage() {
 
                       <div className="flex flex-wrap gap-2 mb-4">
                         {graduate.skills.slice(0, 4).map((skill) => (
-                          <Badge key={skill} variant="secondary">
+                          <Badge key={skill} variant="secondary" className="text-white">
                             {skill}
                           </Badge>
                         ))}

@@ -152,7 +152,7 @@ export default function JessicaMartinezProfile() {
               <Link href="/dashboard">← Back to Search</Link>
             </Button>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">Active</Badge>
+              <Badge variant="secondary" className="text-white">Active</Badge>
               <Badge className="bg-green-500 text-white">{graduate.availability} Availability</Badge>
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function JessicaMartinezProfile() {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {graduate.skills.map((skill) => (
-                  <Badge key={skill} variant="secondary">
+                  <Badge key={skill} variant="secondary" className="text-white">
                     {skill}
                   </Badge>
                 ))}

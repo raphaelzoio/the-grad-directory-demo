@@ -131,7 +131,7 @@ export default function YourJobsPage() {
                         </div>
                         <div className="flex flex-wrap gap-1.5 mb-3">
                           {job.tags.map((tag) => (
-                            <Badge key={tag} variant="secondary" className="text-xs">
+                            <Badge key={tag} variant="secondary" className="text-xs text-white">
                               {tag}
                             </Badge>
                           ))}

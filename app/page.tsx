@@ -41,12 +41,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 items-center">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
             <div className="space-y-8">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
+              <h1 className="text-gray-600 text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
                 The UK's premier graduate talent database
               </h1>
-              <p className="text-base md:text-lg text-muted-foreground text-pretty max-w-2xl leading-relaxed">
+              <p className="text-base md:text-lg text-gray-600 text-pretty max-w-2xl leading-relaxed">
                 The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
               </p>
 
@@ -63,9 +63,9 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button size="lg"
-                  variant="secondary" className="w-full sm:w-auto min-w-[200px]" asChild>
+                  variant="secondary" className="w-full text-white sm:w-auto min-w-[200px]" asChild>
                   <Link href="/about-graduates">
-                    <Briefcase className="size-5 mr-2" />
+                    <Briefcase className="size-5 mr-" />
                     For students and graduates
                   </Link>
                 </Button>
@@ -77,7 +77,7 @@ export default function HomePage() {
                 alt="Graduate students"
                 width={500}
                 height={500}
-                className="w-50 max-w-md h-auto"
+                className="w-60 max-w-md h-auto border rounded-lg shadow-lg object-cover px-4 py-8 bg-white mr-8"
               />
             </div>
           </div>
