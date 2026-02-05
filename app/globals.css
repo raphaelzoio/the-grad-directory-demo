@@ -3,118 +3,118 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Teal-sage color palette: #1f3c3d → #41888c → #6fa895 → #a1c29f → #d5e0c3 */
+/* Teal-sage palette with lighter, balanced cards */
 :root {
-  /* White background */
+  /* Clean white background */
   --background: #ffffff;
   --foreground: #1f3c3d;
 
-  /* Light cream cards with teal text */
-  --card: #d5e0c3;
+  /* Pure white cards */
+  --card: #ffffff;
   --card-foreground: #1f3c3d;
 
   /* Popovers */
   --popover: #ffffff;
   --popover-foreground: #1f3c3d;
 
-  /* Medium teal for primary actions (#41888c) */
+  /* Medium teal for primary actions */
   --primary: #41888c;
   --primary-foreground: #ffffff;
 
-  /* Light teal-green for secondary (#6fa895) */
-  --secondary: #6fa895;
+  /* Light teal-green for secondary */
+  --secondary: #e8f2f0;
   --secondary-foreground: #1f3c3d;
 
-  /* Light sage backgrounds (#a1c29f) */
-  --muted: #c8d9c6;
-  --muted-foreground: #2d5557;
+  /* Very light sage backgrounds */
+  --muted: #f0f5f3;
+  --muted-foreground: #547476;
 
-  /* Light sage accent (#a1c29f) */
-  --accent: #a1c29f;
+  /* Soft sage accent */
+  --accent: #d9ebe6;
   --accent-foreground: #1f3c3d;
 
   /* Warm red for destructive actions */
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  /* Soft teal-tinted borders */
-  --border: #b5c9b3;
-  --input: #b5c9b3;
+  /* Subtle teal-tinted borders */
+  --border: #d4e3e0;
+  --input: #d4e3e0;
   --ring: #41888c;
 
-  /* Chart colors from the palette */
+  /* Chart colors from the teal palette */
   --chart-1: #41888c;
   --chart-2: #6fa895;
   --chart-3: #a1c29f;
   --chart-4: #1f3c3d;
-  --chart-5: #d5e0c3;
+  --chart-5: #d9ebe6;
 
   /* Soft rounded corners */
   --radius: 0.5rem;
 
-  /* Sidebar with cream tint */
-  --sidebar: #e5eed8;
+  /* Sidebar with very subtle tint */
+  --sidebar: #fafbfb;
   --sidebar-foreground: #1f3c3d;
   --sidebar-primary: #41888c;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #c8d9c6;
+  --sidebar-accent: #e8f2f0;
   --sidebar-accent-foreground: #1f3c3d;
-  --sidebar-border: #b5c9b3;
+  --sidebar-border: #d4e3e0;
   --sidebar-ring: #41888c;
 }
 
 .dark {
-  /* Lighter teal background */
-  --background: #2d5557;
-  --foreground: #d5e0c3;
+  /* Deep teal background */
+  --background: #0f1f20;
+  --foreground: #e8f2f0;
 
-  /* Dark teal cards */
-  --card: #1f3c3d;
-  --card-foreground: #d5e0c3;
+  /* Balanced dark teal cards */
+  --card: #1a3334;
+  --card-foreground: #e8f2f0;
 
-  --popover: #2d5557;
-  --popover-foreground: #d5e0c3;
+  --popover: #1a3334;
+  --popover-foreground: #e8f2f0;
 
-  /* Light teal-green for primary (#6fa895) */
+  /* Light teal-green for primary */
   --primary: #6fa895;
-  --primary-foreground: #1f3c3d;
+  --primary-foreground: #0f1f20;
 
-  /* Medium teal for secondary (#41888c) */
-  --secondary: #41888c;
-  --secondary-foreground: #d5e0c3;
+  /* Medium teal for secondary */
+  --secondary: #2d4f50;
+  --secondary-foreground: #d9ebe6;
 
   /* Muted backgrounds */
-  --muted: #355a5c;
+  --muted: #1a3334;
   --muted-foreground: #a1c29f;
 
-  /* Light sage accent (#a1c29f) */
-  --accent: #a1c29f;
-  --accent-foreground: #1f3c3d;
+  /* Sage accent */
+  --accent: #547476;
+  --accent-foreground: #d9ebe6;
 
   /* Destructive red */
-  --destructive: #dc2626;
-  --destructive-foreground: #d5e0c3;
+  --destructive: #ef4444;
+  --destructive-foreground: #e8f2f0;
 
-  /* Borders with teal tint */
-  --border: #41888c;
-  --input: #41888c;
+  /* Teal borders */
+  --border: #2d4f50;
+  --input: #2d4f50;
   --ring: #6fa895;
 
-  /* Chart colors from the palette */
+  /* Chart colors from the teal palette */
   --chart-1: #6fa895;
   --chart-2: #41888c;
   --chart-3: #a1c29f;
-  --chart-4: #d5e0c3;
-  --chart-5: #355a5c;
+  --chart-4: #e8f2f0;
+  --chart-5: #2d4f50;
 
   /* Sidebar */
-  --sidebar: #2d5557;
-  --sidebar-foreground: #d5e0c3;
+  --sidebar: #1a3334;
+  --sidebar-foreground: #e8f2f0;
   --sidebar-primary: #6fa895;
-  --sidebar-primary-foreground: #1f3c3d;
-  --sidebar-accent: #41888c;
-  --sidebar-accent-foreground: #d5e0c3;
-  --sidebar-border: #41888c;
+  --sidebar-primary-foreground: #0f1f20;
+  --sidebar-accent: #2d4f50;
+  --sidebar-accent-foreground: #d9ebe6;
+  --sidebar-border: #2d4f50;
   --sidebar-ring: #6fa895;
 }
 
