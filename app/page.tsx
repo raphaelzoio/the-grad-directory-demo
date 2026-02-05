@@ -44,7 +44,7 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
             <div className="space-y-8">
               <h1 className="text-gray-600 text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
-                The UK's premier graduate talent database
+                The UK's premier graduate talent
               </h1>
               <p className="text-base md:text-lg text-gray-600 text-pretty max-w-2xl leading-relaxed">
                 The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
