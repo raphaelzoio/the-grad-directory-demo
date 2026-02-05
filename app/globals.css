@@ -5,12 +5,12 @@
 
 /* Teal-sage color palette: #1f3c3d → #41888c → #6fa895 → #a1c29f → #d5e0c3 */
 :root {
-  /* Light cream background (#d5e0c3) */
-  --background: #d5e0c3;
+  /* White background */
+  --background: #ffffff;
   --foreground: #1f3c3d;
 
-  /* White cards with teal text */
-  --card: #ffffff;
+  /* Light cream cards with teal text */
+  --card: #d5e0c3;
   --card-foreground: #1f3c3d;
 
   /* Popovers */
@@ -64,12 +64,12 @@
 }
 
 .dark {
-  /* Dark teal background (#1f3c3d) */
-  --background: #1f3c3d;
+  /* Lighter teal background */
+  --background: #2d5557;
   --foreground: #d5e0c3;
 
-  /* Slightly lighter cards */
-  --card: #2d5557;
+  /* Dark teal cards */
+  --card: #1f3c3d;
   --card-foreground: #d5e0c3;
 
   --popover: #2d5557;

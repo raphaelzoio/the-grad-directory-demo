@@ -1,7 +1,12 @@
+"use client"
+
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Navbar } from "@/components/navbar"
 import { Briefcase, MapPin, Clock, DollarSign, Users, Building2, ArrowLeft, Share2, Bookmark } from "lucide-react"
 
 // Mock job data
@@ -49,31 +54,42 @@ const jobData = {
 }
 
 export default function JobDetailPage() {
+  const router = useRouter()
+  const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const sessionType = sessionStorage.getItem("userType") as "employer" | "graduate" | null
+      const localType = localStorage.getItem("userType") as "employer" | "graduate" | null
+      const type = sessionType || localType
+
+      if (!type) {
+        router.push("/")
+      } else {
+        setUserType(type)
+        sessionStorage.setItem("userType", type)
+        localStorage.setItem("userType", type)
+      }
+    }
+  }, [router])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  if (!userType) {
+    return null
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-              <Briefcase className="size-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-semibold text-foreground">The Graduate Directory</span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" disabled>
-              Sign In
-            </Button>
-            <Button size="sm" asChild>
-              <Link href="/post-job">Post a Job</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navbar userType={userType} currentPage="jobs" />
 
       <div className="container mx-auto px-4 py-8">
         <Link
-          href="/"
+          href="/dashboard"
+          onClick={scrollToTop}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
         >
           <ArrowLeft className="size-4" />

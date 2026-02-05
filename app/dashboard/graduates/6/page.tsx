@@ -1,6 +1,11 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Navbar } from "@/components/navbar"
 import { BookmarkButton } from "@/components/bookmark-button"
 import { ContactDialog } from "@/components/contact-dialog"
 import {
@@ -15,6 +20,7 @@ import {
   Linkedin,
   Database,
   TrendingUp,
+  ArrowLeft,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -92,17 +98,50 @@ const alexProfile = {
 }
 
 export default function AlexThompsonProfile() {
+  const router = useRouter()
+  const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const graduate = alexProfile
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const sessionType = sessionStorage.getItem("userType") as "employer" | "graduate" | null
+      const localType = localStorage.getItem("userType") as "employer" | "graduate" | null
+      const type = sessionType || localType
+
+      if (!type) {
+        router.push("/")
+      } else {
+        setUserType(type)
+        sessionStorage.setItem("userType", type)
+        localStorage.setItem("userType", type)
+      }
+    }
+  }, [router])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  if (!userType) {
+    return null
+  }
 
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
+      <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
+
       <div className="bg-background border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Button variant="ghost" asChild>
-              <Link href="/dashboard">← Back to Search</Link>
-            </Button>
+            <Link
+              href="/dashboard"
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ArrowLeft className="size-4" />
+              Back to {userType === "employer" ? "Search" : "Dashboard"}
+            </Link>
             <div className="flex items-center gap-2">
               <Badge variant="secondary" className="text-white">Active</Badge>
               <Badge className="bg-amber-500 text-white">{graduate.availability} Availability</Badge>
