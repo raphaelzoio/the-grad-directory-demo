@@ -63,9 +63,9 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button size="lg"
-                  variant="secondary" className="w-full text-white sm:w-auto min-w-[200px]" asChild>
+                  variant="secondary" className="w-full sm:w-auto min-w-[200px]" asChild>
                   <Link href="/about-graduates">
-                    <Briefcase className="size-5 mr-" />
+                    <Briefcase className="size-5" />
                     For students and graduates
                   </Link>
                 </Button>

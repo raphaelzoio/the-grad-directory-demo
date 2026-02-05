@@ -3,64 +3,64 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Elegant theme with dark green accents and serif typography */
+/* Clean light theme with distinctive sage green accents */
 :root {
-  /* White background */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.2 0.02 140);
+  /* Soft sage-tinted background */
+  --background: oklch(0.98 0.01 135);
+  --foreground: oklch(0.35 0.03 135);
 
-  /* Card elements with slight cream tint */
-  --card: #cffcda;
-  --card-foreground: oklch(0.2 0.02 140);
+  /* White cards that pop against sage background */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.35 0.03 135);
 
   /* Popovers */
-  --popover: oklch(0.99 0.008 85);
-  --popover-foreground: oklch(0.2 0.02 140);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.35 0.03 135);
 
-  /* Dark green for primary accent */
-  --primary: #84c791;
-  --primary-foreground: oklch(0.98 0.008 85);
+  /* Rich sage green for primary actions */
+  --primary: oklch(0.62 0.11 135);
+  --primary-foreground: oklch(1 0 0);
 
-  /* Muted green for secondary elements */
-  --secondary: oklch(56.124% 0.1834 143.76);
-  --secondary-foreground: oklch(0.25 0.02 140);
+  /* Medium sage for secondary elements */
+  --secondary: oklch(0.65 0.10 135);
+  --secondary-foreground: oklch(0.98 0.01 135);
 
-  /* Muted cream tones */
-  --muted: rgb(255 250 240);
-  --muted-foreground: oklch(0.45 0.02 140);
+  /* Sage-tinted backgrounds */
+  --muted: oklch(0.94 0.03 135);
+  --muted-foreground: oklch(0.48 0.04 135);
 
-  /* Medium green accent */
-  --accent: oklch(0.5 0.1 150);
-  --accent-foreground: oklch(0.98 0.008 85);
+  /* Medium sage green accent */
+  --accent: oklch(0.85 0.06 135);
+  --accent-foreground: oklch(0.40 0.05 135);
 
-  /* Destructive in muted red */
-  --destructive: oklch(0.5 0.18 30);
-  --destructive-foreground: oklch(0.98 0.008 85);
+  /* Warm red for destructive actions */
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(1 0 0);
 
-  /* Subtle cream borders */
-  --border: oklch(0.88 0.015 80);
-  --input: oklch(0.88 0.015 80);
-  --ring: oklch(0.35 0.08 150);
+  /* Sage-tinted borders */
+  --border: oklch(0.88 0.02 135);
+  --input: oklch(0.88 0.02 135);
+  --ring: oklch(0.58 0.12 135);
 
-  /* Chart colors with green theme */
-  --chart-1: oklch(0.35 0.08 150);
-  --chart-2: oklch(0.5 0.1 150);
-  --chart-3: oklch(0.65 0.08 150);
-  --chart-4: oklch(0.4 0.06 170);
-  --chart-5: oklch(0.55 0.07 130);
+  /* Chart colors with varied sage greens */
+  --chart-1: oklch(0.58 0.12 135);
+  --chart-2: oklch(0.52 0.13 145);
+  --chart-3: oklch(0.65 0.10 125);
+  --chart-4: oklch(0.48 0.11 150);
+  --chart-5: oklch(0.70 0.08 120);
 
-  /* Reduced radius for elegant feel */
+  /* Soft rounded corners */
   --radius: 0.5rem;
 
-  /* Sidebar in cream tones */
-  --sidebar: oklch(0.96 0.01 80);
-  --sidebar-foreground: oklch(0.2 0.02 140);
-  --sidebar-primary: oklch(0.35 0.08 150);
-  --sidebar-primary-foreground: oklch(0.98 0.008 85);
-  --sidebar-accent: oklch(0.88 0.02 150);
-  --sidebar-accent-foreground: oklch(0.25 0.02 140);
-  --sidebar-border: oklch(0.88 0.015 80);
-  --sidebar-ring: oklch(0.35 0.08 150);
+  /* Sidebar with noticeable sage tint */
+  --sidebar: oklch(0.96 0.02 135);
+  --sidebar-foreground: oklch(0.28 0.03 135);
+  --sidebar-primary: oklch(0.58 0.12 135);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.90 0.05 135);
+  --sidebar-accent-foreground: oklch(0.30 0.05 135);
+  --sidebar-border: oklch(0.88 0.03 135);
+  --sidebar-ring: oklch(0.58 0.12 135);
 }
 
 .dark {
