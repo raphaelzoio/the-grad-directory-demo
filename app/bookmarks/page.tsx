@@ -90,7 +90,7 @@ export default function BookmarksPage() {
                 <Card key={graduate.id} className="p-6 hover:shadow-md transition-shadow">
                   <div className="flex flex-col lg:flex-row gap-6">
                     <div className="flex-shrink-0">
-                      <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
+                      <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-bold text-xl" style={{ backgroundColor: "darkred" }}>
                         {graduate.avatar}
                       </div>
                     </div>

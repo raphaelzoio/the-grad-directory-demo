@@ -157,7 +157,7 @@ export default function AlexThompsonProfile() {
             {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
-                <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
+                <div className="size-24 rounded-full text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4" style={{ backgroundColor: "darkred" }}>
                   {graduate.avatar}
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>

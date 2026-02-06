@@ -21,7 +21,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-center">
@@ -88,7 +88,7 @@ export default function HomePage() {
       <section className="py-16 border-t border-border bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <p className="text-xl font-medium text-muted-foreground mb-12 uppercase tracking-wider text-center">
+            <p className="text-xl font-medium text-muted-foreground mb-12 tracking-wider text-center">
           Trusted by leading organisations
             </p>
             <div className="flex justify-center items-center pl-8">

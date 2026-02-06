@@ -984,7 +984,7 @@ export default function DashboardPage() {
                   {mockGraduates.map((graduate) => (
                     <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow">
                       <div className="flex gap-4">
-                        <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
+                        <div className="size-14 rounded-full text-primary-foreground flex items-center justify-center font-semibold shrink-0" style={{ backgroundColor: "darkred" }}>
                           {graduate.avatar}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -996,7 +996,7 @@ export default function DashboardPage() {
                           </p>
                           <div className="flex flex-wrap gap-1.5 mb-3">
                             {graduate.skills.slice(0, 3).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-white text-xs">
+                              <Badge key={skill} variant="secondary" className="text-xs text-white" style={{ backgroundColor: "#41888C" }}>
                                 {skill}
                               </Badge>
                             ))}
@@ -1072,7 +1072,7 @@ export default function DashboardPage() {
                 {/* Prize Winner 1 */}
                 <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                    <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0" style={{ backgroundColor: "darkred" }}>
                       EW
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1102,7 +1102,7 @@ export default function DashboardPage() {
                 {/* Prize Winner 2 */}
                 <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                    <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0" style={{ backgroundColor: "darkred" }}>
                       AJ
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1132,7 +1132,7 @@ export default function DashboardPage() {
                 {/* Prize Winner 3 */}
                 <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
+                    <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0" style={{ backgroundColor: "darkred" }}>
                       RC
                     </div>
                     <div className="flex-1 min-w-0">
