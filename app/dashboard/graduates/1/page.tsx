@@ -238,7 +238,7 @@ export default function SarahJohnsonProfile() {
             {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
-                <div className="size-24 rounded-full text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4" style={{ backgroundColor: "darkred" }}>
+                <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
                   {graduate.avatar}
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
@@ -256,7 +256,7 @@ export default function SarahJohnsonProfile() {
                     <ExternalLink className="size-4 ml-1" />
                   </a>
                 </Button>
-                <Button variant="outline" className="w-full bg-transparent mt-2" disabled>
+                <Button variant="outline" className="w-full bg-transparent mt-2">
                   <Download className="size-4 mr-2" />
                   Download CV
                 </Button>
@@ -308,7 +308,7 @@ export default function SarahJohnsonProfile() {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {graduate.skills.map((skill) => (
-                  <Badge key={skill} variant="secondary text-white">
+                  <Badge key={skill} variant="secondary" className="text-white" style={{ backgroundColor: "#41888C" }}>
                     {skill}
                   </Badge>
                 ))}
@@ -349,7 +349,7 @@ export default function SarahJohnsonProfile() {
                     className="block p-3 rounded-lg border bg-muted/30 hover:bg-muted/50 transition-colors"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="size-10 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-sm shrink-0" style={{ backgroundColor: "darkred" }}>
+                      <div className="size-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm shrink-0">
                         {candidate.avatar}
                       </div>
                       <div className="flex-1 min-w-0">

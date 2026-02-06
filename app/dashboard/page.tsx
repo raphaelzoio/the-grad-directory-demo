@@ -191,6 +191,20 @@ const mockGraduates = [
     openToRelocation: true,
   },
   {
+    id: 4,
+    name: "David Kim",
+    degree: "Computer Engineering, BEng (1st)",
+    university: "University of Cambridge",
+    graduationYear: 2023,
+    location: "Edinburgh, UK",
+    skills: ["C++", "Rust", "Kubernetes", "Linux"],
+    experience: "2 years",
+    availability: "1 month",
+    avatar: "DK",
+    interests: "Systems Programming, Embedded",
+    openToRelocation: true,
+  },
+  {
     id: 3,
     name: "Emily Rodriguez",
     degree: "Law (Jurisprudence), BA (1st)",
@@ -204,20 +218,6 @@ const mockGraduates = [
     interests: "Commercial Law, M&A",
     portfolioUrl: "https://oxford.ac.uk/dissertation/emily-rodriguez",
     portfolioLabel: "Read dissertation",
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    degree: "Computer Engineering, BEng (1st)",
-    university: "University of Cambridge",
-    graduationYear: 2023,
-    location: "Edinburgh, UK",
-    skills: ["C++", "Rust", "Kubernetes", "Linux"],
-    experience: "2 years",
-    availability: "1 month",
-    avatar: "DK",
-    interests: "Systems Programming, Embedded",
-    openToRelocation: true,
   },
   {
     id: 5,
@@ -244,6 +244,94 @@ const mockGraduates = [
     availability: "2 weeks",
     avatar: "AT",
     interests: "Data Science, AI Research",
+  },
+  {
+    id: 7,
+    name: "Olivia Patel",
+    degree: "Mathematics, MASt (Distinction)",
+    university: "University of Cambridge",
+    graduationYear: 2024,
+    location: "London, UK",
+    skills: ["Stochastic Calculus", "Python", "R", "Statistical Modelling"],
+    experience: "1 year",
+    availability: "Immediate",
+    avatar: "OP",
+    interests: "Quantitative Finance, Probability Theory",
+    portfolioUrl: "https://github.com/oliviapatel-maths",
+    portfolioLabel: "View GitHub",
+  },
+  {
+    id: 8,
+    name: "James Wright",
+    degree: "PPE (Philosophy, Politics and Economics), BA (1st)",
+    university: "University of Oxford",
+    graduationYear: 2024,
+    location: "London, UK",
+    skills: ["Economic Analysis", "Policy Research", "Public Speaking", "Stata"],
+    experience: "1 year",
+    availability: "2 weeks",
+    avatar: "JW",
+    interests: "Public Policy, Development Economics",
+    portfolioUrl: "https://oxford.ac.uk/thesis/james-wright",
+    portfolioLabel: "Read thesis",
+  },
+  {
+    id: 9,
+    name: "Hannah Liu",
+    degree: "Natural Sciences, MSci (1st)",
+    university: "University of Cambridge",
+    graduationYear: 2024,
+    location: "Cambridge, UK",
+    skills: ["Biochemistry", "Lab Techniques", "MATLAB", "Data Analysis"],
+    experience: "2 years",
+    availability: "1 month",
+    avatar: "HL",
+    interests: "Drug Discovery, Molecular Biology",
+    portfolioUrl: "https://github.com/hannahliu-natsci",
+    portfolioLabel: "View Research",
+    openToRelocation: true,
+  },
+  {
+    id: 10,
+    name: "Tom Okafor",
+    degree: "English Language and Literature, BA (1st)",
+    university: "University of Oxford",
+    graduationYear: 2023,
+    location: "Birmingham, UK",
+    skills: ["Copywriting", "Content Strategy", "Editing", "Research"],
+    experience: "2 years",
+    availability: "Immediate",
+    avatar: "TO",
+    interests: "Publishing, Media, Creative Writing",
+  },
+  {
+    id: 11,
+    name: "Priya Sharma",
+    degree: "Chemical Engineering, MEng (1st)",
+    university: "University of Cambridge",
+    graduationYear: 2024,
+    location: "Manchester, UK",
+    skills: ["Process Design", "ASPEN Plus", "MATLAB", "Sustainability"],
+    experience: "1 year",
+    availability: "Immediate",
+    avatar: "PS",
+    interests: "Green Energy, Process Optimisation",
+    openToRelocation: true,
+  },
+  {
+    id: 12,
+    name: "Freddie Lawson",
+    degree: "History, BA (1st)",
+    university: "University of Oxford",
+    graduationYear: 2024,
+    location: "London, UK",
+    skills: ["Archival Research", "Academic Writing", "Critical Analysis", "Public Speaking"],
+    experience: "1 year",
+    availability: "2 weeks",
+    avatar: "FL",
+    interests: "Modern British History, Journalism",
+    portfolioUrl: "https://oxford.ac.uk/thesis/freddie-lawson",
+    portfolioLabel: "Read thesis",
   },
 ]
 
@@ -968,8 +1056,8 @@ export default function DashboardPage() {
         {/* Results Section */}
         {userType === "employer" && (
           <section className="py-8 border-b border-border">
-            <div className="container mx-auto px-4">
-              <div className="max-w-5xl mx-auto">
+            <div className="mx-auto px-10">
+              <div>
                 {/* Results Header */}
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-sm text-muted-foreground">42 active graduates found</p>
@@ -980,11 +1068,11 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Results Grid */}
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {mockGraduates.map((graduate) => (
-                    <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow">
+                    <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow" style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#d4edda" }}>
                       <div className="flex gap-4">
-                        <div className="size-14 rounded-full text-primary-foreground flex items-center justify-center font-semibold shrink-0" style={{ backgroundColor: "darkred" }}>
+                        <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
                           {graduate.avatar}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1070,9 +1158,9 @@ export default function DashboardPage() {
 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {/* Prize Winner 1 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#d4edda" }}>
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0" style={{ backgroundColor: "darkred" }}>
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
                       EW
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1100,9 +1188,9 @@ export default function DashboardPage() {
                 </Card>
 
                 {/* Prize Winner 2 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#fde8e8" }}>
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0" style={{ backgroundColor: "darkred" }}>
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
                       AJ
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1130,9 +1218,9 @@ export default function DashboardPage() {
                 </Card>
 
                 {/* Prize Winner 3 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20">
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#fde8e8" }}>
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0" style={{ backgroundColor: "darkred" }}>
+                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
                       RC
                     </div>
                     <div className="flex-1 min-w-0">

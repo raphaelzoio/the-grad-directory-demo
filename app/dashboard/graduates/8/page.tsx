@@ -18,89 +18,131 @@ import {
   Award,
   Download,
   Linkedin,
-  Database,
-  TrendingUp,
+  BookOpen,
+  FileText,
+  ExternalLink,
   ArrowLeft,
 } from "lucide-react"
 import Link from "next/link"
 
-const alexProfile = {
-  id: 6,
-  name: "Alex Thompson",
-  email: "alex.thompson@cam.ac.uk",
+const jamesProfile = {
+  id: 8,
+  name: "James Wright",
+  email: "james.wright@ppe.ox.ac.uk",
   phone: "+44 7700 678901",
-  degree: "Data Intensive Science, MPhil (1st)",
-  university: "University of Cambridge",
-  graduationYear: 2023,
+  degree: "Philosophy, Politics and Economics (PPE), BA",
+  university: "University of Oxford",
+  college: "Balliol College",
+  graduationYear: 2024,
   classification: "First Class Honours",
-  location: "Bristol, UK",
-  skills: ["Python", "Machine Learning", "TensorFlow", "PyTorch", "Data Analysis", "SQL"],
-  experience: "3 years",
+  location: "London, UK",
+  skills: ["Economic Analysis", "Policy Research", "Public Speaking", "Stata", "Econometrics", "Essay Writing"],
+  experience: "1 year",
   availability: "2 weeks",
-  avatar: "AT",
-  bio: "First Class Data Intensive Science MPhil graduate from Cambridge with three years of experience in machine learning and AI research. Specialising in deep learning architectures and large-scale data processing. Strong background in academic research with publications in peer-reviewed journals. Seeking a senior data scientist role at an innovative organisation working on cutting-edge AI applications.",
-  linkedin: "linkedin.com/in/alexthompsondata",
+  avatar: "JW",
+  bio: "First Class PPE graduate from Balliol College, Oxford, with a strong focus on development economics and public policy. President of the Oxford Union in Michaelmas 2023. Experienced in policy research through internships at the Treasury and a leading think tank. Passionate about evidence-based policymaking and international development. Seeking roles in government, consulting, or international organisations.",
+  linkedin: "linkedin.com/in/jameswright-ppe",
+  portfolioUrl: "https://oxford.ac.uk/thesis/james-wright",
+  portfolioLabel: "Read thesis",
   workExperience: [
     {
-      title: "Machine Learning Engineer",
-      company: "DeepMind London",
-      duration: "2023 - Present",
-      description: "Developed and trained neural network models for natural language processing. Optimised training pipelines for 40% faster convergence. Published research on transformer architecture improvements.",
+      title: "Policy Research Intern",
+      company: "HM Treasury",
+      duration: "Summer 2023",
+      description:
+        "Supported the fiscal policy team with analysis of public spending proposals. Drafted briefing papers for senior officials. Conducted econometric analysis on the impact of tax policy changes using Stata.",
     },
     {
-      title: "Data Scientist",
-      company: "Bloomberg LP",
+      title: "Research Assistant",
+      company: "Institute for Fiscal Studies (IFS)",
       duration: "2022 - 2023",
-      description: "Built predictive models for financial market analysis using TensorFlow. Processed petabyte-scale datasets using distributed computing. Improved model accuracy from 85% to 92%.",
+      description:
+        "Contributed to research on educational inequality and labour market outcomes. Cleaned and analysed large administrative datasets. Co-authored a working paper on regional productivity disparities.",
     },
     {
-      title: "Research Associate",
-      company: "Cambridge Computer Lab",
-      duration: "2021 - 2022",
-      description: "Conducted research on neural network optimisation techniques. Co-authored 3 published papers in top-tier conferences. Mentored 2 undergraduate researchers.",
+      title: "Summer Analyst",
+      company: "McKinsey & Company",
+      duration: "Summer 2022",
+      description:
+        "Worked on a public sector engagement advising a government department on digital transformation. Conducted stakeholder interviews, built financial models, and presented recommendations to the client.",
     },
   ],
-  courses: [
-    { name: "Advanced Machine Learning", grade: "First (92%)" },
-    { name: "Statistical Data Analysis", grade: "First (90%)" },
-    { name: "Deep Learning Architecture", grade: "First (91%)" },
-    { name: "Research Methodology", grade: "First (88%)" },
-    { name: "Data Engineering at Scale", grade: "First (89%)" },
+  oxfordPapers: [
+    {
+      name: "Microeconomics",
+      grade: "First (76%)",
+      description: "Consumer and producer theory, general equilibrium, welfare economics, and market failures.",
+    },
+    {
+      name: "Macroeconomics",
+      grade: "First (74%)",
+      description: "Growth theory, business cycles, monetary and fiscal policy, and open economy macroeconomics.",
+    },
+    {
+      name: "Quantitative Economics",
+      grade: "First (72%)",
+      description: "Econometric methods, time-series analysis, panel data, and causal inference techniques.",
+    },
+    {
+      name: "Political Theory",
+      grade: "First (75%)",
+      description: "Justice, liberty, equality, and democracy from Plato to Rawls. Focus on contemporary liberalism.",
+    },
+    {
+      name: "British Politics and Government",
+      grade: "First (73%)",
+      description: "Parliamentary sovereignty, electoral systems, party politics, and devolution.",
+    },
+    {
+      name: "Ethics",
+      grade: "First (71%)",
+      description: "Metaethics, normative ethics, and applied ethics. Utilitarianism, deontology, and virtue ethics.",
+    },
+    {
+      name: "Development Economics (Option)",
+      grade: "First (78%)",
+      description: "Poverty, inequality, aid effectiveness, and institutional development. Thesis on microfinance in Sub-Saharan Africa.",
+    },
+    {
+      name: "Philosophy of Mind (Option)",
+      grade: "First (70%)",
+      description: "Consciousness, intentionality, mental causation, and the mind-body problem.",
+    },
   ],
   education: [
     {
-      degree: "Master of Philosophy in Data Intensive Science",
-      school: "University of Cambridge",
-      year: "2021 - 2023",
-      honors: "First Class Honours, Hall Prize for Best Research",
+      degree: "Bachelor of Arts in Philosophy, Politics and Economics",
+      school: "University of Oxford, Balliol College",
+      year: "2021 - 2024",
+      honors: "First Class Honours, Gibbs Prize in Economics",
     },
     {
-      degree: "Bachelor of Arts in Mathematics",
-      school: "University of Cambridge",
-      year: "2018 - 2021",
-      honors: "First Class Honours, Cambridge Mathematics Prize",
+      degree: "A-Levels",
+      school: "Eton College",
+      year: "2019 - 2021",
+      honors: "A*A*A*A in Economics, Mathematics, History, Politics",
     },
   ],
-  certifications: ["Google Cloud Professional Data Engineer", "TensorFlow Certified Developer"],
-  awards: ["Cambridge Data Science Award 2023", "Best Paper - International ML Conference 2023"],
-  languages: ["English (Native)", "Python (Advanced)", "SQL (Advanced)"],
-  interests: ["Machine Learning", "AI Research", "Data Engineering", "Open Source ML"],
-  projects: [
-    {
-      title: "Transformer Model Optimization",
-      description: "Developed novel attention mechanism reducing computational complexity by 30% while maintaining performance on BERT benchmarks.",
-    },
-    {
-      title: "Large Language Model Fine-tuning Framework",
-      description: "Created distributed framework for fine-tuning LLMs on custom datasets, now used by 50+ researchers globally. Open-sourced with 2k GitHub stars.",
-    },
+  certifications: [
+    "Bloomberg Market Concepts Certificate",
+    "LSE Summer School - Advanced Econometrics",
+    "Oxford Said Business School - Entrepreneurship Programme",
+    "Civil Service Fast Stream Assessment - Passed",
   ],
+  awards: [
+    "Gibbs Prize in Economics - Best Finals Performance",
+    "Oxford Union President - Michaelmas 2023",
+    "Balliol College Academic Scholarship",
+    "IFS Best Intern Research Contribution 2023",
+  ],
+  languages: ["English (Native)", "French (Fluent)", "German (Intermediate)"],
+  interests: ["Development Economics", "Public Policy", "Debating", "Political Philosophy"],
 }
 
-export default function AlexThompsonProfile() {
+export default function JamesWrightProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
-  const graduate = alexProfile
+  const graduate = jamesProfile
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -128,7 +170,6 @@ export default function AlexThompsonProfile() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Header */}
       <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
 
       <div className="bg-background border-b">
@@ -143,7 +184,7 @@ export default function AlexThompsonProfile() {
               Back to {userType === "employer" ? "Search" : "Dashboard"}
             </Link>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="text-white">Active</Badge>
+              <Badge variant="secondary">Active</Badge>
               <Badge className="bg-amber-500 text-white">{graduate.availability} Availability</Badge>
             </div>
           </div>
@@ -152,9 +193,7 @@ export default function AlexThompsonProfile() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Left Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
                 <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
@@ -162,12 +201,19 @@ export default function AlexThompsonProfile() {
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
-                <p className="text-sm text-muted-foreground mb-4">{graduate.university}</p>
+                <p className="text-sm text-muted-foreground mb-4">{graduate.college}, {graduate.university}</p>
                 <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
                 <div className="flex gap-2 mb-6">
                   <ContactDialog graduateName={graduate.name} />
                   <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
                 </div>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                    <FileText className="size-4 mr-2" />
+                    {graduate.portfolioLabel}
+                    <ExternalLink className="size-4 ml-1" />
+                  </a>
+                </Button>
                 <Button variant="outline" className="w-full bg-transparent mt-2">
                   <Download className="size-4 mr-2" />
                   Download CV
@@ -196,13 +242,22 @@ export default function AlexThompsonProfile() {
                   <span className="text-muted-foreground">{graduate.experience} Experience</span>
                 </div>
               </div>
+
+              <div className="mt-6 pt-6 border-t">
+                <h3 className="font-semibold mb-3 text-sm">Online Presence</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
+                    <Linkedin className="size-4" />
+                    <span>{graduate.linkedin}</span>
+                  </div>
+                </div>
+              </div>
             </Card>
 
-            {/* Skills */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <Database className="size-5" />
-                Technical Skills
+                <BookOpen className="size-5" />
+                Key Skills
               </h3>
               <div className="flex flex-wrap gap-2">
                 {graduate.skills.map((skill) => (
@@ -213,9 +268,8 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Languages */}
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Languages & Proficiencies</h3>
+              <h3 className="font-semibold mb-4">Languages</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.languages.map((lang) => (
                   <li key={lang}>• {lang}</li>
@@ -223,11 +277,10 @@ export default function AlexThompsonProfile() {
               </ul>
             </Card>
 
-            {/* Awards */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Award className="size-5" />
-                Awards
+                Awards & Honours
               </h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.awards.map((award) => (
@@ -237,31 +290,32 @@ export default function AlexThompsonProfile() {
             </Card>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* About */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">About</h2>
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
             </Card>
 
-            {/* Projects */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <TrendingUp className="size-5" />
-                Research Projects
+                <BookOpen className="size-5" />
+                Oxford PPE Papers & Results
               </h2>
-              <div className="space-y-4">
-                {graduate.projects.map((project, index) => (
+              <div className="grid gap-4">
+                {graduate.oxfordPapers.map((paper, index) => (
                   <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold mb-2">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-semibold">{paper.name}</h3>
+                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                        {paper.grade}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{paper.description}</p>
                   </div>
                 ))}
               </div>
             </Card>
 
-            {/* Work Experience */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <Briefcase className="size-5" />
@@ -286,23 +340,6 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Academic Coursework */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Database className="size-5" />
-                Academic Coursework
-              </h2>
-              <div className="grid gap-3">
-                {graduate.courses.map((course, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold text-sm">{course.name}</h3>
-                    <Badge className="bg-amber-50 text-amber-700 border-amber-200">{course.grade}</Badge>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            {/* Education */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <GraduationCap className="size-5" />
@@ -324,9 +361,8 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Certifications */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6">Professional Certifications</h2>
+              <h2 className="text-xl font-bold mb-6">Certifications & Programmes</h2>
               <ul className="space-y-2">
                 {graduate.certifications.map((cert) => (
                   <li key={cert} className="flex items-center gap-2 text-sm">
@@ -337,7 +373,6 @@ export default function AlexThompsonProfile() {
               </ul>
             </Card>
 
-            {/* Interests */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">Areas of Interest</h2>
               <div className="flex flex-wrap gap-2">

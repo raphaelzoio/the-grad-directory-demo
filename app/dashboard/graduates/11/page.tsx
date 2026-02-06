@@ -18,89 +18,140 @@ import {
   Award,
   Download,
   Linkedin,
-  Database,
-  TrendingUp,
+  Github,
+  Leaf,
+  BookOpen,
+  ExternalLink,
   ArrowLeft,
 } from "lucide-react"
 import Link from "next/link"
 
-const alexProfile = {
-  id: 6,
-  name: "Alex Thompson",
-  email: "alex.thompson@cam.ac.uk",
-  phone: "+44 7700 678901",
-  degree: "Data Intensive Science, MPhil (1st)",
+const priyaProfile = {
+  id: 11,
+  name: "Priya Sharma",
+  email: "priya.sharma@cam.ac.uk",
+  phone: "+44 7700 901234",
+  degree: "Chemical Engineering, MEng",
   university: "University of Cambridge",
-  graduationYear: 2023,
+  college: "Churchill College",
+  graduationYear: 2024,
   classification: "First Class Honours",
-  location: "Bristol, UK",
-  skills: ["Python", "Machine Learning", "TensorFlow", "PyTorch", "Data Analysis", "SQL"],
-  experience: "3 years",
-  availability: "2 weeks",
-  avatar: "AT",
-  bio: "First Class Data Intensive Science MPhil graduate from Cambridge with three years of experience in machine learning and AI research. Specialising in deep learning architectures and large-scale data processing. Strong background in academic research with publications in peer-reviewed journals. Seeking a senior data scientist role at an innovative organisation working on cutting-edge AI applications.",
-  linkedin: "linkedin.com/in/alexthompsondata",
+  location: "Manchester, UK",
+  skills: ["Process Design", "ASPEN Plus", "MATLAB", "Sustainability", "CFD Modelling", "Process Safety"],
+  experience: "1 year",
+  availability: "Immediate",
+  avatar: "PS",
+  bio: "MEng Chemical Engineering graduate from Churchill College, Cambridge, with First Class Honours and a strong focus on sustainable process design. Dissertation on carbon capture technology using novel solvent systems. Industrial experience through a year-long placement at a major energy company. Passionate about applying engineering solutions to the climate crisis. Seeking a graduate engineer role in energy, sustainability, or process industries.",
+  linkedin: "linkedin.com/in/priyasharma-chemeng",
+  github: "github.com/priyasharma-eng",
+  portfolioUrl: "https://github.com/priyasharma-eng",
+  portfolioLabel: "View Projects",
   workExperience: [
     {
-      title: "Machine Learning Engineer",
-      company: "DeepMind London",
-      duration: "2023 - Present",
-      description: "Developed and trained neural network models for natural language processing. Optimised training pipelines for 40% faster convergence. Published research on transformer architecture improvements.",
-    },
-    {
-      title: "Data Scientist",
-      company: "Bloomberg LP",
+      title: "Process Engineering Placement",
+      company: "BP, London",
       duration: "2022 - 2023",
-      description: "Built predictive models for financial market analysis using TensorFlow. Processed petabyte-scale datasets using distributed computing. Improved model accuracy from 85% to 92%.",
+      description:
+        "Year-long industrial placement in the low-carbon energy division. Developed process simulations for hydrogen production using ASPEN Plus. Conducted techno-economic analysis of carbon capture retrofit options. Presented findings to senior engineers and contributed to a patent application.",
     },
     {
-      title: "Research Associate",
-      company: "Cambridge Computer Lab",
-      duration: "2021 - 2022",
-      description: "Conducted research on neural network optimisation techniques. Co-authored 3 published papers in top-tier conferences. Mentored 2 undergraduate researchers.",
+      title: "Summer Research Intern",
+      company: "Cambridge Chemical Engineering Department",
+      duration: "Summer 2022",
+      description:
+        "Investigated novel amine solvents for post-combustion carbon capture. Performed laboratory experiments and modelled absorption columns using MATLAB. Research contributed to a journal publication in Chemical Engineering Science.",
+    },
+    {
+      title: "Engineering Outreach Coordinator",
+      company: "Women in STEM Society, Cambridge",
+      duration: "2021 - 2024",
+      description:
+        "Organised workshops and talks to encourage young women to pursue engineering. Led a team of 15 volunteers to deliver events reaching 500+ school students across Cambridgeshire.",
     },
   ],
-  courses: [
-    { name: "Advanced Machine Learning", grade: "First (92%)" },
-    { name: "Statistical Data Analysis", grade: "First (90%)" },
-    { name: "Deep Learning Architecture", grade: "First (91%)" },
-    { name: "Research Methodology", grade: "First (88%)" },
-    { name: "Data Engineering at Scale", grade: "First (89%)" },
+  cambridgeModules: [
+    {
+      name: "Reactor Design and Separation Processes",
+      grade: "First (80%)",
+      description: "Chemical reactor engineering, distillation, absorption, extraction, and membrane separation processes.",
+    },
+    {
+      name: "Fluid Mechanics and Thermodynamics",
+      grade: "First (77%)",
+      description: "Computational fluid dynamics, turbulent flow, non-Newtonian fluids, and advanced thermodynamic cycles.",
+    },
+    {
+      name: "Process Systems Engineering",
+      grade: "First (82%)",
+      description: "Process optimisation, control theory, plant-wide control, and scheduling under uncertainty.",
+    },
+    {
+      name: "Sustainability and Environmental Engineering",
+      grade: "First (85%)",
+      description: "Life cycle assessment, carbon footprinting, waste treatment, and circular economy principles.",
+    },
+    {
+      name: "Energy Systems",
+      grade: "First (78%)",
+      description: "Renewable energy technologies, energy storage, grid integration, and hydrogen economy.",
+    },
+    {
+      name: "Biochemical Engineering",
+      grade: "First (74%)",
+      description: "Bioreactor design, fermentation, downstream processing, and biopharmaceutical manufacturing.",
+    },
+  ],
+  projects: [
+    {
+      name: "Carbon Capture Solvent Screening",
+      description: "MEng dissertation investigating novel amine-based solvents for improved CO₂ absorption efficiency. Achieved 15% improvement over baseline monoethanolamine.",
+      technologies: ["ASPEN Plus", "MATLAB", "Lab Experiments"],
+    },
+    {
+      name: "Hydrogen Production Techno-Economic Model",
+      description: "Built a comprehensive model comparing blue and green hydrogen production routes for the UK energy system.",
+      technologies: ["Python", "Excel", "ASPEN Plus"],
+    },
+    {
+      name: "Sustainable Brewery Design",
+      description: "Group design project creating a zero-waste craft brewery with integrated heat recovery and water recycling.",
+      technologies: ["ASPEN Plus", "AutoCAD", "Process Safety Analysis"],
+    },
   ],
   education: [
     {
-      degree: "Master of Philosophy in Data Intensive Science",
-      school: "University of Cambridge",
-      year: "2021 - 2023",
-      honors: "First Class Honours, Hall Prize for Best Research",
+      degree: "Master of Engineering in Chemical Engineering",
+      school: "University of Cambridge, Churchill College",
+      year: "2020 - 2024",
+      honors: "First Class Honours, IChemE Undergraduate Award",
     },
     {
-      degree: "Bachelor of Arts in Mathematics",
-      school: "University of Cambridge",
-      year: "2018 - 2021",
-      honors: "First Class Honours, Cambridge Mathematics Prize",
+      degree: "A-Levels",
+      school: "Manchester Grammar School",
+      year: "2018 - 2020",
+      honors: "A*A*A* in Chemistry, Mathematics, Physics",
     },
   ],
-  certifications: ["Google Cloud Professional Data Engineer", "TensorFlow Certified Developer"],
-  awards: ["Cambridge Data Science Award 2023", "Best Paper - International ML Conference 2023"],
-  languages: ["English (Native)", "Python (Advanced)", "SQL (Advanced)"],
-  interests: ["Machine Learning", "AI Research", "Data Engineering", "Open Source ML"],
-  projects: [
-    {
-      title: "Transformer Model Optimization",
-      description: "Developed novel attention mechanism reducing computational complexity by 30% while maintaining performance on BERT benchmarks.",
-    },
-    {
-      title: "Large Language Model Fine-tuning Framework",
-      description: "Created distributed framework for fine-tuning LLMs on custom datasets, now used by 50+ researchers globally. Open-sourced with 2k GitHub stars.",
-    },
+  certifications: [
+    "IChemE Associate Member (AMIChemE)",
+    "NEBOSH Process Safety Management Certificate",
+    "ASPEN Plus Advanced User Certification",
+    "Sustainability and Climate Risk (CFA Institute)",
   ],
+  awards: [
+    "IChemE Undergraduate Award for Best Design Project",
+    "Churchill College Engineering Prize 2024",
+    "BP Placement Star Performer Award",
+    "Cambridge University Engineering Society - Best Presentation",
+  ],
+  languages: ["English (Native)", "Hindi (Fluent)", "Punjabi (Conversational)"],
+  interests: ["Green Energy", "Process Optimisation", "Carbon Capture", "STEM Outreach"],
 }
 
-export default function AlexThompsonProfile() {
+export default function PriyaSharmaProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
-  const graduate = alexProfile
+  const graduate = priyaProfile
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -128,7 +179,6 @@ export default function AlexThompsonProfile() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Header */}
       <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
 
       <div className="bg-background border-b">
@@ -143,8 +193,8 @@ export default function AlexThompsonProfile() {
               Back to {userType === "employer" ? "Search" : "Dashboard"}
             </Link>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="text-white">Active</Badge>
-              <Badge className="bg-amber-500 text-white">{graduate.availability} Availability</Badge>
+              <Badge variant="secondary">Active</Badge>
+              <Badge className="bg-green-500 text-white">{graduate.availability} Availability</Badge>
             </div>
           </div>
         </div>
@@ -152,9 +202,7 @@ export default function AlexThompsonProfile() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Left Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
                 <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
@@ -162,12 +210,19 @@ export default function AlexThompsonProfile() {
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
-                <p className="text-sm text-muted-foreground mb-4">{graduate.university}</p>
+                <p className="text-sm text-muted-foreground mb-4">{graduate.college}, {graduate.university}</p>
                 <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
                 <div className="flex gap-2 mb-6">
                   <ContactDialog graduateName={graduate.name} />
                   <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
                 </div>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                    <Github className="size-4 mr-2" />
+                    {graduate.portfolioLabel}
+                    <ExternalLink className="size-4 ml-1" />
+                  </a>
+                </Button>
                 <Button variant="outline" className="w-full bg-transparent mt-2">
                   <Download className="size-4 mr-2" />
                   Download CV
@@ -196,12 +251,25 @@ export default function AlexThompsonProfile() {
                   <span className="text-muted-foreground">{graduate.experience} Experience</span>
                 </div>
               </div>
+
+              <div className="mt-6 pt-6 border-t">
+                <h3 className="font-semibold mb-3 text-sm">Online Presence</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
+                    <Linkedin className="size-4" />
+                    <span>{graduate.linkedin}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
+                    <Github className="size-4" />
+                    <span>{graduate.github}</span>
+                  </div>
+                </div>
+              </div>
             </Card>
 
-            {/* Skills */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <Database className="size-5" />
+                <Leaf className="size-5" />
                 Technical Skills
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -213,9 +281,8 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Languages */}
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Languages & Proficiencies</h3>
+              <h3 className="font-semibold mb-4">Languages</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.languages.map((lang) => (
                   <li key={lang}>• {lang}</li>
@@ -223,11 +290,10 @@ export default function AlexThompsonProfile() {
               </ul>
             </Card>
 
-            {/* Awards */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Award className="size-5" />
-                Awards
+                Awards & Honours
               </h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.awards.map((award) => (
@@ -237,31 +303,32 @@ export default function AlexThompsonProfile() {
             </Card>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* About */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">About</h2>
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
             </Card>
 
-            {/* Projects */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <TrendingUp className="size-5" />
-                Research Projects
+                <BookOpen className="size-5" />
+                Cambridge Chemical Engineering Modules
               </h2>
-              <div className="space-y-4">
-                {graduate.projects.map((project, index) => (
+              <div className="grid gap-4">
+                {graduate.cambridgeModules.map((module, index) => (
                   <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold mb-2">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-semibold">{module.name}</h3>
+                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                        {module.grade}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{module.description}</p>
                   </div>
                 ))}
               </div>
             </Card>
 
-            {/* Work Experience */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <Briefcase className="size-5" />
@@ -286,23 +353,28 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Academic Coursework */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Database className="size-5" />
-                Academic Coursework
+                <Leaf className="size-5" />
+                Notable Projects
               </h2>
-              <div className="grid gap-3">
-                {graduate.courses.map((course, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold text-sm">{course.name}</h3>
-                    <Badge className="bg-amber-50 text-amber-700 border-amber-200">{course.grade}</Badge>
+              <div className="space-y-4">
+                {graduate.projects.map((project, index) => (
+                  <div key={index} className="p-4 rounded-lg border bg-muted/30">
+                    <h3 className="font-semibold mb-2">{project.name}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="outline" className="text-xs">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
             </Card>
 
-            {/* Education */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <GraduationCap className="size-5" />
@@ -324,7 +396,6 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Certifications */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6">Professional Certifications</h2>
               <ul className="space-y-2">
@@ -337,7 +408,6 @@ export default function AlexThompsonProfile() {
               </ul>
             </Card>
 
-            {/* Interests */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">Areas of Interest</h2>
               <div className="flex flex-wrap gap-2">

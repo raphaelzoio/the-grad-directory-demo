@@ -18,89 +18,126 @@ import {
   Award,
   Download,
   Linkedin,
-  Database,
-  TrendingUp,
+  BookOpen,
+  PenTool,
+  ExternalLink,
   ArrowLeft,
 } from "lucide-react"
 import Link from "next/link"
 
-const alexProfile = {
-  id: 6,
-  name: "Alex Thompson",
-  email: "alex.thompson@cam.ac.uk",
-  phone: "+44 7700 678901",
-  degree: "Data Intensive Science, MPhil (1st)",
-  university: "University of Cambridge",
+const tomProfile = {
+  id: 10,
+  name: "Tom Okafor",
+  email: "tom.okafor@eng.ox.ac.uk",
+  phone: "+44 7700 890123",
+  degree: "English Language and Literature, BA",
+  university: "University of Oxford",
+  college: "Magdalen College",
   graduationYear: 2023,
   classification: "First Class Honours",
-  location: "Bristol, UK",
-  skills: ["Python", "Machine Learning", "TensorFlow", "PyTorch", "Data Analysis", "SQL"],
-  experience: "3 years",
-  availability: "2 weeks",
-  avatar: "AT",
-  bio: "First Class Data Intensive Science MPhil graduate from Cambridge with three years of experience in machine learning and AI research. Specialising in deep learning architectures and large-scale data processing. Strong background in academic research with publications in peer-reviewed journals. Seeking a senior data scientist role at an innovative organisation working on cutting-edge AI applications.",
-  linkedin: "linkedin.com/in/alexthompsondata",
+  location: "Birmingham, UK",
+  skills: ["Copywriting", "Content Strategy", "Editing", "Research", "SEO Writing", "Proofreading"],
+  experience: "2 years",
+  availability: "Immediate",
+  avatar: "TO",
+  bio: "First Class English graduate from Magdalen College, Oxford, with a specialism in modern and contemporary literature. Two years of professional writing and editorial experience across publishing, media, and digital marketing. Skilled in crafting compelling copy, managing content strategies, and conducting in-depth research. Published creative writing in several literary journals. Seeking a role in publishing, journalism, or content strategy.",
+  linkedin: "linkedin.com/in/tomokafor-writer",
+  portfolioUrl: "https://tomokafor.substack.com",
+  portfolioLabel: "Read writing",
   workExperience: [
     {
-      title: "Machine Learning Engineer",
-      company: "DeepMind London",
+      title: "Editorial Assistant",
+      company: "Penguin Random House UK",
       duration: "2023 - Present",
-      description: "Developed and trained neural network models for natural language processing. Optimised training pipelines for 40% faster convergence. Published research on transformer architecture improvements.",
+      description:
+        "Assist editors in the literary fiction division with manuscript assessment, copy-editing, and proofreading. Write jacket copy and catalogue descriptions. Liaise with authors and agents on editorial queries. Managed the editorial process for three debut novels.",
     },
     {
-      title: "Data Scientist",
-      company: "Bloomberg LP",
+      title: "Content Writer",
+      company: "The Guardian (Freelance)",
       duration: "2022 - 2023",
-      description: "Built predictive models for financial market analysis using TensorFlow. Processed petabyte-scale datasets using distributed computing. Improved model accuracy from 85% to 92%.",
+      description:
+        "Contributed long-form features and book reviews to the culture section. Wrote pieces on contemporary fiction, poetry, and the publishing industry. Averaged 15,000 monthly reads per article.",
     },
     {
-      title: "Research Associate",
-      company: "Cambridge Computer Lab",
-      duration: "2021 - 2022",
-      description: "Conducted research on neural network optimisation techniques. Co-authored 3 published papers in top-tier conferences. Mentored 2 undergraduate researchers.",
+      title: "Communications Intern",
+      company: "Oxford Literary Festival",
+      duration: "Spring 2022",
+      description:
+        "Managed social media channels during the festival period. Wrote press releases and author profiles. Coordinated media coverage resulting in 40% increase in online engagement.",
     },
   ],
-  courses: [
-    { name: "Advanced Machine Learning", grade: "First (92%)" },
-    { name: "Statistical Data Analysis", grade: "First (90%)" },
-    { name: "Deep Learning Architecture", grade: "First (91%)" },
-    { name: "Research Methodology", grade: "First (88%)" },
-    { name: "Data Engineering at Scale", grade: "First (89%)" },
+  oxfordPapers: [
+    {
+      name: "Shakespeare",
+      grade: "First (76%)",
+      description: "Close reading of the plays and poems, performance history, and critical approaches to Shakespeare studies.",
+    },
+    {
+      name: "Victorian Literature",
+      grade: "First (78%)",
+      description: "The novel, poetry, and prose of the Victorian period including Dickens, Eliot, Tennyson, and the Brontës.",
+    },
+    {
+      name: "Modern Literature (1910-present)",
+      grade: "First (80%)",
+      description: "Modernism, postmodernism, and contemporary writing. Focus on Woolf, Joyce, Beckett, and postcolonial fiction.",
+    },
+    {
+      name: "Old English",
+      grade: "First (72%)",
+      description: "Language and literature of the Anglo-Saxon period including Beowulf, The Wanderer, and prose texts.",
+    },
+    {
+      name: "The English Language",
+      grade: "First (74%)",
+      description: "History of the English language, sociolinguistics, pragmatics, and discourse analysis.",
+    },
+    {
+      name: "Postcolonial Literature (Option)",
+      grade: "First (82%)",
+      description: "Literature of the postcolonial world with focus on African, Caribbean, and South Asian writing. Dissertation on Chimamanda Ngozi Adichie.",
+    },
+    {
+      name: "Creative Writing (Option)",
+      grade: "First (79%)",
+      description: "Workshop-based module producing a portfolio of fiction and poetry. Supervised by published novelist.",
+    },
   ],
   education: [
     {
-      degree: "Master of Philosophy in Data Intensive Science",
-      school: "University of Cambridge",
-      year: "2021 - 2023",
-      honors: "First Class Honours, Hall Prize for Best Research",
+      degree: "Bachelor of Arts in English Language and Literature",
+      school: "University of Oxford, Magdalen College",
+      year: "2020 - 2023",
+      honors: "First Class Honours, Addison Prize for English Essay",
     },
     {
-      degree: "Bachelor of Arts in Mathematics",
-      school: "University of Cambridge",
-      year: "2018 - 2021",
-      honors: "First Class Honours, Cambridge Mathematics Prize",
+      degree: "A-Levels",
+      school: "King Edward's School, Birmingham",
+      year: "2018 - 2020",
+      honors: "A*A*A in English Literature, History, French",
     },
   ],
-  certifications: ["Google Cloud Professional Data Engineer", "TensorFlow Certified Developer"],
-  awards: ["Cambridge Data Science Award 2023", "Best Paper - International ML Conference 2023"],
-  languages: ["English (Native)", "Python (Advanced)", "SQL (Advanced)"],
-  interests: ["Machine Learning", "AI Research", "Data Engineering", "Open Source ML"],
-  projects: [
-    {
-      title: "Transformer Model Optimization",
-      description: "Developed novel attention mechanism reducing computational complexity by 30% while maintaining performance on BERT benchmarks.",
-    },
-    {
-      title: "Large Language Model Fine-tuning Framework",
-      description: "Created distributed framework for fine-tuning LLMs on custom datasets, now used by 50+ researchers globally. Open-sourced with 2k GitHub stars.",
-    },
+  certifications: [
+    "Society for Editors and Proofreaders (SfEP) - Entry-Level Member",
+    "Google Digital Marketing Certificate",
+    "SEO Content Writing (HubSpot Academy)",
+    "Publishing Scotland Editorial Skills Course",
   ],
+  awards: [
+    "Addison Prize for English Essay - Magdalen College",
+    "Oxford Newdigate Poetry Prize - Runner-up 2023",
+    "Young Writer of the Year Shortlist - Sunday Times 2022",
+    "Oxford Creative Writing Anthology - Featured Writer",
+  ],
+  languages: ["English (Native)", "French (Fluent)", "Igbo (Conversational)"],
+  interests: ["Publishing", "Contemporary Fiction", "Poetry", "Literary Criticism"],
 }
 
-export default function AlexThompsonProfile() {
+export default function TomOkaforProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
-  const graduate = alexProfile
+  const graduate = tomProfile
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -128,7 +165,6 @@ export default function AlexThompsonProfile() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Header */}
       <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
 
       <div className="bg-background border-b">
@@ -143,8 +179,8 @@ export default function AlexThompsonProfile() {
               Back to {userType === "employer" ? "Search" : "Dashboard"}
             </Link>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="text-white">Active</Badge>
-              <Badge className="bg-amber-500 text-white">{graduate.availability} Availability</Badge>
+              <Badge variant="secondary">Active</Badge>
+              <Badge className="bg-green-500 text-white">{graduate.availability} Availability</Badge>
             </div>
           </div>
         </div>
@@ -152,9 +188,7 @@ export default function AlexThompsonProfile() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Left Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
                 <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
@@ -162,12 +196,19 @@ export default function AlexThompsonProfile() {
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
-                <p className="text-sm text-muted-foreground mb-4">{graduate.university}</p>
+                <p className="text-sm text-muted-foreground mb-4">{graduate.college}, {graduate.university}</p>
                 <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
                 <div className="flex gap-2 mb-6">
                   <ContactDialog graduateName={graduate.name} />
                   <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
                 </div>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
+                    <PenTool className="size-4 mr-2" />
+                    {graduate.portfolioLabel}
+                    <ExternalLink className="size-4 ml-1" />
+                  </a>
+                </Button>
                 <Button variant="outline" className="w-full bg-transparent mt-2">
                   <Download className="size-4 mr-2" />
                   Download CV
@@ -196,13 +237,22 @@ export default function AlexThompsonProfile() {
                   <span className="text-muted-foreground">{graduate.experience} Experience</span>
                 </div>
               </div>
+
+              <div className="mt-6 pt-6 border-t">
+                <h3 className="font-semibold mb-3 text-sm">Online Presence</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
+                    <Linkedin className="size-4" />
+                    <span>{graduate.linkedin}</span>
+                  </div>
+                </div>
+              </div>
             </Card>
 
-            {/* Skills */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <Database className="size-5" />
-                Technical Skills
+                <PenTool className="size-5" />
+                Key Skills
               </h3>
               <div className="flex flex-wrap gap-2">
                 {graduate.skills.map((skill) => (
@@ -213,9 +263,8 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Languages */}
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Languages & Proficiencies</h3>
+              <h3 className="font-semibold mb-4">Languages</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.languages.map((lang) => (
                   <li key={lang}>• {lang}</li>
@@ -223,11 +272,10 @@ export default function AlexThompsonProfile() {
               </ul>
             </Card>
 
-            {/* Awards */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Award className="size-5" />
-                Awards
+                Awards & Honours
               </h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {graduate.awards.map((award) => (
@@ -237,31 +285,32 @@ export default function AlexThompsonProfile() {
             </Card>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* About */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">About</h2>
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
             </Card>
 
-            {/* Projects */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <TrendingUp className="size-5" />
-                Research Projects
+                <BookOpen className="size-5" />
+                Oxford English Papers & Results
               </h2>
-              <div className="space-y-4">
-                {graduate.projects.map((project, index) => (
+              <div className="grid gap-4">
+                {graduate.oxfordPapers.map((paper, index) => (
                   <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold mb-2">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-semibold">{paper.name}</h3>
+                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                        {paper.grade}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{paper.description}</p>
                   </div>
                 ))}
               </div>
             </Card>
 
-            {/* Work Experience */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <Briefcase className="size-5" />
@@ -286,23 +335,6 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Academic Coursework */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Database className="size-5" />
-                Academic Coursework
-              </h2>
-              <div className="grid gap-3">
-                {graduate.courses.map((course, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
-                    <h3 className="font-semibold text-sm">{course.name}</h3>
-                    <Badge className="bg-amber-50 text-amber-700 border-amber-200">{course.grade}</Badge>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            {/* Education */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <GraduationCap className="size-5" />
@@ -324,9 +356,8 @@ export default function AlexThompsonProfile() {
               </div>
             </Card>
 
-            {/* Certifications */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6">Professional Certifications</h2>
+              <h2 className="text-xl font-bold mb-6">Certifications</h2>
               <ul className="space-y-2">
                 {graduate.certifications.map((cert) => (
                   <li key={cert} className="flex items-center gap-2 text-sm">
@@ -337,7 +368,6 @@ export default function AlexThompsonProfile() {
               </ul>
             </Card>
 
-            {/* Interests */}
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">Areas of Interest</h2>
               <div className="flex flex-wrap gap-2">

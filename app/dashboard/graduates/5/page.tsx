@@ -205,7 +205,7 @@ export default function JessicaMartinezProfile() {
             {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
-                <div className="size-24 rounded-full text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4" style={{ backgroundColor: "darkred" }}>
+                <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
                   {graduate.avatar}
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
@@ -216,7 +216,7 @@ export default function JessicaMartinezProfile() {
                   <ContactDialog graduateName={graduate.name} />
                   <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
                 </div>
-                <Button variant="outline" className="w-full bg-transparent" disabled>
+                <Button variant="outline" className="w-full bg-transparent mt-2">
                   <Download className="size-4 mr-2" />
                   Download CV
                 </Button>
@@ -268,7 +268,7 @@ export default function JessicaMartinezProfile() {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {graduate.skills.map((skill) => (
-                  <Badge key={skill} variant="secondary" className="text-white">
+                  <Badge key={skill} variant="secondary" className="text-white" style={{ backgroundColor: "#41888C" }}>
                     {skill}
                   </Badge>
                 ))}
