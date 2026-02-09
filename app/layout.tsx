@@ -1,13 +1,25 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Nata_Sans } from "next/font/google"
+import { Noto_Serif, Lora, Belleza } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const nataSans = Nata_Sans({
+const notoSerif = Noto_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-sans"
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-noto-serif",
+})
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-lora",
+})
+
+const belleza = Belleza({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-belleza",
 })
 
 export const metadata: Metadata = {
@@ -28,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nataSans.variable} font-sans font-medium antialiased`} style={{ "--font-serif": "var(--font-sans)" } as React.CSSProperties}>
+      <body className={`${notoSerif.variable} ${lora.variable} ${belleza.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

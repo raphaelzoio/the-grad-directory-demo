@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -32,18 +31,11 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
     }`
 
   return (
-    <header className="border-b border-primary/30 sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
+    <header className="border-b border-primary/30 sticky top-0 z-50" style={{ backgroundColor: "#E7D9CB" }}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-            <Image
-              src="/images/logo.jpg"
-              alt="The Graduate Directory"
-              width={32}
-              height={32}
-              className="size-8 rounded-lg"
-            />
-            <span className="text-xl font-belleza text-foreground"></span>
+            <span className="text-xl font-belleza text-foreground">The Graduate Directory</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             {userType === "employer" ? (
