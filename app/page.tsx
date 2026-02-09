@@ -23,38 +23,30 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
+      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#E7D9CB" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
-            <Image
-              src="/images/logo.jpg"
-              alt="The Graduate Directory"
-              width={40}
-              height={40}
-              className="size-10 rounded-lg"
-            />
-            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">The Graduate Directory</span>
+            <span className="text-2xl font-belleza text-foreground tracking-tight">The Graduate Directory</span>
           </Link>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#5a684b" }}>
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
-            <div className="space-y-8">
-              <h1 className="text-gray-600 text-3xl md:text-4xl lg:text-5xl font-serif text-foreground text-balance leading-tight">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+              <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-serif text-balance leading-tight">
                 The UK's premier graduate talent database
               </h1>
-              <p className="text-base md:text-lg text-gray-600 text-pretty max-w-2xl leading-relaxed">
+              <p className="text-base md:text-lg text-white/80 text-pretty max-w-2xl mx-auto leading-relaxed">
                 The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
               </p>
 
               {/* Login Buttons */}
-              <div className="flex flex-col sm:flex-row items-start gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto min-w-[200px]"
+                  className="w-full sm:w-auto min-w-[220px] text-foreground text-base px-8 py-6 bg-white hover:bg-white/90"
                   asChild
                 >
                   <Link href="/about-employers">
@@ -63,28 +55,18 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button size="lg"
-                  variant="secondary" className="w-full sm:w-auto min-w-[200px]" style={{ backgroundColor: "#f9c4c4" }} asChild>
+                  className="w-full sm:w-auto min-w-[220px] text-foreground text-base px-8 py-6 bg-white hover:bg-white/90" asChild>
                   <Link href="/about-graduates">
                     <Briefcase className="size-5" />
                     For students and graduates
                   </Link>
                 </Button>
               </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <Image
-                src="/images/board_briefcase.png"
-                alt="Graduate students"
-                width={500}
-                height={500}
-                className="w-72 max-w-md h-auto border rounded-lg shadow-lg object-cover px-4 py-8 bg-white"
-              />
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 border-t border-border" style={{ backgroundColor: "#A8D1DF" }}>
+      <section className="py-16 border-t border-border" style={{ backgroundColor: "#E7D9CB" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
               <h3 className="text-3xl md:text-4xl lg:text-4xl font-serif text-foreground text-balance leading-tight pb-6">
@@ -120,8 +102,24 @@ export default function HomePage() {
         </div>
       </section>  
 
+<section className="py-16 border-t border-border" style={{ backgroundColor: "#E7D9CB" }}>
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+              <h3 className="text-3xl md:text-4xl lg:text-4xl font-serif text-foreground text-balance leading-tight pb-6">
+                Tailored to your needs
+              </h3>
+              <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
+                State of the art profiles allow graduates to display skillsets comprehensively via inbuilt video introductions, upload of content such as CVs and dissertations, with ability to specify desired roles and sectors to optimise their employment prospects.
+              </p><br/>
+              <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
+   Employers use the database to rapidly and precisely target the high potential talent they seek and circumvent the consuming, high volume applications with little ability to distinguish between them.
+              </p>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-border py-12" style={{ backgroundColor: "#A8D1DF" }}>
+      <footer className="border-t border-border py-12" style={{ backgroundColor: "#E7D9CB" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-sm text-muted-foreground">

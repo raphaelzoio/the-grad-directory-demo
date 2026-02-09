@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowRight, ArrowLeft } from "lucide-react"
@@ -21,17 +20,10 @@ export default function AboutGraduatesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
+      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#E7D9CB" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3">
-            <Image 
-              src="/images/logo.jpg"
-              alt="The Graduate Directory"
-              width={40}
-              height={40}
-              className="size-10 rounded-lg"
-            />
-            <span className="text-2xl font-serif font-semibold text-foreground tracking-tight">The Graduate Directory</span>
+            <span className="text-2xl font-belleza text-foreground tracking-tight">The Graduate Directory</span>
           </Link>
         </div>
       </header>

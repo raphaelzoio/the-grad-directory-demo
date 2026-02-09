@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 /* Teal-sage palette with lighter, balanced cards */
@@ -118,10 +119,11 @@
   --sidebar-ring: #6fa895;
 }
 
-/* Playfair Display for elegant serif headings */
 @theme inline {
-  --font-serif: var(--font-serif);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-noto-serif), "Noto Serif", Georgia, serif;
+  --font-serif: var(--font-lora), "Lora", Georgia, serif;
+  --font-lora: var(--font-lora), "Lora", Georgia, serif;
+  --font-belleza: var(--font-belleza), "Belleza", sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Consolas", monospace;
 
   --color-background: var(--background);

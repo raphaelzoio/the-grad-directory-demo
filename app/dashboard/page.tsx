@@ -1070,7 +1070,7 @@ export default function DashboardPage() {
                 {/* Results Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {mockGraduates.map((graduate) => (
-                    <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow" style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#A8D1DF" }}>
+                    <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow" style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#E7D9CB" }}>
                       <div className="flex gap-4">
                         <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
                           {graduate.avatar}
@@ -1158,7 +1158,7 @@ export default function DashboardPage() {
 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {/* Prize Winner 1 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#A8D1DF" }}>
+                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#E7D9CB" }}>
                   <div className="flex items-start gap-4 mb-4">
                     <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
                       EW
