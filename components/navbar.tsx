@@ -32,7 +32,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
     }`
 
   return (
-    <header className="border-b border-primary/30 sticky top-0 z-50" style={{ backgroundColor: "#d4edda" }}>
+    <header className="border-b border-primary/30 sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>

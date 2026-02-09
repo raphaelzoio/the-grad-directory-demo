@@ -97,6 +97,12 @@ const alexProfile = {
   ],
 }
 
+const relatedProfiles = [
+  { id: 1, name: "Sarah Johnson", university: "Oxford", degree: "Computer Science, BSc", classification: "First", avatar: "SJ" },
+  { id: 7, name: "Olivia Patel", university: "Cambridge", degree: "Mathematics, MASt", classification: "Distinction", avatar: "OP" },
+  { id: 9, name: "Hannah Liu", university: "Cambridge", degree: "Natural Sciences, MSci", classification: "First", avatar: "HL" },
+]
+
 export default function AlexThompsonProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
@@ -234,6 +240,36 @@ export default function AlexThompsonProfile() {
                   <li key={award}>• {award}</li>
                 ))}
               </ul>
+            </Card>
+
+            {/* Related Profiles */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Related profiles</h3>
+              <div className="space-y-3">
+                {relatedProfiles.map((profile) => (
+                  <Link
+                    key={profile.id}
+                    href={`/dashboard/graduates/${profile.id}`}
+                    className="block p-3 rounded-lg border bg-muted/30 hover:bg-muted/50 transition-colors"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="size-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm shrink-0">
+                        {profile.avatar}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-sm text-foreground mb-1.5">
+                          {profile.name}
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          <Badge variant="secondary" className="text-xs">{profile.university}</Badge>
+                          <Badge variant="secondary" className="text-xs">{profile.degree}</Badge>
+                          <Badge variant="secondary" className="text-xs">{profile.classification}</Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </Card>
           </div>
 

@@ -22,7 +22,7 @@
   --primary-foreground: #ffffff;
 
   /* Light teal-green for secondary */
-  --secondary: #e8f2f0;
+  --secondary: #c8ddd8;
   --secondary-foreground: #1f3c3d;
 
   /* Very light sage backgrounds */
@@ -57,7 +57,7 @@
   --sidebar-foreground: #1f3c3d;
   --sidebar-primary: #41888c;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e8f2f0;
+  --sidebar-accent: #c8ddd8;
   --sidebar-accent-foreground: #1f3c3d;
   --sidebar-border: #d4e3e0;
   --sidebar-ring: #41888c;

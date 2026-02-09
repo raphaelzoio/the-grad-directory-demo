@@ -158,24 +158,10 @@ const sarahProfile = {
   interests: ["Artificial Intelligence", "Machine Learning", "Open Source", "Tech for Good"],
 }
 
-// Similar candidates based on Sarah's profile (CS, similar skills)
-const similarCandidates = [
-  {
-    id: 2,
-    name: "Michael Chen",
-    degree: "Software Engineering, MSc (1st)",
-    university: "University of Cambridge",
-    avatar: "MC",
-    skills: ["Java", "AWS", "Docker"],
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    degree: "Computer Engineering, BEng (1st)",
-    university: "University of Cambridge",
-    avatar: "DK",
-    skills: ["C++", "Rust", "Kubernetes"],
-  },
+const relatedProfiles = [
+  { id: 2, name: "Michael Chen", university: "Cambridge", degree: "Software Engineering, MSc", classification: "Distinction", avatar: "MC" },
+  { id: 4, name: "David Kim", university: "Cambridge", degree: "Computer Engineering, BEng", classification: "First", avatar: "DK" },
+  { id: 6, name: "Alex Thompson", university: "Cambridge", degree: "Data Intensive Science, MPhil", classification: "First", avatar: "AT" },
 ]
 
 export default function SarahJohnsonProfile() {
@@ -338,33 +324,28 @@ export default function SarahJohnsonProfile() {
               </ul>
             </Card>
 
-            {/* Find Similar Candidates */}
+            {/* Related Profiles */}
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Find similar candidates</h3>
+              <h3 className="font-semibold mb-4">Related profiles</h3>
               <div className="space-y-3">
-                {similarCandidates.map((candidate) => (
+                {relatedProfiles.map((profile) => (
                   <Link
-                    key={candidate.id}
-                    href={`/dashboard/graduates/${candidate.id}`}
+                    key={profile.id}
+                    href={`/dashboard/graduates/${profile.id}`}
                     className="block p-3 rounded-lg border bg-muted/30 hover:bg-muted/50 transition-colors"
                   >
                     <div className="flex items-start gap-3">
                       <div className="size-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm shrink-0">
-                        {candidate.avatar}
+                        {profile.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-sm text-foreground mb-0.5 hover:underline">
-                          {candidate.name}
+                        <h4 className="font-semibold text-sm text-foreground mb-1.5">
+                          {profile.name}
                         </h4>
-                        <p className="text-xs text-muted-foreground mb-2 line-clamp-1">
-                          {candidate.degree}
-                        </p>
                         <div className="flex flex-wrap gap-1">
-                          {candidate.skills.map((skill) => (
-                            <Badge key={skill} variant="secondary" className="text-xs text-white">
-                              {skill}
-                            </Badge>
-                          ))}
+                          <Badge variant="secondary" className="text-xs">{profile.university}</Badge>
+                          <Badge variant="secondary" className="text-xs">{profile.degree}</Badge>
+                          <Badge variant="secondary" className="text-xs">{profile.classification}</Badge>
                         </div>
                       </div>
                     </div>

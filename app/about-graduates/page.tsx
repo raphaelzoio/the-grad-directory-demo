@@ -21,10 +21,10 @@ export default function AboutGraduatesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#d4edda" }}>
+      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3">
-            <Image
+            <Image 
               src="/images/logo.jpg"
               alt="The Graduate Directory"
               width={40}
@@ -50,7 +50,7 @@ export default function AboutGraduatesPage() {
           </div>
 
           {/* Content Card */}
-          <Card className="p-8 md:p-12 mb-8">
+          <Card className="p-8 md:p-12 mb-8" style={{ backgroundColor: "#f9c4c4" }}>
             <div className="prose prose-lg max-w-none">
               <p className="text-foreground leading-relaxed mb-6">
                 The Graduate Directory is a closed database of profiles for the purposes of recruitment. It presents a valuable opportunity for Oxbridge students and recent graduates to

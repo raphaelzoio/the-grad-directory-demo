@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#d4edda" }}>
+      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
             <Image
@@ -63,7 +63,7 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button size="lg"
-                  variant="secondary" className="w-full sm:w-auto min-w-[200px]" style={{ backgroundColor: "#fde8e8" }} asChild>
+                  variant="secondary" className="w-full sm:w-auto min-w-[200px]" style={{ backgroundColor: "#f9c4c4" }} asChild>
                   <Link href="/about-graduates">
                     <Briefcase className="size-5" />
                     For students and graduates
@@ -77,14 +77,14 @@ export default function HomePage() {
                 alt="Graduate students"
                 width={500}
                 height={500}
-                className="w-60 max-w-md h-auto border rounded-lg shadow-lg object-cover px-4 py-8 bg-white mr-8"
+                className="w-72 max-w-md h-auto border rounded-lg shadow-lg object-cover px-4 py-8 bg-white"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 border-t border-border" style={{ backgroundColor: "#d4edda" }}>
+      <section className="py-16 border-t border-border" style={{ backgroundColor: "#A8D1DF" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
               <h3 className="text-3xl md:text-4xl lg:text-4xl font-serif text-foreground text-balance leading-tight pb-6">
@@ -121,7 +121,7 @@ export default function HomePage() {
       </section>  
 
       {/* Footer */}
-      <footer className="border-t border-border py-12" style={{ backgroundColor: "#d4edda" }}>
+      <footer className="border-t border-border py-12" style={{ backgroundColor: "#A8D1DF" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-sm text-muted-foreground">

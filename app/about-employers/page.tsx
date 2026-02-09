@@ -19,7 +19,7 @@ export default function AboutEmployersPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#d4edda" }}>
+      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#A8D1DF" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3">
             <Image
@@ -44,7 +44,7 @@ export default function AboutEmployersPage() {
           </div>
 
           {/* Information Card */}
-          <Card className="p-8 md:p-12">
+          <Card className="p-8 md:p-12" style={{ backgroundColor: "#A8D1DF" }}>
             <div className="space-y-6 text-foreground leading-relaxed">
               <p className="text-base">
                 The Graduate Directory is a closed searchable database enabling Oxbridge graduates to access high quality jobs and employers to access the highest quality junior talent.
