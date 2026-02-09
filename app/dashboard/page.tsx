@@ -1125,7 +1125,7 @@ export default function DashboardPage() {
                           )}
                         </div>
                         <div className="shrink-0">
-                          <Button variant="outline" size="sm" className="bg-transparent" asChild>
+                          <Button variant="outline" size="sm" className="bg-white" asChild>
                             <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
                               View
                             </Link>
