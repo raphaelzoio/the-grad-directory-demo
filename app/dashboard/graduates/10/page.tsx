@@ -11,7 +11,7 @@ import { ContactDialog } from "@/components/contact-dialog"
 import {
   MapPin,
   Mail,
-  Phone,
+  Phone, 
   Calendar,
   Briefcase,
   GraduationCap,
