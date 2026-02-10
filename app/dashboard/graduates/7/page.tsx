@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import { BookmarkButton } from "@/components/bookmark-button"
 import { ContactDialog } from "@/components/contact-dialog"
 import {
@@ -167,8 +166,6 @@ export default function OliviaPatelProfile() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
-
       <div className="bg-background border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

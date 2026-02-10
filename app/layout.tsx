@@ -1,7 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { ViewTransition } from "react"
 import { Noto_Serif, Lora, Belleza } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { NavbarWrapper } from "@/components/navbar-wrapper"
 import "./globals.css"
 
 const notoSerif = Noto_Serif({
@@ -41,7 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${notoSerif.variable} ${lora.variable} ${belleza.variable} font-sans antialiased`}>
-        {children}
+        <NavbarWrapper />
+        <ViewTransition default="cross-fade">
+          {children}
+        </ViewTransition>
         <Analytics />
       </body>
     </html>

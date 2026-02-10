@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import { Briefcase, MapPin, Clock, DollarSign, Users, Building2, ArrowLeft, Share2, Bookmark } from "lucide-react"
 
 // Mock job data
@@ -83,9 +82,6 @@ export default function JobDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <Navbar userType={userType} currentPage="jobs" />
-
       <div className="container mx-auto px-4 py-8">
         <Link
           href="/dashboard"

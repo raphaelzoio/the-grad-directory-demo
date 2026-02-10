@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import { Bookmark, MapPin, Building2, Trash2 } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -76,8 +75,6 @@ export default function SavedJobsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar userType={userType} currentPage="bookmarks" />
-
       <main className="min-h-screen bg-background">
         <section className="py-8">
           <div className="container mx-auto px-4">

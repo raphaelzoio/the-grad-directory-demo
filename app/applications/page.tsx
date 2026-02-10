@@ -19,7 +19,6 @@ import {
   XCircle,
   AlertCircle,
 } from "lucide-react"
-import { Navbar } from "@/components/navbar"
 
 const mockApplications = [
   {
@@ -150,8 +149,6 @@ export default function ApplicationsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar userType="graduate" currentPage="applications" />
-
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">

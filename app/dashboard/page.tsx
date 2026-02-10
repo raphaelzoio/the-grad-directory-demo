@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import {
   Search,
   MapPin,
@@ -30,6 +29,7 @@ import {
   Bookmark,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 
 
@@ -502,6 +502,7 @@ export default function DashboardPage() {
   const [selectedDiversity, setSelectedDiversity] = useState<string[]>([])
   const [inCurrentEmployment, setInCurrentEmployment] = useState(false)
   const [searchKeywords, setSearchKeywords] = useState("")
+  const [navigatingId, setNavigatingId] = useState<number | null>(null)
 
   const [jobStartDateOpen, setJobStartDateOpen] = useState(false)
   const [jobSectorOpen, setJobSectorOpen] = useState(false)
@@ -644,11 +645,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      {userType && (
-        <Navbar userType={userType} currentPage={userType === "employer" ? "directory" : "jobs"} />
-      )}
-
       {/* Main Content */}
       <main className="min-h-screen bg-background">
         {/* Profile Completion Banner for Graduates */}
@@ -1069,16 +1065,38 @@ export default function DashboardPage() {
 
                 {/* Results Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {mockGraduates.map((graduate) => (
-                    <Card key={graduate.id} className="p-5 hover:shadow-md transition-shadow" style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#E7D9CB" }}>
+                  {mockGraduates.map((graduate, index) => (
+                    <motion.div
+                      key={graduate.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{
+                        opacity: navigatingId === null || navigatingId === graduate.id ? 1 : 0.3,
+                        y: 0,
+                        scale: navigatingId === graduate.id ? 1.04 : navigatingId !== null ? 0.97 : 1,
+                        filter: navigatingId !== null && navigatingId !== graduate.id ? "blur(2px)" : "blur(0px)",
+                      }}
+                      transition={{
+                        duration: 0.3,
+                        delay: navigatingId === null ? index * 0.03 : 0,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      whileHover={navigatingId === null ? { scale: 1.02, y: -2 } : {}}
+                      whileTap={navigatingId === null ? { scale: 0.98 } : {}}
+                      className="cursor-pointer"
+                    >
+                    <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
+                    <Card
+                      className={`p-5 h-full transition-shadow duration-200 ${
+                        navigatingId === graduate.id ? "shadow-lg ring-2 ring-primary/30" : "hover:shadow-md"
+                      }`}
+                      style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#E7D9CB" }}
+                    >
                       <div className="flex gap-4">
                         <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
                           {graduate.avatar}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
                             <h3 className="font-semibold text-foreground">{graduate.name}</h3>
-                          </Link>
                           <p className="text-sm text-muted-foreground mb-2">
                             {graduate.degree} - {graduate.university}
                           </p>
@@ -1112,7 +1130,10 @@ export default function DashboardPage() {
                                 variant="outline"
                                 size="sm"
                                 className="h-7 text-xs gap-1.5"
-                                onClick={(e) => e.preventDefault()}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  window.open(graduate.portfolioUrl, "_blank")
+                                }}
                               >
                                 {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? (
                                   <BookOpen className="size-3" />
@@ -1124,15 +1145,10 @@ export default function DashboardPage() {
                             </div>
                           )}
                         </div>
-                        <div className="shrink-0">
-                          <Button variant="outline" size="sm" className="bg-white" asChild>
-                            <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop}>
-                              View
-                            </Link>
-                          </Button>
-                        </div>
                       </div>
                     </Card>
+                    </Link>
+                    </motion.div>
                   ))}
                 </div>
 

@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { UKCityAutocomplete } from "@/components/uk-city-autocomplete"
-import { Navbar } from "@/components/navbar"
 import { User, GraduationCap, Briefcase, Globe, Github, Linkedin, X, Plus, Save, Trash2 } from "lucide-react"
 import Link from "next/link"
 
@@ -105,8 +104,6 @@ export default function EditProfilePage() {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      <Navbar userType="graduate" currentPage="profile" />
-
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Page Header */}

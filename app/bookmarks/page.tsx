@@ -6,7 +6,6 @@ import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import { ContactDialog } from "@/components/contact-dialog"
 import {
   MapPin,
@@ -59,8 +58,6 @@ export default function BookmarksPage() {
 
   return (
     <div className="min-h-screen bg-[var(--background-app)]">
-      <Navbar userType="employer" currentPage="bookmarks" />
-
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="mb-6">

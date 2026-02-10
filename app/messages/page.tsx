@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Navbar } from "@/components/navbar"
 import { Search, Send, Paperclip, MoreVertical, Phone, Video, Archive, Star } from "lucide-react"
 
 const employerConversations = [
@@ -207,9 +206,6 @@ export default function MessagesPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      {userType && <Navbar userType={userType} currentPage="messages" />}
-
       {/* Messages Interface */}
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-140px)]">

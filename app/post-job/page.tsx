@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { UKCityAutocomplete } from "@/components/uk-city-autocomplete"
-import { Navbar } from "@/components/navbar"
 import { useEffect, useState } from "react"
 
 export default function PostJobPage() {
@@ -35,9 +34,6 @@ export default function PostJobPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <Navbar userType="employer" currentPage="post-job" />
-
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8 text-center">
