@@ -1105,7 +1105,9 @@ export default function DashboardPage() {
                     >
                     <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="no-underline hover:no-underline">
                     <Card
-                      className={`p-5 min-h-[260px] flex flex-col transition-shadow duration-200 shadow-sm relative overflow-hidden rounded-xl font-manrope border-0 ${
+                      className={`p-5 min-h-[260px] flex flex-col transition-shadow duration-200 shadow-sm relative overflow-hidden rounded-xl font-manrope ${
+                        index >= 3 && index <= 5 ? "border border-black/20" : "border-0"
+                      } ${
                         navigatingId === graduate.id ? "shadow-lg ring-2 ring-primary/30" : "hover:shadow-md"
                       }`}
                       style={{
@@ -1113,13 +1115,8 @@ export default function DashboardPage() {
                       }}
                     >
                       <div className="relative z-10 flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="size-14 rounded-full flex items-center justify-center font-semibold shrink-0 text-white"
-                            style={{ backgroundColor: graduate.university.includes("Oxford") ? "#8580b3" : "#f0c85a" }}
-                          >
-                            {graduate.avatar}
-                          </div>
-                          <h3 className="font-semibold text-lg" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
+                        <div className="mb-3">
+                          <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                         </div>
                         <div className="text-left">
                           <p className="text-sm mb-1" style={{ color: "#444" }}>
