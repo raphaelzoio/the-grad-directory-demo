@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { ViewTransition } from "react"
-import { Noto_Serif, Lora, Belleza } from "next/font/google"
+import { Noto_Serif, Lora, Belleza, Manrope } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { NavbarWrapper } from "@/components/navbar-wrapper"
 import { NavigationDirection } from "@/components/navigation-direction"
@@ -25,6 +25,12 @@ const belleza = Belleza({
   variable: "--font-belleza",
 })
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+})
+
 export const metadata: Metadata = {
   title: "The Graduate Directory",
   description:
@@ -43,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${notoSerif.variable} ${lora.variable} ${belleza.variable} font-sans antialiased`}>
+      <body className={`${notoSerif.variable} ${lora.variable} ${belleza.variable} ${manrope.variable} font-sans antialiased`}>
         <NavbarWrapper />
         <NavigationDirection />
         <ViewTransition default="cross-fade">

@@ -124,6 +124,7 @@
   --font-serif: var(--font-lora), "Lora", Georgia, serif;
   --font-lora: var(--font-lora), "Lora", Georgia, serif;
   --font-belleza: var(--font-belleza), "Belleza", sans-serif;
+  --font-manrope: var(--font-manrope), "Manrope", sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Consolas", monospace;
 
   --color-background: var(--background);

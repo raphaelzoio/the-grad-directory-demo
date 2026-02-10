@@ -1071,7 +1071,7 @@ export default function DashboardPage() {
         {/* Results Section */}
         {userType === "employer" && (
           <section className="py-8 border-b border-border">
-            <div className="mx-auto px-10">
+            <div className="mx-auto px-24">
               <div>
                 {/* Results Header */}
                 <div className="flex items-center justify-between mb-6">
@@ -1083,7 +1083,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Results Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[40%] mx-auto">
                   {mockGraduates.map((graduate, index) => (
                     <motion.div
                       key={graduate.id}
@@ -1103,33 +1103,42 @@ export default function DashboardPage() {
                       whileTap={navigatingId === null ? { scale: 0.98 } : {}}
                       className="cursor-pointer"
                     >
-                    <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="hover:underline">
+                    <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="no-underline hover:no-underline">
                     <Card
-                      className={`p-5 h-full transition-shadow duration-200 ${
+                      className={`p-5 min-h-[260px] flex flex-col transition-shadow duration-200 shadow-sm relative overflow-hidden rounded-xl font-manrope border-0 ${
                         navigatingId === graduate.id ? "shadow-lg ring-2 ring-primary/30" : "hover:shadow-md"
                       }`}
-                      style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#E7D9CB" }}
+                      style={{
+                        background: `linear-gradient(to bottom, white 80%, white 85%, ${graduate.university.includes("Oxford") ? "#c5c3d9" : "#fbe8b3"})`,
+                      }}
                     >
-                      <div className="flex gap-4">
-                        <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold shrink-0">
-                          {graduate.avatar}
+                      <div className="relative z-10 flex-1">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="size-14 rounded-full flex items-center justify-center font-semibold shrink-0 text-white"
+                            style={{ backgroundColor: graduate.university.includes("Oxford") ? "#8580b3" : "#f0c85a" }}
+                          >
+                            {graduate.avatar}
+                          </div>
+                          <h3 className="font-semibold text-lg" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                         </div>
-                        <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-foreground">{graduate.name}</h3>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {graduate.degree} - {graduate.university}
+                        <div className="text-left">
+                          <p className="text-sm mb-1" style={{ color: "#444" }}>
+                            {graduate.degree}
+                          </p>
+                          <p className="text-sm mb-2" style={{ color: "#555" }}>
+                            {graduate.university}
                           </p>
                           <div className="flex flex-wrap gap-1.5 mb-3">
-                            {graduate.skills.slice(0, 3).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-xs text-white" style={{ backgroundColor: "#41888C" }}>
+                            {graduate.skills.slice(0, 2).map((skill) => (
+                              <Badge key={skill} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
                                 {skill}
                               </Badge>
                             ))}
-                            {graduate.skills.length > 3 && (
-                              <Badge variant="outline" className="text-xs">+{graduate.skills.length - 3}</Badge>
+                            {graduate.skills.length > 2 && (
+                              <Badge variant="outline" className="text-xs">+{graduate.skills.length - 2}</Badge>
                             )}
                           </div>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#555" }}>
                             <span className="flex items-center gap-1">
                               <MapPin className="size-3" />
                               {graduate.location}
