@@ -1071,8 +1071,8 @@ export default function DashboardPage() {
         {/* Results Section */}
         {userType === "employer" && (
           <section className="py-8 border-b border-border">
-            <div className="mx-auto px-24">
-              <div>
+            <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
                 {/* Results Header */}
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-sm text-muted-foreground">42 active graduates found</p>
@@ -1083,7 +1083,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Results Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[40%] mx-auto">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {mockGraduates.map((graduate, index) => (
                     <motion.div
                       key={graduate.id}
@@ -1105,56 +1105,55 @@ export default function DashboardPage() {
                     >
                     <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="no-underline hover:no-underline">
                     <Card
-                      className={`p-5 min-h-[260px] flex flex-col transition-shadow duration-200 shadow-sm relative overflow-hidden rounded-xl font-manrope ${
-                        index >= 3 && index <= 5 ? "border border-black/20" : "border-0"
-                      } ${
-                        navigatingId === graduate.id ? "shadow-lg ring-2 ring-primary/30" : "hover:shadow-md"
+                      className={`p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20 ${
+                        navigatingId === graduate.id ? "ring-2 ring-primary/30" : ""
                       }`}
                       style={{
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
                         background: `linear-gradient(to bottom, white 80%, white 85%, ${graduate.university.includes("Oxford") ? "#c5c3d9" : "#fbe8b3"})`,
                       }}
                     >
                       <div className="relative z-10 flex-1">
-                        <div className="mb-3">
-                          <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
+                        <div className="mb-4">
+                          <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                         </div>
                         <div className="text-left">
-                          <p className="text-sm mb-1" style={{ color: "#444" }}>
+                          <p className="text-base mb-1" style={{ color: "#444" }}>
                             {graduate.degree}
                           </p>
-                          <p className="text-sm mb-2" style={{ color: "#555" }}>
+                          <p className="text-base mb-3" style={{ color: "#555" }}>
                             {graduate.university}
                           </p>
-                          <div className="flex flex-wrap gap-1.5 mb-3">
+                          <div className="flex flex-wrap gap-2 mb-4">
                             {graduate.skills.slice(0, 2).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
+                              <Badge key={skill} variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
                                 {skill}
                               </Badge>
                             ))}
                             {graduate.skills.length > 2 && (
-                              <Badge variant="outline" className="text-xs">+{graduate.skills.length - 2}</Badge>
+                              <Badge variant="outline" className="text-sm">+{graduate.skills.length - 2}</Badge>
                             )}
                           </div>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#555" }}>
-                            <span className="flex items-center gap-1">
-                              <MapPin className="size-3" />
+                          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm" style={{ color: "#555" }}>
+                            <span className="flex items-center gap-1.5">
+                              <MapPin className="size-4" />
                               {graduate.location}
                             </span>
-                            <span className="flex items-center gap-1">
-                              <Clock className="size-3" />
+                            <span className="flex items-center gap-1.5">
+                              <Clock className="size-4" />
                               {graduate.availability}
                             </span>
-                            <span className="flex items-center gap-1">
-                              <Briefcase className="size-3" />
+                            <span className="flex items-center gap-1.5">
+                              <Briefcase className="size-4" />
                               {graduate.experience}
                             </span>
                           </div>
                           {graduate.portfolioUrl && graduate.portfolioLabel && (
-                            <div className="mt-2">
+                            <div className="mt-3">
                               <Button
                                 variant="outline"
                                 size="sm"
-                                className="h-7 text-xs gap-1.5"
+                                className="h-8 text-sm gap-1.5"
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   window.open(graduate.portfolioUrl, "_blank")
