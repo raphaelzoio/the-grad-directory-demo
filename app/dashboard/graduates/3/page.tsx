@@ -22,6 +22,7 @@ import {
   FileText,
   ExternalLink,
   ArrowLeft,
+  ChevronDown,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -172,6 +173,7 @@ export default function EmilyRodriguezProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
+  const [modulesExpanded, setModulesExpanded] = useState(false)
   const graduate = emilyProfile
 
   useEffect(() => {
@@ -374,12 +376,17 @@ export default function EmilyRodriguezProfile() {
 
             {/* Oxford Papers */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <BookOpen className="size-5" />
-                Oxford Law Papers & Results
-              </h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <BookOpen className="size-5" />
+                  Oxford Law Papers & Results
+                </h2>
+                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+                </button>
+              </div>
               <div className="grid gap-4">
-                {graduate.oxfordPapers.map((paper, index) => (
+                {(modulesExpanded ? graduate.oxfordPapers : graduate.oxfordPapers.slice(0, 1)).map((paper, index) => (
                   <div key={index} className="p-4 rounded-lg border bg-muted/30">
                     <div className="flex items-start justify-between mb-2">
                       <h3 className="font-semibold">{paper.name}</h3>
@@ -395,7 +402,7 @@ export default function EmilyRodriguezProfile() {
 
             {/* Work Experience */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <Briefcase className="size-5" />
                 Legal Experience
               </h2>
@@ -420,7 +427,7 @@ export default function EmilyRodriguezProfile() {
 
             {/* Mooting */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <Scale className="size-5" />
                 Mooting & Advocacy
               </h2>
@@ -439,7 +446,7 @@ export default function EmilyRodriguezProfile() {
 
             {/* Education */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <GraduationCap className="size-5" />
                 Education
               </h2>
@@ -461,7 +468,7 @@ export default function EmilyRodriguezProfile() {
 
             {/* Certifications */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <FileText className="size-5" />
                 Professional Qualifications
               </h2>

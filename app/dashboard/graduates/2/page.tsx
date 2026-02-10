@@ -22,6 +22,7 @@ import {
   Server,
   ExternalLink,
   ArrowLeft,
+  ChevronDown,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -158,6 +159,7 @@ export default function MichaelChenProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
+  const [modulesExpanded, setModulesExpanded] = useState(false)
   const graduate = michaelProfile
 
   useEffect(() => {
@@ -364,12 +366,17 @@ export default function MichaelChenProfile() {
 
             {/* Imperial Modules */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Server className="size-5" />
-                Imperial College MSc Modules
-              </h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Server className="size-5" />
+                  Imperial College MSc Modules
+                </h2>
+                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+                </button>
+              </div>
               <div className="grid gap-4">
-                {graduate.imperialModules.map((module, index) => (
+                {(modulesExpanded ? graduate.imperialModules : graduate.imperialModules.slice(0, 1)).map((module, index) => (
                   <div key={index} className="p-4 rounded-lg border bg-muted/30">
                     <div className="flex items-start justify-between mb-2">
                       <h3 className="font-semibold">{module.name}</h3>
@@ -385,7 +392,7 @@ export default function MichaelChenProfile() {
 
             {/* Work Experience */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <Briefcase className="size-5" />
                 Work Experience
               </h2>
@@ -410,7 +417,7 @@ export default function MichaelChenProfile() {
 
             {/* Projects */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <Cloud className="size-5" />
                 Notable Projects
               </h2>
@@ -433,7 +440,7 @@ export default function MichaelChenProfile() {
 
             {/* Education */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <GraduationCap className="size-5" />
                 Education
               </h2>
@@ -455,7 +462,7 @@ export default function MichaelChenProfile() {
 
             {/* Certifications */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6">Professional Certifications</h2>
+              <h2 className="text-xl font-bold mb-3">Professional Certifications</h2>
               <ul className="space-y-2">
                 {graduate.certifications.map((cert) => (
                   <li key={cert} className="flex items-center gap-2 text-sm">

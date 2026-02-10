@@ -32,7 +32,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 md:py-16" style={{ backgroundColor: "#5a684b" }}>
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
               <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-serif text-balance leading-tight">

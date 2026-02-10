@@ -19,6 +19,7 @@ import {
   Linkedin,
   Database,
   TrendingUp,
+  ChevronDown,
   ArrowLeft,
 } from "lucide-react"
 import Link from "next/link"
@@ -106,6 +107,7 @@ export default function AlexThompsonProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
+  const [modulesExpanded, setModulesExpanded] = useState(false)
   const graduate = alexProfile
 
   useEffect(() => {
@@ -291,7 +293,7 @@ export default function AlexThompsonProfile() {
 
             {/* Projects */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <TrendingUp className="size-5" />
                 Research Projects
               </h2>
@@ -307,7 +309,7 @@ export default function AlexThompsonProfile() {
 
             {/* Work Experience */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <Briefcase className="size-5" />
                 Work Experience
               </h2>
@@ -332,12 +334,17 @@ export default function AlexThompsonProfile() {
 
             {/* Academic Coursework */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                <Database className="size-5" />
-                Academic Coursework
-              </h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <Database className="size-5" />
+                  Academic Coursework
+                </h2>
+                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+                </button>
+              </div>
               <div className="grid gap-3">
-                {graduate.courses.map((course, index) => (
+                {(modulesExpanded ? graduate.courses : graduate.courses.slice(0, 1)).map((course, index) => (
                   <div key={index} className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
                     <h3 className="font-semibold text-sm">{course.name}</h3>
                     <Badge className="bg-amber-50 text-amber-700 border-amber-200">{course.grade}</Badge>
@@ -348,7 +355,7 @@ export default function AlexThompsonProfile() {
 
             {/* Education */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
                 <GraduationCap className="size-5" />
                 Education
               </h2>
@@ -370,7 +377,7 @@ export default function AlexThompsonProfile() {
 
             {/* Certifications */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-6">Professional Certifications</h2>
+              <h2 className="text-xl font-bold mb-3">Professional Certifications</h2>
               <ul className="space-y-2">
                 {graduate.certifications.map((cert) => (
                   <li key={cert} className="flex items-center gap-2 text-sm">
