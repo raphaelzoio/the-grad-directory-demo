@@ -157,6 +157,7 @@ const relatedProfiles = [
 export default function MichaelChenProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
+  const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
   const graduate = michaelProfile
 
   useEffect(() => {
@@ -169,6 +170,8 @@ export default function MichaelChenProfile() {
         router.push("/")
       } else {
         setUserType(type)
+        const previousPathname = sessionStorage.getItem("previousPathname")
+        setCameFromBookmarks(previousPathname === "/bookmarks")
         sessionStorage.setItem("userType", type)
         localStorage.setItem("userType", type)
       }
@@ -177,6 +180,15 @@ export default function MichaelChenProfile() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const handleBackToDashboard = () => {
+    if (cameFromBookmarks) {
+      sessionStorage.removeItem("graduateBackTransition")
+    } else {
+      sessionStorage.setItem("graduateBackTransition", "1")
+    }
+    scrollToTop()
   }
 
   if (!userType) {
@@ -189,12 +201,12 @@ export default function MichaelChenProfile() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link
-              href="/dashboard"
-              onClick={scrollToTop}
+              href={cameFromBookmarks ? "/bookmarks" : "/dashboard"}
+              onClick={handleBackToDashboard}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="size-4" />
-              Back to {userType === "employer" ? "Search" : "Dashboard"}
+              Back to {cameFromBookmarks ? "Saved Candidates" : userType === "employer" ? "Search" : "Dashboard"}
             </Link>
             <div className="flex items-center gap-2">
               <Badge variant="secondary" className="text-white">Active</Badge>

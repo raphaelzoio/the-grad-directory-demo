@@ -4,6 +4,7 @@ import { ViewTransition } from "react"
 import { Noto_Serif, Lora, Belleza } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { NavbarWrapper } from "@/components/navbar-wrapper"
+import { NavigationDirection } from "@/components/navigation-direction"
 import "./globals.css"
 
 const notoSerif = Noto_Serif({
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${notoSerif.variable} ${lora.variable} ${belleza.variable} font-sans antialiased`}>
         <NavbarWrapper />
+        <NavigationDirection />
         <ViewTransition default="cross-fade">
           {children}
         </ViewTransition>

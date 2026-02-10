@@ -29,7 +29,7 @@ import {
   Bookmark,
 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 
 
 
@@ -485,6 +485,7 @@ const mockSavedJobs = [
 
 export default function DashboardPage() {
   const router = useRouter()
+  const prefersReducedMotion = useReducedMotion()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [locationOpen, setLocationOpen] = useState(false)
   const [universityOpen, setUniversityOpen] = useState(false)
@@ -510,6 +511,7 @@ export default function DashboardPage() {
   const [selectedJobStartDates, setSelectedJobStartDates] = useState<string[]>([])
   const [selectedJobSectors, setSelectedJobSectors] = useState<string[]>([])
   const [selectedJobBusinessSizes, setSelectedJobBusinessSizes] = useState<string[]>([])
+  const [animateFromGraduateBack, setAnimateFromGraduateBack] = useState(false)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -528,6 +530,16 @@ export default function DashboardPage() {
       }
     }
   }, [router])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const shouldAnimate = sessionStorage.getItem("graduateBackTransition") === "1"
+    if (shouldAnimate) {
+      setAnimateFromGraduateBack(true)
+      sessionStorage.removeItem("graduateBackTransition")
+    }
+  }, [])
 
   const locationRef = useRef<HTMLDivElement>(null)
   const universityRef = useRef<HTMLDivElement>(null)
@@ -643,8 +655,15 @@ export default function DashboardPage() {
     return null
   }
 
+  const shouldAnimateBackEntry = animateFromGraduateBack && !prefersReducedMotion
+
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div
+      className="min-h-screen bg-background"
+      initial={shouldAnimateBackEntry ? { y: -36 } : undefined}
+      animate={{ y: 0 }}
+      transition={shouldAnimateBackEntry ? { duration: 0.35, ease: [0.16, 1, 0.3, 1] } : { duration: 0 }}
+    >
       {/* Main Content */}
       <main className="min-h-screen bg-background">
         {/* Profile Completion Banner for Graduates */}
@@ -1609,7 +1628,6 @@ export default function DashboardPage() {
           </section>
         )}
       </main>
-    </div>
-    )
-  }
-
+    </motion.div>
+  )
+}
