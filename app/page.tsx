@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Building2 } from "lucide-react"
+import { Building2, Lightbulb } from "lucide-react"
 
 export default function HomePage() {
   const router = useRouter()
@@ -28,9 +28,6 @@ export default function HomePage() {
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
             <span className="text-2xl font-belleza text-white tracking-tight">The Graduate Directory</span>
           </Link>
-          <Link href="/about-employers" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-            About
-          </Link>
         </div>
       </header>
 
@@ -45,23 +42,14 @@ export default function HomePage() {
                 The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
               </p>
 
-              {/* Login Buttons */}
-              <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2 pb-16">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto min-w-[220px] text-foreground text-base px-8 py-6 bg-white hover:bg-white/90"
-                  onClick={() => handleLogin("employer")}
-                >
-                  <Building2 className="size-5 mr-2" />
-                  See the database
-                </Button>
-              </div>
+              <div className="pt-2 pb-16" />
+
           </div>
         </div>
       </section>
 
       {/* Image Section */}
-      <section className="w-full" style={{ backgroundColor: "#445145" }}>
+      <section className="w-full relative" style={{ backgroundColor: "#445145" }}>
         <div className="relative w-full opacity-60">
           <Image
             src="/images/landing-page.png"
@@ -71,6 +59,28 @@ export default function HomePage() {
             className="w-full h-auto block"
             priority
           />
+        </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ marginTop: "-5%" }}>
+          <div className="flex flex-row items-center gap-12">
+            <Button
+              size="lg"
+              className="min-w-[350px] text-foreground text-xl px-12 py-8 bg-white hover:bg-white/90 rounded-none"
+              asChild
+            >
+              <Link href="/about-employers">
+                <Lightbulb className="size-7 mr-3" />
+                About
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              className="min-w-[350px] text-foreground text-xl px-12 py-8 bg-white hover:bg-white/90 rounded-none"
+              onClick={() => handleLogin("employer")}
+            >
+              <Building2 className="size-7 mr-3" />
+              See the database
+            </Button>
+          </div>
         </div>
       </section>
 
