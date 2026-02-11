@@ -26,7 +26,7 @@ export default function HomePage() {
       <header className="border-b border-white/20 sticky top-0 z-50" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4 py-8 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
-            <span className="text-2xl font-belleza text-white tracking-tight">The Graduate Directory</span>
+            <span className="text-3xl font-belleza text-white tracking-tight">The Graduate Directory</span>
           </Link>
         </div>
       </header>

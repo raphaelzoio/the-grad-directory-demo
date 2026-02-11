@@ -26,16 +26,16 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
   }
 
   const navLinkClass = (isActive: boolean) =>
-    `text-sm font-medium transition-colors ${
+    `text-base font-medium transition-colors ${
       isActive ? "text-white" : "text-white/70 hover:text-white"
     }`
 
   return (
     <header className="border-b border-white/20 sticky top-0 z-50" style={{ backgroundColor: "#445145" }}>
-      <div className="container mx-auto px-4 py-5 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-8 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-            <span className="text-xl font-belleza text-white">The Graduate Directory</span>
+            <span className="text-2xl font-belleza text-white">The Graduate Directory</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             {userType === "employer" ? (
