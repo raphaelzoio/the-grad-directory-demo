@@ -32,17 +32,17 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="flex-1 flex flex-col justify-center pt-16" style={{ backgroundColor: "#445145" }}>
+      <section className="flex-1 flex flex-col justify-center pt-30" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-serif text-balance leading-tight">
                 Search, refined
               </h1>
-              <p className="text-base md:text-lg text-white/80 text-pretty max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg text-white/80 text-pretty max-w-2xl mx-auto leading-relaxed mt-4">
                 The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
               </p>
 
-              <div className="pt-2 pb-16" />
+              <div className="pt-2 pb-30" />
 
           </div>
         </div>
