@@ -1189,6 +1189,7 @@ export default function DashboardPage() {
         {userType === "employer" && (
           <section className="py-16 bg-gradient-to-b from-muted/30 to-background border-b border-border">
             <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
               <div className="mb-8">
                 <h2 className="text-2xl font-semibold text-foreground mb-2">Prize Winners</h2>
                 <p className="text-sm text-muted-foreground">
@@ -1196,96 +1197,91 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {/* Prize Winner 1 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#E7D9CB" }}>
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      EW
+                <Link href="/dashboard/graduates/1" onClick={scrollToTop} className="no-underline hover:no-underline">
+                <Card
+                  className="p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                  style={{
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                    background: "linear-gradient(to bottom, white 80%, white 85%, #fbe8b3)",
+                  }}
+                >
+                  <div className="relative z-10 flex-1">
+                    <div className="mb-4">
+                      <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>Eleanor Watson</h3>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Eleanor Watson</h3>
-                      <p className="text-sm text-muted-foreground">Economics, BA (1st)</p>
-                      <p className="text-sm text-muted-foreground">University of Cambridge</p>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
-                    <div className="flex items-start gap-2">
-                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">Stevenson Prize for Economics</p>
-                        <p className="text-xs text-muted-foreground">Best undergraduate dissertation 2024</p>
+                    <div className="text-left">
+                      <p className="text-base mb-1" style={{ color: "#444" }}>Economics, BA (1st)</p>
+                      <p className="text-base mb-3" style={{ color: "#555" }}>University of Cambridge</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <Badge variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                          <Award className="size-3 mr-1" />
+                          Stevenson Prize for Economics
+                        </Badge>
                       </div>
+                      <p className="text-sm" style={{ color: "#555" }}>Best undergraduate dissertation 2024</p>
                     </div>
                   </div>
-
-                  <Button size="sm" asChild>
-                    <Link href="/dashboard/graduates/1" onClick={scrollToTop}>
-                      View Profile
-                    </Link>
-                  </Button>
                 </Card>
+                </Link>
 
                 {/* Prize Winner 2 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#fde8e8" }}>
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      AJ
+                <Link href="/dashboard/graduates/2" onClick={scrollToTop} className="no-underline hover:no-underline">
+                <Card
+                  className="p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                  style={{
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                    background: "linear-gradient(to bottom, white 80%, white 85%, #fbe8b3)",
+                  }}
+                >
+                  <div className="relative z-10 flex-1">
+                    <div className="mb-4">
+                      <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>Aisha Johnson</h3>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Aisha Johnson</h3>
-                      <p className="text-sm text-muted-foreground">Computer Science, MEng (1st)</p>
-                      <p className="text-sm text-muted-foreground">Imperial College London</p>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
-                    <div className="flex items-start gap-2">
-                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">Google Scholar Award</p>
-                        <p className="text-xs text-muted-foreground">Excellence in AI and Machine Learning</p>
+                    <div className="text-left">
+                      <p className="text-base mb-1" style={{ color: "#444" }}>Computer Science, MEng (1st)</p>
+                      <p className="text-base mb-3" style={{ color: "#555" }}>Imperial College London</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <Badge variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                          <Award className="size-3 mr-1" />
+                          Google Scholar Award
+                        </Badge>
                       </div>
+                      <p className="text-sm" style={{ color: "#555" }}>Excellence in AI and Machine Learning</p>
                     </div>
                   </div>
-
-                  <Button size="sm" asChild>
-                    <Link href="/dashboard/graduates/2" onClick={scrollToTop}>
-                      View Profile
-                    </Link>
-                  </Button>
                 </Card>
+                </Link>
 
                 {/* Prize Winner 3 */}
-                <Card className="p-6 hover:shadow-lg transition-shadow border-primary/20" style={{ backgroundColor: "#fde8e8" }}>
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-lg shrink-0">
-                      RC
+                <Link href="/dashboard/graduates/3" onClick={scrollToTop} className="no-underline hover:no-underline">
+                <Card
+                  className="p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                  style={{
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                    background: "linear-gradient(to bottom, white 80%, white 85%, #c5c3d9)",
+                  }}
+                >
+                  <div className="relative z-10 flex-1">
+                    <div className="mb-4">
+                      <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>Rohan Chaudhury</h3>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-foreground">Rohan Chaudhury</h3>
-                      <p className="text-sm text-muted-foreground">Physics, BA (1st)</p>
-                      <p className="text-sm text-muted-foreground">University of Oxford</p>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 p-3 bg-primary/10 rounded-md border border-primary/20">
-                    <div className="flex items-start gap-2">
-                      <Award className="size-4 text-primary mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">Hertz Fellowship Award</p>
-                        <p className="text-xs text-muted-foreground">Exceptional STEM talent and innovation</p>
+                    <div className="text-left">
+                      <p className="text-base mb-1" style={{ color: "#444" }}>Physics, BA (1st)</p>
+                      <p className="text-base mb-3" style={{ color: "#555" }}>University of Oxford</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <Badge variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                          <Award className="size-3 mr-1" />
+                          Hertz Fellowship Award
+                        </Badge>
                       </div>
+                      <p className="text-sm" style={{ color: "#555" }}>Exceptional STEM talent and innovation</p>
                     </div>
                   </div>
-
-                  <Button size="sm" asChild>
-                    <Link href="/dashboard/graduates/3" onClick={scrollToTop}>
-                      View Profile
-                    </Link>
-                  </Button>
                 </Card>
+                </Link>
+              </div>
               </div>
             </div>
           </section>
@@ -1339,7 +1335,7 @@ export default function DashboardPage() {
                     </div>
                   </Card>
                 ))}
-              </div>
+              </div>  
             </div>
           </section>
         )}

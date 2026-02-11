@@ -7,7 +7,7 @@ import { User, Bookmark, Bell } from "lucide-react"
 
 interface NavbarProps {
   userType: "employer" | "graduate"
-  currentPage?: "directory" | "jobs" | "applications" | "messages" | "your-jobs" | "bookmarks" | "profile" | "post-job"
+  currentPage?: "directory" | "jobs" | "applications" | "messages" | "your-jobs" | "bookmarks" | "profile" | "post-job" | "about"
 }
 
 export function Navbar({ userType, currentPage }: NavbarProps) {
@@ -32,7 +32,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
 
   return (
     <header className="border-b border-white/20 sticky top-0 z-50" style={{ backgroundColor: "#445145" }}>
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-5 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
             <span className="text-xl font-belleza text-white">The Graduate Directory</span>
@@ -53,6 +53,13 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
                   className={navLinkClass(currentPage === "bookmarks")}
                 >
                   Saved Candidates
+                </Link>
+                <Link
+                  href="/about-employers?from=dashboard"
+                  onClick={scrollToTop}
+                  className={navLinkClass(currentPage === "about")}
+                >
+                  About
                 </Link>
                 <Link
                   href="/messages"
@@ -84,6 +91,13 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
                   className={navLinkClass(currentPage === "jobs")}
                 >
                   Find Jobs
+                </Link>
+                <Link
+                  href="/about-employers?from=dashboard"
+                  onClick={scrollToTop}
+                  className={navLinkClass(currentPage === "about")}
+                >
+                  About
                 </Link>
                 <Link
                   href="/saved-jobs"

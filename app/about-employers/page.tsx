@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 export default function AboutEmployersPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const fromDashboard = searchParams.get("from") === "dashboard"
 
   const handleProceed = () => {
     localStorage.setItem("userType", "employer")
@@ -39,7 +41,7 @@ export default function AboutEmployersPage() {
           <Card className="p-8 md:p-12" style={{ backgroundColor: "#E7D9CB" }}>
             <div className="space-y-6 text-foreground leading-relaxed">
               <p className="text-base">
-                The Graduate Directory is a closed searchable database enabling Oxbridge graduates to access high quality jobs and employers to access the highest quality junior talent.
+                The Graduate Directory is a closed searchable database enabling employers to access the country's highest quality junior talent.
               </p>
 
               <p className="text-base">
@@ -58,16 +60,27 @@ export default function AboutEmployersPage() {
 
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" variant="outline" asChild className="min-w-[200px]">
-              <Link href="/">
-                <ArrowLeft className="size-5 mr-2" />
-                Back to Home
-              </Link>
-            </Button>
-            <Button size="lg" onClick={handleProceed} className="min-w-[200px]">
-              Log in
-              <ArrowRight className="size-5 ml-2" />
-            </Button>
+            {fromDashboard ? (
+              <Button size="lg" variant="outline" asChild className="min-w-[200px]">
+                <Link href="/dashboard">
+                  <ArrowLeft className="size-5 mr-2" />
+                  Back to dashboard
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button size="lg" variant="outline" asChild className="min-w-[200px]">
+                  <Link href="/">
+                    <ArrowLeft className="size-5 mr-2" />
+                    Back to Home
+                  </Link>
+                </Button>
+                <Button size="lg" onClick={handleProceed} className="min-w-[200px]">
+                  Log in
+                  <ArrowRight className="size-5 ml-2" />
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Additional Info */}
