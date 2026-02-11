@@ -23,10 +23,10 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#E7D9CB" }}>
+      <header className="border-b border-white/20 sticky top-0 z-50" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3" onClick={scrollToTop}>
-            <span className="text-2xl font-belleza text-foreground tracking-tight">The Graduate Directory</span>
+            <span className="text-2xl font-belleza text-white tracking-tight">The Graduate Directory</span>
           </Link>
         </div>
       </header>
@@ -119,10 +119,10 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12" style={{ backgroundColor: "#E7D9CB" }}>
+      <footer className="border-t border-white/20 py-12" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-white/70">
               <p>&copy; 2026 The Graduate Directory. All rights reserved.</p>
             </div>
           </div>

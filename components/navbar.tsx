@@ -27,15 +27,15 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
 
   const navLinkClass = (isActive: boolean) =>
     `text-sm font-medium transition-colors ${
-      isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+      isActive ? "text-white" : "text-white/70 hover:text-white"
     }`
 
   return (
-    <header className="border-b border-primary/30 sticky top-0 z-50" style={{ backgroundColor: "#E7D9CB" }}>
+    <header className="border-b border-white/20 sticky top-0 z-50" style={{ backgroundColor: "#445145" }}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={scrollToTop}>
-            <span className="text-xl font-belleza text-foreground">The Graduate Directory</span>
+            <span className="text-xl font-belleza text-white">The Graduate Directory</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             {userType === "employer" ? (
@@ -113,7 +113,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
         <div className="flex items-center gap-2 ml-auto">
           {userType === "graduate" ? (
           <div className="relative group">
-            <Button variant="ghost" size="icon" className="rounded-full relative text-foreground hover:bg-black/10">
+            <Button variant="ghost" size="icon" className="rounded-full relative text-white hover:bg-white/10">
               <Bell className="size-5" />
               <span className="absolute -top-1 -right-1 size-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                 1
@@ -126,7 +126,7 @@ export function Navbar({ userType, currentPage }: NavbarProps) {
             </div>
           </div>
           ) : null}
-          <Button variant="ghost" size="icon" className="rounded-full text-foreground hover:bg-black/10" onClick={handleLogout} title="Logout">
+          <Button variant="ghost" size="icon" className="rounded-full text-white hover:bg-white/10" onClick={handleLogout} title="Logout">
             <User className="size-5" />
           </Button>
         </div>

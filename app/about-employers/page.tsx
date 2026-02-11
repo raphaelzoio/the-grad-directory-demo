@@ -18,10 +18,10 @@ export default function AboutEmployersPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 z-50" style={{ backgroundColor: "#E7D9CB" }}>
+      <header className="border-b border-white/20 sticky top-0 z-50" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4 py-4 flex justify-center">
           <Link href="/" className="flex items-center gap-3">
-            <span className="text-2xl font-belleza text-foreground tracking-tight">The Graduate Directory</span>
+            <span className="text-2xl font-belleza text-white tracking-tight">The Graduate Directory</span>
           </Link>
         </div>
       </header>
@@ -29,7 +29,7 @@ export default function AboutEmployersPage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Title */}
+          {/* Title */} 
           <div className="text-center space-y-2">
             <h1 className="text-3xl md:text-3xl font-bold text-foreground">About</h1>
             <p className="text-lg text-muted-foreground">For employers</p>
