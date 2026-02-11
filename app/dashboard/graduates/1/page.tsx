@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { BookmarkButton } from "@/components/bookmark-button"
 import { ContactDialog } from "@/components/contact-dialog"
@@ -294,7 +295,20 @@ export default function SarahJohnsonProfile() {
                   </div>
                 </div>
               </div>
-            </Card>
+            </Card> 
+
+{/* Video Introduction */}
+<Card className="p-6">
+  <h3 className="font-semibold mb-4">Video Introduction</h3>
+  <Image
+              src="/images/playbutton.png"
+              alt="The Graduate Directory"
+              className="w-full h-auto block opacity-40"
+              width={200}
+            height={100}
+              priority
+            />
+</Card>
 
             {/* Skills */}
             <Card className="p-6">

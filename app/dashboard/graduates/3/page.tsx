@@ -25,6 +25,7 @@ import {
   ChevronDown,
 } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const emilyProfile = {
   id: 3,
@@ -295,6 +296,19 @@ export default function EmilyRodriguezProfile() {
                   </div>
                 </div>
               </div>
+            </Card>
+
+            {/* Video Introduction */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Video Introduction</h3>
+              <Image
+                src="/images/playbutton.png"
+                alt="The Graduate Directory"
+                className="w-full h-auto block opacity-40"
+                width={200}
+                height={100}
+                priority
+              />
             </Card>
 
             {/* Qualifications */}
