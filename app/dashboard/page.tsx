@@ -1215,7 +1215,7 @@ export default function DashboardPage() {
                       <p className="text-base mb-1" style={{ color: "#444" }}>Economics, BA (1st)</p>
                       <p className="text-base mb-3" style={{ color: "#555" }}>University of Cambridge</p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                        <Badge variant="secondary" className="text-sm text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
                           <Award className="size-3 mr-1" />
                           Stevenson Prize for Economics
                         </Badge>
@@ -1243,7 +1243,7 @@ export default function DashboardPage() {
                       <p className="text-base mb-1" style={{ color: "#444" }}>Computer Science, MEng (1st)</p>
                       <p className="text-base mb-3" style={{ color: "#555" }}>Imperial College London</p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                        <Badge variant="secondary" className="text-sm text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
                           <Award className="size-3 mr-1" />
                           Google Scholar Award
                         </Badge>
@@ -1271,7 +1271,7 @@ export default function DashboardPage() {
                       <p className="text-base mb-1" style={{ color: "#444" }}>Physics, BA (1st)</p>
                       <p className="text-base mb-3" style={{ color: "#555" }}>University of Oxford</p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                        <Badge variant="secondary" className="text-sm text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
                           <Award className="size-3 mr-1" />
                           Hertz Fellowship Award
                         </Badge>

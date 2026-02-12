@@ -18,8 +18,8 @@
   --popover: #ffffff;
   --popover-foreground: #1f3c3d;
 
-  /* Medium teal for primary actions */
-  --primary: #41888c;
+  /* Dark green for primary actions */
+  --primary: #445145;
   --primary-foreground: #ffffff;
 
   /* Light teal-green for secondary */
@@ -76,8 +76,8 @@
   --popover: #1a3334;
   --popover-foreground: #e8f2f0;
 
-  /* Light teal-green for primary */
-  --primary: #6fa895;
+  /* Light green for primary */
+  --primary: #6b7d6e;
   --primary-foreground: #0f1f20;
 
   /* Medium teal for secondary */
