@@ -34,7 +34,6 @@ export default function AboutEmployersPage() {
           {/* Title */} 
           <div className="text-center space-y-2">
             <h1 className="text-3xl md:text-3xl font-bold text-foreground">About</h1>
-            <p className="text-lg text-muted-foreground">For employers</p>
           </div>
 
           {/* Information Card */}
