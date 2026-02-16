@@ -151,6 +151,7 @@ export default function JamesWrightProfile() {
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
   const [modulesExpanded, setModulesExpanded] = useState(false)
+  const [beyondCvExpanded, setBeyondCvExpanded] = useState(false)
   const graduate = jamesProfile
 
   useEffect(() => {
@@ -357,29 +358,33 @@ export default function JamesWrightProfile() {
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
             </Card>
 
+            {/* Beyond the CV */}
             <Card className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold flex items-center gap-2">
-                  <BookOpen className="size-5" />
-                  Oxford PPE Papers & Results
-                </h2>
-                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
-                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold">Beyond the CV</h2>
+                <button onClick={() => setBeyondCvExpanded(!beyondCvExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${beyondCvExpanded ? "rotate-180" : ""}`} />
                 </button>
               </div>
-              <div className="grid gap-4">
-                {(modulesExpanded ? graduate.oxfordPapers : graduate.oxfordPapers.slice(0, 1)).map((paper, index) => (
-                  <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold">{paper.name}</h3>
-                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
-                        {paper.grade}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{paper.description}</p>
-                  </div>
-                ))}
+              <div className="flex flex-wrap gap-2 mt-3">
+                <Badge className="text-sm bg-amber-500 text-white">Resourcefulness</Badge>
+                <Badge className="text-sm bg-amber-500 text-white">Critical thinking</Badge>
               </div>
+              {beyondCvExpanded && (
+                <div className="mt-4 space-y-4">
+                  <blockquote className="text-sm text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 italic">
+                    &ldquo;During my internship at a fintech startup, our team lost access to key market data two days before a client presentation. I identified three free alternative data sources, taught myself basic Python scraping to compile the information, and delivered comparable insights. The client commended our adaptability, and the workaround became standard practice for the team&rsquo;s future projects.&rdquo;
+                  </blockquote>
+                  <p className="text-sm text-muted-foreground">Internship, Summer 2025</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    In his Abstract Box, James answered the question &ldquo;If you had £10,000 and six months, what would you create or explore?&rdquo;.{" "}
+                    <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
+                      Read answer here
+                      <ExternalLink className="size-3" />
+                    </a>
+                  </p>
+                </div>
+              )}
             </Card>
 
             <Card className="p-6">
@@ -401,6 +406,31 @@ export default function JamesWrightProfile() {
                       <Badge variant="outline">{job.duration}</Badge>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{job.description}</p>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <BookOpen className="size-5" />
+                  Oxford PPE Papers & Results
+                </h2>
+                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              <div className="grid gap-4">
+                {(modulesExpanded ? graduate.oxfordPapers : graduate.oxfordPapers.slice(0, 1)).map((paper, index) => (
+                  <div key={index} className="p-4 rounded-lg border bg-muted/30">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-semibold">{paper.name}</h3>
+                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                        {paper.grade}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{paper.description}</p>
                   </div>
                 ))}
               </div>

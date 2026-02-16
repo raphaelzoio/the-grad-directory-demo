@@ -160,6 +160,7 @@ export default function PriyaSharmaProfile() {
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
   const [modulesExpanded, setModulesExpanded] = useState(false)
+  const [beyondCvExpanded, setBeyondCvExpanded] = useState(false)
   const graduate = priyaProfile
 
   useEffect(() => {
@@ -370,29 +371,33 @@ export default function PriyaSharmaProfile() {
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
             </Card>
 
+            {/* Beyond the CV */}
             <Card className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold flex items-center gap-2">
-                  <BookOpen className="size-5" />
-                  Cambridge Chemical Engineering Modules
-                </h2>
-                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
-                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold">Beyond the CV</h2>
+                <button onClick={() => setBeyondCvExpanded(!beyondCvExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${beyondCvExpanded ? "rotate-180" : ""}`} />
                 </button>
               </div>
-              <div className="grid gap-4">
-                {(modulesExpanded ? graduate.cambridgeModules : graduate.cambridgeModules.slice(0, 1)).map((module, index) => (
-                  <div key={index} className="p-4 rounded-lg border bg-muted/30">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold">{module.name}</h3>
-                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
-                        {module.grade}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{module.description}</p>
-                  </div>
-                ))}
+              <div className="flex flex-wrap gap-2 mt-3">
+                <Badge className="text-sm bg-amber-500 text-white">Resourcefulness</Badge>
+                <Badge className="text-sm bg-amber-500 text-white">Critical thinking</Badge>
               </div>
+              {beyondCvExpanded && (
+                <div className="mt-4 space-y-4">
+                  <blockquote className="text-sm text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 italic">
+                    &ldquo;During my internship at a fintech startup, our team lost access to key market data two days before a client presentation. I identified three free alternative data sources, taught myself basic Python scraping to compile the information, and delivered comparable insights. The client commended our adaptability, and the workaround became standard practice for the team&rsquo;s future projects.&rdquo;
+                  </blockquote>
+                  <p className="text-sm text-muted-foreground">Internship, Summer 2025</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    In her Abstract Box, Priya answered the question &ldquo;If you had £10,000 and six months, what would you create or explore?&rdquo;.{" "}
+                    <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
+                      Read answer here
+                      <ExternalLink className="size-3" />
+                    </a>
+                  </p>
+                </div>
+              )}
             </Card>
 
             <Card className="p-6">
@@ -436,6 +441,31 @@ export default function PriyaSharmaProfile() {
                         </Badge>
                       ))}
                     </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <BookOpen className="size-5" />
+                  Cambridge Chemical Engineering Modules
+                </h2>
+                <button onClick={() => setModulesExpanded(!modulesExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
+                  <ChevronDown className={`size-6 transition-transform duration-200 ${modulesExpanded ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              <div className="grid gap-4">
+                {(modulesExpanded ? graduate.cambridgeModules : graduate.cambridgeModules.slice(0, 1)).map((module, index) => (
+                  <div key={index} className="p-4 rounded-lg border bg-muted/30">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-semibold">{module.name}</h3>
+                      <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                        {module.grade}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{module.description}</p>
                   </div>
                 ))}
               </div>

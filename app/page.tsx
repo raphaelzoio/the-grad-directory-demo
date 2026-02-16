@@ -39,7 +39,7 @@ export default function HomePage() {
                 Search, refined
               </h1>
               <p className="text-base md:text-lg text-white/80 text-pretty max-w-2xl mx-auto leading-relaxed mt-4">
-                The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent.
+                The Graduate Directory is a closed private database of Oxbridge students and graduates, offering employers access to the country's most able and ambitious junior talent, as both interns and employees.
               </p>
 
               <div className="pt-2 pb-16" />

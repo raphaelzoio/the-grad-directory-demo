@@ -40,7 +40,7 @@ export default function AboutEmployersPage() {
           <Card className="p-8 md:p-12" style={{ backgroundColor: "#E7D9CB" }}>
             <div className="space-y-6 text-foreground leading-relaxed">
               <p className="text-base">
-                The Graduate Directory is a closed searchable database enabling employers to access the country's highest quality junior talent.
+                The Graduate Directory is a closed searchable database enabling employers to access the country's highest quality junior talent, as both interns and employees.
               </p>
 
               <p className="text-base">
