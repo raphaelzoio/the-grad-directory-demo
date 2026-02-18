@@ -397,8 +397,8 @@ export default function SarahJohnsonProfile() {
                 </button>
               </div>
               <div className="flex flex-wrap gap-2 mt-3">
-                <Badge variant="secondary" className="text-sm">Resourcefulness</Badge>
-                <Badge variant="secondary" className="text-sm">Critical thinking</Badge>
+                <Badge variant="secondary" className="text-base px-3 py-1">Resourcefulness</Badge>
+                <Badge variant="secondary" className="text-base px-3 py-1">Critical thinking</Badge>
               </div>
               {beyondCvExpanded && (
                 <div className="mt-4 space-y-4">
@@ -406,8 +406,17 @@ export default function SarahJohnsonProfile() {
                     &ldquo;During my internship at a fintech startup, our team lost access to key market data two days before a client presentation. I identified three free alternative data sources, taught myself basic Python scraping to compile the information, and delivered comparable insights. The client commended our adaptability, and the workaround became standard practice for the team&rsquo;s future projects.&rdquo;
                   </blockquote>
                   <p className="text-sm text-muted-foreground">Internship, Summer 2025</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    In her Abstract Box, Sarah answered the question &ldquo;If you had £10,000 and six months, what would you create or explore?&rdquo;.{" "}
+                  <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
+                    In her Abstract Box, Sarah answered the All Souls College question: &ldquo;If you had £10,000 and six months, what would you create or explore?&rdquo;.{" "}
+                    <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
+                      Read answer here
+                      <ExternalLink className="size-3" />
+                    </a>
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
+                    Sarah also answered our Scenario Question: &ldquo;How would you develop a new feature at a company, without disrupting the state of its current work?&rdquo;
+                  </p>
+                  <p className="text-sm">
                     <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
                       Read answer here
                       <ExternalLink className="size-3" />
