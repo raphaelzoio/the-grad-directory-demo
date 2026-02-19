@@ -24,6 +24,7 @@ import {
   ExternalLink,
   ArrowLeft,
   ChevronDown,
+  FileText,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -258,6 +259,10 @@ export default function SarahJohnsonProfile() {
                   <Download className="size-4 mr-2" />
                   Download CV
                 </Button>
+                <Button variant="outline" className="w-full bg-transparent mt-2">
+                  <FileText className="size-4 mr-2" />
+                  See other documents
+                </Button>
               </div>
 
               <div className="mt-6 pt-6 border-t space-y-3">
@@ -406,14 +411,15 @@ export default function SarahJohnsonProfile() {
                   <ChevronDown className={`size-6 transition-transform duration-200 ${beyondCvExpanded ? "rotate-180" : ""}`} />
                 </button>
               </div>
-              <p className="text-sm text-muted-foreground mt-2">A unique space for candidates to demonstrate their creativity and soft skills.</p>
-              <p className="text-sm mt-3 mb-1" style={{ color: "#cc7a00" }}>Sarah selected:</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-sm text-muted-foreground mt-1">A unique space for candidates to demonstrate their creativity and soft skills.</p>
+              <p className="text-sm text-muted-foreground mt-1">On their profile, they can answer prompts and questions set by our team, or share a 'curated trail' - three pieces of content (articles, books, talks) that have influenced how they think, with a sentence on why.</p>
+              <div className="flex flex-wrap items-center gap-2 mt-2">
+                <span className="text-base font-medium" style={{ color: "#cc7a00" }}>Sarah selected:</span>
                 <Badge variant="secondary" className="text-base px-3 py-1">Resourcefulness</Badge>
                 <Badge variant="secondary" className="text-base px-3 py-1">Critical thinking</Badge>
               </div>
               {beyondCvExpanded && (
-                <div className="mt-4 space-y-4">
+                <div className="mt-3 space-y-3">
                   <blockquote className="text-sm text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 italic">
                     &ldquo;During my internship at a fintech startup, our team lost access to key market data two days before a client presentation. I identified three free alternative data sources, taught myself basic Python scraping to compile the information, and delivered comparable insights. The client commended our adaptability, and the workaround became standard practice for the team&rsquo;s future projects.&rdquo;
                   </blockquote>
@@ -426,7 +432,7 @@ export default function SarahJohnsonProfile() {
                     </a>
                   </p>
                   <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
-                    Sarah also answered our Scenario Question: &ldquo;How would you develop a new feature at a company, without disrupting the state of its current work?&rdquo;
+                    Sarah also answered our Scenario Question: &ldquo;How would you develop a new feature at a company, without disrupting the state of its current operations?&rdquo;
                   </p>
                   <p className="text-sm">
                     <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">

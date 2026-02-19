@@ -1405,7 +1405,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Results Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {mockGraduates.map((graduate, index) => (
                     <motion.div
                       key={graduate.id}
@@ -1423,11 +1423,11 @@ export default function DashboardPage() {
                       }}
                       whileHover={navigatingId === null ? { scale: 1.02, y: -2 } : {}}
                       whileTap={navigatingId === null ? { scale: 0.98 } : {}}
-                      className="cursor-pointer"
+                      className="cursor-pointer flex justify-center"
                     >
-                    <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="no-underline hover:no-underline">
+                    <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
                     <Card
-                      className={`p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20 ${
+                      className={`p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20 ${
                         navigatingId === graduate.id ? "ring-2 ring-primary/30" : ""
                       }`}
                       style={{
@@ -1436,55 +1436,55 @@ export default function DashboardPage() {
                       }}
                     >
                       <div className="relative z-10 flex-1">
-                        <div className="mb-4">
-                          <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
+                        <div className="mb-3">
+                          <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                         </div>
                         <div className="text-left">
-                          <p className="text-base mb-1" style={{ color: "#444" }}>
+                          <p className="text-sm mb-1" style={{ color: "#444" }}>
                             {graduate.degree}
                           </p>
-                          <p className="text-base mb-3" style={{ color: "#555" }}>
+                          <p className="text-sm mb-2" style={{ color: "#555" }}>
                             {graduate.university}
                           </p>
-                          <div className="flex flex-wrap gap-2 mb-4">
+                          <div className="flex flex-wrap gap-1.5 mb-3">
                             {graduate.skills.slice(0, 2).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-sm bg-white border border-border" style={{ color: "#333" }}>
+                              <Badge key={skill} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
                                 {skill}
                               </Badge>
                             ))}
                             {graduate.skills.length > 2 && (
-                              <Badge variant="outline" className="text-sm">+{graduate.skills.length - 2}</Badge>
+                              <Badge variant="outline" className="text-xs">+{graduate.skills.length - 2}</Badge>
                             )}
                           </div>
-                          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm" style={{ color: "#555" }}>
-                            <span className="flex items-center gap-1.5">
-                              <MapPin className="size-4" />
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#555" }}>
+                            <span className="flex items-center gap-1">
+                              <MapPin className="size-3" />
                               {graduate.location}
                             </span>
-                            <span className="flex items-center gap-1.5">
-                              <Clock className="size-4" />
+                            <span className="flex items-center gap-1">
+                              <Clock className="size-3" />
                               {graduate.availability}
                             </span>
-                            <span className="flex items-center gap-1.5">
-                              <Briefcase className="size-4" />
+                            <span className="flex items-center gap-1">
+                              <Briefcase className="size-3" />
                               {graduate.experience}
                             </span>
                           </div>
                           {graduate.portfolioUrl && graduate.portfolioLabel && (
-                            <div className="mt-3">
+                            <div className="mt-2">
                               <Button
                                 variant="outline"
                                 size="sm"
-                                className="h-8 text-sm gap-1.5"
+                                className="h-7 text-xs gap-1"
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   window.open(graduate.portfolioUrl, "_blank")
                                 }}
                               >
                                 {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? (
-                                  <BookOpen className="size-3" />
+                                  <BookOpen className="size-2.5" />
                                 ) : (
-                                  <ExternalLink className="size-3" />
+                                  <ExternalLink className="size-2.5" />
                                 )}
                                 {graduate.portfolioLabel}
                               </Button>
@@ -1519,90 +1519,96 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Prize Winner 1 */}
-                <Link href="/dashboard/graduates/1" onClick={scrollToTop} className="no-underline hover:no-underline">
+                <div className="flex justify-center">
+                <Link href="/dashboard/graduates/1" onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
                 <Card
-                  className="p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                  className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
                   style={{
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
                     background: "linear-gradient(to bottom, white 80%, white 85%, #fbe8b3)",
                   }}
                 >
                   <div className="relative z-10 flex-1">
-                    <div className="mb-4">
-                      <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>Eleanor Watson</h3>
+                    <div className="mb-3">
+                      <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>Eleanor Watson</h3>
                     </div>
                     <div className="text-left">
-                      <p className="text-base mb-1" style={{ color: "#444" }}>Economics, BA (1st)</p>
-                      <p className="text-base mb-3" style={{ color: "#555" }}>University of Cambridge</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary" className="text-sm text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
-                          <Award className="size-3 mr-1" />
+                      <p className="text-sm mb-1" style={{ color: "#444" }}>Economics, BA (1st)</p>
+                      <p className="text-sm mb-2" style={{ color: "#555" }}>University of Cambridge</p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        <Badge variant="secondary" className="text-xs text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
+                          <Award className="size-2.5 mr-1" />
                           Stevenson Prize for Economics
                         </Badge>
                       </div>
-                      <p className="text-sm" style={{ color: "#555" }}>Best undergraduate dissertation 2024</p>
+                      <p className="text-xs" style={{ color: "#555" }}>Best undergraduate dissertation 2024</p>
                     </div>
                   </div>
                 </Card>
                 </Link>
+                </div>
 
                 {/* Prize Winner 2 */}
-                <Link href="/dashboard/graduates/2" onClick={scrollToTop} className="no-underline hover:no-underline">
+                <div className="flex justify-center">
+                <Link href="/dashboard/graduates/2" onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
                 <Card
-                  className="p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                  className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
                   style={{
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
                     background: "linear-gradient(to bottom, white 80%, white 85%, #fbe8b3)",
                   }}
                 >
                   <div className="relative z-10 flex-1">
-                    <div className="mb-4">
-                      <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>Aisha Johnson</h3>
+                    <div className="mb-3">
+                      <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>Aisha Johnson</h3>
                     </div>
                     <div className="text-left">
-                      <p className="text-base mb-1" style={{ color: "#444" }}>Computer Science, MEng (1st)</p>
-                      <p className="text-base mb-3" style={{ color: "#555" }}>Imperial College London</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary" className="text-sm text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
-                          <Award className="size-3 mr-1" />
+                      <p className="text-sm mb-1" style={{ color: "#444" }}>Computer Science, MEng (1st)</p>
+                      <p className="text-sm mb-2" style={{ color: "#555" }}>Imperial College London</p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        <Badge variant="secondary" className="text-xs text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
+                          <Award className="size-2.5 mr-1" />
                           Google Scholar Award
                         </Badge>
                       </div>
-                      <p className="text-sm" style={{ color: "#555" }}>Excellence in AI and Machine Learning</p>
+                      <p className="text-xs" style={{ color: "#555" }}>Excellence in AI and Machine Learning</p>
                     </div>
                   </div>
                 </Card>
                 </Link>
+                </div>
 
                 {/* Prize Winner 3 */}
-                <Link href="/dashboard/graduates/3" onClick={scrollToTop} className="no-underline hover:no-underline">
+                <div className="flex justify-center">
+                <Link href="/dashboard/graduates/3" onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
                 <Card
-                  className="p-7 min-h-[300px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                  className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
                   style={{
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
                     background: "linear-gradient(to bottom, white 80%, white 85%, #c5c3d9)",
                   }}
                 >
                   <div className="relative z-10 flex-1">
-                    <div className="mb-4">
-                      <h3 className="font-semibold text-2xl font-manrope" style={{ color: "#1a1a1a" }}>Rohan Chaudhury</h3>
+                    <div className="mb-3">
+                      <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>Rohan Chaudhury</h3>
                     </div>
                     <div className="text-left">
-                      <p className="text-base mb-1" style={{ color: "#444" }}>Physics, BA (1st)</p>
-                      <p className="text-base mb-3" style={{ color: "#555" }}>University of Oxford</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary" className="text-sm text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
-                          <Award className="size-3 mr-1" />
+                      <p className="text-sm mb-1" style={{ color: "#444" }}>Physics, BA (1st)</p>
+                      <p className="text-sm mb-2" style={{ color: "#555" }}>University of Oxford</p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        <Badge variant="secondary" className="text-xs text-white border-0" style={{ backgroundColor: "#6b7d6e" }}>
+                          <Award className="size-2.5 mr-1" />
                           Hertz Fellowship Award
                         </Badge>
                       </div>
-                      <p className="text-sm" style={{ color: "#555" }}>Exceptional STEM talent and innovation</p>
+                      <p className="text-xs" style={{ color: "#555" }}>Exceptional STEM talent and innovation</p>
                     </div>
                   </div>
                 </Card>
                 </Link>
+                </div>
               </div>
               </div>
             </div>
