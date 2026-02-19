@@ -496,6 +496,7 @@ export default function DashboardPage() {
   const [selectedUniversities, setSelectedUniversities] = useState<string[]>([])
   const [selectedColleges, setSelectedColleges] = useState<string[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
+  const [selectedSoftSkills, setSelectedSoftSkills] = useState<string[]>([])
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
   const [selectedExperience, setSelectedExperience] = useState<string[]>([])
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([])
@@ -550,6 +551,7 @@ export default function DashboardPage() {
   const universityRef = useRef<HTMLDivElement>(null)
   const collegeRef = useRef<HTMLDivElement>(null)
   const skillsRef = useRef<HTMLDivElement>(null)
+  const softSkillsRef = useRef<HTMLDivElement>(null)
   const subjectRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
   const availabilityRef = useRef<HTMLDivElement>(null)
@@ -571,6 +573,7 @@ export default function DashboardPage() {
   university: universityRef,
   college: collegeRef,
   skills: skillsRef,
+  softSkills: softSkillsRef,
   subject: subjectRef,
   experience: experienceRef,
   availability: availabilityRef,
@@ -804,6 +807,59 @@ export default function DashboardPage() {
                               className="size-4"
                               checked={selectedSkills.includes(skill)}
                               onChange={() => toggleSelection(skill, selectedSkills, setSelectedSkills)}
+                            />
+                            <span className="text-sm">{skill}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Soft Skills Filter */}
+                  <div className="relative" ref={softSkillsRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "softSkills" ? null : "softSkills")
+                      }}
+                      className={`h-10 px-4 rounded-full border text-sm font-medium flex items-center gap-2 transition-colors ${
+                        selectedSoftSkills.length > 0
+                          ? "text-foreground"
+                          : "text-foreground"
+                      }`}
+                      style={{ backgroundColor: "#f5c97a", borderColor: "#e8b455" }}
+                    >
+                      <span>{selectedSoftSkills.length === 0 ? "Soft Skills" : `${selectedSoftSkills.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "softSkills" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[220px]"
+                      >
+                        {[
+                          "Resourcefulness",
+                          "Problem Solving",
+                          "Critical Thinking",
+                          "Communication",
+                          "Teamwork",
+                          "Adaptability",
+                          "Leadership",
+                          "Creativity",
+                          "Time Management",
+                          "Emotional Intelligence",
+                          "Attention to Detail",
+                          "Resilience",
+                        ].map((skill) => (
+                          <label
+                            key={skill}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedSoftSkills.includes(skill)}
+                              onChange={() => toggleSelection(skill, selectedSoftSkills, setSelectedSoftSkills)}
                             />
                             <span className="text-sm">{skill}</span>
                           </label>
