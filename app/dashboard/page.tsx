@@ -768,7 +768,7 @@ export default function DashboardPage() {
                       style={{ backgroundColor: "#2d4a31" }}
                     >
                       <Code className="size-4" />
-                      <span>{selectedSkills.length === 0 ? "Skills" : `${selectedSkills.length} selected`}</span>
+                      <span>{selectedSkills.length === 0 ? "Technical Skills" : `${selectedSkills.length} selected`}</span>
                       <ChevronDown className="size-3" />
                     </button>
                     {openDropdown === "skills" && (
