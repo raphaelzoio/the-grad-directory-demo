@@ -494,6 +494,7 @@ export default function DashboardPage() {
   const [availabilityOpen, setAvailabilityOpen] = useState(false)
   const [selectedLocations, setSelectedLocations] = useState<string[]>([])
   const [selectedUniversities, setSelectedUniversities] = useState<string[]>([])
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
   const [selectedExperience, setSelectedExperience] = useState<string[]>([])
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([])
@@ -543,6 +544,7 @@ export default function DashboardPage() {
 
   const locationRef = useRef<HTMLDivElement>(null)
   const universityRef = useRef<HTMLDivElement>(null)
+  const skillsRef = useRef<HTMLDivElement>(null)
   const subjectRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
   const availabilityRef = useRef<HTMLDivElement>(null)
@@ -561,12 +563,13 @@ export default function DashboardPage() {
       const refs = {
   location: locationRef,
   university: universityRef,
+  skills: skillsRef,
   subject: subjectRef,
   experience: experienceRef,
   availability: availabilityRef,
   sector: sectorRef,
   degreeClass: degreeClassRef,
-  diversity: diversityRef,  // Add this line
+  diversity: diversityRef,
 }
 
       if (openDropdown && refs[openDropdown as keyof typeof refs]) {
@@ -739,6 +742,68 @@ export default function DashboardPage() {
 
                 {/* Compact Filters Row */}
                 <div className="flex flex-wrap items-center gap-2 mb-4">
+                  {/* Skills Filter */}
+                  <div className="relative" ref={skillsRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "skills" ? null : "skills")
+                      }}
+                      className={`h-10 px-4 rounded-full border text-sm font-medium flex items-center gap-2 transition-colors ${
+                        selectedSkills.length > 0
+                          ? "text-white border-transparent"
+                          : "border-transparent text-white"
+                      }`}
+                      style={{ backgroundColor: "#2d4a31" }}
+                    >
+                      <Code className="size-4" />
+                      <span>{selectedSkills.length === 0 ? "Skills" : `${selectedSkills.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "skills" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[220px]"
+                      >
+                        {[
+                          "Python",
+                          "React",
+                          "TypeScript",
+                          "Node.js",
+                          "Java",
+                          "SQL",
+                          "Machine Learning",
+                          "Data Analysis",
+                          "AWS",
+                          "Docker",
+                          "UX Design",
+                          "Figma",
+                          "Copywriting",
+                          "Content Strategy",
+                          "SEO",
+                          "Financial Modelling",
+                          "Excel / VBA",
+                          "Project Management",
+                          "Public Speaking",
+                          "Research & Analysis",
+                        ].map((skill) => (
+                          <label
+                            key={skill}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedSkills.includes(skill)}
+                              onChange={() => toggleSelection(skill, selectedSkills, setSelectedSkills)}
+                            />
+                            <span className="text-sm">{skill}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* Location Filter */}
                   <div className="relative" ref={locationRef}>
                     <button
@@ -1025,7 +1090,7 @@ export default function DashboardPage() {
                         onClick={(e) => e.stopPropagation()}
                         className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[180px]"
                       >
-                        {["Ethnically diverse", "Neurodiverse"].map((diversity) => (
+                        {["Ethnic diversity", "Neurodiversity", "Gender diversity"].map((diversity) => (
                           <label
                             key={diversity}
                             className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
@@ -1316,7 +1381,7 @@ export default function DashboardPage() {
                         <p className="text-sm text-foreground mb-3">{job.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {job.tags.map((tag) => (
-                            <Badge key={tag} variant="secondary text-white">
+                            <Badge key={tag} variant="secondary" className="text-white">
                               {tag}
                             </Badge>
                           ))}

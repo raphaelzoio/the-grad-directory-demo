@@ -44,7 +44,7 @@ export default function AboutEmployersPage() {
               </p>
 
               <p className="text-base">
-                Employers can both post jobs and search the database in a wide variety of ways to identify and connect with employed and not yet employed graduates with up to 10 years’ experience in the workplace. State of the art profiles allow graduates to display skillsets comprehensively via inbuilt video introductions, upload of content such as CVs and dissertations, with ability to specify desired roles and sectors to optimise their employment prospects.
+                Employers can both post roles and search the database in a wide variety of ways to identify and connect with employed and not yet employed graduates with up to 10 years’ experience in the workplace. State of the art profiles allow graduates to display skillsets comprehensively via inbuilt video introductions, upload of content such as CVs and dissertations, with ability to specify desired roles and sectors to optimise their employment prospects.
               </p>
 
               <p className="text-base">
