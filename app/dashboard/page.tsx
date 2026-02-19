@@ -494,6 +494,7 @@ export default function DashboardPage() {
   const [availabilityOpen, setAvailabilityOpen] = useState(false)
   const [selectedLocations, setSelectedLocations] = useState<string[]>([])
   const [selectedUniversities, setSelectedUniversities] = useState<string[]>([])
+  const [selectedColleges, setSelectedColleges] = useState<string[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
   const [selectedExperience, setSelectedExperience] = useState<string[]>([])
@@ -503,6 +504,9 @@ export default function DashboardPage() {
   const [selectedDegreeClass, setSelectedDegreeClass] = useState<string[]>([])
   const [selectedDiversity, setSelectedDiversity] = useState<string[]>([])
   const [inCurrentEmployment, setInCurrentEmployment] = useState(false)
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [isBluesPlayer, setIsBluesPlayer] = useState(false)
+  const [isStudentJournalist, setIsStudentJournalist] = useState(false)
   const [searchKeywords, setSearchKeywords] = useState("")
   const [navigatingId, setNavigatingId] = useState<number | null>(null)
 
@@ -544,12 +548,14 @@ export default function DashboardPage() {
 
   const locationRef = useRef<HTMLDivElement>(null)
   const universityRef = useRef<HTMLDivElement>(null)
+  const collegeRef = useRef<HTMLDivElement>(null)
   const skillsRef = useRef<HTMLDivElement>(null)
   const subjectRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
   const availabilityRef = useRef<HTMLDivElement>(null)
   const sectorRef = useRef<HTMLDivElement>(null)
   const degreeClassRef = useRef<HTMLDivElement>(null)
+  const languagesRef = useRef<HTMLDivElement>(null)
 
   const jobStartDateRef = useRef<HTMLDivElement>(null)
   const jobSectorRef = useRef<HTMLDivElement>(null)
@@ -563,6 +569,7 @@ export default function DashboardPage() {
       const refs = {
   location: locationRef,
   university: universityRef,
+  college: collegeRef,
   skills: skillsRef,
   subject: subjectRef,
   experience: experienceRef,
@@ -570,6 +577,7 @@ export default function DashboardPage() {
   sector: sectorRef,
   degreeClass: degreeClassRef,
   diversity: diversityRef,
+  languages: languagesRef,
 }
 
       if (openDropdown && refs[openDropdown as keyof typeof refs]) {
@@ -869,14 +877,6 @@ export default function DashboardPage() {
                         {[
                           "University of Oxford",
                           "University of Cambridge",
-                          "Imperial College London",
-                          "University College London",
-                          "London School of Economics",
-                          "University of Edinburgh",
-                          "King's College London",
-                          "University of Manchester",
-                          "University of Bristol",
-                          "University of Warwick",
                         ].map((uni) => (
                           <label
                             key={uni}
@@ -889,6 +889,115 @@ export default function DashboardPage() {
                               onChange={() => toggleSelection(uni, selectedUniversities, setSelectedUniversities)}
                             />
                             <span className="text-sm">{uni}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* College Filter */}
+                  <div className="relative" ref={collegeRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "college" ? null : "college")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedColleges.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <span>{selectedColleges.length === 0 ? "College" : `${selectedColleges.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "college" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[260px]"
+                      >
+                        {[
+                          "Balliol College, Oxford",
+                          "Brasenose College, Oxford",
+                          "Christ Church, Oxford",
+                          "Christ's College, Cambridge",
+                          "Churchill College, Cambridge",
+                          "Clare College, Cambridge",
+                          "Clare Hall, Cambridge",
+                          "Corpus Christi College, Cambridge",
+                          "Corpus Christi College, Oxford",
+                          "Darwin College, Cambridge",
+                          "Downing College, Cambridge",
+                          "Emmanuel College, Cambridge",
+                          "Exeter College, Oxford",
+                          "Fitzwilliam College, Cambridge",
+                          "Girton College, Cambridge",
+                          "Gonville & Caius College, Cambridge",
+                          "Green Templeton College, Oxford",
+                          "Harris Manchester College, Oxford",
+                          "Hertford College, Oxford",
+                          "Homerton College, Cambridge",
+                          "Hughes Hall, Cambridge",
+                          "Jesus College, Cambridge",
+                          "Jesus College, Oxford",
+                          "Keble College, Oxford",
+                          "Kellogg College, Oxford",
+                          "King's College, Cambridge",
+                          "Lady Margaret Hall, Oxford",
+                          "Linacre College, Oxford",
+                          "Lincoln College, Oxford",
+                          "Magdalen College, Oxford",
+                          "Magdalene College, Cambridge",
+                          "Mansfield College, Oxford",
+                          "Merton College, Oxford",
+                          "Murray Edwards College, Cambridge",
+                          "New College, Oxford",
+                          "Newnham College, Cambridge",
+                          "Oriel College, Oxford",
+                          "Pembroke College, Cambridge",
+                          "Pembroke College, Oxford",
+                          "Peterhouse, Cambridge",
+                          "Queen's College, Oxford",
+                          "Queens' College, Cambridge",
+                          "Regent's Park College, Oxford",
+                          "Reuben College, Oxford",
+                          "Robinson College, Cambridge",
+                          "St Anne's College, Oxford",
+                          "St Antony's College, Oxford",
+                          "St Catharine's College, Cambridge",
+                          "St Catherine's College, Oxford",
+                          "St Cross College, Oxford",
+                          "St Edmund Hall, Oxford",
+                          "St Edmund's College, Cambridge",
+                          "St Hilda's College, Oxford",
+                          "St Hugh's College, Oxford",
+                          "St John's College, Cambridge",
+                          "St John's College, Oxford",
+                          "St Peter's College, Oxford",
+                          "Selwyn College, Cambridge",
+                          "Sidney Sussex College, Cambridge",
+                          "Somerville College, Oxford",
+                          "Trinity College, Cambridge",
+                          "Trinity College, Oxford",
+                          "Trinity Hall, Cambridge",
+                          "University College, Oxford",
+                          "Wadham College, Oxford",
+                          "Wolfson College, Cambridge",
+                          "Wolfson College, Oxford",
+                          "Worcester College, Oxford",
+                          "Wycliffe Hall, Oxford",
+                        ].map((college) => (
+                          <label
+                            key={college}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedColleges.includes(college)}
+                              onChange={() => toggleSelection(college, selectedColleges, setSelectedColleges)}
+                            />
+                            <span className="text-sm">{college}</span>
                           </label>
                         ))}
                       </div>
@@ -1109,6 +1218,98 @@ export default function DashboardPage() {
                       </div>
                     )}
                   </div>
+
+                  {/* Languages Filter */}
+                  <div className="relative" ref={languagesRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "languages" ? null : "languages")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedLanguages.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <span>{selectedLanguages.length === 0 ? "Languages" : `${selectedLanguages.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "languages" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[200px]"
+                      >
+                        {[
+                          "English",
+                          "French",
+                          "Spanish",
+                          "Italian",
+                          "Russian",
+                          "Mandarin",
+                          "Arabic",
+                          "Portuguese",
+                          "German",
+                          "Japanese",
+                          "Korean",
+                          "Hindi",
+                          "Bengali",
+                          "Dutch",
+                          "Swedish",
+                          "Norwegian",
+                          "Danish",
+                          "Finnish",
+                          "Polish",
+                          "Turkish",
+                          "Greek",
+                          "Hebrew",
+                          "Farsi",
+                          "Urdu",
+                          "Swahili",
+                          "Malay",
+                          "Indonesian",
+                          "Tagalog",
+                          "Vietnamese",
+                          "Thai",
+                        ].map((lang) => (
+                          <label
+                            key={lang}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedLanguages.includes(lang)}
+                              onChange={() => toggleSelection(lang, selectedLanguages, setSelectedLanguages)}
+                            />
+                            <span className="text-sm">{lang}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Blues Player */}
+                  <label className="h-9 px-3 rounded-full border border-input bg-background flex items-center gap-2 cursor-pointer hover:bg-muted/50 transition-colors">
+                    <input
+                      type="checkbox"
+                      className="size-4"
+                      checked={isBluesPlayer}
+                      onChange={() => setIsBluesPlayer(!isBluesPlayer)}
+                    />
+                    <span className="text-sm text-muted-foreground">Blues Player</span>
+                  </label>
+
+                  {/* Student Journalist */}
+                  <label className="h-9 px-3 rounded-full border border-input bg-background flex items-center gap-2 cursor-pointer hover:bg-muted/50 transition-colors">
+                    <input
+                      type="checkbox"
+                      className="size-4"
+                      checked={isStudentJournalist}
+                      onChange={() => setIsStudentJournalist(!isStudentJournalist)}
+                    />
+                    <span className="text-sm text-muted-foreground">Student Journalist</span>
+                  </label>
 
                   {/* Clear Filters */}
                   {(selectedLocations.length > 0 || selectedUniversities.length > 0 || selectedSubjects.length > 0 || selectedExperience.length > 0 || selectedAvailability.length > 0 || selectedDegreeClass.length > 0 || selectedDiversity.length > 0) && (

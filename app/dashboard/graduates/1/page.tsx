@@ -378,6 +378,16 @@ export default function SarahJohnsonProfile() {
                 ))}
               </div>
             </Card>
+
+            {/* Hobbies */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Hobbies</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>• Football</li>
+                <li>• Painting</li>
+                <li>• Video editing</li>
+              </ul>
+            </Card>
           </div>
 
           {/* Main Content */}
@@ -396,7 +406,9 @@ export default function SarahJohnsonProfile() {
                   <ChevronDown className={`size-6 transition-transform duration-200 ${beyondCvExpanded ? "rotate-180" : ""}`} />
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2 mt-3">
+              <p className="text-sm text-muted-foreground mt-2">A unique space for candidates to demonstrate their creativity and soft skills.</p>
+              <p className="text-sm mt-3 mb-1" style={{ color: "#cc7a00" }}>Sarah selected:</p>
+              <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary" className="text-base px-3 py-1">Resourcefulness</Badge>
                 <Badge variant="secondary" className="text-base px-3 py-1">Critical thinking</Badge>
               </div>
