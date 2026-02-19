@@ -48,7 +48,7 @@ export default function AboutEmployersPage() {
               </p>
 
               <p className="text-base">
-                Employers use the database to rapidly and precisely target the high potential talent they seek and circumvent the consuming, high volume applications with little ability to distinguish between them.
+                Employers use the database to rapidly and precisely target the high potential talent they seek for jobs, internships and placements, and circumvent the consuming, high volume applications with little ability to distinguish between them.
               </p>
 
               <p className="text-base">
