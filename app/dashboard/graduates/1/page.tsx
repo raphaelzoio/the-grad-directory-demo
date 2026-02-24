@@ -417,6 +417,8 @@ export default function SarahJohnsonProfile() {
                 <span className="text-base font-medium" style={{ color: "#cc7a00" }}>Sarah selected:</span>
                 <Badge variant="secondary" className="text-base px-3 py-1">Resourcefulness</Badge>
                 <Badge variant="secondary" className="text-base px-3 py-1">Critical thinking</Badge>
+                <span className="text-base font-medium" style={{ color: "#cc7a00" }}>and a critical essay on:</span>
+                <Badge className="text-base px-3 py-1 text-white border-0" style={{ backgroundColor: "#445145" }}>Geopolitics</Badge>
               </div>
               {beyondCvExpanded && (
                 <div className="mt-3 space-y-3">

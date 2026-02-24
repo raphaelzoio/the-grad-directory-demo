@@ -8,9 +8,10 @@ import { User, Bookmark, Bell } from "lucide-react"
 interface NavbarProps {
   userType: "employer" | "graduate"
   currentPage?: "directory" | "jobs" | "applications" | "messages" | "your-jobs" | "bookmarks" | "profile" | "post-job" | "about"
+  isDashboard?: boolean
 }
 
-export function Navbar({ userType, currentPage }: NavbarProps) {
+export function Navbar({ userType, currentPage, isDashboard }: NavbarProps) {
   const router = useRouter()
 
   const scrollToTop = () => {

@@ -46,5 +46,5 @@ export function NavbarWrapper() {
 
   const currentPage = getCurrentPage(pathname, userType)
 
-  return <Navbar userType={userType} currentPage={currentPage} />
+  return <Navbar userType={userType} currentPage={currentPage} isDashboard={pathname === "/dashboard"} />
 }
