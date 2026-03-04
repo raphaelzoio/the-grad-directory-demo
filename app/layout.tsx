@@ -33,8 +33,6 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "The Graduate Directory",
-  description:
-    "Discover thousands of job opportunities from top companies. Post jobs and connect with talented candidates.",
   generator: "v0.app",
   icons: {
     icon: "/images/logo.jpg",
