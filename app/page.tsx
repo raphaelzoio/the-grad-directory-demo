@@ -88,12 +88,12 @@ export default function HomePage() {
       <footer className="border-t border-white/20 py-12" style={{ backgroundColor: "#445145" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto flex flex-col items-center gap-6">
-            <button
-              onClick={() => handleLogin("graduate")}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors cursor-pointer bg-transparent border-none"
+            <Link
+              href="/about-graduates"
+              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
             >
               For students and graduates
-            </button>
+            </Link>
             <div className="text-sm text-white/70">
               <p>&copy; 2026 The Graduate Directory. All rights reserved.</p>
             </div>

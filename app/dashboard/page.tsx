@@ -506,6 +506,7 @@ export default function DashboardPage() {
   const [selectedDiversity, setSelectedDiversity] = useState<string[]>([])
   const [inCurrentEmployment, setInCurrentEmployment] = useState(false)
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [selectedSex, setSelectedSex] = useState<string[]>([])
   const [isBluesPlayer, setIsBluesPlayer] = useState(false)
   const [isStudentJournalist, setIsStudentJournalist] = useState(false)
   const [searchKeywords, setSearchKeywords] = useState("")
@@ -558,6 +559,7 @@ export default function DashboardPage() {
   const sectorRef = useRef<HTMLDivElement>(null)
   const degreeClassRef = useRef<HTMLDivElement>(null)
   const languagesRef = useRef<HTMLDivElement>(null)
+  const sexRef = useRef<HTMLDivElement>(null)
 
   const jobStartDateRef = useRef<HTMLDivElement>(null)
   const jobSectorRef = useRef<HTMLDivElement>(null)
@@ -581,6 +583,7 @@ export default function DashboardPage() {
   degreeClass: degreeClassRef,
   diversity: diversityRef,
   languages: languagesRef,
+  sex: sexRef,
 }
 
       if (openDropdown && refs[openDropdown as keyof typeof refs]) {
@@ -1345,6 +1348,46 @@ export default function DashboardPage() {
                     )}
                   </div>
 
+                  {/* Sex Filter */}
+                  <div className="relative" ref={sexRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "sex" ? null : "sex")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedSex.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <span>♂♀</span>
+                      <span>{selectedSex.length === 0 ? "Sex" : selectedSex[0]}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "sex" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 min-w-[140px]"
+                      >
+                        {["Male", "Female"].map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedSex.includes(option)}
+                              onChange={() => toggleSelection(option, selectedSex, setSelectedSex)}
+                            />
+                            <span className="text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* Blues Player */}
                   <label className="h-9 px-3 rounded-full border border-input bg-background flex items-center gap-2 cursor-pointer hover:bg-muted/50 transition-colors">
                     <input
@@ -1842,42 +1885,49 @@ export default function DashboardPage() {
                 {/* Jobs Grid */}
                 <div className="grid gap-4 md:grid-cols-2">
                   {featuredJobs.map((job) => (
-                    <Card key={job.id} className="p-5 hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
+                    <div key={job.id} className="flex justify-center">
+                    <Link href={`/jobs/${job.id}`} onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
+                    <Card
+                      className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
+                      style={{
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                        background: "linear-gradient(to bottom, white 80%, white 85%, #c5c3d9)",
+                      }}
+                    >
+                      <div className="relative z-10 flex-1">
+                        <div className="mb-3">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="text-base font-semibold text-foreground">{job.title}</h3>
-                            {job.featured && (
-                              <Badge variant="secondary" className="text-white text-xs">Featured</Badge>
-                            )}
+                            <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{job.title}</h3>
                           </div>
-                          <p className="text-sm text-muted-foreground">
-                            {job.company} • {job.location}
-                          </p>
+                          {job.featured && (
+                            <Badge variant="secondary" className="text-white text-xs mb-1" style={{ backgroundColor: "#445145" }}>Featured</Badge>
+                          )}
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm mb-1" style={{ color: "#444" }}>{job.company}</p>
+                          <p className="text-sm mb-2" style={{ color: "#555" }}>{job.location} • {job.type}</p>
+                          <div className="flex flex-wrap gap-1.5 mb-3">
+                            {job.tags.map((tag) => (
+                              <Badge key={tag} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#555" }}>
+                            <span className="flex items-center gap-1">
+                              <Briefcase className="size-3" />
+                              {job.salary}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="size-3" />
+                              Start: {job.startDate}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <span>{job.type}</span>
-                        <span>{job.salary}</span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {job.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-muted-foreground">
-                          Posted {job.postedDays} {job.postedDays === 1 ? "day" : "days"} ago • Start: {job.startDate}
-                        </span>
-                        <Button size="sm" asChild>
-                          <Link href={`/jobs/${job.id}`} onClick={scrollToTop}>
-                            View Job
-                          </Link>
-                        </Button>
-                      </div>
                     </Card>
+                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>
