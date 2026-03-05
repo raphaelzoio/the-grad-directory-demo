@@ -755,7 +755,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Compact Filters Row */}
-                <div className="flex flex-wrap items-center gap-2 mb-4">
+                <div className="flex flex-wrap items-center justify-between gap-y-2 mb-4">
                   {/* Skills Filter */}
                   <div className="relative" ref={skillsRef}>
                     <button
@@ -1466,77 +1466,62 @@ export default function DashboardPage() {
                       }}
                       whileHover={navigatingId === null ? { scale: 1.02, y: -2 } : {}}
                       whileTap={navigatingId === null ? { scale: 0.98 } : {}}
-                      className="cursor-pointer flex justify-center"
+                      className="cursor-pointer"
                     >
-                    <Link href={`/dashboard/graduates/${graduate.id}`} onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
-                    <Card
-                      className={`p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20 ${
-                        navigatingId === graduate.id ? "ring-2 ring-primary/30" : ""
-                      }`}
-                      style={{
-                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-                        background: `linear-gradient(to bottom, white 80%, white 85%, ${graduate.university.includes("Oxford") ? "#c5c3d9" : "#fbe8b3"})`,
-                      }}
-                    >
-                      <div className="relative z-10 flex-1">
-                        <div className="mb-3">
-                          <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
-                        </div>
-                        <div className="text-left">
-                          <p className="text-sm mb-1" style={{ color: "#444" }}>
-                            {graduate.degree}
-                          </p>
-                          <p className="text-sm mb-2" style={{ color: "#555" }}>
-                            {graduate.university}
-                          </p>
-                          <div className="flex flex-wrap gap-1.5 mb-3">
-                            {graduate.skills.slice(0, 2).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
-                                {skill}
-                              </Badge>
-                            ))}
-                            {graduate.skills.length > 2 && (
-                              <Badge variant="outline" className="text-xs">+{graduate.skills.length - 2}</Badge>
-                            )}
-                          </div>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#555" }}>
-                            <span className="flex items-center gap-1">
-                              <MapPin className="size-3" />
-                              {graduate.location}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Clock className="size-3" />
-                              {graduate.availability}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Briefcase className="size-3" />
-                              {graduate.experience}
-                            </span>
-                          </div>
-                          {graduate.portfolioUrl && graduate.portfolioLabel && (
-                            <div className="mt-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="h-7 text-xs gap-1"
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  window.open(graduate.portfolioUrl, "_blank")
-                                }}
-                              >
-                                {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? (
-                                  <BookOpen className="size-2.5" />
-                                ) : (
-                                  <ExternalLink className="size-2.5" />
-                                )}
-                                {graduate.portfolioLabel}
-                              </Button>
+                    {(() => {
+                      const cardContent = (
+                        <Card
+                          className={`p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20 ${
+                            navigatingId === graduate.id ? "ring-2 ring-primary/30" : ""
+                          }`}
+                          style={{
+                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                            background: `linear-gradient(to bottom, white 80%, white 85%, ${graduate.university.includes("Oxford") ? "#c5c3d9" : "#fbe8b3"})`,
+                          }}
+                        >
+                          <div className="relative z-10 flex-1">
+                            <div className="mb-3">
+                              <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                             </div>
-                          )}
-                        </div>
-                      </div>
-                    </Card>
-                    </Link>
+                            <div className="text-left">
+                              <p className="text-sm mb-1" style={{ color: "#444" }}>{graduate.degree}</p>
+                              <p className="text-sm mb-2" style={{ color: "#555" }}>{graduate.university}</p>
+                              <div className="flex flex-wrap gap-1.5 mb-3">
+                                {graduate.skills.slice(0, 2).map((skill) => (
+                                  <Badge key={skill} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
+                                    {skill}
+                                  </Badge>
+                                ))}
+                                {graduate.skills.length > 2 && (
+                                  <Badge variant="outline" className="text-xs">+{graduate.skills.length - 2}</Badge>
+                                )}
+                              </div>
+                              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style={{ color: "#555" }}>
+                                <span className="flex items-center gap-1"><MapPin className="size-3" />{graduate.location}</span>
+                                <span className="flex items-center gap-1"><Clock className="size-3" />{graduate.availability}</span>
+                                <span className="flex items-center gap-1"><Briefcase className="size-3" />{graduate.experience}</span>
+                              </div>
+                              {graduate.portfolioUrl && graduate.portfolioLabel && (
+                                <div className="mt-2">
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="h-7 text-xs gap-1"
+                                    onClick={(e) => { e.stopPropagation(); window.open(graduate.portfolioUrl, "_blank") }}
+                                  >
+                                    {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? <BookOpen className="size-2.5" /> : <ExternalLink className="size-2.5" />}
+                                    {graduate.portfolioLabel}
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </Card>
+                      )
+                      return graduate.id === 1
+                        ? <Link href="/dashboard/graduates/1" onClick={scrollToTop} className="no-underline hover:no-underline w-full block">{cardContent}</Link>
+                        : cardContent
+                    })()}
                     </motion.div>
                   ))}
                 </div>
@@ -1564,8 +1549,7 @@ export default function DashboardPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Prize Winner 1 */}
-                <div className="flex justify-center">
-                <Link href="/dashboard/graduates/1" onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
+                <Link href="/dashboard/graduates/1" onClick={scrollToTop} className="no-underline hover:no-underline w-full">
                 <Card
                   className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
                   style={{
@@ -1591,11 +1575,9 @@ export default function DashboardPage() {
                   </div>
                 </Card>
                 </Link>
-                </div>
 
                 {/* Prize Winner 2 */}
-                <div className="flex justify-center">
-                <Link href="/dashboard/graduates/2" onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
+                <Link href="/dashboard/graduates/2" onClick={scrollToTop} className="no-underline hover:no-underline w-full">
                 <Card
                   className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
                   style={{
@@ -1621,11 +1603,9 @@ export default function DashboardPage() {
                   </div>
                 </Card>
                 </Link>
-                </div>
 
                 {/* Prize Winner 3 */}
-                <div className="flex justify-center">
-                <Link href="/dashboard/graduates/3" onClick={scrollToTop} className="no-underline hover:no-underline w-[90%]">
+                <Link href="/dashboard/graduates/3" onClick={scrollToTop} className="no-underline hover:no-underline w-full">
                 <Card
                   className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20"
                   style={{
@@ -1651,7 +1631,6 @@ export default function DashboardPage() {
                   </div>
                 </Card>
                 </Link>
-                </div>
               </div>
               </div>
             </div>
