@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { BookmarkButton } from "@/components/bookmark-button"
 import { ContactDialog } from "@/components/contact-dialog"
@@ -306,14 +305,17 @@ export default function SarahJohnsonProfile() {
 {/* Video Introduction */}
 <Card className="p-6">
   <h3 className="font-semibold mb-4">Video Introduction</h3>
-  <Image
-              src="/images/playbutton.png"
-              alt="The Graduate Directory"
-              className="w-full h-auto block opacity-40"
-              width={200}
-            height={100}
-              priority
-            />
+  <div className="overflow-hidden rounded-lg border border-border bg-black">
+    <video
+      className="block w-full aspect-video object-cover"
+      controls
+      preload="metadata"
+      poster="/images/playbutton.png"
+    >
+      <source src="/videos/graduate-1-intro.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
 </Card>
 
             {/* Skills */}
