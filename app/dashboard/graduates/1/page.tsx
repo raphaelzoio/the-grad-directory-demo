@@ -172,6 +172,7 @@ export default function SarahJohnsonProfile() {
   const [modulesExpanded, setModulesExpanded] = useState(false)
   const [beyondCvExpanded, setBeyondCvExpanded] = useState(false)
   const graduate = sarahProfile
+  const introVideoSrc = process.env.NEXT_PUBLIC_GRADUATE_1_VIDEO_URL || "/videos/graduate-1-intro.mp4"
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -312,7 +313,7 @@ export default function SarahJohnsonProfile() {
       preload="metadata"
       poster="/images/playbutton.png"
     >
-      <source src="/videos/graduate-1-intro.mp4" type="video/mp4" />
+      <source src={introVideoSrc} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </div>
