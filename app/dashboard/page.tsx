@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import {
   Search,
   MapPin,
@@ -217,7 +218,7 @@ const mockGraduates = [
     avatar: "ER",
     interests: "Commercial Law, M&A",
     portfolioUrl: "https://oxford.ac.uk/dissertation/emily-rodriguez",
-    portfolioLabel: "Read dissertation",
+    portfolioLabel: "Dissertation",
   },
   {
     id: 5,
@@ -511,6 +512,8 @@ export default function DashboardPage() {
   const [isStudentJournalist, setIsStudentJournalist] = useState(false)
   const [searchKeywords, setSearchKeywords] = useState("")
   const [navigatingId, setNavigatingId] = useState<number | null>(null)
+  const [savedCards, setSavedCards] = useState<number[]>([])
+  const [allSoulsOpen, setAllSoulsOpen] = useState(false)
 
   const [jobStartDateOpen, setJobStartDateOpen] = useState(false)
   const [jobSectorOpen, setJobSectorOpen] = useState(false)
@@ -1480,6 +1483,22 @@ export default function DashboardPage() {
                           }}
                         >
                           <div className="relative z-10 flex-1">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                                setSavedCards(prev => prev.includes(graduate.id) ? prev.filter(id => id !== graduate.id) : [...prev, graduate.id])
+                              }}
+                              className="absolute top-0 right-0 p-1 rounded-md hover:bg-black/5 transition-colors"
+                            >
+                              <Bookmark
+                                className="size-4"
+                                style={{
+                                  fill: savedCards.includes(graduate.id) ? "#445145" : "none",
+                                  stroke: savedCards.includes(graduate.id) ? "#445145" : "#999",
+                                }}
+                              />
+                            </button>
                             <div className="mb-3">
                               <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                             </div>
@@ -1502,7 +1521,7 @@ export default function DashboardPage() {
                                 <span className="flex items-center gap-1"><Briefcase className="size-3" />{graduate.experience}</span>
                               </div>
                               {graduate.portfolioUrl && graduate.portfolioLabel && (
-                                <div className="mt-2">
+                                <div className="mt-2 flex flex-wrap gap-1.5">
                                   <Button
                                     variant="outline"
                                     size="sm"
@@ -1512,6 +1531,16 @@ export default function DashboardPage() {
                                     {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? <BookOpen className="size-2.5" /> : <ExternalLink className="size-2.5" />}
                                     {graduate.portfolioLabel}
                                   </Button>
+                                  {graduate.id === 3 && (
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="h-7 text-xs gap-1"
+                                      onClick={(e) => { e.stopPropagation(); e.preventDefault(); setAllSoulsOpen(true) }}
+                                    >
+                                      All Souls Exam answer
+                                    </Button>
+                                  )}
                                 </div>
                               )}
                             </div>
@@ -1525,6 +1554,29 @@ export default function DashboardPage() {
                     </motion.div>
                   ))}
                 </div>
+
+                {/* All Souls Dialog */}
+                <Dialog open={allSoulsOpen} onOpenChange={setAllSoulsOpen}>
+                  <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle>All Souls Exam Answer — Emily Rodriguez</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 pt-2">
+                      <p className="text-sm font-medium text-foreground">
+                        &lsquo;Justice delayed is justice denied.&rsquo; Is timeliness a fundamental feature of a just legal system, or merely a practical desideratum?
+                      </p>
+                      <p className="text-sm text-muted-foreground italic leading-relaxed">
+                        The aphorism, attributed variously to Gladstone and to the Magna Carta&rsquo;s quieter provisions, has the ring of self-evidence. Of course justice must be timely; a remedy that arrives after the wrong has consumed its victim is no remedy at all. But the slogan, precisely because it is so intuitively compelling, deserves pressure. It conflates two distinct claims: the empirical observation that delay causes suffering, which is plainly true, and the stronger philosophical proposition that timeliness is constitutive of justice rather than merely instrumental to it. If the latter claim is correct ...
+                      </p>
+                      <div className="flex gap-3 pt-2">
+                        <Button size="sm" asChild onClick={() => setAllSoulsOpen(false)}>
+                          <Link href="/dashboard/graduates/3" onClick={scrollToTop}>View profile</Link>
+                        </Button>
+                        <Button size="sm" variant="outline">Read full dissertation</Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
 
                 {/* View All Button */}
                 <div className="flex justify-center pt-6">
