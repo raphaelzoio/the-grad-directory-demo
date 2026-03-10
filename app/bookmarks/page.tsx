@@ -9,26 +9,52 @@ import { Badge } from "@/components/ui/badge"
 import { ContactDialog } from "@/components/contact-dialog"
 import {
   MapPin,
-  Calendar,
   Briefcase,
   Bookmark,
-  GraduationCap,
+  Clock,
+  ExternalLink,
+  BookOpen,
 } from "lucide-react"
 
 const bookmarkedGraduates = [
   {
     id: 1,
     name: "Sarah Johnson",
-    degree: "Computer Science, BSc",
+    degree: "Computer Science, BSc (1st)",
     university: "University of Oxford",
-    college: "St John's College",
-    graduationYear: 2024,
-    classification: "First Class Honours",
     location: "London, UK",
-    skills: ["React", "TypeScript", "Node.js", "Python", "Machine Learning", "AWS"],
+    skills: ["React", "TypeScript", "Node.js", "Python"],
     experience: "2 years",
     availability: "Immediate",
     avatar: "SJ",
+    portfolioUrl: "https://github.com/sarahjohnson",
+    portfolioLabel: "View GitHub",
+  },
+  {
+    id: 2,
+    name: "Michael Chen",
+    degree: "Software Engineering, MSc (1st)",
+    university: "University of Cambridge",
+    location: "Cambridge, UK",
+    skills: ["Java", "Spring Boot", "AWS", "Docker"],
+    experience: "3 years",
+    availability: "2 weeks",
+    avatar: "MC",
+    portfolioUrl: "https://michaelchen-projects.dev",
+    portfolioLabel: "View Projects",
+  },
+  {
+    id: 3,
+    name: "Emily Rodriguez",
+    degree: "Law (Jurisprudence), BA (1st)",
+    university: "University of Oxford",
+    location: "London, UK",
+    skills: ["SQE1", "SQE2", "First Class", "Research"],
+    experience: "1 year",
+    availability: "Immediate",
+    avatar: "ER",
+    portfolioUrl: "https://oxford.ac.uk/dissertation/emily-rodriguez",
+    portfolioLabel: "Read dissertation",
   },
 ]
 
@@ -47,11 +73,6 @@ export default function BookmarksPage() {
     }
   }, [router])
 
-  const handleRemoveBookmark = (id: number) => {
-    // In a real app, this would remove the bookmark
-    console.log("Remove bookmark:", id)
-  }
-
   if (!userType) {
     return null
   }
@@ -59,12 +80,10 @@ export default function BookmarksPage() {
   return (
     <div className="min-h-screen bg-[var(--background-app)]">
       <main className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="mb-6">
             <h1 className="text-2xl font-semibold text-foreground mb-1">Saved Candidates</h1>
-            <p className="text-sm text-muted-foreground">
-              Your saved candidates for quick access
-            </p>
+            <p className="text-sm text-muted-foreground">Your saved candidates for quick access</p>
           </div>
 
           <div className="mb-6">
@@ -73,89 +92,76 @@ export default function BookmarksPage() {
             </Badge>
           </div>
 
-          <div className="space-y-4">
-            {bookmarkedGraduates.length === 0 ? (
-              <Card className="p-12 text-center">
-                <Bookmark className="size-12 mx-auto text-muted-foreground mb-4" />
-                <p className="text-muted-foreground mb-4">No bookmarked candidates yet</p>
-                <Button asChild>
-                  <Link href="/dashboard">Browse Directory</Link>
-                </Button>
-              </Card>
-            ) : (
-              bookmarkedGraduates.map((graduate) => (
-                <Card key={graduate.id} className="p-6 hover:shadow-md transition-shadow" style={{ backgroundColor: graduate.university.includes("Oxford") ? "#fde8e8" : "#E7D9CB" }}>
-                  <div className="flex flex-col lg:flex-row gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="size-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
-                        {graduate.avatar}
-                      </div>
-                    </div>
-
-                    <div className="flex-1 min-w-0">
+          {bookmarkedGraduates.length === 0 ? (
+            <Card className="p-12 text-center">
+              <Bookmark className="size-12 mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground mb-4">No bookmarked candidates yet</p>
+              <Button asChild>
+                <Link href="/dashboard">Browse Directory</Link>
+              </Button>
+            </Card>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {bookmarkedGraduates.map((graduate) => (
+                <Link
+                  key={graduate.id}
+                  href={`/dashboard/graduates/${graduate.id}`}
+                  className="no-underline hover:no-underline w-full block"
+                  onClick={() => sessionStorage.setItem("previousPathname", "/bookmarks")}
+                >
+                  <Card
+                    className="p-6 min-h-[243px] flex flex-col transition-shadow duration-200 relative overflow-hidden rounded-xl font-manrope border border-black/20 hover:shadow-lg"
+                    style={{
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                      background: `linear-gradient(to bottom, white 80%, white 85%, ${graduate.university.includes("Oxford") ? "#c5c3d9" : "#fbe8b3"})`,
+                    }}
+                  >
+                    <div className="relative z-10 flex-1">
                       <div className="mb-3">
-                        <h3 className="text-xl font-semibold text-foreground mb-1">
-                          {graduate.name}
-                        </h3>
-                        <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                          <GraduationCap className="size-4" />
-                          <span className="text-sm">{graduate.degree}</span>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {graduate.college}, {graduate.university}
-                        </p>
-                        <Badge className="bg-green-800 text-white w-fit">
-                          {graduate.classification}
-                        </Badge>
+                        <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>{graduate.name}</h3>
                       </div>
-
-                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="size-4" />
-                          {graduate.location}
+                      <div className="text-left">
+                        <p className="text-sm mb-1" style={{ color: "#444" }}>{graduate.degree}</p>
+                        <p className="text-sm mb-2" style={{ color: "#555" }}>{graduate.university}</p>
+                        <div className="flex flex-wrap gap-1.5 mb-3">
+                          {graduate.skills.slice(0, 2).map((skill) => (
+                            <Badge key={skill} variant="secondary" className="text-xs bg-white border border-border" style={{ color: "#333" }}>
+                              {skill}
+                            </Badge>
+                          ))}
+                          {graduate.skills.length > 2 && (
+                            <Badge variant="outline" className="text-xs">+{graduate.skills.length - 2}</Badge>
+                          )}
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="size-4" />
-                          Graduated {graduate.graduationYear}
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs mb-3" style={{ color: "#555" }}>
+                          <span className="flex items-center gap-1"><MapPin className="size-3" />{graduate.location}</span>
+                          <span className="flex items-center gap-1"><Clock className="size-3" />{graduate.availability}</span>
+                          <span className="flex items-center gap-1"><Briefcase className="size-3" />{graduate.experience}</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Briefcase className="size-4" />
-                          {graduate.experience} experience
+                        <div className="flex flex-wrap gap-1.5" onClick={(e) => e.preventDefault()}>
+                          {graduate.portfolioUrl && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-7 text-xs gap-1"
+                              onClick={(e) => { e.stopPropagation(); window.open(graduate.portfolioUrl, "_blank") }}
+                            >
+                              {graduate.portfolioLabel.toLowerCase().includes("dissertation") ? <BookOpen className="size-2.5" /> : <ExternalLink className="size-2.5" />}
+                              {graduate.portfolioLabel}
+                            </Button>
+                          )}
+                          <ContactDialog
+                            graduateName={graduate.name}
+                            buttonClassName="h-7 text-xs"
+                          />
                         </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {graduate.skills.slice(0, 4).map((skill) => (
-                          <Badge key={skill} variant="secondary" className="text-white">
-                            {skill}
-                          </Badge>
-                        ))}
-                        {graduate.skills.length > 4 && (
-                          <Badge variant="outline">+{graduate.skills.length - 4} more</Badge>
-                        )}
                       </div>
                     </div>
-
-                    <div className="flex flex-col gap-2 lg:ml-4 lg:min-w-[140px]">
-                      <Button size="sm" className="w-full" asChild>
-                        <Link href={`/dashboard/graduates/${graduate.id}`}>View Profile</Link>
-                      </Button>
-                      <ContactDialog graduateName={graduate.name} buttonClassName="w-full" />
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="w-full"
-                        onClick={() => handleRemoveBookmark(graduate.id)}
-                      >
-                        <Bookmark className="size-4 mr-1 fill-current" />
-                        Remove
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              ))
-            )}
-          </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </main>
     </div>
