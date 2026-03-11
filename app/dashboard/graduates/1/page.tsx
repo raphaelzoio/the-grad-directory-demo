@@ -8,6 +8,11 @@ import { Badge } from "@/components/ui/badge"
 import { BookmarkButton } from "@/components/bookmark-button"
 import { ContactDialog } from "@/components/contact-dialog"
 import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import {
   MapPin,
   Mail,
   Phone,
@@ -24,6 +29,7 @@ import {
   ArrowLeft,
   ChevronDown,
   FileText,
+  Play,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -171,6 +177,7 @@ export default function SarahJohnsonProfile() {
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
   const [modulesExpanded, setModulesExpanded] = useState(false)
   const [beyondCvExpanded, setBeyondCvExpanded] = useState(false)
+  const [videoDialogOpen, setVideoDialogOpen] = useState(false)
   const graduate = sarahProfile
   const introVideoSrc = process.env.NEXT_PUBLIC_GRADUATE_1_VIDEO_URL || "/videos/graduate-1-intro.mp4"
 
@@ -237,8 +244,23 @@ export default function SarahJohnsonProfile() {
             {/* Profile Card */}
             <Card className="p-6">
               <div className="flex flex-col items-center text-center">
-                <div className="size-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl mb-4">
-                  {graduate.avatar}
+                <div className="relative inline-block mb-4">
+                  {/* Circular border */}
+                  <div className="size-28 rounded-full border-2 border-[#445145] flex items-center justify-center relative">
+                    {/* Avatar */}
+                    <div className="size-[92px] rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-3xl">
+                      {graduate.avatar}
+                    </div>
+
+                    {/* Play button */}
+                    <button
+                      onClick={() => setVideoDialogOpen(true)}
+                      className="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-[#445145] flex items-center justify-center hover:bg-[#3a3d38] transition-colors shadow-lg"
+                      title="Play video introduction"
+                    >
+                      <Play className="size-4 fill-white text-white" />
+                    </button>
+                  </div>
                 </div>
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
@@ -318,6 +340,25 @@ export default function SarahJohnsonProfile() {
     </video>
   </div>
 </Card>
+
+{/* Video Dialog */}
+<Dialog open={videoDialogOpen} onOpenChange={setVideoDialogOpen}>
+  <DialogContent className="max-w-4xl">
+    <DialogTitle>Video Introduction</DialogTitle>
+    <div className="overflow-hidden rounded-lg border border-border bg-black">
+      <video
+        className="block w-full aspect-video object-cover"
+        controls
+        autoPlay
+        preload="metadata"
+        poster="/images/playbutton.png"
+      >
+        <source src={introVideoSrc} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </DialogContent>
+</Dialog>
 
             {/* Skills */}
             <Card className="p-6">
