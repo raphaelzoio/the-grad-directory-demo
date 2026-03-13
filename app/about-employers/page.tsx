@@ -52,7 +52,7 @@ export default function AboutEmployersPage() {
               </p>
 
               <p className="text-base">
-                We offer a simple charging structure. Employers can pay a one-off database search fee of £995 for a month of access if an SME or £1,995 if a large corporate. Alternatively, they can subscribe at £600 a month for a minimum of six months.
+                We offer a simple charging structure. Employers can pay a one-off database search fee of £995 for a month of access if an SME or £1,995 if a large or mid sized corporate. Alternatively, they can subscribe at £600 a month for a minimum of six months.
               </p>
             </div>
           </Card>
