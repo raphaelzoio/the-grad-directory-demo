@@ -266,9 +266,8 @@ export default function SarahJohnsonProfile() {
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
                 <p className="text-sm text-muted-foreground mb-4">{graduate.college}, {graduate.university}</p>
                 <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
-                <div className="flex gap-2 mb-6">
-                  <ContactDialog graduateName={graduate.name} />
-                  <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
+                <div className="mb-6">
+                  <ContactDialog graduateName={graduate.name} buttonSize="lg" />
                 </div>
                 <Button variant="outline" className="w-full bg-transparent" asChild>
                   <a href={graduate.portfolioUrl} target="_blank" rel="noopener noreferrer">
@@ -276,10 +275,6 @@ export default function SarahJohnsonProfile() {
                     {graduate.portfolioLabel}
                     <ExternalLink className="size-4 ml-1" />
                   </a>
-                </Button>
-                <Button variant="outline" className="w-full bg-transparent mt-2">
-                  <Download className="size-4 mr-2" />
-                  Download CV
                 </Button>
                 <Button variant="outline" className="w-full bg-transparent mt-2">
                   <FileText className="size-4 mr-2" />

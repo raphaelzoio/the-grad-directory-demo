@@ -16,15 +16,16 @@ import { MessageSquare, Paperclip, Send, Image as ImageIcon } from "lucide-react
 interface ContactDialogProps {
   graduateName: string
   buttonClassName?: string
+  buttonSize?: "sm" | "md" | "lg"
 }
 
-export function ContactDialog({ graduateName, buttonClassName }: ContactDialogProps) {
+export function ContactDialog({ graduateName, buttonClassName, buttonSize = "sm" }: ContactDialogProps) {
   const [open, setOpen] = useState(false)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className={buttonClassName || "flex-1"}>
+        <Button size={buttonSize} className={buttonClassName || "flex-1 w-full"}>
           <MessageSquare className="size-4 mr-2" />
           Contact
         </Button>
