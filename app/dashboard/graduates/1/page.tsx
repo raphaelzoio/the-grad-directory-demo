@@ -284,14 +284,6 @@ export default function SarahJohnsonProfile() {
 
               <div className="mt-6 pt-6 border-t space-y-3">
                 <div className="flex items-center gap-3 text-sm">
-                  <Mail className="size-4 text-muted-foreground shrink-0" />
-                  <span className="text-muted-foreground break-all">{graduate.email}</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <Phone className="size-4 text-muted-foreground shrink-0" />
-                  <span className="text-muted-foreground">{graduate.phone}</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm">
                   <MapPin className="size-4 text-muted-foreground shrink-0" />
                   <span className="text-muted-foreground">{graduate.location}</span>
                 </div>
@@ -308,10 +300,6 @@ export default function SarahJohnsonProfile() {
               <div className="mt-6 pt-6 border-t">
                 <h3 className="font-semibold mb-3 text-sm">Online Presence</h3>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
-                    <Linkedin className="size-4" />
-                    <span>{graduate.linkedin}</span>
-                  </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground cursor-default">
                     <Github className="size-4" />
                     <span>{graduate.github}</span>
