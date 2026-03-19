@@ -30,6 +30,7 @@ import {
   ChevronDown,
   FileText,
   Play,
+  Target,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -278,7 +279,7 @@ export default function SarahJohnsonProfile() {
                 </Button>
                 <Button variant="outline" className="w-full bg-transparent mt-2">
                   <FileText className="size-4 mr-2" />
-                  See other documents
+                  View 2023 research paper 
                 </Button>
               </div>
 
@@ -293,7 +294,11 @@ export default function SarahJohnsonProfile() {
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <Briefcase className="size-4 text-muted-foreground shrink-0" />
-                  <span className="text-muted-foreground">{graduate.experience} Experience</span>
+                  <span className="text-muted-foreground">{graduate.experience} experience</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Target className="size-4 shrink-0" style={{ color: "#cc7a00" }} />
+                  <span style={{ color: "#cc7a00" }}>Sarah is seeking permanent positions only.</span>
                 </div>
               </div>
 
@@ -439,7 +444,7 @@ export default function SarahJohnsonProfile() {
                 </button>
               </div>
               <p className="text-sm text-muted-foreground mt-1">A unique space for candidates to demonstrate their creativity and soft skills.</p>
-              <p className="text-sm text-muted-foreground mt-1">On their profile, they can answer prompts and questions set by our team, or share a 'curated trail' - three pieces of content (articles, books, talks) that have influenced how they think, with a sentence on why.</p>
+              <p className="text-sm text-muted-foreground mt-1">On their profile, they can answer prompts and questions set by our team, or share a 'curated trail' - three pieces of content (articles, books, talks) that have influenced how they think, with a sentence on why. Candidates also have the option of attaching their thoughts on a relevant geopolitical issue, legal case or stock movement if they so wish.</p>
               <div className="flex flex-wrap items-center gap-2 mt-2">
                 <span className="text-base font-medium" style={{ color: "#cc7a00" }}>Sarah selected:</span>
                 <Badge variant="secondary" className="text-base px-3 py-1">Resourcefulness</Badge>
@@ -544,6 +549,20 @@ export default function SarahJohnsonProfile() {
                     <p className="text-sm text-muted-foreground leading-relaxed">{module.description}</p>
                   </div>
                 ))}
+              </div>
+            </Card>
+
+            {/* Clubs and Societies */}
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
+                <Award className="size-5" />
+                Clubs and Societies
+              </h2>
+              <div className="space-y-4">
+                <div className="p-4 rounded-lg border bg-muted/30">
+                  <h3 className="font-semibold mb-2">Oxford Computing Society</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">President and founding member. Led the society's growth from 15 to over 150 members, organized weekly technical talks, annual hackathon, and mentorship programs connecting students with industry professionals.</p>
+                </div>
               </div>
             </Card>
 
