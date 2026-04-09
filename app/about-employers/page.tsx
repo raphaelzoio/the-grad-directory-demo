@@ -50,10 +50,6 @@ export default function AboutEmployersPage() {
               <p className="text-base">
                 Employers use the database to rapidly and precisely target the high potential talent they seek for jobs, internships and placements, and circumvent the consuming, high volume applications with little ability to distinguish between them.
               </p>
-
-              <p className="text-base">
-                We offer a simple charging structure. Employers can pay a one-off database search fee of £995 for a month of access if an SME or £1,995 if a large or mid sized corporate. Alternatively, they can subscribe at £800 a month for a minimum of four months.
-              </p>
             </div>
           </Card>
 
