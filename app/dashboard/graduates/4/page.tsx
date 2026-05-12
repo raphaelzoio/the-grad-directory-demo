@@ -153,7 +153,7 @@ const davidProfile = {
 }
 
 const relatedProfiles = [
-  { id: 1, name: "Sarah Johnson", university: "Oxford", degree: "Computer Science, BSc", classification: "First", avatar: "SJ" },
+  { id: 1, name: "Sarah Janssen", university: "Oxford", degree: "Computer Science, BSc", classification: "First", avatar: "SJ" },
   { id: 2, name: "Michael Chen", university: "Cambridge", degree: "Software Engineering, MSc", classification: "Distinction", avatar: "MC" },
   { id: 6, name: "Alex Thompson", university: "Cambridge", degree: "Data Intensive Science, MPhil", classification: "First", avatar: "AT" },
 ]

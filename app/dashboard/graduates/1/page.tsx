@@ -36,8 +36,8 @@ import Link from "next/link"
 
 const sarahProfile = {
   id: 1,
-  name: "Sarah Johnson",
-  email: "sarah.johnson@cs.ox.ac.uk",
+  name: "Sarah Janssen",
+  email: "sarah.Janssen@cs.ox.ac.uk",
   phone: "+44 7700 234567",
   degree: "Computer Science, BSc",
   university: "University of Oxford",
@@ -50,9 +50,9 @@ const sarahProfile = {
   availability: "Immediate",
   avatar: "SJ",
   bio: "First Class Computer Science graduate from the University of Oxford with a strong foundation in software engineering and artificial intelligence. Passionate about building scalable web applications and exploring the intersection of machine learning and user experience. Experienced in full-stack development through internships at leading tech companies and personal projects. Seeking a graduate role in software engineering or AI/ML engineering.",
-  linkedin: "linkedin.com/in/sarahjohnsoncs",
-  github: "github.com/sarahjohnson",
-  portfolioUrl: "https://github.com/sarahjohnson",
+  linkedin: "linkedin.com/in/sarahJanssencs",
+  github: "github.com/sarahJanssen",
+  portfolioUrl: "https://github.com/sarahJanssen",
   portfolioLabel: "View GitHub",
   workExperience: [
     {
@@ -172,7 +172,7 @@ const relatedProfiles = [
   { id: 6, name: "Alex Thompson", university: "Cambridge", degree: "Data Intensive Science, MPhil", classification: "First", avatar: "AT" },
 ]
 
-export default function SarahJohnsonProfile() {
+export default function SarahJanssenProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
@@ -425,6 +425,16 @@ export default function SarahJohnsonProfile() {
                 <li>• Video editing</li>
               </ul>
             </Card>
+
+            {/* Hobbies */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Story</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>• Football</li>
+                <li>• Painting</li>
+                <li>• Video editing</li>
+              </ul>
+            </Card>
           </div>
 
           {/* Main Content */}
@@ -433,6 +443,12 @@ export default function SarahJohnsonProfile() {
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">About</h2>
               <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
+            </Card>
+
+            {/* About */}
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-4">My Story</h2>
+              <p className="text-muted-foreground leading-relaxed">I was the first person in my family to attend university - an experience that helped me grow my skills in independent working and gave me a self starting attitude. I helped out with sports summer schools and did lots of community projects as a teenager, both of which allowed me to connect and communicate with groups easily and lead from the front.</p>
             </Card>
 
             {/* Beyond the CV */}
@@ -612,6 +628,7 @@ export default function SarahJohnsonProfile() {
                 ))}
               </div>
             </Card>
+            
           </div>
         </div>
       </div>

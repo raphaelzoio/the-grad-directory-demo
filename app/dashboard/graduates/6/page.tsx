@@ -100,7 +100,7 @@ const alexProfile = {
 }
 
 const relatedProfiles = [
-  { id: 1, name: "Sarah Johnson", university: "Oxford", degree: "Computer Science, BSc", classification: "First", avatar: "SJ" },
+  { id: 1, name: "Sarah Janssen", university: "Oxford", degree: "Computer Science, BSc", classification: "First", avatar: "SJ" },
   { id: 7, name: "Olivia Patel", university: "Cambridge", degree: "Mathematics, MASt", classification: "Distinction", avatar: "OP" },
   { id: 9, name: "Hannah Liu", university: "Cambridge", degree: "Natural Sciences, MSci", classification: "First", avatar: "HL" },
 ]

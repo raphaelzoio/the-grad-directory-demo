@@ -12,7 +12,7 @@ import { Search, Send, Paperclip, MoreVertical, Phone, Video, Archive, Star } fr
 const employerConversations = [
   {
     id: 1,
-    name: "Sarah Johnson",
+    name: "Sarah Janssen",
     avatar: null,
     lastMessage: "Perfect! How about Thursday at 3 PM? I'll send over a calendar invite.",
     timestamp: "11:45 AM",
