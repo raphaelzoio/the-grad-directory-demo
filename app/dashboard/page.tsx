@@ -162,7 +162,7 @@ const employerJobs = [
 const mockGraduates = [
   {
     id: 1,
-    name: "Sarah Janssen",
+    name: "Sarah Nowak",
     degree: "Computer Science, BSc (1st)",
     university: "University of Oxford",
     graduationYear: 2024,
@@ -172,7 +172,7 @@ const mockGraduates = [
     availability: "Immediate",
     avatar: "SJ",
     interests: "AI, Machine Learning",
-    portfolioUrl: "https://github.com/sarahJanssen",
+    portfolioUrl: "https://github.com/sarahNowak",
     portfolioLabel: "View GitHub",
   },
   {
@@ -1658,7 +1658,7 @@ export default function DashboardPage() {
                 >
                   <div className="relative z-10 flex-1">
                     <div className="mb-3">
-                      <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>Aisha Janssen</h3>
+                      <h3 className="font-semibold text-xl font-manrope" style={{ color: "#1a1a1a" }}>Aisha Nowak</h3>
                     </div>
                     <div className="text-left">
                       <p className="text-sm mb-1" style={{ color: "#444" }}>Computer Science, MEng (1st)</p>

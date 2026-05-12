@@ -19,7 +19,7 @@ import {
 const bookmarkedGraduates = [
   {
     id: 1,
-    name: "Sarah Janssen",
+    name: "Sarah Nowak",
     degree: "Computer Science, BSc (1st)",
     university: "University of Oxford",
     location: "London, UK",
@@ -27,7 +27,7 @@ const bookmarkedGraduates = [
     experience: "2 years",
     availability: "Immediate",
     avatar: "SJ",
-    portfolioUrl: "https://github.com/sarahJanssen",
+    portfolioUrl: "https://github.com/sarahNowak",
     portfolioLabel: "View GitHub",
   },
   {

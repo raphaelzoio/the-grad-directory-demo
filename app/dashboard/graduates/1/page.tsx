@@ -36,8 +36,8 @@ import Link from "next/link"
 
 const sarahProfile = {
   id: 1,
-  name: "Sarah Janssen",
-  email: "sarah.Janssen@cs.ox.ac.uk",
+  name: "Sarah Nowak",
+  email: "sarah.Nowak@cs.ox.ac.uk",
   phone: "+44 7700 234567",
   degree: "Computer Science, BSc",
   university: "University of Oxford",
@@ -50,9 +50,9 @@ const sarahProfile = {
   availability: "Immediate",
   avatar: "SJ",
   bio: "First Class Computer Science graduate from the University of Oxford with a strong foundation in software engineering and artificial intelligence. Passionate about building scalable web applications and exploring the intersection of machine learning and user experience. Experienced in full-stack development through internships at leading tech companies and personal projects. Seeking a graduate role in software engineering or AI/ML engineering.",
-  linkedin: "linkedin.com/in/sarahJanssencs",
-  github: "github.com/sarahJanssen",
-  portfolioUrl: "https://github.com/sarahJanssen",
+  linkedin: "linkedin.com/in/sarahNowakcs",
+  github: "github.com/sarahNowak",
+  portfolioUrl: "https://github.com/sarahNowak",
   portfolioLabel: "View GitHub",
   workExperience: [
     {
@@ -172,7 +172,7 @@ const relatedProfiles = [
   { id: 6, name: "Alex Thompson", university: "Cambridge", degree: "Data Intensive Science, MPhil", classification: "First", avatar: "AT" },
 ]
 
-export default function SarahJanssenProfile() {
+export default function SarahNowakProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
