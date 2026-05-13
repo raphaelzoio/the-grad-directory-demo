@@ -316,16 +316,22 @@ export default function SarahNowakProfile() {
 {/* Video Introduction */}
 <Card className="p-6">
   <h3 className="font-semibold mb-4">Video Introduction</h3>
-  <div className="overflow-hidden rounded-lg border border-border bg-black">
+  <div className="relative overflow-hidden rounded-lg border border-border bg-black cursor-pointer" onClick={() => setVideoDialogOpen(true)}>
     <video
       className="block w-full aspect-video object-cover"
-      controls
       preload="metadata"
-      poster="/images/playbutton.png"
     >
       <source src={introVideoSrc} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
+    <div className="absolute inset-0 flex items-center justify-center">
+      <button
+        className="w-12 h-12 rounded-full bg-[#445145]/80 flex items-center justify-center hover:bg-[#445145] transition-colors shadow-lg"
+        title="Play video introduction"
+      >
+        <Play className="size-6 fill-white text-white ml-0.5" />
+      </button>
+    </div>
   </div>
 </Card>
 
