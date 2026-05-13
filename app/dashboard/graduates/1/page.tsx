@@ -449,6 +449,8 @@ export default function SarahNowakProfile() {
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">My Story</h2>
               <p className="text-muted-foreground leading-relaxed">I was the first person in my family to attend university - an experience that helped me grow my skills in independent working and gave me a self starting attitude. I helped out with sports summer schools and did lots of community projects as a teenager, both of which allowed me to connect and communicate with groups easily and lead from the front.</p>
+              <p className="text-muted-foreground leading-relaxed">I'm currently looking for a role as a junior developer or software intern, ideally within a multinational company. I want a role that can test my abilities and allow me to grow my skillset.</p>
+              <p className="text-muted-foreground leading-relaxed">I'm a quick learner with a self starting attitude to work, and strong communication skills. I'm good at translating complex subjects into understandable language for less technical peers.</p>
             </Card>
 
             {/* Beyond the CV */}
