@@ -177,7 +177,6 @@ export default function SarahNowakProfile() {
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
   const [modulesExpanded, setModulesExpanded] = useState(false)
-  const [beyondCvExpanded, setBeyondCvExpanded] = useState(false)
   const [videoDialogOpen, setVideoDialogOpen] = useState(false)
   const graduate = sarahProfile
   const introVideoSrc = process.env.NEXT_PUBLIC_GRADUATE_1_VIDEO_URL || "/videos/graduate-1-intro.mp4"
@@ -441,6 +440,31 @@ export default function SarahNowakProfile() {
                 <li>• Video editing</li>
               </ul>
             </Card>
+
+            {/* Certifications */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-3">Professional Certifications</h3>
+              <ul className="space-y-2">
+                {graduate.certifications.map((cert) => (
+                  <li key={cert} className="flex items-center gap-2 text-sm">
+                    <div className="size-2 rounded-full bg-primary shrink-0" />
+                    <span>{cert}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            {/* Areas of Interest */}
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Areas of Interest</h3>
+              <div className="flex flex-wrap gap-2">
+                {graduate.interests.map((interest) => (
+                  <Badge key={interest} variant="outline">
+                    {interest}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
           </div>
 
           {/* Main Content */}
@@ -455,20 +479,17 @@ export default function SarahNowakProfile() {
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">My Story</h2>
               <p className="text-muted-foreground leading-relaxed">I was the first person in my family to attend university - an experience that helped me grow my skills in independent working and gave me a self starting attitude. I helped out with sports summer schools and did lots of community projects as a teenager, both of which allowed me to connect and communicate with groups easily and lead from the front.</p>
-              <p className="text-muted-foreground leading-relaxed">I'm currently looking for a role as a junior software developer, ideally within a multinational company. I want a role that can test my abilities and allow me to grow my skillset.</p>
+              <hr className="border-t border-border my-4" />
+              <p className="leading-relaxed" style={{ color: "#cc7a00" }}>I'm currently looking for a role as a junior software developer, ideally within a multinational company. I want a role that can test my abilities and allow me to grow my skillset.</p>
+              <hr className="border-t border-border my-4" />
               <p className="text-muted-foreground leading-relaxed">I'm a quick learner with a self starting attitude to work, and strong communication skills. I'm good at translating complex subjects into understandable language for less technical peers.</p>
             </Card>
 
             {/* Beyond the CV */}
             <Card className="p-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold">Beyond the CV</h2>
-                <button onClick={() => setBeyondCvExpanded(!beyondCvExpanded)} className="p-1 rounded-md hover:bg-muted transition-colors">
-                  <ChevronDown className={`size-6 transition-transform duration-200 ${beyondCvExpanded ? "rotate-180" : ""}`} />
-                </button>
-              </div>
-              <p className="text-sm text-muted-foreground mt-1">A unique space for candidates to demonstrate their creativity and soft skills.</p>
-              <p className="text-sm text-muted-foreground mt-1">On their profile, they can answer prompts and questions set by our team, or share a 'curated trail' - three pieces of content (articles, books, talks) that have influenced how they think, with a sentence on why. Candidates also have the option of attaching their thoughts on a relevant geopolitical issue, legal case or stock movement if they so wish.</p>
+              <h2 className="text-xl font-bold mb-1">Beyond the CV</h2>
+              <p className="text-sm text-muted-foreground mt-1"><i>A unique space for candidates to demonstrate their creativity and soft skills.</i></p>
+              <p className="text-sm text-muted-foreground mt-1"><i>On their profile, they can answer prompts and questions set by our team, or share a 'curated trail' - three pieces of content (articles, books, talks) that have influenced how they think, with a sentence on why. Candidates also have the option of attaching their thoughts on a relevant geopolitical issue, legal case or stock movement if they so wish.</i></p>
               <div className="flex flex-wrap items-center gap-2 mt-2">
                 <span className="text-base font-medium" style={{ color: "#cc7a00" }}>Sarah selected:</span>
                 <Badge variant="secondary" className="text-base px-3 py-1">Resourcefulness</Badge>
@@ -476,30 +497,28 @@ export default function SarahNowakProfile() {
                 <span className="text-base font-medium" style={{ color: "#cc7a00" }}>and a critical essay on:</span>
                 <Badge className="text-base px-3 py-1 text-white border-0" style={{ backgroundColor: "#445145" }}>Geopolitics</Badge>
               </div>
-              {beyondCvExpanded && (
-                <div className="mt-3 space-y-3">
-                  <blockquote className="text-sm text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 italic">
-                    &ldquo;During my internship at a fintech startup, our team lost access to key market data two days before a client presentation. I identified three free alternative data sources, taught myself basic Python scraping to compile the information, and delivered comparable insights. The client commended our adaptability, and the workaround became standard practice for the team&rsquo;s future projects.&rdquo;
-                  </blockquote>
-                  <p className="text-sm text-muted-foreground">Internship, Summer 2025</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
-                    In her Abstract Box, Sarah answered the All Souls College question: &ldquo;If you had £10,000 and six months, what would you create or explore?&rdquo;.{" "}
-                    <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
-                      Read answer here
-                      <ExternalLink className="size-3" />
-                    </a>
-                  </p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
-                    Sarah also answered our Scenario Question: &ldquo;How would you develop a new feature at a company, without disrupting the state of its current operations?&rdquo;
-                  </p>
-                  <p className="text-sm">
-                    <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
-                      Read answer here
-                      <ExternalLink className="size-3" />
-                    </a>
-                  </p>
-                </div>
-              )}
+              <div className="mt-3 space-y-3">
+                <blockquote className="text-sm text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4">
+                  &ldquo;During my internship at a fintech startup, our team lost access to key market data two days before a client presentation. I identified three free alternative data sources, taught myself basic Python scraping to compile the information, and delivered comparable insights. The client commended our adaptability, and the workaround became standard practice for the team&rsquo;s future projects.&rdquo;
+                </blockquote>
+                <p className="text-sm text-muted-foreground">Internship, Summer 2025</p>
+                <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
+                  In her Abstract Box, Sarah answered the All Souls College question: &ldquo;If you had £10,000 and six months, what would you create or explore?&rdquo;.{" "}
+                  <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
+                    Read answer here
+                    <ExternalLink className="size-3" />
+                  </a>
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "#cc7a00" }}>
+                  Sarah also attached an article she loves from The Atlantic: &ldquo;An Urgent Question for Anyone Who Uses Social Media&rdquo;
+                </p>
+                <p className="text-sm">
+                  <a href="#" className="text-primary hover:underline inline-flex items-center gap-1">
+                    Read article here
+                    <ExternalLink className="size-3" />
+                  </a>
+                </p>
+              </div>
             </Card>
 
             {/* Work Experience */}
@@ -612,30 +631,6 @@ export default function SarahNowakProfile() {
               </div>
             </Card>
 
-            {/* Certifications */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-3">Professional Certifications</h2>
-              <ul className="space-y-2">
-                {graduate.certifications.map((cert) => (
-                  <li key={cert} className="flex items-center gap-2 text-sm">
-                    <div className="size-2 rounded-full bg-primary shrink-0" />
-                    <span>{cert}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Interests */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Areas of Interest</h2>
-              <div className="flex flex-wrap gap-2">
-                {graduate.interests.map((interest) => (
-                  <Badge key={interest} variant="outline">
-                    {interest}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
             
           </div>
         </div>

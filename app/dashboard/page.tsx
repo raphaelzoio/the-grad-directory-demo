@@ -495,9 +495,9 @@ export default function DashboardPage() {
   const [availabilityOpen, setAvailabilityOpen] = useState(false)
   const [selectedLocations, setSelectedLocations] = useState<string[]>([])
   const [selectedUniversities, setSelectedUniversities] = useState<string[]>([])
-  const [selectedColleges, setSelectedColleges] = useState<string[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [selectedSoftSkills, setSelectedSoftSkills] = useState<string[]>([])
+  const [selectedAdditionalSkills, setSelectedAdditionalSkills] = useState<string[]>([])
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
   const [selectedExperience, setSelectedExperience] = useState<string[]>([])
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([])
@@ -553,9 +553,9 @@ export default function DashboardPage() {
 
   const locationRef = useRef<HTMLDivElement>(null)
   const universityRef = useRef<HTMLDivElement>(null)
-  const collegeRef = useRef<HTMLDivElement>(null)
   const skillsRef = useRef<HTMLDivElement>(null)
   const softSkillsRef = useRef<HTMLDivElement>(null)
+  const additionalSkillsRef = useRef<HTMLDivElement>(null)
   const subjectRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
   const availabilityRef = useRef<HTMLDivElement>(null)
@@ -576,9 +576,9 @@ export default function DashboardPage() {
       const refs = {
   location: locationRef,
   university: universityRef,
-  college: collegeRef,
   skills: skillsRef,
   softSkills: softSkillsRef,
+  additionalSkills: additionalSkillsRef,
   subject: subjectRef,
   experience: experienceRef,
   availability: availabilityRef,
@@ -754,127 +754,188 @@ export default function DashboardPage() {
                       Smart Search
                     </Button>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">Describe what you are looking for and we will autofill the filters below</p>
+                  <p className="text-xs text-muted-foreground mt-2">Describe what you are looking for and we will autofill the filters below. Your search will keep in mind the sectors that candidates have expressed interest in.</p>
                 </div>
 
                 {/* Compact Filters Row */}
-                <div className="flex flex-wrap items-center justify-between gap-y-2 mb-4">
-                  {/* Skills Filter */}
-                  <div className="relative" ref={skillsRef}>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setOpenDropdown(openDropdown === "skills" ? null : "skills")
-                      }}
-                      className={`h-10 px-4 rounded-full border text-sm font-medium flex items-center gap-2 transition-colors ${
-                        selectedSkills.length > 0
-                          ? "text-white border-transparent"
-                          : "border-transparent text-white"
-                      }`}
-                      style={{ backgroundColor: "#2d4a31" }}
-                    >
-                      <Code className="size-4" />
-                      <span>{selectedSkills.length === 0 ? "Technical Skills" : `${selectedSkills.length} selected`}</span>
-                      <ChevronDown className="size-3" />
-                    </button>
-                    {openDropdown === "skills" && (
-                      <div
-                        onClick={(e) => e.stopPropagation()}
-                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[220px]"
+                <div className="mb-4">
+                  {/* Top row: three main skill filters, centred and larger */}
+                  <div className="flex justify-center gap-4 mb-4">
+                    {/* Technical Skills Filter */}
+                    <div className="relative" ref={skillsRef}>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setOpenDropdown(openDropdown === "skills" ? null : "skills")
+                        }}
+                        className="h-[52px] px-6 rounded-full border border-transparent text-base font-medium flex items-center gap-2 transition-colors text-white"
+                        style={{ backgroundColor: "#2d4a31" }}
                       >
-                        {[
-                          "Python",
-                          "LLM Usage",
-                          "React",
-                          "TypeScript",
-                          "Node.js",
-                          "Java",
-                          "SQL",
-                          "Machine Learning",
-                          "Data Analysis",
-                          "AWS",
-                          "Docker",
-                          "UX Design",
-                          "Figma",
-                          "Copywriting",
-                          "Content Strategy",
-                          "SEO",
-                          "Financial Modelling",
-                          "Excel / VBA",
-                          "Project Management",
-                          "Public Speaking",
-                          "Research & Analysis",
-                        ].map((skill) => (
-                          <label
-                            key={skill}
-                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              className="size-4"
-                              checked={selectedSkills.includes(skill)}
-                              onChange={() => toggleSelection(skill, selectedSkills, setSelectedSkills)}
-                            />
-                            <span className="text-sm">{skill}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
+                        <Code className="size-5" />
+                        <span>{selectedSkills.length === 0 ? "Technical Skills" : `${selectedSkills.length} selected`}</span>
+                        <ChevronDown className="size-4" />
+                      </button>
+                      {openDropdown === "skills" && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[240px]"
+                        >
+                          {[
+                            "Python",
+                            "SQL",
+                            "JavaScript",
+                            "Java",
+                            "R",
+                            "Excel/advanced spreadsheets",
+                            "Financial modelling",
+                            "Data analysis",
+                            "Tableau",
+                            "Power BI",
+                            "Git/version control",
+                            "HTML/CSS",
+                            "Cloud platforms (AWS/Azure/GCP)",
+                            "Machine learning",
+                            "Statistical analysis",
+                            "CAD/engineering software",
+                            "Adobe Creative Suite",
+                            "Figma",
+                            "SPSS/Stata",
+                            "Bloomberg Terminal",
+                          ].map((skill) => (
+                            <label
+                              key={skill}
+                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                className="size-4"
+                                checked={selectedSkills.includes(skill)}
+                                onChange={() => toggleSelection(skill, selectedSkills, setSelectedSkills)}
+                              />
+                              <span className="text-sm">{skill}</span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Soft Skills Filter */}
+                    <div className="relative" ref={softSkillsRef}>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setOpenDropdown(openDropdown === "softSkills" ? null : "softSkills")
+                        }}
+                        className="h-[52px] px-6 rounded-full border text-base font-medium flex items-center gap-2 transition-colors text-foreground"
+                        style={{ backgroundColor: "#f5c97a", borderColor: "#e8b455" }}
+                      >
+                        <span>{selectedSoftSkills.length === 0 ? "Soft Skills" : `${selectedSoftSkills.length} selected`}</span>
+                        <ChevronDown className="size-4" />
+                      </button>
+                      {openDropdown === "softSkills" && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[240px]"
+                        >
+                          {[
+                            "Communication",
+                            "Leadership",
+                            "Problem-solving",
+                            "Teamwork",
+                            "Adaptability",
+                            "Critical thinking",
+                            "Time management",
+                            "Attention to detail",
+                            "Emotional intelligence",
+                            "Negotiation",
+                            "Conflict resolution",
+                            "Decision-making",
+                            "Creativity",
+                            "Resilience",
+                            "Public speaking",
+                            "Active listening",
+                            "Mentoring",
+                            "Networking",
+                            "Work ethic",
+                            "Commercial awareness",
+                          ].map((skill) => (
+                            <label
+                              key={skill}
+                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                className="size-4"
+                                checked={selectedSoftSkills.includes(skill)}
+                                onChange={() => toggleSelection(skill, selectedSoftSkills, setSelectedSoftSkills)}
+                              />
+                              <span className="text-sm">{skill}</span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Additional Skills Filter */}
+                    <div className="relative" ref={additionalSkillsRef}>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setOpenDropdown(openDropdown === "additionalSkills" ? null : "additionalSkills")
+                        }}
+                        className="h-[52px] px-6 rounded-full border text-base font-medium flex items-center gap-2 transition-colors text-foreground"
+                        style={{ backgroundColor: "#fde8c8", borderColor: "#f5c99a" }}
+                      >
+                        <span>{selectedAdditionalSkills.length === 0 ? "Additional Skills" : `${selectedAdditionalSkills.length} selected`}</span>
+                        <ChevronDown className="size-4" />
+                      </button>
+                      {openDropdown === "additionalSkills" && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[240px]"
+                        >
+                          {[
+                            "Languages",
+                            "Project management",
+                            "Event organisation",
+                            "Content writing",
+                            "Social media management",
+                            "Video production",
+                            "Photography",
+                            "Copyediting",
+                            "Research",
+                            "Fundraising",
+                            "Community organising",
+                            "Tutoring/teaching",
+                            "Sports coaching",
+                            "Debating",
+                            "Blogging",
+                            "Podcasting",
+                            "Graphic design",
+                            "Translation",
+                            "First aid/lifeguarding",
+                            "Driving licence",
+                          ].map((skill) => (
+                            <label
+                              key={skill}
+                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                className="size-4"
+                                checked={selectedAdditionalSkills.includes(skill)}
+                                onChange={() => toggleSelection(skill, selectedAdditionalSkills, setSelectedAdditionalSkills)}
+                              />
+                              <span className="text-sm">{skill}</span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Soft Skills Filter */}
-                  <div className="relative" ref={softSkillsRef}>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setOpenDropdown(openDropdown === "softSkills" ? null : "softSkills")
-                      }}
-                      className={`h-10 px-4 rounded-full border text-sm font-medium flex items-center gap-2 transition-colors ${
-                        selectedSoftSkills.length > 0
-                          ? "text-foreground"
-                          : "text-foreground"
-                      }`}
-                      style={{ backgroundColor: "#f5c97a", borderColor: "#e8b455" }}
-                    >
-                      <span>{selectedSoftSkills.length === 0 ? "Soft Skills" : `${selectedSoftSkills.length} selected`}</span>
-                      <ChevronDown className="size-3" />
-                    </button>
-                    {openDropdown === "softSkills" && (
-                      <div
-                        onClick={(e) => e.stopPropagation()}
-                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[220px]"
-                      >
-                        {[
-                          "Resourcefulness",
-                          "Problem Solving",
-                          "Critical Thinking",
-                          "Communication",
-                          "Teamwork",
-                          "Adaptability",
-                          "Leadership",
-                          "Creativity",
-                          "Time Management",
-                          "Emotional Intelligence",
-                          "Attention to Detail",
-                          "Resilience",
-                        ].map((skill) => (
-                          <label
-                            key={skill}
-                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              className="size-4"
-                              checked={selectedSoftSkills.includes(skill)}
-                              onChange={() => toggleSelection(skill, selectedSoftSkills, setSelectedSoftSkills)}
-                            />
-                            <span className="text-sm">{skill}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
+                  {/* Second row: remaining filters */}
+                  <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
                   {/* Location Filter */}
                   <div className="relative" ref={locationRef}>
                     <button
@@ -940,6 +1001,14 @@ export default function DashboardPage() {
                         {[
                           "University of Oxford",
                           "University of Cambridge",
+                          "London School of Economics and Political Science (LSE)",
+                          "Imperial College London",
+                          "University of St Andrews",
+                          "Durham University",
+                          "University College London (UCL)",
+                          "University of Warwick",
+                          "University of Bath",
+                          "King's College London",
                         ].map((uni) => (
                           <label
                             key={uni}
@@ -952,115 +1021,6 @@ export default function DashboardPage() {
                               onChange={() => toggleSelection(uni, selectedUniversities, setSelectedUniversities)}
                             />
                             <span className="text-sm">{uni}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* College Filter */}
-                  <div className="relative" ref={collegeRef}>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setOpenDropdown(openDropdown === "college" ? null : "college")
-                      }}
-                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
-                        selectedColleges.length > 0
-                          ? "bg-primary/10 border-primary/30 text-foreground"
-                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
-                      }`}
-                    >
-                      <span>{selectedColleges.length === 0 ? "College" : `${selectedColleges.length} selected`}</span>
-                      <ChevronDown className="size-3" />
-                    </button>
-                    {openDropdown === "college" && (
-                      <div
-                        onClick={(e) => e.stopPropagation()}
-                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-72 overflow-y-auto min-w-[260px]"
-                      >
-                        {[
-                          "Balliol College, Oxford",
-                          "Brasenose College, Oxford",
-                          "Christ Church, Oxford",
-                          "Christ's College, Cambridge",
-                          "Churchill College, Cambridge",
-                          "Clare College, Cambridge",
-                          "Clare Hall, Cambridge",
-                          "Corpus Christi College, Cambridge",
-                          "Corpus Christi College, Oxford",
-                          "Darwin College, Cambridge",
-                          "Downing College, Cambridge",
-                          "Emmanuel College, Cambridge",
-                          "Exeter College, Oxford",
-                          "Fitzwilliam College, Cambridge",
-                          "Girton College, Cambridge",
-                          "Gonville & Caius College, Cambridge",
-                          "Green Templeton College, Oxford",
-                          "Harris Manchester College, Oxford",
-                          "Hertford College, Oxford",
-                          "Homerton College, Cambridge",
-                          "Hughes Hall, Cambridge",
-                          "Jesus College, Cambridge",
-                          "Jesus College, Oxford",
-                          "Keble College, Oxford",
-                          "Kellogg College, Oxford",
-                          "King's College, Cambridge",
-                          "Lady Margaret Hall, Oxford",
-                          "Linacre College, Oxford",
-                          "Lincoln College, Oxford",
-                          "Magdalen College, Oxford",
-                          "Magdalene College, Cambridge",
-                          "Mansfield College, Oxford",
-                          "Merton College, Oxford",
-                          "Murray Edwards College, Cambridge",
-                          "New College, Oxford",
-                          "Newnham College, Cambridge",
-                          "Oriel College, Oxford",
-                          "Pembroke College, Cambridge",
-                          "Pembroke College, Oxford",
-                          "Peterhouse, Cambridge",
-                          "Queen's College, Oxford",
-                          "Queens' College, Cambridge",
-                          "Regent's Park College, Oxford",
-                          "Reuben College, Oxford",
-                          "Robinson College, Cambridge",
-                          "St Anne's College, Oxford",
-                          "St Antony's College, Oxford",
-                          "St Catharine's College, Cambridge",
-                          "St Catherine's College, Oxford",
-                          "St Cross College, Oxford",
-                          "St Edmund Hall, Oxford",
-                          "St Edmund's College, Cambridge",
-                          "St Hilda's College, Oxford",
-                          "St Hugh's College, Oxford",
-                          "St John's College, Cambridge",
-                          "St John's College, Oxford",
-                          "St Peter's College, Oxford",
-                          "Selwyn College, Cambridge",
-                          "Sidney Sussex College, Cambridge",
-                          "Somerville College, Oxford",
-                          "Trinity College, Cambridge",
-                          "Trinity College, Oxford",
-                          "Trinity Hall, Cambridge",
-                          "University College, Oxford",
-                          "Wadham College, Oxford",
-                          "Wolfson College, Cambridge",
-                          "Wolfson College, Oxford",
-                          "Worcester College, Oxford",
-                          "Wycliffe Hall, Oxford",
-                        ].map((college) => (
-                          <label
-                            key={college}
-                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              className="size-4"
-                              checked={selectedColleges.includes(college)}
-                              onChange={() => toggleSelection(college, selectedColleges, setSelectedColleges)}
-                            />
-                            <span className="text-sm">{college}</span>
                           </label>
                         ))}
                       </div>
@@ -1449,6 +1409,7 @@ export default function DashboardPage() {
                       Clear all
                     </button>
                   )}
+                  </div>
                 </div>
               </div>
             </div>
