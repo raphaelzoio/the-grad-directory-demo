@@ -504,6 +504,7 @@ export default function DashboardPage() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [selectedSectors, setSelectedSectors] = useState<string[]>([])
   const [selectedDegreeClass, setSelectedDegreeClass] = useState<string[]>([])
+  const [selectedEducationHighlights, setSelectedEducationHighlights] = useState<string[]>([])
   const [selectedDiversity, setSelectedDiversity] = useState<string[]>([])
   const [inCurrentEmployment, setInCurrentEmployment] = useState(false)
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
@@ -567,6 +568,7 @@ export default function DashboardPage() {
   const jobStartDateRef = useRef<HTMLDivElement>(null)
   const jobSectorRef = useRef<HTMLDivElement>(null)
   const jobBusinessSizeRef = useRef<HTMLDivElement>(null)
+  const educationHighlightsRef = useRef<HTMLDivElement>(null)
   const diversityRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -584,6 +586,7 @@ export default function DashboardPage() {
   availability: availabilityRef,
   sector: sectorRef,
   degreeClass: degreeClassRef,
+  educationHighlights: educationHighlightsRef,
   diversity: diversityRef,
   languages: languagesRef,
   sex: sexRef,
@@ -1213,6 +1216,45 @@ export default function DashboardPage() {
                               }
                             />
                             <span className="text-sm">{degClass}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Education Highlights Filter */}
+                  <div className="relative" ref={educationHighlightsRef}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setOpenDropdown(openDropdown === "educationHighlights" ? null : "educationHighlights")
+                      }}
+                      className={`h-9 px-3 rounded-full border text-sm flex items-center gap-2 transition-colors ${
+                        selectedEducationHighlights.length > 0
+                          ? "bg-primary/10 border-primary/30 text-foreground"
+                          : "border-input bg-background hover:bg-muted/50 text-muted-foreground"
+                      }`}
+                    >
+                      <span>{selectedEducationHighlights.length === 0 ? "Education Highlights" : `${selectedEducationHighlights.length} selected`}</span>
+                      <ChevronDown className="size-3" />
+                    </button>
+                    {openDropdown === "educationHighlights" && (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 min-w-[180px]"
+                      >
+                        {["A level performance", "UCAS points"].map((option) => (
+                          <label
+                            key={option}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              className="size-4"
+                              checked={selectedEducationHighlights.includes(option)}
+                              onChange={() => toggleSelection(option, selectedEducationHighlights, setSelectedEducationHighlights)}
+                            />
+                            <span className="text-sm">{option}</span>
                           </label>
                         ))}
                       </div>
