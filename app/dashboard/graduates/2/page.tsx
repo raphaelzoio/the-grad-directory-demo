@@ -29,8 +29,8 @@ import Image from "next/image"
 
 const michaelProfile = {
   id: 2,
-  name: "Michael Chen",
-  email: "michael.chen@imperial.ac.uk",
+  name: "Michael Turner",
+  email: "michael.turner@imperial.ac.uk",
   phone: "+44 7700 345678",
   degree: "Software Engineering, MSc",
   university: "Imperial College London",
@@ -41,11 +41,11 @@ const michaelProfile = {
   skills: ["Java", "Spring Boot", "AWS", "Docker", "Kubernetes", "Microservices"],
   experience: "3 years",
   availability: "2 weeks",
-  avatar: "MC",
-  bio: "MSc Software Engineering graduate from Imperial College London with Distinction. Specialising in cloud architecture and distributed systems. Three years of industry experience building scalable enterprise applications at leading fintech companies. Passionate about DevOps practices and infrastructure automation. Seeking a senior software engineering role focusing on cloud-native development.",
-  linkedin: "linkedin.com/in/michaelchenswe",
-  github: "github.com/mchen-dev",
-  portfolioUrl: "https://michaelchen-projects.dev",
+  avatar: "MT",
+  bio: "MSc Software Engineering graduate from Imperial College London with Distinction. First in his family to attend university. Specialising in cloud architecture and distributed systems. Three years of industry experience building scalable enterprise applications at leading fintech companies. Passionate about DevOps practices and infrastructure automation. Seeking a senior software engineering role focusing on cloud-native development.",
+  linkedin: "linkedin.com/in/michaelturnerdev",
+  github: "github.com/mturner-dev",
+  portfolioUrl: "https://michaelturner-projects.dev",
   portfolioLabel: "View Projects",
   workExperience: [
     {
@@ -156,7 +156,7 @@ const relatedProfiles = [
   { id: 6, name: "Alex Thompson", university: "Cambridge", degree: "Data Intensive Science, MPhil", classification: "First", avatar: "AT" },
 ]
 
-export default function MichaelChenProfile() {
+export default function MichaelTurnerProfile() {
   const router = useRouter()
   const [userType, setUserType] = useState<"employer" | "graduate" | null>(null)
   const [cameFromBookmarks, setCameFromBookmarks] = useState(false)
@@ -233,7 +233,10 @@ export default function MichaelChenProfile() {
                 <h1 className="text-2xl font-bold mb-1">{graduate.name}</h1>
                 <p className="text-muted-foreground mb-1">{graduate.degree}</p>
                 <p className="text-sm text-muted-foreground mb-4">{graduate.department}, {graduate.university}</p>
-                <Badge className="bg-amber-500 text-white mb-4">{graduate.classification}</Badge>
+                <div className="flex flex-wrap justify-center gap-2 mb-4">
+                  <Badge className="bg-amber-500 text-white">{graduate.classification}</Badge>
+                  <Badge className="bg-blue-600 text-white">Socially Diverse</Badge>
+                </div>
                 <div className="flex gap-2 mb-6">
                   <ContactDialog graduateName={graduate.name} />
                   <BookmarkButton graduateId={graduate.id} graduateName={graduate.name} />
@@ -373,10 +376,22 @@ export default function MichaelChenProfile() {
 
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* About */}
+            {/* My Story */}
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">About</h2>
-              <p className="text-muted-foreground leading-relaxed">{graduate.bio}</p>
+              <h2 className="text-xl font-bold mb-4">My Story</h2>
+              <p className="text-muted-foreground leading-relaxed">I was the first person in my family to attend university, growing up in a working-class household in Manchester. That experience taught me to work hard, be resourceful, and never take opportunities for granted. I developed a passion for distributed systems during my undergraduate studies, which led me to pursue my MSc at Imperial where I graduated with a Distinction.</p>
+            </Card>
+
+            {/* What I'm looking for */}
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-4">What I'm looking for</h2>
+              <p className="leading-relaxed" style={{ color: "#cc7a00" }}>I'm seeking a senior software engineering role at a forward-thinking company where I can architect and build cloud-native systems at scale. I'm particularly drawn to organisations in fintech and infrastructure where the technical challenges are complex and the impact is immediate.</p>
+            </Card>
+
+            {/* What I bring */}
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-4">What I bring</h2>
+              <p className="text-muted-foreground leading-relaxed">I combine deep technical expertise in cloud architecture and Java-based distributed systems with three years of industry experience at Revolut and Goldman Sachs. I'm known for writing clean, maintainable code and for translating architectural concepts into reliable, production-ready systems.</p>
             </Card>
 
             {/* Beyond the CV */}

@@ -167,7 +167,7 @@ const sarahProfile = {
 }
 
 const relatedProfiles = [
-  { id: 2, name: "Michael Chen", university: "Cambridge", degree: "Software Engineering, MSc", classification: "Distinction", avatar: "MC" },
+  { id: 2, name: "Michael Turner", university: "Cambridge", degree: "Software Engineering, MSc", classification: "Distinction", avatar: "MT" },
   { id: 4, name: "David Kim", university: "Cambridge", degree: "Computer Engineering, BEng", classification: "First", avatar: "DK" },
   { id: 6, name: "Alex Thompson", university: "Cambridge", degree: "Data Intensive Science, MPhil", classification: "First", avatar: "AT" },
 ]
@@ -479,9 +479,17 @@ export default function SarahNowakProfile() {
             <Card className="p-6">
               <h2 className="text-xl font-bold mb-4">My Story</h2>
               <p className="text-muted-foreground leading-relaxed">I was the first person in my family to attend university - an experience that helped me grow my skills in independent working and gave me a self starting attitude. I helped out with sports summer schools and did lots of community projects as a teenager, both of which allowed me to connect and communicate with groups easily and lead from the front.</p>
-              <hr className="border-t border-border my-4" />
+            </Card>
+
+            {/* What I'm looking for */}
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-4">What I'm looking for</h2>
               <p className="leading-relaxed" style={{ color: "#cc7a00" }}>I'm currently looking for a role as a junior software developer, ideally within a multinational company. I want a role that can test my abilities and allow me to grow my skillset.</p>
-              <hr className="border-t border-border my-4" />
+            </Card>
+
+            {/* What I bring */}
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-4">What I bring</h2>
               <p className="text-muted-foreground leading-relaxed">I'm a quick learner with a self starting attitude to work, and strong communication skills. I'm good at translating complex subjects into understandable language for less technical peers.</p>
             </Card>
 

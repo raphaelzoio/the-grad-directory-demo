@@ -32,15 +32,15 @@ const bookmarkedGraduates = [
   },
   {
     id: 2,
-    name: "Michael Chen",
+    name: "Michael Turner",
     degree: "Software Engineering, MSc (1st)",
     university: "University of Cambridge",
     location: "Cambridge, UK",
     skills: ["Java", "Spring Boot", "AWS", "Docker"],
     experience: "3 years",
     availability: "2 weeks",
-    avatar: "MC",
-    portfolioUrl: "https://michaelchen-projects.dev",
+    avatar: "MT",
+    portfolioUrl: "https://michaelturner-projects.dev",
     portfolioLabel: "View Projects",
   },
   {

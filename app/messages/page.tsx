@@ -22,7 +22,7 @@ const employerConversations = [
   },
   {
     id: 2,
-    name: "Michael Chen",
+    name: "Michael Turner",
     avatar: "/professional-man.jpg",
     lastMessage: "I would love to discuss this opportunity further.",
     timestamp: "Yesterday",
