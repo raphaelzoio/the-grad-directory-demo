@@ -23,6 +23,7 @@ import {
   ExternalLink,
   ArrowLeft,
   ChevronDown,
+  Play,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -295,14 +296,21 @@ export default function MichaelTurnerProfile() {
             {/* Video Introduction */}
             <Card className="p-6">
               <h3 className="font-semibold mb-4">Video Introduction</h3>
-              <Image
-                src="/images/playbutton.png"
-                alt="The Graduate Directory"
-                className="w-full h-auto block opacity-40"
-                width={200}
-                height={100}
-                priority
-              />
+              <div className="relative overflow-hidden rounded-lg border border-border bg-black">
+                <Image
+                  src="/professional-man.jpg"
+                  alt="Michael Turner video introduction"
+                  className="block w-full aspect-video object-cover object-top"
+                  width={640}
+                  height={360}
+                  priority
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[#445145]/80 flex items-center justify-center shadow-lg">
+                    <Play className="size-6 fill-white text-white ml-0.5" />
+                  </div>
+                </div>
+              </div>
             </Card>
 
             {/* Skills */}
