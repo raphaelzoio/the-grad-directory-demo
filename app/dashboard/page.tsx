@@ -1122,7 +1122,7 @@ export default function DashboardPage() {
                         onClick={(e) => e.stopPropagation()}
                         className="absolute top-full left-0 mt-1 bg-card border border-border rounded-md shadow-lg z-20 max-h-60 overflow-y-auto min-w-[160px]"
                       >
-                        {["0-1 years", "1-2 years", "2-3 years", "3-5 years", "5+ years"].map((exp) => (
+                        {["0-1 years", "1-2 years", "2-3 years", "3-5 years", "5-7 years", "7-9 years", "9+ years"].map((exp) => (
                           <label
                             key={exp}
                             className="flex items-center gap-2 px-4 py-2 hover:bg-muted/50 cursor-pointer"
